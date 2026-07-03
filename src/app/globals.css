@@ -1,0 +1,115 @@
+@import "tailwindcss";
+
+/* ── GreenThread design tokens ─────────────────────────────── */
+:root {
+  --background: oklch(0.977 0.008 85);        /* warm cream */
+  --surface: oklch(1 0 0);                    /* white cards */
+  --surface-2: oklch(0.955 0.01 90);          /* sand wash */
+  --foreground: oklch(0.24 0.02 160);         /* ink (green-black) */
+  --muted-foreground: oklch(0.5 0.02 155);
+  --primary: oklch(0.38 0.075 160);           /* deep forest */
+  --primary-foreground: oklch(0.977 0.008 85);
+  --accent: oklch(0.88 0.04 150);             /* sage */
+  --accent-foreground: oklch(0.3 0.06 160);
+  --border: oklch(0.9 0.012 90);
+  --ring: oklch(0.55 0.09 160);
+
+  --grade-a: oklch(0.62 0.15 155);
+  --grade-b: oklch(0.68 0.14 125);
+  --grade-c: oklch(0.72 0.14 85);
+  --grade-d: oklch(0.65 0.15 55);
+  --grade-e: oklch(0.55 0.19 30);
+}
+
+.dark {
+  --background: oklch(0.19 0.015 160);
+  --surface: oklch(0.24 0.018 160);
+  --surface-2: oklch(0.28 0.02 160);
+  --foreground: oklch(0.95 0.01 140);
+  --muted-foreground: oklch(0.7 0.02 150);
+  --primary: oklch(0.78 0.1 155);             /* lifted sage-mint */
+  --primary-foreground: oklch(0.2 0.02 160);
+  --accent: oklch(0.34 0.04 158);
+  --accent-foreground: oklch(0.88 0.05 150);
+  --border: oklch(0.32 0.02 160);
+  --ring: oklch(0.7 0.09 155);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-foreground: var(--foreground);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-border: var(--border);
+  --color-ring: var(--ring);
+  --color-grade-a: var(--grade-a);
+  --color-grade-b: var(--grade-b);
+  --color-grade-c: var(--grade-c);
+  --color-grade-d: var(--grade-d);
+  --color-grade-e: var(--grade-e);
+
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-space-grotesk), var(--font-inter), sans-serif;
+
+  --radius-xl2: 1.25rem;
+
+  --animate-fade-up: fade-up 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
+  --animate-shimmer: shimmer 1.6s linear infinite;
+
+  @keyframes fade-up {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes shimmer {
+    from { background-position: 200% 0; }
+    to { background-position: -200% 0; }
+  }
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+h1, h2, h3, .font-display {
+  font-family: var(--font-display);
+  letter-spacing: -0.02em;
+}
+
+/* skeleton shimmer block */
+.skeleton {
+  background: linear-gradient(
+    90deg,
+    var(--surface-2) 25%,
+    var(--border) 50%,
+    var(--surface-2) 75%
+  );
+  background-size: 200% 100%;
+  animation: var(--animate-shimmer);
+  border-radius: 0.75rem;
+}
+
+/* card hover lift */
+.hover-lift {
+  transition: transform 0.25s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.25s ease;
+}
+.hover-lift:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 32px -12px oklch(0.24 0.02 160 / 0.18);
+}
+
+/* hide scrollbar for chip rows */
+.scrollbar-hide::-webkit-scrollbar { display: none; }
+.scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }

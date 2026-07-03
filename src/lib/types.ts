@@ -1,0 +1,93 @@
+/** Canonical material ids used across the app (filter facets, scoring). */
+export type MaterialId =
+  | "organic_cotton"
+  | "recycled_cotton"
+  | "conventional_cotton"
+  | "bci_cotton"
+  | "linen"
+  | "hemp"
+  | "tencel_lyocell"
+  | "modal"
+  | "cupro"
+  | "viscose"
+  | "merino_wool"
+  | "lambswool"
+  | "recycled_wool"
+  | "virgin_wool"
+  | "peace_silk"
+  | "recycled_polyester"
+  | "polyester"
+  | "recycled_polyamide"
+  | "polyamide"
+  | "elastane"
+  | "other";
+
+export interface FabricPart {
+  material: MaterialId;
+  /** Human label as shown on the garment label, e.g. "TENCEL™ Lyocell" */
+  label: string;
+  pct: number;
+}
+
+/** Practice flags the extraction agent detects in product copy. */
+export interface Practices {
+  natural_dye: boolean;
+  undyed: boolean;
+  deadstock: boolean;
+  pfc_free: boolean;
+  repair_program: boolean;
+  take_back: boolean;
+  zero_waste: boolean;
+  made_to_order: boolean;
+}
+
+export interface ScoreFactor {
+  label: string;
+  /** Signed contribution in points. */
+  points: number;
+  detail: string;
+}
+
+export interface Sustainability {
+  score: number; // 0–100
+  grade: "A" | "B" | "C" | "D" | "E";
+  factors: ScoreFactor[];
+  /** Plain-language explanation written by the enrichment agent. */
+  explanation: string;
+  /** Claims found in copy that lack certification/evidence. */
+  greenwash_flags: string[];
+  certifications: string[];
+  practices: Practices;
+}
+
+export interface Brand {
+  slug: string;
+  name: string;
+  website: string;
+  ethics_summary: string;
+  certifications: string[];
+  /** 0–6 points added to product scores, from brand-level ethics. */
+  ethics_modifier: number;
+}
+
+export interface Product {
+  id: string; // slug
+  brand: Brand;
+  title: string;
+  description: string;
+  category: string;
+  gender: "men" | "women" | "unisex";
+  price: number;
+  currency: string;
+  retailer: string;
+  buy_url: string;
+  image_url: string;
+  color: string;
+  fabric_composition: FabricPart[];
+  sustainability: Sustainability;
+}
+
+/** Shape stored in data/products_seed.json (brand as slug reference). */
+export interface SeedProduct extends Omit<Product, "brand"> {
+  brand_slug: string;
+}

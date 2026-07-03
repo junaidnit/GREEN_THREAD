@@ -1,0 +1,100 @@
+{
+  "brands": [
+    {
+      "slug": "terra-loom",
+      "name": "Terra Loom",
+      "website": "https://terraloom.example.com",
+      "ethics_summary": "Small-batch weaver using GOTS-certified organic cotton and natural dyes. Publishes full supplier list and pays living wages audited by Fair Wear Foundation.",
+      "certifications": ["GOTS", "Fair Wear Foundation"],
+      "ethics_modifier": 6
+    },
+    {
+      "slug": "north-fibre",
+      "name": "North Fibre",
+      "website": "https://northfibre.example.com",
+      "ethics_summary": "Scandinavian knitwear label working with mulesing-free merino and traceable wool lots. Carbon-neutral shipping, repairs-for-life program.",
+      "certifications": ["RWS", "OEKO-TEX Standard 100"],
+      "ethics_modifier": 5
+    },
+    {
+      "slug": "salt-and-stem",
+      "name": "Salt & Stem",
+      "website": "https://saltandstem.example.com",
+      "ethics_summary": "Coastal label making linen and hemp staples. Flax sourced from European farms, low-impact dyes, plastic-free packaging.",
+      "certifications": ["European Flax", "OEKO-TEX Standard 100"],
+      "ethics_modifier": 5
+    },
+    {
+      "slug": "reform-thread",
+      "name": "Reform Thread",
+      "website": "https://reformthread.example.com",
+      "ethics_summary": "Circular-fashion brand: garments made from GRS-certified recycled fibres with take-back recycling program. Transparent factory scorecards.",
+      "certifications": ["GRS"],
+      "ethics_modifier": 5
+    },
+    {
+      "slug": "cedar-and-jade",
+      "name": "Cedar & Jade",
+      "website": "https://cedarandjade.example.com",
+      "ethics_summary": "TENCEL and modal specialist. Closed-loop lyocell from FSC-certified eucalyptus, water-based prints, B Corp certified.",
+      "certifications": ["B Corp", "FSC"],
+      "ethics_modifier": 6
+    },
+    {
+      "slug": "harvest-workwear",
+      "name": "Harvest Workwear",
+      "website": "https://harvestworkwear.example.com",
+      "ethics_summary": "Durable workwear in organic and recycled cotton canvas. Lifetime repair guarantee; factories audited by SA8000.",
+      "certifications": ["OCS", "SA8000"],
+      "ethics_modifier": 4
+    },
+    {
+      "slug": "mirien",
+      "name": "Mirien",
+      "website": "https://mirien.example.com",
+      "ethics_summary": "Contemporary womenswear using deadstock fabrics and TENCEL. Made-to-order model to avoid overproduction; some blends include conventional elastane.",
+      "certifications": [],
+      "ethics_modifier": 3
+    },
+    {
+      "slug": "kanso-athletics",
+      "name": "Kanso Athletics",
+      "website": "https://kansoathletics.example.com",
+      "ethics_summary": "Activewear from recycled ocean-bound nylon (ECONYL) and recycled polyester. Publishes microfibre-shedding test results; ships with Guppyfriend bag.",
+      "certifications": ["GRS", "OEKO-TEX Standard 100"],
+      "ethics_modifier": 4
+    },
+    {
+      "slug": "bloomfield-basics",
+      "name": "Bloomfield Basics",
+      "website": "https://bloomfieldbasics.example.com",
+      "ethics_summary": "Affordable everyday basics. Uses BCI cotton and some conventional blends; sustainability program is early-stage with limited transparency.",
+      "certifications": ["BCI"],
+      "ethics_modifier": 0
+    },
+    {
+      "slug": "atelier-ondes",
+      "name": "Atelier Ondes",
+      "website": "https://atelierondes.example.com",
+      "ethics_summary": "French atelier making occasionwear from GOTS silk alternatives, cupro and peace silk. Small runs, artisan-made, full cost transparency.",
+      "certifications": ["GOTS"],
+      "ethics_modifier": 5
+    },
+    {
+      "slug": "moss-and-mountain",
+      "name": "Moss & Mountain",
+      "website": "https://mossandmountain.example.com",
+      "ethics_summary": "Outdoor apparel with PFC-free finishes, recycled shells and traceable down alternatives. 1% for the Planet member, Bluesign system partner.",
+      "certifications": ["Bluesign", "1% for the Planet"],
+      "ethics_modifier": 5
+    },
+    {
+      "slug": "juno-hemp-co",
+      "name": "Juno Hemp Co",
+      "website": "https://junohempco.example.com",
+      "ethics_summary": "Hemp-first label; rain-fed hemp grown without pesticides, blended with organic cotton. Natural indigo dye house, zero-waste pattern cutting.",
+      "certifications": ["USDA Organic"],
+      "ethics_modifier": 5
+    }
+  ]
+}
