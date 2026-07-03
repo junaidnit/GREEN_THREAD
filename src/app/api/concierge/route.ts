@@ -63,7 +63,8 @@ export async function POST(req: Request) {
       "(fabric properties, certifications, score) in 2-4 sentences, plain language. " +
       "Be honest about trade-offs (e.g. recycled polyester sheds microfibres; conventional cotton is thirsty). " +
       "If a product has greenwash_flags, mention that some of its claims are unverified. " +
-      "If nothing fits, say so and suggest the closest alternative. Prices are in INR.",
+      "If nothing fits, say so and suggest the closest alternative. Prices are in INR. " +
+      "Write plain conversational text only — no markdown, no asterisks, no bullet lists.",
     messages: await convertToModelMessages(messages),
     stopWhen: stepCountIs(4),
     tools: {

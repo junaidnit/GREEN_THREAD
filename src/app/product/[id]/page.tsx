@@ -99,7 +99,7 @@ export default async function ProductPage({ params }: Props) {
           {/* certifications */}
           {s.certifications.length > 0 && (
             <div className="mt-4 flex flex-wrap gap-2" data-testid="certifications">
-              {s.certifications.map((c) => (
+              {[...new Set(s.certifications)].map((c) => (
                 <span
                   key={c}
                   className="flex items-center gap-1.5 rounded-full border border-border bg-surface px-3 py-1.5 text-xs font-medium"

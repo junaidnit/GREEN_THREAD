@@ -1,36 +1,81 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# GreenThread 🌿
 
-## Getting Started
+**Shop by fabric, not just price.** A sustainable-fashion aggregator MVP: instant
+search across a multi-retailer catalog, first-class fabric filtering, and an
+explainable sustainability score on every garment — with an AI enrichment
+pipeline and shopping concierge powered by Claude.
 
-First, run the development server:
+## Architecture
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+```
+data/raw/raw_products.json        ← messy retailer-style product copy (67 items)
+        │
+        ▼  npm run enrich          (Claude extraction agent + scoring rubric)
+data/products_seed.json           ← structured fabric %, certs, flags, explanations
+        │
+        ▼  npm run db:setup        (Supabase Management API — schema + seed)
+Supabase (brands, products)       ← served to the app; local seed is the fallback
+        │
+        ▼
+Next.js app                       ← instant client-side search (MiniSearch),
+                                    faceted fabric filter, product pages,
+                                    /api/concierge (Claude + tool-calling)
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+**Key principle:** all AI work happens *offline* in the pipeline. Users search a
+pre-enriched index — that's why it's instant.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## The scoring rubric (transparent by design)
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+`src/lib/scoring.ts` — every point is accounted for and shown in the UI:
 
-## Learn More
+| Component | Range | Source |
+|---|---|---|
+| Fibre composition (weighted per-material impact) | 0–70 | deterministic |
+| Certifications (GOTS +6, GRS +4, …, capped) | 0–15 | extracted by Claude, only if stated |
+| Brand practices modifier | 0–6 | curated brand data |
+| Practice bonuses (deadstock, natural dye, repair…) | 0–9 | extracted by Claude |
 
-To learn more about Next.js, take a look at the following resources:
+Claude also writes an honest plain-language explanation and flags **greenwashing**
+(vague eco-claims with no certification behind them) — shown on product pages.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Run it
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```bash
+npm install
+npm run dev          # http://localhost:3000
+```
 
-## Deploy on Vercel
+Works out of the box using the checked-in enriched seed. For the full stack,
+create `.env.local`:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+```
+NEXT_PUBLIC_SUPABASE_URL=https://<ref>.supabase.co
+NEXT_PUBLIC_SUPABASE_ANON_KEY=<publishable key>
+SUPABASE_ACCESS_TOKEN=<personal access token>   # only for npm run db:setup
+SUPABASE_PROJECT_REF=<ref>                      # only for npm run db:setup
+ANTHROPIC_API_KEY=<key>                         # concierge + npm run enrich
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+| Command | What it does |
+|---|---|
+| `npm run dev` | dev server |
+| `npm run build && npm start` | production build |
+| `npm run test` | unit tests (scoring rubric, search/facets, URL state) |
+| `npm run test:e2e` | Playwright end-to-end (uses local seed, no network) |
+| `npm run enrich` | re-run the Claude enrichment pipeline (resumable) |
+| `npm run db:setup` | create schema + seed Supabase |
+
+## What's real vs. demo
+
+- Real: the entire pipeline, scoring, search, filtering, concierge.
+- Demo: the 12 brands and 67 products are fictional-but-realistic so no false
+  claims are made about real companies. Buy buttons link out to illustrative URLs.
+
+## Next steps (beyond MVP)
+
+- Real ingestion: affiliate feeds + Firecrawl/Playwright scrapers feeding the same enrichment agent
+- pgvector semantic search + visual search (CLIP embeddings)
+- Meilisearch/Typesense once the catalog outgrows client-side indexing
+- Compare view, saved searches/alerts, user accounts
+- Affiliate deeplink tracking on buy clicks

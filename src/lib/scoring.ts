@@ -112,6 +112,46 @@ export const CERT_POINTS: Record<string, number> = {
 export const CERT_CAP = 15;
 export const PRACTICE_CAP = 9;
 
+/**
+ * Textual evidence patterns per certification. A cert claimed by the
+ * extraction agent only survives validation if the product copy (or the
+ * brand's own certification list) actually mentions it — LLM extractors
+ * occasionally hallucinate certifications, and unverified certs must never
+ * inflate a score.
+ */
+export const CERT_EVIDENCE: Record<string, RegExp> = {
+  GOTS: /gots/i,
+  "USDA Organic": /usda/i,
+  GRS: /\bgrs\b/i,
+  Bluesign: /bluesign/i,
+  RWS: /\brws\b|responsible wool/i,
+  "European Flax": /european flax/i,
+  OCS: /\bocs\b/i,
+  "B Corp": /b[- ]corp/i,
+  "Fair Wear Foundation": /fair wear/i,
+  "OEKO-TEX Standard 100": /oeko[- ]?tex/i,
+  SA8000: /sa8000/i,
+  FSC: /\bfsc\b/i,
+  BCI: /\bbci\b|better cotton/i,
+  "1% for the Planet": /1% for the planet/i,
+};
+
+/** Dedupe + drop certifications with no textual evidence. */
+export function validateCertifications(
+  certs: string[],
+  rawText: string,
+  brandCerts: string[] = [],
+): string[] {
+  const out: string[] = [];
+  for (const cert of certs) {
+    if (out.includes(cert)) continue; // dedupe
+    const pattern = CERT_EVIDENCE[cert];
+    if (!pattern) continue; // unknown cert name
+    if (pattern.test(rawText) || brandCerts.includes(cert)) out.push(cert);
+  }
+  return out;
+}
+
 const PRACTICE_POINTS: Array<{
   key: keyof Practices;
   points: number;
@@ -180,7 +220,7 @@ export function computeScore(input: ScoreInput): {
 
   let certTotal = 0;
   const recognized: string[] = [];
-  for (const cert of input.certifications) {
+  for (const cert of [...new Set(input.certifications)]) {
     const pts = CERT_POINTS[cert];
     if (pts) {
       certTotal += pts;

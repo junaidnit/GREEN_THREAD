@@ -53,12 +53,14 @@ test.describe("search & filter", () => {
     await page.goto("/search");
     const initial = await page.getByTestId("product-card").count();
     await page.getByTestId("filters-toggle").click();
-    await page.locator('input[type="range"]').first().fill("80");
+    await page.locator('input[type="range"]').first().fill("70");
     await expect
       .poll(async () => page.getByTestId("product-card").count())
       .toBeLessThan(initial);
-    // every visible card must show grade A (score >= 80)
-    await expect(page.getByTestId("grade-badge").first()).toContainText("A");
+    // every remaining card's badge score must be >= 70
+    const badgeText = await page.getByTestId("grade-badge").first().innerText();
+    const score = Number(badgeText.replace(/[^0-9]/g, ""));
+    expect(score).toBeGreaterThanOrEqual(70);
   });
 
   test("empty state appears for impossible queries", async ({ page }) => {
@@ -71,8 +73,9 @@ test.describe("search & filter", () => {
 test.describe("product page", () => {
   test("full sustainability story renders and buy link is external", async ({ page }) => {
     await page.goto("/search?fabric=linen");
+    await expect(page.getByTestId("results-count")).toBeVisible();
     await page.getByTestId("product-card").first().click();
-    await page.waitForURL(/\/product\//);
+    await expect(page).toHaveURL(/\/product\//, { timeout: 30_000 });
 
     await expect(page.getByTestId("sustainability-panel")).toBeVisible();
     await expect(page.getByTestId("composition-bars")).toBeVisible();

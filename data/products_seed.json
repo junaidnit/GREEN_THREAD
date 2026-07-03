@@ -76,12 +76,12 @@
       "fabric_composition": [
         {
           "material": "organic_cotton",
-          "label": "100% organic cotton (GOTS)",
+          "label": "organic cotton (GOTS)",
           "pct": 100
         }
       ],
       "sustainability": {
-        "score": 79,
+        "score": 73,
         "grade": "B",
         "factors": [
           {
@@ -91,8 +91,8 @@
           },
           {
             "label": "Certifications",
-            "points": 15,
-            "detail": "GOTS (+6), Fair Wear Foundation (+3), GRS (+4), GOTS (+6) — capped at 15."
+            "points": 9,
+            "detail": "GOTS (+6), Fair Wear Foundation (+3)."
           },
           {
             "label": "Brand practices",
@@ -109,9 +109,7 @@
         "greenwash_flags": [],
         "certifications": [
           "GOTS",
-          "Fair Wear Foundation",
-          "GRS",
-          "GOTS"
+          "Fair Wear Foundation"
         ],
         "practices": {
           "natural_dye": true,
@@ -210,12 +208,12 @@
       "fabric_composition": [
         {
           "material": "organic_cotton",
-          "label": "100% GOTS certified organic cotton",
+          "label": "GOTS certified organic cotton",
           "pct": 100
         }
       ],
       "sustainability": {
-        "score": 76,
+        "score": 73,
         "grade": "B",
         "factors": [
           {
@@ -225,8 +223,8 @@
           },
           {
             "label": "Certifications",
-            "points": 12,
-            "detail": "GOTS (+6), Fair Wear Foundation (+3), Fair Wear Foundation (+3)."
+            "points": 9,
+            "detail": "GOTS (+6), Fair Wear Foundation (+3)."
           },
           {
             "label": "Brand practices",
@@ -243,7 +241,6 @@
         "greenwash_flags": [],
         "certifications": [
           "GOTS",
-          "Fair Wear Foundation",
           "Fair Wear Foundation"
         ],
         "practices": {
@@ -274,7 +271,7 @@
       "fabric_composition": [
         {
           "material": "organic_cotton",
-          "label": "100% organic cotton",
+          "label": "organic cotton",
           "pct": 100
         }
       ],
@@ -539,7 +536,7 @@
       "fabric_composition": [
         {
           "material": "merino_wool",
-          "label": "100% mulesing-free merino",
+          "label": "mulesing-free merino",
           "pct": 100
         }
       ],
@@ -675,7 +672,7 @@
       "fabric_composition": [
         {
           "material": "lambswool",
-          "label": "100% Lambswool",
+          "label": "Lambswool",
           "pct": 100
         }
       ],
@@ -743,7 +740,7 @@
         }
       ],
       "sustainability": {
-        "score": 74,
+        "score": 71,
         "grade": "B",
         "factors": [
           {
@@ -753,8 +750,8 @@
           },
           {
             "label": "Certifications",
-            "points": 6,
-            "detail": "European Flax (+3), European Flax (+3)."
+            "points": 3,
+            "detail": "European Flax (+3)."
           },
           {
             "label": "Brand practices",
@@ -762,10 +759,9 @@
             "detail": "Brand-level transparency, labour and supply-chain record."
           }
         ],
-        "explanation": "This shiris genuinely a solid sustainable pick: it's 100% European Flax certified linen, a fiber that requires much less water and fewer inputs than conventional cotton, and the certification verifies responsible European flax farming. The weak point is that beyond the fiber and dye claim there's no info on manufacturing conditions, dyeing certification, or end-of-life programs, so the sustainability story stops at the raw material stage.",
+        "explanation": "This shirt is genuinely a solid sustainable pick: it's 100% European Flax certified linen, a fiber that requires much less water and fewer inputs than conventional cotton, and the certification verifies responsible European flax farming. The weak point is that beyond the fiber and dye claim there's no info on manufacturing conditions, dyeing certification, or end-of-life programs, so the sustainability story stops at the raw material stage.",
         "greenwash_flags": [],
         "certifications": [
-          "European Flax",
           "European Flax"
         ],
         "practices": {
@@ -796,7 +792,7 @@
       "fabric_composition": [
         {
           "material": "linen",
-          "label": "100% Linen (European Flax)",
+          "label": "Linen (European Flax)",
           "pct": 100
         }
       ],
@@ -1733,7 +1729,7 @@
       "fabric_composition": [
         {
           "material": "organic_cotton",
-          "label": "100% organic cotton canvas (OCS certified)",
+          "label": "organic cotton canvas (OCS certified)",
           "pct": 100
         }
       ],
@@ -1864,7 +1860,7 @@
       "fabric_composition": [
         {
           "material": "organic_cotton",
-          "label": "100% organic cotton (OCS)",
+          "label": "organic cotton (OCS)",
           "pct": 100
         }
       ],
@@ -1927,7 +1923,7 @@
       "fabric_composition": [
         {
           "material": "organic_cotton",
-          "label": "100% organic cotton canvas",
+          "label": "organic cotton canvas",
           "pct": 100
         }
       ],
@@ -2369,13 +2365,13 @@
       "fabric_composition": [
         {
           "material": "recycled_polyester",
-          "label": "100% recycled polyester (GRS certified)",
+          "label": "recycled polyester (GRS certified)",
           "pct": 100
         }
       ],
       "sustainability": {
-        "score": 65,
-        "grade": "B",
+        "score": 56,
+        "grade": "C",
         "factors": [
           {
             "label": "Fibre composition",
@@ -2384,8 +2380,8 @@
           },
           {
             "label": "Certifications",
-            "points": 15,
-            "detail": "GRS (+4), OEKO-TEX Standard 100 (+2), USDA Organic (+4), RWS (+3), OCS (+3), OEKO-TEX Standard 100 (+2), FSC (+2), OEKO-TEX Standard 100 (+2) — capped at 15."
+            "points": 6,
+            "detail": "GRS (+4), OEKO-TEX Standard 100 (+2)."
           },
           {
             "label": "Brand practices",
@@ -2397,12 +2393,6 @@
         "greenwash_flags": [],
         "certifications": [
           "GRS",
-          "OEKO-TEX Standard 100",
-          "USDA Organic",
-          "RWS",
-          "OCS",
-          "OEKO-TEX Standard 100",
-          "FSC",
           "OEKO-TEX Standard 100"
         ],
         "practices": {
@@ -2794,7 +2784,7 @@
       "fabric_composition": [
         {
           "material": "bci_cotton",
-          "label": "100% Cotton (Better Cotton Initiative)",
+          "label": "Cotton (Better Cotton Initiative)",
           "pct": 100
         }
       ],
@@ -2907,7 +2897,7 @@
       "fabric_composition": [
         {
           "material": "viscose",
-          "label": "100% Viscose",
+          "label": "Viscose",
           "pct": 100
         }
       ],
@@ -3242,7 +3232,7 @@
         }
       ],
       "sustainability": {
-        "score": 60,
+        "score": 59,
         "grade": "C",
         "factors": [
           {
@@ -3252,8 +3242,8 @@
           },
           {
             "label": "Certifications",
-            "points": 10,
-            "detail": "GRS (+4), Bluesign (+4), 1% for the Planet (+1), 1% for the Planet (+1)."
+            "points": 9,
+            "detail": "GRS (+4), Bluesign (+4), 1% for the Planet (+1)."
           },
           {
             "label": "Brand practices",
@@ -3273,7 +3263,6 @@
         "certifications": [
           "GRS",
           "Bluesign",
-          "1% for the Planet",
           "1% for the Planet"
         ],
         "practices": {
@@ -3304,7 +3293,7 @@
       "fabric_composition": [
         {
           "material": "recycled_polyamide",
-          "label": "100% recycled nylon",
+          "label": "recycled nylon",
           "pct": 100
         }
       ],
@@ -3451,7 +3440,7 @@
         }
       ],
       "sustainability": {
-        "score": 68,
+        "score": 67,
         "grade": "B",
         "factors": [
           {
@@ -3461,8 +3450,8 @@
           },
           {
             "label": "Certifications",
-            "points": 9,
-            "detail": "RWS (+3), Bluesign (+4), 1% for the Planet (+1), 1% for the Planet (+1)."
+            "points": 8,
+            "detail": "RWS (+3), Bluesign (+4), 1% for the Planet (+1)."
           },
           {
             "label": "Brand practices",
@@ -3480,7 +3469,6 @@
         "certifications": [
           "RWS",
           "Bluesign",
-          "1% for the Planet",
           "1% for the Planet"
         ],
         "practices": {
@@ -3511,7 +3499,7 @@
       "fabric_composition": [
         {
           "material": "recycled_polyester",
-          "label": "100% recycled polyester (shell + insulation)",
+          "label": "recycled polyester (shell + insulation)",
           "pct": 100
         }
       ],
@@ -3647,7 +3635,7 @@
       "fabric_composition": [
         {
           "material": "hemp",
-          "label": "100% hemp",
+          "label": "hemp",
           "pct": 100
         }
       ],
@@ -3754,6 +3742,472 @@
           "repair_program": false,
           "take_back": false,
           "zero_waste": true,
+          "made_to_order": false
+        }
+      }
+    },
+    {
+      "id": "juno-hemp-jacket",
+      "brand_slug": "juno-hemp-co",
+      "title": "Homestead Hemp Jacket",
+      "description": "A chore jacket for the next thirty years. 100% hemp canvas, 320gsm, dyed with walnut hulls from a food-industry byproduct stream. Zero-waste cutting, hand-finished seams. USDA organic certified fibre. Ages beautifully.",
+      "category": "outerwear",
+      "gender": "unisex",
+      "price": 6299,
+      "currency": "INR",
+      "retailer": "Brand Direct",
+      "buy_url": "https://junohempco.example.com/products/juno-hemp-jacket",
+      "image_url": "https://images.unsplash.com/photo-1495105787522-5334e3ffa0ef?auto=format&fit=crop&w=900&h=1200&q=80",
+      "color": "walnut",
+      "fabric_composition": [
+        {
+          "material": "hemp",
+          "label": "hemp canvas",
+          "pct": 100
+        }
+      ],
+      "sustainability": {
+        "score": 79,
+        "grade": "B",
+        "factors": [
+          {
+            "label": "Fibre composition",
+            "points": 66.5,
+            "detail": "100% Hemp — weighted fibre impact (max 70)."
+          },
+          {
+            "label": "Certifications",
+            "points": 4,
+            "detail": "USDA Organic (+4)."
+          },
+          {
+            "label": "Brand practices",
+            "points": 5,
+            "detail": "Brand-level transparency, labour and supply-chain record."
+          },
+          {
+            "label": "Natural dyes",
+            "points": 2,
+            "detail": "Plant/mineral dyes avoid synthetic dye effluent."
+          },
+          {
+            "label": "Zero-waste cutting",
+            "points": 1,
+            "detail": "Pattern layout designed to leave no offcut waste."
+          }
+        ],
+        "explanation": "This jacket uses 100% USDA Organic certified hemp, a naturally low-input fibre, and is dyed with a walnut-hull byproduct rather than synthetic dyes, plus zero-waste pattern cutting—these are genuine, verifiable sustainability practices. Weak points are the lack of any certification for the dyeing process itself (no OEKO-TEX or similar) and vague longevity language ('ages beautifully') that isn't backed by a warranty or repair program mentioned in the copy.",
+        "greenwash_flags": [
+          "\"Ages beautifully\" (vague durability claim with no supporting detail)"
+        ],
+        "certifications": [
+          "USDA Organic"
+        ],
+        "practices": {
+          "natural_dye": true,
+          "undyed": false,
+          "deadstock": false,
+          "pfc_free": false,
+          "repair_program": false,
+          "take_back": false,
+          "zero_waste": true,
+          "made_to_order": false
+        }
+      }
+    },
+    {
+      "id": "juno-hemp-dress",
+      "brand_slug": "juno-hemp-co",
+      "title": "Meadow Hemp Dress",
+      "description": "Easy A-line in breathable hemp-blend. 60% hemp / 40% organic cotton poplin, 150gsm, dyed with sage and iron (natural dye, low water). Pockets, square neckline, grown-on sleeves. USDA organic cotton, rain-fed hemp.",
+      "category": "dresses",
+      "gender": "women",
+      "price": 3999,
+      "currency": "INR",
+      "retailer": "LeafMart",
+      "buy_url": "https://junohempco.example.com/products/juno-hemp-dress",
+      "image_url": "https://images.unsplash.com/photo-1445205170230-053b83016050?auto=format&fit=crop&w=900&h=1200&q=80",
+      "color": "sage",
+      "fabric_composition": [
+        {
+          "material": "hemp",
+          "label": "Hemp",
+          "pct": 60
+        },
+        {
+          "material": "organic_cotton",
+          "label": "Organic Cotton",
+          "pct": 40
+        }
+      ],
+      "sustainability": {
+        "score": 74,
+        "grade": "B",
+        "factors": [
+          {
+            "label": "Fibre composition",
+            "points": 62.3,
+            "detail": "60% Hemp, 40% Organic cotton — weighted fibre impact (max 70)."
+          },
+          {
+            "label": "Certifications",
+            "points": 4,
+            "detail": "USDA Organic (+4)."
+          },
+          {
+            "label": "Brand practices",
+            "points": 5,
+            "detail": "Brand-level transparency, labour and supply-chain record."
+          },
+          {
+            "label": "Natural dyes",
+            "points": 2,
+            "detail": "Plant/mineral dyes avoid synthetic dye effluent."
+          },
+          {
+            "label": "Zero-waste cutting",
+            "points": 1,
+            "detail": "Pattern layout designed to leave no offcut waste."
+          }
+        ],
+        "explanation": "This dress uses a hemp/organic cotton blend, both low-impact fibers, and the natural sage-and-iron dye process reduces water use compared to synthetic dyeing. The organic cotton portion carries USDA Organic certification, and the brand notes zero-waste pattern cutting, but the hemp itself isn't certified organic or otherwise verified, and there's no information on labor practices, packaging, or the dye house's broader environmental footprint.",
+        "greenwash_flags": [],
+        "certifications": [
+          "USDA Organic"
+        ],
+        "practices": {
+          "natural_dye": true,
+          "undyed": false,
+          "deadstock": false,
+          "pfc_free": false,
+          "repair_program": false,
+          "take_back": false,
+          "zero_waste": true,
+          "made_to_order": false
+        }
+      }
+    },
+    {
+      "id": "kanso-court-shorts",
+      "brand_slug": "kanso-athletics",
+      "title": "Court Shorts",
+      "description": "7-inch training shorts. 90% recycled polyester (GRS) / 10% elastane woven stretch, 130gsm. Laser-cut ventilation, zip back pocket, recycled drawcord. OEKO-TEX Standard 100.",
+      "category": "activewear",
+      "gender": "men",
+      "price": 1899,
+      "currency": "INR",
+      "retailer": "EcoBazaar",
+      "buy_url": "https://kansoathletics.example.com/products/kanso-court-shorts",
+      "image_url": "https://images.unsplash.com/photo-1562183241-b937e95585b6?auto=format&fit=crop&w=900&h=1200&q=80",
+      "color": "black",
+      "fabric_composition": [
+        {
+          "material": "recycled_polyester",
+          "label": "Recycled Polyester (GRS)",
+          "pct": 90
+        },
+        {
+          "material": "elastane",
+          "label": "Elastane",
+          "pct": 10
+        }
+      ],
+      "sustainability": {
+        "score": 52,
+        "grade": "C",
+        "factors": [
+          {
+            "label": "Fibre composition",
+            "points": 42.4,
+            "detail": "90% Recycled polyester, 10% Elastane — weighted fibre impact (max 70)."
+          },
+          {
+            "label": "Certifications",
+            "points": 6,
+            "detail": "GRS (+4), OEKO-TEX Standard 100 (+2)."
+          },
+          {
+            "label": "Brand practices",
+            "points": 4,
+            "detail": "Brand-level transparency, labour and supply-chain record."
+          }
+        ],
+        "explanation": "The shjor faterial (90%) is GRS-certified recycled polyester and the fabric meets OEKO-TEX Standard 100 for harmful substances, which are verifiable, concrete claims. However, the 10% elastane is virgin synthetic, no info is given on dyeing, end-of-life, or manufacturing labor conditions, and this specific product listing doesn't mention the brand's broader microfibre-shedding testing or ECONYL use.",
+        "greenwash_flags": [],
+        "certifications": [
+          "GRS",
+          "OEKO-TEX Standard 100"
+        ],
+        "practices": {
+          "natural_dye": false,
+          "undyed": false,
+          "deadstock": false,
+          "pfc_free": false,
+          "repair_program": false,
+          "take_back": false,
+          "zero_waste": false,
+          "made_to_order": false
+        }
+      }
+    },
+    {
+      "id": "cedar-jade-turtleneck",
+      "brand_slug": "cedar-and-jade",
+      "title": "Ember Rib Turtleneck",
+      "description": "Slim rib turtleneck with serious softness. 85% TENCEL Modal / 15% recycled polyamide, tight 14-gauge knit that holds its shape. B Corp made, low-impact dyed. Layers under everything.",
+      "category": "knitwear",
+      "gender": "women",
+      "price": 3499,
+      "currency": "INR",
+      "retailer": "EcoBazaar",
+      "buy_url": "https://cedarandjade.example.com/products/cedar-jade-turtleneck",
+      "image_url": "https://images.unsplash.com/photo-1610288311735-39b7facbd095?auto=format&fit=crop&w=900&h=1200&q=80",
+      "color": "rust",
+      "fabric_composition": [
+        {
+          "material": "modal",
+          "label": "TENCEL Modal",
+          "pct": 85
+        },
+        {
+          "material": "recycled_polyamide",
+          "label": "Recycled Polyamide",
+          "pct": 15
+        }
+      ],
+      "sustainability": {
+        "score": 61,
+        "grade": "C",
+        "factors": [
+          {
+            "label": "Fibre composition",
+            "points": 51.5,
+            "detail": "85% Modal, 15% Recycled nylon — weighted fibre impact (max 70)."
+          },
+          {
+            "label": "Certifications",
+            "points": 3,
+            "detail": "B Corp (+3)."
+          },
+          {
+            "label": "Brand practices",
+            "points": 6,
+            "detail": "Brand-level transparency, labour and supply-chain record."
+          }
+        ],
+        "explanation": "The TENCEL Modal fiber and B Corp certification are genuine positives, and blending in recycled polyamide is better than virgin nylon. However, the 'low-impact dyed' claim isn't backed by any certification or detail, so it reads as a soft, unverifiable sustainability claim rather than a proven practice.",
+        "greenwash_flags": [
+          "'low-impact dyed' with no certification or specifics provided"
+        ],
+        "certifications": [
+          "B Corp"
+        ],
+        "practices": {
+          "natural_dye": false,
+          "undyed": false,
+          "deadstock": false,
+          "pfc_free": false,
+          "repair_program": false,
+          "take_back": false,
+          "zero_waste": false,
+          "made_to_order": false
+        }
+      }
+    },
+    {
+      "id": "terra-loom-baby-blanket",
+      "brand_slug": "terra-loom",
+      "title": "Heirloom Baby Blanket",
+      "description": "Softest start. 100% GOTS organic cotton muslin, double-layered, 120x120cm. No optical brighteners, no formaldehyde finishes, nothing but cotton — certified safe for newborn skin. Gets softer with every wash for years.",
+      "category": "accessories",
+      "gender": "unisex",
+      "price": 2999,
+      "currency": "INR",
+      "retailer": "Brand Direct",
+      "buy_url": "https://terraloom.example.com/products/terra-loom-baby-blanket",
+      "image_url": "https://images.unsplash.com/photo-1620799139507-2a76f79a2f4d?auto=format&fit=crop&w=900&h=1200&q=80",
+      "color": "cloud",
+      "fabric_composition": [
+        {
+          "material": "organic_cotton",
+          "label": "GOTS organic cotton",
+          "pct": 100
+        }
+      ],
+      "sustainability": {
+        "score": 74,
+        "grade": "B",
+        "factors": [
+          {
+            "label": "Fibre composition",
+            "points": 56,
+            "detail": "100% Organic cotton — weighted fibre impact (max 70)."
+          },
+          {
+            "label": "Certifications",
+            "points": 9,
+            "detail": "GOTS (+6), Fair Wear Foundation (+3)."
+          },
+          {
+            "label": "Brand practices",
+            "points": 6,
+            "detail": "Brand-level transparency, labour and supply-chain record."
+          },
+          {
+            "label": "Undyed",
+            "points": 3,
+            "detail": "No dye chemistry or dye wastewater at all."
+          }
+        ],
+        "explanation": "This blanket uses certified organic cotton (GOTS) and is produced by a brand independently audited for fair wages, giving real credibility to its ethical and environmental claims. The fabric appears undyed and free of harsh finishing chemicals, which is a genuine plus for a newborn product, though the copy offers no info on packaging, shipping, or end-of-life take-back options.",
+        "greenwash_flags": [],
+        "certifications": [
+          "GOTS",
+          "Fair Wear Foundation"
+        ],
+        "practices": {
+          "natural_dye": false,
+          "undyed": true,
+          "deadstock": false,
+          "pfc_free": false,
+          "repair_program": false,
+          "take_back": false,
+          "zero_waste": false,
+          "made_to_order": false
+        }
+      }
+    },
+    {
+      "id": "north-fibre-wool-socks-3pack",
+      "brand_slug": "north-fibre",
+      "title": "Boot Socks 3-Pack",
+      "description": "Warm feet, wild sourcing. 65% RWS merino wool / 30% recycled polyamide (for durability at heel and toe) / 5% elastane. Cushioned sole, seamless toe. OEKO-TEX yarns, knitted in Denmark.",
+      "category": "accessories",
+      "gender": "unisex",
+      "price": 1599,
+      "currency": "INR",
+      "retailer": "LeafMart",
+      "buy_url": "https://northfibre.example.com/products/north-fibre-wool-socks-3pack",
+      "image_url": "https://images.unsplash.com/photo-1586350977771-b3b0abd50c82?auto=format&fit=crop&w=900&h=1200&q=80",
+      "color": "mixed earth",
+      "fabric_composition": [
+        {
+          "material": "merino_wool",
+          "label": "RWS merino wool",
+          "pct": 65
+        },
+        {
+          "material": "recycled_polyamide",
+          "label": "recycled polyamide",
+          "pct": 30
+        },
+        {
+          "material": "elastane",
+          "label": "elastane",
+          "pct": 5
+        }
+      ],
+      "sustainability": {
+        "score": 58,
+        "grade": "C",
+        "factors": [
+          {
+            "label": "Fibre composition",
+            "points": 46.2,
+            "detail": "65% Merino wool, 30% Recycled nylon, 5% Elastane — weighted fibre impact (max 70)."
+          },
+          {
+            "label": "Certifications",
+            "points": 5,
+            "detail": "RWS (+3), OEKO-TEX Standard 100 (+2)."
+          },
+          {
+            "label": "Brand practices",
+            "points": 5,
+            "detail": "Brand-level transparency, labour and supply-chain record."
+          },
+          {
+            "label": "Repair programme",
+            "points": 2,
+            "detail": "Brand repairs the garment, extending its life."
+          }
+        ],
+        "explanation": "The merino wool is RWS-certified for animal welfare and traceability, and the yarns carry OEKO-TEX Standard 100 certification for harmful substance testing, both verifiable claims. The recycled polyamide content adds a genuine recycled-material benefit, though it's a minority share and elastane (non-recyclable) is present for stretch. The brand's repair-for-life program supports longevity, but claims like 'wild sourcing' are just marketing flourish rather than substantive sustainability information.",
+        "greenwash_flags": [],
+        "certifications": [
+          "RWS",
+          "OEKO-TEX Standard 100"
+        ],
+        "practices": {
+          "natural_dye": false,
+          "undyed": false,
+          "deadstock": false,
+          "pfc_free": false,
+          "repair_program": true,
+          "take_back": false,
+          "zero_waste": false,
+          "made_to_order": false
+        }
+      }
+    },
+    {
+      "id": "salt-stem-bucket-hat",
+      "brand_slug": "salt-and-stem",
+      "title": "Tide Bucket Hat",
+      "description": "Sun cover, coastal style. Outer 100% European Flax linen; lining 100% organic cotton. Packable, machine washable, UPF 30. Plastic-free trims.",
+      "category": "accessories",
+      "gender": "unisex",
+      "price": 1499,
+      "currency": "INR",
+      "retailer": "GreenCart",
+      "buy_url": "https://saltandstem.example.com/products/salt-stem-bucket-hat",
+      "image_url": "https://images.unsplash.com/photo-1556306535-0f09a537f0a3?auto=format&fit=crop&w=900&h=1200&q=80",
+      "color": "stone",
+      "fabric_composition": [
+        {
+          "material": "linen",
+          "label": "European Flax linen",
+          "pct": 80
+        },
+        {
+          "material": "organic_cotton",
+          "label": "organic cotton",
+          "pct": 20
+        }
+      ],
+      "sustainability": {
+        "score": 70,
+        "grade": "B",
+        "factors": [
+          {
+            "label": "Fibre composition",
+            "points": 61.6,
+            "detail": "80% Linen, 20% Organic cotton — weighted fibre impact (max 70)."
+          },
+          {
+            "label": "Certifications",
+            "points": 3,
+            "detail": "European Flax (+3)."
+          },
+          {
+            "label": "Brand practices",
+            "points": 5,
+            "detail": "Brand-level transparency, labour and supply-chain record."
+          }
+        ],
+        "explanation": "The hat uses certified European Flax linen, which guarantees traceable, lower-impact flax farming, paired with organic cotton lining, both solid sustainable fiber choices. However, the organic cotton isn't certified (e.g., GOTS) in this copy, and there's no verifiable detail on dyeing process or end-of-life care despite brand-level claims of low-impact dyes.",
+        "greenwash_flags": [],
+        "certifications": [
+          "European Flax"
+        ],
+        "practices": {
+          "natural_dye": false,
+          "undyed": false,
+          "deadstock": false,
+          "pfc_free": false,
+          "repair_program": false,
+          "take_back": false,
+          "zero_waste": false,
           "made_to_order": false
         }
       }

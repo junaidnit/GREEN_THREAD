@@ -5,6 +5,7 @@ import {
   fibreScore,
   gradeFor,
   normalizeComposition,
+  validateCertifications,
 } from "@/lib/scoring";
 import type { Practices } from "@/lib/types";
 
@@ -64,6 +65,53 @@ describe("gradeFor", () => {
     [0, "E"], [34, "E"],
   ] as const)("score %i → grade %s", (score, grade) => {
     expect(gradeFor(score)).toBe(grade);
+  });
+});
+
+describe("validateCertifications", () => {
+  it("keeps certs with textual evidence", () => {
+    const out = validateCertifications(
+      ["GOTS", "OEKO-TEX Standard 100"],
+      "100% GOTS-certified organic cotton, OEKO-TEX certified fabric.",
+    );
+    expect(out).toEqual(["GOTS", "OEKO-TEX Standard 100"]);
+  });
+
+  it("drops hallucinated certs with no evidence", () => {
+    const out = validateCertifications(
+      ["GRS", "USDA Organic", "RWS", "FSC"],
+      "100% recycled polyester (GRS certified) from post-consumer bottles.",
+    );
+    expect(out).toEqual(["GRS"]);
+  });
+
+  it("dedupes repeated certs", () => {
+    const out = validateCertifications(
+      ["European Flax", "European Flax"],
+      "100% European Flax certified linen.",
+    );
+    expect(out).toEqual(["European Flax"]);
+  });
+
+  it("accepts brand-level certs even when absent from copy", () => {
+    const out = validateCertifications(["B Corp"], "A lovely soft tee.", ["B Corp"]);
+    expect(out).toEqual(["B Corp"]);
+  });
+
+  it("duplicate certs never double-count in scoring", () => {
+    const once = computeScore({
+      fabric_composition: [{ material: "linen", label: "Linen", pct: 100 }],
+      certifications: ["European Flax"],
+      practices: NO_PRACTICES,
+      brand_ethics_modifier: 0,
+    });
+    const twice = computeScore({
+      fabric_composition: [{ material: "linen", label: "Linen", pct: 100 }],
+      certifications: ["European Flax", "European Flax"],
+      practices: NO_PRACTICES,
+      brand_ethics_modifier: 0,
+    });
+    expect(twice.score).toBe(once.score);
   });
 });
 

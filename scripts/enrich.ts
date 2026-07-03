@@ -18,7 +18,7 @@ import { z } from "zod";
 import { readFileSync, writeFileSync, existsSync } from "node:fs";
 import { resolve } from "node:path";
 import { config } from "dotenv";
-import { computeScore } from "../src/lib/scoring";
+import { computeScore, validateCertifications } from "../src/lib/scoring";
 import type { Practices, SeedProduct } from "../src/lib/types";
 
 config({ path: resolve(process.cwd(), ".env.local") });
@@ -101,9 +101,17 @@ async function extractOne(p: RawProduct, brand: RawBrand): Promise<SeedProduct> 
       `Product: ${p.title} (${p.category})\nCopy:\n"""${p.raw_description}"""`,
   });
 
+  // Guardrail: extractors can hallucinate certifications — only keep those
+  // with textual evidence in the copy or the brand's own cert list.
+  const certifications = validateCertifications(
+    object.certifications,
+    p.raw_description,
+    brand.certifications,
+  );
+
   const { score, grade, factors } = computeScore({
     fabric_composition: object.fabric_composition,
-    certifications: object.certifications,
+    certifications,
     practices: object.practices as Practices,
     brand_ethics_modifier: brand.ethics_modifier,
   });
@@ -128,7 +136,7 @@ async function extractOne(p: RawProduct, brand: RawBrand): Promise<SeedProduct> 
       factors,
       explanation: object.explanation,
       greenwash_flags: object.greenwash_flags,
-      certifications: object.certifications,
+      certifications,
       practices: object.practices as Practices,
     },
   };

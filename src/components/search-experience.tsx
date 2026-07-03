@@ -34,12 +34,20 @@ export function SearchExperience({ products }: { products: Product[] }) {
   const [panelOpen, setPanelOpen] = useState(false);
   const index = useMemo(() => buildIndex(products), [products]);
 
-  // Debounced URL sync (shareable links + back button, no history spam)
+  // Debounced URL sync (shareable links + back button, no history spam).
+  // Skips when the URL already matches — a redundant replace can race and
+  // cancel an in-flight navigation (e.g. clicking through to a product).
   const urlTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
   useEffect(() => {
+    const qs = filtersToParams(filters).toString();
+    const current = new URLSearchParams(window.location.search);
+    current.sort();
+    const next = new URLSearchParams(qs);
+    next.sort();
+    if (next.toString() === current.toString()) return;
+
     if (urlTimer.current) clearTimeout(urlTimer.current);
     urlTimer.current = setTimeout(() => {
-      const qs = filtersToParams(filters).toString();
       router.replace(qs ? `${pathname}?${qs}` : pathname, { scroll: false });
     }, 250);
     return () => {
