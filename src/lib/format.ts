@@ -1,9 +1,10 @@
 export function formatPrice(amount: number, currency: string): string {
+  const locale = currency === "GBP" ? "en-GB" : currency === "INR" ? "en-IN" : "en-US";
   try {
-    return new Intl.NumberFormat(currency === "INR" ? "en-IN" : "en-US", {
+    return new Intl.NumberFormat(locale, {
       style: "currency",
       currency,
-      maximumFractionDigits: 0,
+      maximumFractionDigits: Number.isInteger(amount) ? 0 : 2,
     }).format(amount);
   } catch {
     return `${currency} ${amount}`;

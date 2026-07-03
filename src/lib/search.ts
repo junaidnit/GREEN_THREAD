@@ -8,9 +8,26 @@ import { MATERIAL_LABELS } from "./scoring";
  * <1ms queries with typo tolerance — the "search feels instant" core.
  */
 
+/** Shopper-language synonyms per category, so "top" finds tees/shirts/knits. */
+const CATEGORY_SYNONYMS: Record<string, string> = {
+  "t-shirts": "top tops tee tees t-shirt tshirt",
+  shirts: "top tops shirt blouse button-up overshirt",
+  knitwear: "top tops jumper sweater pullover cardigan knit turtleneck",
+  hoodies: "top tops hoodie sweatshirt crew fleece",
+  dresses: "dress dresses midi maxi jumpsuit occasionwear",
+  trousers: "trousers pants jeans bottoms shorts joggers chinos",
+  skirts: "skirt skirts bottoms",
+  activewear: "activewear gym sportswear workout leggings sports bra running",
+  outerwear: "jacket coat outerwear layer parka blazer vest gilet",
+  accessories: "accessory accessories hat scarf bag tote beanie socks apron blanket",
+};
+
 export interface Filters {
   q: string;
   fabrics: MaterialId[];
+  brands: string[];
+  sizes: string[];
+  colors: string[];
   certs: string[];
   categories: string[];
   gender: string | null;
@@ -22,6 +39,9 @@ export interface Filters {
 export const EMPTY_FILTERS: Filters = {
   q: "",
   fabrics: [],
+  brands: [],
+  sizes: [],
+  colors: [],
   certs: [],
   categories: [],
   gender: null,
@@ -32,10 +52,10 @@ export const EMPTY_FILTERS: Filters = {
 
 export function buildIndex(products: Product[]): MiniSearch {
   const mini = new MiniSearch({
-    fields: ["title", "description", "brand", "category", "color", "fabrics", "certs"],
+    fields: ["title", "description", "brand", "category", "synonyms", "color", "fabrics", "certs"],
     storeFields: ["id"],
     searchOptions: {
-      boost: { title: 3, fabrics: 2.5, brand: 2, category: 2 },
+      boost: { title: 3, synonyms: 2.5, fabrics: 2.5, brand: 2, category: 2 },
       fuzzy: 0.2,
       prefix: true,
     },
@@ -47,7 +67,8 @@ export function buildIndex(products: Product[]): MiniSearch {
       description: p.description,
       brand: p.brand.name,
       category: p.category,
-      color: p.color,
+      synonyms: `${CATEGORY_SYNONYMS[p.category] ?? ""} ${p.gender}`,
+      color: `${p.color} ${p.color_family}`,
       fabrics: p.fabric_composition
         .map((f) => `${f.label} ${MATERIAL_LABELS[f.material]}`)
         .join(" "),
@@ -65,6 +86,10 @@ function matchesFabrics(p: Product, fabrics: MaterialId[]): boolean {
 
 function matchesFacets(p: Product, f: Filters, skip?: keyof Filters): boolean {
   if (skip !== "fabrics" && !matchesFabrics(p, f.fabrics)) return false;
+  if (skip !== "brands" && f.brands.length > 0 && !f.brands.includes(p.brand.slug)) return false;
+  if (skip !== "sizes" && f.sizes.length > 0 &&
+      !f.sizes.some((s) => p.sizes.includes(s))) return false;
+  if (skip !== "colors" && f.colors.length > 0 && !f.colors.includes(p.color_family)) return false;
   if (skip !== "certs" && f.certs.length > 0 &&
       !f.certs.every((c) => p.sustainability.certifications.includes(c))) return false;
   if (skip !== "categories" && f.categories.length > 0 &&
@@ -108,6 +133,9 @@ export function applyFilters(
 
 export interface FacetCounts {
   fabrics: Map<MaterialId, number>;
+  brands: Map<string, number>;
+  sizes: Map<string, number>;
+  colors: Map<string, number>;
   certs: Map<string, number>;
   categories: Map<string, number>;
 }
@@ -124,6 +152,9 @@ export function facetCounts(products: Product[], filters: Filters, index: MiniSe
   }
 
   const fabrics = new Map<MaterialId, number>();
+  const brands = new Map<string, number>();
+  const sizes = new Map<string, number>();
+  const colors = new Map<string, number>();
   const certs = new Map<string, number>();
   const categories = new Map<string, number>();
 
@@ -132,6 +163,15 @@ export function facetCounts(products: Product[], filters: Filters, index: MiniSe
       for (const f of p.fabric_composition) {
         if (f.pct >= 5) fabrics.set(f.material, (fabrics.get(f.material) ?? 0) + 1);
       }
+    }
+    if (matchesFacets(p, filters, "brands")) {
+      brands.set(p.brand.slug, (brands.get(p.brand.slug) ?? 0) + 1);
+    }
+    if (matchesFacets(p, filters, "sizes")) {
+      for (const s of p.sizes) sizes.set(s, (sizes.get(s) ?? 0) + 1);
+    }
+    if (matchesFacets(p, filters, "colors")) {
+      colors.set(p.color_family, (colors.get(p.color_family) ?? 0) + 1);
     }
     if (matchesFacets(p, filters, "certs")) {
       for (const c of p.sustainability.certifications) {
@@ -143,7 +183,7 @@ export function facetCounts(products: Product[], filters: Filters, index: MiniSe
     }
   }
 
-  return { fabrics, certs, categories };
+  return { fabrics, brands, sizes, colors, certs, categories };
 }
 
 /* ── URL <-> Filters (shareable, back-button-friendly state) ── */
@@ -152,6 +192,9 @@ export function filtersToParams(f: Filters): URLSearchParams {
   const sp = new URLSearchParams();
   if (f.q) sp.set("q", f.q);
   if (f.fabrics.length) sp.set("fabric", f.fabrics.join(","));
+  if (f.brands.length) sp.set("brand", f.brands.join(","));
+  if (f.sizes.length) sp.set("size", f.sizes.join(","));
+  if (f.colors.length) sp.set("color", f.colors.join(","));
   if (f.certs.length) sp.set("cert", f.certs.join(","));
   if (f.categories.length) sp.set("category", f.categories.join(","));
   if (f.gender) sp.set("gender", f.gender);
@@ -171,6 +214,9 @@ export function paramsToFilters(sp: URLSearchParams): Filters {
   return {
     q: sp.get("q") ?? "",
     fabrics: list("fabric") as MaterialId[],
+    brands: list("brand"),
+    sizes: list("size"),
+    colors: list("color"),
     certs: list("cert"),
     categories: list("category"),
     gender: sp.get("gender"),

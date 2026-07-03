@@ -48,6 +48,8 @@ async function loadSupabase(): Promise<Product[]> {
     buy_url: row.buy_url,
     image_url: row.image_url,
     color: row.color,
+    color_family: row.color_family ?? "",
+    sizes: row.sizes ?? [],
     fabric_composition: row.fabric_composition,
     sustainability: row.sustainability,
   }));

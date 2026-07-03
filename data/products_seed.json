@@ -2,15 +2,15 @@
   "products": [
     {
       "id": "terra-loom-everyday-tee-ecru",
-      "brand_slug": "terra-loom",
+      "brand_slug": "people-tree",
       "title": "Everyday Tee — Ecru",
       "description": "Our signature everyday tee, cut from a breathable 180gsm single jersey. 100% GOTS-certified organic cotton grown without synthetic pesticides. Garment-dyed with low-impact fibre-reactive dyes. Pre-shrunk, side-seamed. Machine wash cold, line dry. Woven, cut and sewn in a Fair Wear audited unit.",
       "category": "t-shirts",
       "gender": "unisex",
-      "price": 1499,
-      "currency": "INR",
-      "retailer": "LeafMart",
-      "buy_url": "https://terraloom.example.com/products/terra-loom-everyday-tee-ecru",
+      "price": 15,
+      "currency": "GBP",
+      "retailer": "ASOS",
+      "buy_url": "https://demo.greenthread.example/people-tree/products/terra-loom-everyday-tee-ecru",
       "image_url": "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?auto=format&fit=crop&w=900&h=1200&q=80",
       "color": "ecru",
       "fabric_composition": [
@@ -58,19 +58,26 @@
           "zero_waste": false,
           "made_to_order": false
         }
-      }
+      },
+      "sizes": [
+        "XS",
+        "S",
+        "M",
+        "L"
+      ],
+      "color_family": "White & Cream"
     },
     {
       "id": "terra-loom-everyday-tee-moss",
-      "brand_slug": "terra-loom",
+      "brand_slug": "people-tree",
       "title": "Everyday Tee — Moss",
       "description": "The Everyday Tee in a deep moss, dyed with natural plant extracts. Fabric: 100% organic cotton (GOTS), 180gsm. Slight colour variation between batches is part of the charm of natural dyeing. Wash cold with like colours.",
       "category": "t-shirts",
       "gender": "unisex",
-      "price": 1499,
-      "currency": "INR",
-      "retailer": "EcoBazaar",
-      "buy_url": "https://terraloom.example.com/products/terra-loom-everyday-tee-moss",
+      "price": 15,
+      "currency": "GBP",
+      "retailer": "John Lewis",
+      "buy_url": "https://demo.greenthread.example/people-tree/products/terra-loom-everyday-tee-moss",
       "image_url": "https://images.unsplash.com/photo-1576566588028-4147f3842f27?auto=format&fit=crop&w=900&h=1200&q=80",
       "color": "moss green",
       "fabric_composition": [
@@ -121,19 +128,25 @@
           "zero_waste": false,
           "made_to_order": false
         }
-      }
+      },
+      "sizes": [
+        "XS",
+        "L",
+        "XL"
+      ],
+      "color_family": "Green"
     },
     {
       "id": "terra-loom-boxy-crop-tee",
-      "brand_slug": "terra-loom",
+      "brand_slug": "people-tree",
       "title": "Boxy Crop Tee",
       "description": "Boxy, cropped, effortless. Mid-weight 200gsm organic cotton jersey — 95% GOTS organic cotton with 5% elastane for a touch of recovery. OEKO-TEX Standard 100 certified fabric. Drop shoulders, raw-look hem.",
       "category": "t-shirts",
       "gender": "women",
-      "price": 1699,
-      "currency": "INR",
-      "retailer": "LeafMart",
-      "buy_url": "https://terraloom.example.com/products/terra-loom-boxy-crop-tee",
+      "price": 17,
+      "currency": "GBP",
+      "retailer": "ASOS",
+      "buy_url": "https://demo.greenthread.example/people-tree/products/terra-loom-boxy-crop-tee",
       "image_url": "https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?auto=format&fit=crop&w=900&h=1200&q=80",
       "color": "white",
       "fabric_composition": [
@@ -190,19 +203,26 @@
           "zero_waste": false,
           "made_to_order": false
         }
-      }
+      },
+      "sizes": [
+        "S",
+        "M",
+        "L",
+        "XL"
+      ],
+      "color_family": "White & Cream"
     },
     {
       "id": "terra-loom-block-print-shirt",
-      "brand_slug": "terra-loom",
+      "brand_slug": "people-tree",
       "title": "Hand Block-Print Shirt",
       "description": "Hand block-printed in Jaipur using natural indigo. Lightweight 130gsm cambric, 100% GOTS certified organic cotton. Corozo nut buttons (no plastic). Each shirt is slightly unique due to hand printing. Gentle machine wash.",
       "category": "shirts",
       "gender": "men",
-      "price": 2899,
-      "currency": "INR",
+      "price": 29,
+      "currency": "GBP",
       "retailer": "Brand Direct",
-      "buy_url": "https://terraloom.example.com/products/terra-loom-block-print-shirt",
+      "buy_url": "https://demo.greenthread.example/people-tree/products/terra-loom-block-print-shirt",
       "image_url": "https://images.unsplash.com/photo-1596755094514-f87e34085b2c?auto=format&fit=crop&w=900&h=1200&q=80",
       "color": "indigo",
       "fabric_composition": [
@@ -253,19 +273,26 @@
           "zero_waste": false,
           "made_to_order": false
         }
-      }
+      },
+      "sizes": [
+        "XS",
+        "S",
+        "M",
+        "L"
+      ],
+      "color_family": "Blue"
     },
     {
       "id": "terra-loom-canvas-tote",
-      "brand_slug": "terra-loom",
+      "brand_slug": "people-tree",
       "title": "Heavy Canvas Tote",
       "description": "Carries everything. 340gsm heavy canvas woven from 100% organic cotton, undyed and unbleached. Reinforced handles rated to 20kg. Replaces a lifetime of plastic bags.",
       "category": "accessories",
       "gender": "unisex",
-      "price": 999,
-      "currency": "INR",
-      "retailer": "EcoBazaar",
-      "buy_url": "https://terraloom.example.com/products/terra-loom-canvas-tote",
+      "price": 10,
+      "currency": "GBP",
+      "retailer": "John Lewis",
+      "buy_url": "https://demo.greenthread.example/people-tree/products/terra-loom-canvas-tote",
       "image_url": "https://images.unsplash.com/photo-1544816155-12df9643f363?auto=format&fit=crop&w=900&h=1200&q=80",
       "color": "natural",
       "fabric_composition": [
@@ -318,19 +345,23 @@
           "zero_waste": false,
           "made_to_order": false
         }
-      }
+      },
+      "sizes": [
+        "One size"
+      ],
+      "color_family": "White & Cream"
     },
     {
       "id": "terra-loom-mud-dye-dress",
-      "brand_slug": "terra-loom",
+      "brand_slug": "people-tree",
       "title": "Mud-Dye Midi Dress",
       "description": "A-line midi in traditional mud-resist dyed fabric. 100% organic cotton poplin, GOTS certified, 140gsm. Pockets, obviously. Dyed with iron-rich river mud and natural alum mordant — zero synthetic dye chemistry.",
       "category": "dresses",
       "gender": "women",
-      "price": 3999,
-      "currency": "INR",
+      "price": 40,
+      "currency": "GBP",
       "retailer": "Brand Direct",
-      "buy_url": "https://terraloom.example.com/products/terra-loom-mud-dye-dress",
+      "buy_url": "https://demo.greenthread.example/people-tree/products/terra-loom-mud-dye-dress",
       "image_url": "https://images.unsplash.com/photo-1572804013309-59a88b7e92f1?auto=format&fit=crop&w=900&h=1200&q=80",
       "color": "clay",
       "fabric_composition": [
@@ -381,19 +412,25 @@
           "zero_waste": false,
           "made_to_order": false
         }
-      }
+      },
+      "sizes": [
+        "XS",
+        "M",
+        "XL"
+      ],
+      "color_family": "Brown & Tan"
     },
     {
       "id": "north-fibre-merino-crew",
-      "brand_slug": "north-fibre",
+      "brand_slug": "uniqlo",
       "title": "Merino Crew Sweater",
       "description": "Featherweight warmth. Knitted from 100% extra-fine merino wool, certified to the Responsible Wool Standard — mulesing-free and traceable to farm lots in Tasmania. 12-gauge knit, fully fashioned to eliminate cutting waste. Hand wash or wool cycle.",
       "category": "knitwear",
       "gender": "unisex",
-      "price": 6499,
-      "currency": "INR",
-      "retailer": "GreenCart",
-      "buy_url": "https://northfibre.example.com/products/north-fibre-merino-crew",
+      "price": 65,
+      "currency": "GBP",
+      "retailer": "Zalando",
+      "buy_url": "https://demo.greenthread.example/uniqlo/products/north-fibre-merino-crew",
       "image_url": "https://images.unsplash.com/photo-1434389677669-e08b4cac3105?auto=format&fit=crop&w=900&h=1200&q=80",
       "color": "oatmeal",
       "fabric_composition": [
@@ -448,19 +485,27 @@
           "zero_waste": true,
           "made_to_order": false
         }
-      }
+      },
+      "sizes": [
+        "XS",
+        "S",
+        "M",
+        "L",
+        "XL"
+      ],
+      "color_family": "White & Cream"
     },
     {
       "id": "north-fibre-fisherman-rib",
-      "brand_slug": "north-fibre",
+      "brand_slug": "uniqlo",
       "title": "Fisherman Rib Jumper",
       "description": "Chunky fisherman rib in a blend built to last decades: 80% RWS merino wool / 20% recycled wool reclaimed from post-consumer garments. OEKO-TEX certified yarns. Comes with free lifetime repair — send it back, we fix it.",
       "category": "knitwear",
       "gender": "men",
-      "price": 7999,
-      "currency": "INR",
+      "price": 80,
+      "currency": "GBP",
       "retailer": "Brand Direct",
-      "buy_url": "https://northfibre.example.com/products/north-fibre-fisherman-rib",
+      "buy_url": "https://demo.greenthread.example/uniqlo/products/north-fibre-fisherman-rib",
       "image_url": "https://images.unsplash.com/photo-1544022613-e87ca75a784a?auto=format&fit=crop&w=900&h=1200&q=80",
       "color": "navy",
       "fabric_composition": [
@@ -518,19 +563,27 @@
           "zero_waste": false,
           "made_to_order": false
         }
-      }
+      },
+      "sizes": [
+        "XS",
+        "S",
+        "M",
+        "L",
+        "XL"
+      ],
+      "color_family": "Blue"
     },
     {
       "id": "north-fibre-wool-beanie",
-      "brand_slug": "north-fibre",
+      "brand_slug": "uniqlo",
       "title": "Ribbed Wool Beanie",
       "description": "Classic ribbed beanie. 100% mulesing-free merino (RWS certified), naturally odour-resistant and warm even when damp. Undyed charcoal fleece — the colour is the sheep's own.",
       "category": "accessories",
       "gender": "unisex",
-      "price": 1899,
-      "currency": "INR",
-      "retailer": "LeafMart",
-      "buy_url": "https://northfibre.example.com/products/north-fibre-wool-beanie",
+      "price": 19,
+      "currency": "GBP",
+      "retailer": "ASOS",
+      "buy_url": "https://demo.greenthread.example/uniqlo/products/north-fibre-wool-beanie",
       "image_url": "https://images.unsplash.com/photo-1510598969022-c4c6c5d05769?auto=format&fit=crop&w=900&h=1200&q=80",
       "color": "charcoal",
       "fabric_composition": [
@@ -585,19 +638,23 @@
           "zero_waste": false,
           "made_to_order": false
         }
-      }
+      },
+      "sizes": [
+        "One size"
+      ],
+      "color_family": "Black"
     },
     {
       "id": "north-fibre-cardigan-sage",
-      "brand_slug": "north-fibre",
+      "brand_slug": "uniqlo",
       "title": "Everyday Cardigan",
       "description": "Soft everyday layer. 70% merino wool (RWS), 30% TENCEL lyocell for drape and a cool touch. Corozo buttons. Knitted in a wind-powered mill in Denmark. Wool cycle, dry flat.",
       "category": "knitwear",
       "gender": "women",
-      "price": 7499,
-      "currency": "INR",
-      "retailer": "GreenCart",
-      "buy_url": "https://northfibre.example.com/products/north-fibre-cardigan-sage",
+      "price": 75,
+      "currency": "GBP",
+      "retailer": "Zalando",
+      "buy_url": "https://demo.greenthread.example/uniqlo/products/north-fibre-cardigan-sage",
       "image_url": "https://images.unsplash.com/photo-1509942774463-acf339cf87d5?auto=format&fit=crop&w=900&h=1200&q=80",
       "color": "sage",
       "fabric_composition": [
@@ -654,19 +711,25 @@
           "zero_waste": false,
           "made_to_order": false
         }
-      }
+      },
+      "sizes": [
+        "XS",
+        "M",
+        "XL"
+      ],
+      "color_family": "Green"
     },
     {
       "id": "north-fibre-lambswool-scarf",
-      "brand_slug": "north-fibre",
+      "brand_slug": "uniqlo",
       "title": "Lambswool Scarf",
       "description": "Woven, not knitted, for a crisp drape. 100% lambswool from RWS-certified flocks, spun and woven in a solar-powered mill. OEKO-TEX Standard 100. 30 x 180 cm.",
       "category": "accessories",
       "gender": "unisex",
-      "price": 2499,
-      "currency": "INR",
-      "retailer": "EcoBazaar",
-      "buy_url": "https://northfibre.example.com/products/north-fibre-lambswool-scarf",
+      "price": 25,
+      "currency": "GBP",
+      "retailer": "John Lewis",
+      "buy_url": "https://demo.greenthread.example/uniqlo/products/north-fibre-lambswool-scarf",
       "image_url": "https://images.unsplash.com/photo-1520903920243-00d872a2d1c9?auto=format&fit=crop&w=900&h=1200&q=80",
       "color": "heather grey",
       "fabric_composition": [
@@ -717,19 +780,23 @@
           "zero_waste": false,
           "made_to_order": false
         }
-      }
+      },
+      "sizes": [
+        "One size"
+      ],
+      "color_family": "Grey"
     },
     {
       "id": "salt-stem-linen-shirt-white",
-      "brand_slug": "salt-and-stem",
+      "brand_slug": "seasalt",
       "title": "Breezy Linen Shirt — White",
       "description": "The only shirt you need above 30°C. 100% European Flax certified linen, 185gsm, stonewashed for softness from day one. Linen uses a fraction of the water cotton needs and the whole flax plant is used. Mother-of-pearl buttons. Gets better with every wash.",
       "category": "shirts",
       "gender": "men",
-      "price": 3499,
-      "currency": "INR",
-      "retailer": "LeafMart",
-      "buy_url": "https://saltandstem.example.com/products/salt-stem-linen-shirt-white",
+      "price": 35,
+      "currency": "GBP",
+      "retailer": "ASOS",
+      "buy_url": "https://demo.greenthread.example/seasalt/products/salt-stem-linen-shirt-white",
       "image_url": "https://images.unsplash.com/photo-1602810318383-e386cc2a3ccf?auto=format&fit=crop&w=900&h=1200&q=80",
       "color": "white",
       "fabric_composition": [
@@ -774,19 +841,27 @@
           "zero_waste": false,
           "made_to_order": false
         }
-      }
+      },
+      "sizes": [
+        "XS",
+        "S",
+        "M",
+        "L",
+        "XL"
+      ],
+      "color_family": "White & Cream"
     },
     {
       "id": "salt-stem-linen-shirt-sky",
-      "brand_slug": "salt-and-stem",
+      "brand_slug": "seasalt",
       "title": "Breezy Linen Shirt — Sky",
       "description": "Breezy Linen Shirt in washed sky blue. 100% linen (European Flax), dyed with GOTS-approved low-impact dyes in a closed-loop water treatment facility. Relaxed fit, cut for airflow.",
       "category": "shirts",
       "gender": "men",
-      "price": 3499,
-      "currency": "INR",
-      "retailer": "EcoBazaar",
-      "buy_url": "https://saltandstem.example.com/products/salt-stem-linen-shirt-sky",
+      "price": 35,
+      "currency": "GBP",
+      "retailer": "John Lewis",
+      "buy_url": "https://demo.greenthread.example/seasalt/products/salt-stem-linen-shirt-sky",
       "image_url": "https://images.unsplash.com/photo-1620012253295-c15cc3e65df4?auto=format&fit=crop&w=900&h=1200&q=80",
       "color": "sky blue",
       "fabric_composition": [
@@ -831,19 +906,25 @@
           "zero_waste": false,
           "made_to_order": false
         }
-      }
+      },
+      "sizes": [
+        "XS",
+        "S",
+        "M"
+      ],
+      "color_family": "Blue"
     },
     {
       "id": "salt-stem-linen-trousers",
-      "brand_slug": "salt-and-stem",
+      "brand_slug": "seasalt",
       "title": "Drawstring Linen Trousers",
       "description": "Holiday-at-home trousers. 55% European flax linen / 45% organic cotton for structure with softness. 210gsm. Elasticated drawstring waist, deep pockets. OEKO-TEX certified. Machine wash cool.",
       "category": "trousers",
       "gender": "unisex",
-      "price": 3999,
-      "currency": "INR",
+      "price": 40,
+      "currency": "GBP",
       "retailer": "Brand Direct",
-      "buy_url": "https://saltandstem.example.com/products/salt-stem-linen-trousers",
+      "buy_url": "https://demo.greenthread.example/seasalt/products/salt-stem-linen-trousers",
       "image_url": "https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?auto=format&fit=crop&w=900&h=1200&q=80",
       "color": "sand",
       "fabric_composition": [
@@ -895,19 +976,25 @@
           "zero_waste": false,
           "made_to_order": false
         }
-      }
+      },
+      "sizes": [
+        "S",
+        "M",
+        "L"
+      ],
+      "color_family": "Brown & Tan"
     },
     {
       "id": "salt-stem-hemp-overshirt",
-      "brand_slug": "salt-and-stem",
+      "brand_slug": "seasalt",
       "title": "Hemp Overshirt",
       "description": "A rugged overshirt in 60% hemp / 40% organic cotton twill, 280gsm. Hemp grows rain-fed with no pesticides and improves soil health. Corozo buttons, chest pockets. Wears in like denim, softens like linen.",
       "category": "outerwear",
       "gender": "unisex",
-      "price": 4499,
-      "currency": "INR",
-      "retailer": "GreenCart",
-      "buy_url": "https://saltandstem.example.com/products/salt-stem-hemp-overshirt",
+      "price": 45,
+      "currency": "GBP",
+      "retailer": "Zalando",
+      "buy_url": "https://demo.greenthread.example/seasalt/products/salt-stem-hemp-overshirt",
       "image_url": "https://images.unsplash.com/photo-1608234807905-4466023792f5?auto=format&fit=crop&w=900&h=1200&q=80",
       "color": "olive",
       "fabric_composition": [
@@ -952,19 +1039,26 @@
           "zero_waste": false,
           "made_to_order": false
         }
-      }
+      },
+      "sizes": [
+        "XS",
+        "S",
+        "M",
+        "XL"
+      ],
+      "color_family": "Green"
     },
     {
       "id": "salt-stem-linen-dress",
-      "brand_slug": "salt-and-stem",
+      "brand_slug": "seasalt",
       "title": "Sundown Linen Dress",
       "description": "Square-neck midi with side slits. 100% European Flax linen, garment-washed, 165gsm. Terracotta shade from low-impact dyes, OEKO-TEX certified fabric. Pockets. Line dry and embrace the crinkle.",
       "category": "dresses",
       "gender": "women",
-      "price": 4299,
-      "currency": "INR",
-      "retailer": "LeafMart",
-      "buy_url": "https://saltandstem.example.com/products/salt-stem-linen-dress",
+      "price": 43,
+      "currency": "GBP",
+      "retailer": "ASOS",
+      "buy_url": "https://demo.greenthread.example/seasalt/products/salt-stem-linen-dress",
       "image_url": "https://images.unsplash.com/photo-1595777457583-95e059d581b8?auto=format&fit=crop&w=900&h=1200&q=80",
       "color": "terracotta",
       "fabric_composition": [
@@ -1012,19 +1106,25 @@
           "zero_waste": false,
           "made_to_order": false
         }
-      }
+      },
+      "sizes": [
+        "S",
+        "M",
+        "L"
+      ],
+      "color_family": "Brown & Tan"
     },
     {
       "id": "salt-stem-striped-linen-top",
-      "brand_slug": "salt-and-stem",
+      "brand_slug": "seasalt",
       "title": "Striped Linen Top",
       "description": "Breton stripes, coastal linen. 100% European Flax certified linen in yarn-dyed navy stripe. 160gsm, boxy fit, drop shoulder. Plastic-free packaging, shipped carbon-neutral.",
       "category": "shirts",
       "gender": "women",
-      "price": 2999,
-      "currency": "INR",
-      "retailer": "EcoBazaar",
-      "buy_url": "https://saltandstem.example.com/products/salt-stem-striped-linen-top",
+      "price": 30,
+      "currency": "GBP",
+      "retailer": "John Lewis",
+      "buy_url": "https://demo.greenthread.example/seasalt/products/salt-stem-striped-linen-top",
       "image_url": "https://images.unsplash.com/photo-1551163943-3f6a855d1153?auto=format&fit=crop&w=900&h=1200&q=80",
       "color": "navy stripe",
       "fabric_composition": [
@@ -1071,19 +1171,26 @@
           "zero_waste": false,
           "made_to_order": false
         }
-      }
+      },
+      "sizes": [
+        "XS",
+        "S",
+        "M",
+        "L"
+      ],
+      "color_family": "Blue"
     },
     {
       "id": "reform-thread-recycled-denim-jacket",
-      "brand_slug": "reform-thread",
+      "brand_slug": "marks-and-spencer",
       "title": "Re:Denim Trucker Jacket",
       "description": "Classic trucker silhouette, circular construction. Denim woven from 70% post-consumer recycled cotton (GRS certified) and 30% organic cotton for fibre strength. Laser-finished instead of stone washing — saves ~35L of water per jacket. Send it back when worn out; we recycle it into the next run.",
       "category": "outerwear",
       "gender": "unisex",
-      "price": 5499,
-      "currency": "INR",
-      "retailer": "GreenCart",
-      "buy_url": "https://reformthread.example.com/products/reform-thread-recycled-denim-jacket",
+      "price": 55,
+      "currency": "GBP",
+      "retailer": "Zalando",
+      "buy_url": "https://demo.greenthread.example/ms/products/reform-thread-recycled-denim-jacket",
       "image_url": "https://images.unsplash.com/photo-1539533018447-63fcce2678e3?auto=format&fit=crop&w=900&h=1200&q=80",
       "color": "mid-wash blue",
       "fabric_composition": [
@@ -1138,19 +1245,27 @@
           "zero_waste": false,
           "made_to_order": false
         }
-      }
+      },
+      "sizes": [
+        "XS",
+        "S",
+        "M",
+        "L",
+        "XL"
+      ],
+      "color_family": "Blue"
     },
     {
       "id": "reform-thread-re-tee",
-      "brand_slug": "reform-thread",
+      "brand_slug": "marks-and-spencer",
       "title": "Re:Tee",
       "description": "A tee made from tees. 60% GRS-certified recycled cotton (from textile offcuts) blended with 40% organic cotton. Because recycled cotton fibres are shorter, the blend keeps it durable. Undyed — the faded black comes entirely from the recycled feedstock. 170gsm.",
       "category": "t-shirts",
       "gender": "unisex",
-      "price": 1299,
-      "currency": "INR",
-      "retailer": "LeafMart",
-      "buy_url": "https://reformthread.example.com/products/reform-thread-re-tee",
+      "price": 13,
+      "currency": "GBP",
+      "retailer": "ASOS",
+      "buy_url": "https://demo.greenthread.example/ms/products/reform-thread-re-tee",
       "image_url": "https://images.unsplash.com/photo-1618354691373-d851c5c3a990?auto=format&fit=crop&w=900&h=1200&q=80",
       "color": "faded black",
       "fabric_composition": [
@@ -1210,19 +1325,26 @@
           "zero_waste": false,
           "made_to_order": false
         }
-      }
+      },
+      "sizes": [
+        "XS",
+        "M",
+        "L",
+        "XL"
+      ],
+      "color_family": "Black"
     },
     {
       "id": "reform-thread-puffer-vest",
-      "brand_slug": "reform-thread",
+      "brand_slug": "marks-and-spencer",
       "title": "Re:Loft Puffer Vest",
       "description": "City-ready warmth with a clear conscience. Shell and lining: 100% recycled polyester (GRS) from post-consumer bottles. Fill: 100% recycled PET wadding, 120gsm loft. PFC-free water repellent finish. Packs into its own pocket.",
       "category": "outerwear",
       "gender": "unisex",
-      "price": 4999,
-      "currency": "INR",
-      "retailer": "EcoBazaar",
-      "buy_url": "https://reformthread.example.com/products/reform-thread-puffer-vest",
+      "price": 50,
+      "currency": "GBP",
+      "retailer": "John Lewis",
+      "buy_url": "https://demo.greenthread.example/ms/products/reform-thread-puffer-vest",
       "image_url": "https://images.unsplash.com/photo-1591047139829-d91aecb6caea?auto=format&fit=crop&w=900&h=1200&q=80",
       "color": "black",
       "fabric_composition": [
@@ -1279,19 +1401,26 @@
           "zero_waste": false,
           "made_to_order": false
         }
-      }
+      },
+      "sizes": [
+        "XS",
+        "S",
+        "L",
+        "XL"
+      ],
+      "color_family": "Black"
     },
     {
       "id": "reform-thread-recycled-jeans",
-      "brand_slug": "reform-thread",
+      "brand_slug": "marks-and-spencer",
       "title": "Re:Denim Straight Jeans",
       "description": "Straight-leg everyday jeans. 65% recycled cotton (GRS) / 33% organic cotton / 2% elastane for comfort stretch. Ozone-washed finish cuts water use by 60% vs conventional denim washing. Button fly, recycled-brass hardware.",
       "category": "trousers",
       "gender": "men",
-      "price": 4499,
-      "currency": "INR",
+      "price": 45,
+      "currency": "GBP",
       "retailer": "Brand Direct",
-      "buy_url": "https://reformthread.example.com/products/reform-thread-recycled-jeans",
+      "buy_url": "https://demo.greenthread.example/ms/products/reform-thread-recycled-jeans",
       "image_url": "https://images.unsplash.com/photo-1542272604-787c3835535d?auto=format&fit=crop&w=900&h=1200&q=80",
       "color": "indigo",
       "fabric_composition": [
@@ -1351,19 +1480,25 @@
           "zero_waste": false,
           "made_to_order": false
         }
-      }
+      },
+      "sizes": [
+        "XS",
+        "L",
+        "XL"
+      ],
+      "color_family": "Blue"
     },
     {
       "id": "reform-thread-sweatshirt",
-      "brand_slug": "reform-thread",
+      "brand_slug": "marks-and-spencer",
       "title": "Re:Fleece Sweatshirt",
       "description": "Brushed-back fleece crew. 50% recycled cotton / 50% recycled polyester, both GRS certified, 320gsm. Made in a factory running 80% on rooftop solar. Take-back program: old Re:Fleece pieces become new ones.",
       "category": "hoodies",
       "gender": "unisex",
-      "price": 2999,
-      "currency": "INR",
-      "retailer": "GreenCart",
-      "buy_url": "https://reformthread.example.com/products/reform-thread-sweatshirt",
+      "price": 30,
+      "currency": "GBP",
+      "retailer": "Zalando",
+      "buy_url": "https://demo.greenthread.example/ms/products/reform-thread-sweatshirt",
       "image_url": "https://images.unsplash.com/photo-1556821840-3a63f95609a7?auto=format&fit=crop&w=900&h=1200&q=80",
       "color": "heather grey",
       "fabric_composition": [
@@ -1418,19 +1553,25 @@
           "zero_waste": false,
           "made_to_order": false
         }
-      }
+      },
+      "sizes": [
+        "XS",
+        "S",
+        "L"
+      ],
+      "color_family": "Grey"
     },
     {
       "id": "cedar-jade-tencel-wrap-dress",
-      "brand_slug": "cedar-and-jade",
+      "brand_slug": "thought",
       "title": "Willow Wrap Dress",
       "description": "Fluid, flattering, forest-green. 100% TENCEL™ Lyocell — wood pulp from FSC-certified eucalyptus, spun in a closed-loop process that recovers 99% of solvents. Butter-soft drape, naturally breathable and gentle on skin. B Corp certified maker.",
       "category": "dresses",
       "gender": "women",
-      "price": 4799,
-      "currency": "INR",
-      "retailer": "LeafMart",
-      "buy_url": "https://cedarandjade.example.com/products/cedar-jade-tencel-wrap-dress",
+      "price": 48,
+      "currency": "GBP",
+      "retailer": "ASOS",
+      "buy_url": "https://demo.greenthread.example/thought/products/cedar-jade-tencel-wrap-dress",
       "image_url": "https://images.unsplash.com/photo-1496747611176-843222e1e57c?auto=format&fit=crop&w=900&h=1200&q=80",
       "color": "forest",
       "fabric_composition": [
@@ -1476,19 +1617,27 @@
           "zero_waste": false,
           "made_to_order": false
         }
-      }
+      },
+      "sizes": [
+        "XS",
+        "S",
+        "M",
+        "L",
+        "XL"
+      ],
+      "color_family": "Green"
     },
     {
       "id": "cedar-jade-modal-tee",
-      "brand_slug": "cedar-and-jade",
+      "brand_slug": "thought",
       "title": "Cloud Modal Tee",
       "description": "The softest tee we make. 92% TENCEL™ Modal from beechwood, 8% elastane. Silky hand-feel, resists pilling, stays true after washing. Water-based prints only. 160gsm.",
       "category": "t-shirts",
       "gender": "women",
-      "price": 1899,
-      "currency": "INR",
-      "retailer": "EcoBazaar",
-      "buy_url": "https://cedarandjade.example.com/products/cedar-jade-modal-tee",
+      "price": 19,
+      "currency": "GBP",
+      "retailer": "John Lewis",
+      "buy_url": "https://demo.greenthread.example/thought/products/cedar-jade-modal-tee",
       "image_url": "https://images.unsplash.com/photo-1523381210434-271e8be1f52b?auto=format&fit=crop&w=900&h=1200&q=80",
       "color": "dusty rose",
       "fabric_composition": [
@@ -1538,19 +1687,27 @@
           "zero_waste": false,
           "made_to_order": false
         }
-      }
+      },
+      "sizes": [
+        "XS",
+        "S",
+        "M",
+        "L",
+        "XL"
+      ],
+      "color_family": "Pink & Purple"
     },
     {
       "id": "cedar-jade-lyocell-shirt",
-      "brand_slug": "cedar-and-jade",
+      "brand_slug": "thought",
       "title": "Slate Lyocell Shirt",
       "description": "A dress shirt that breathes. 100% TENCEL Lyocell twill, 145gsm — cooler than cotton, softer than silk, made from FSC-certified wood in a closed-loop mill. Wrinkle-resistant enough to skip the iron most days.",
       "category": "shirts",
       "gender": "men",
-      "price": 3699,
-      "currency": "INR",
-      "retailer": "GreenCart",
-      "buy_url": "https://cedarandjade.example.com/products/cedar-jade-lyocell-shirt",
+      "price": 37,
+      "currency": "GBP",
+      "retailer": "Zalando",
+      "buy_url": "https://demo.greenthread.example/thought/products/cedar-jade-lyocell-shirt",
       "image_url": "https://images.unsplash.com/photo-1603252109303-2751441dd157?auto=format&fit=crop&w=900&h=1200&q=80",
       "color": "slate",
       "fabric_composition": [
@@ -1596,19 +1753,25 @@
           "zero_waste": false,
           "made_to_order": false
         }
-      }
+      },
+      "sizes": [
+        "XS",
+        "S",
+        "M"
+      ],
+      "color_family": "Multi"
     },
     {
       "id": "cedar-jade-lounge-set-pants",
-      "brand_slug": "cedar-and-jade",
+      "brand_slug": "thought",
       "title": "Haven Lounge Pants",
       "description": "Weekend-grade comfort. 70% TENCEL Modal / 30% organic cotton french terry, 250gsm. Elastic waist with internal drawcord. Dyed with certified low-impact dyes in a B Corp facility.",
       "category": "trousers",
       "gender": "women",
-      "price": 2799,
-      "currency": "INR",
-      "retailer": "LeafMart",
-      "buy_url": "https://cedarandjade.example.com/products/cedar-jade-lounge-set-pants",
+      "price": 28,
+      "currency": "GBP",
+      "retailer": "ASOS",
+      "buy_url": "https://demo.greenthread.example/thought/products/cedar-jade-lounge-set-pants",
       "image_url": "https://images.unsplash.com/photo-1624378439575-d8705ad7ae80?auto=format&fit=crop&w=900&h=1200&q=80",
       "color": "oat",
       "fabric_composition": [
@@ -1661,19 +1824,25 @@
           "zero_waste": false,
           "made_to_order": false
         }
-      }
+      },
+      "sizes": [
+        "XS",
+        "S",
+        "L"
+      ],
+      "color_family": "White & Cream"
     },
     {
       "id": "cedar-jade-slip-skirt",
-      "brand_slug": "cedar-and-jade",
+      "brand_slug": "thought",
       "title": "Ripple Slip Skirt",
       "description": "Bias-cut slip skirt with liquid drape. 100% cupro — a regenerated fibre made from cotton linter waste that would otherwise be discarded, processed in a closed loop in Japan. Feels like silk, machine washable, vegan.",
       "category": "skirts",
       "gender": "women",
-      "price": 3299,
-      "currency": "INR",
+      "price": 33,
+      "currency": "GBP",
       "retailer": "Brand Direct",
-      "buy_url": "https://cedarandjade.example.com/products/cedar-jade-slip-skirt",
+      "buy_url": "https://demo.greenthread.example/thought/products/cedar-jade-slip-skirt",
       "image_url": "https://images.unsplash.com/photo-1583496661160-fb5886a0aaaa?auto=format&fit=crop&w=900&h=1200&q=80",
       "color": "champagne",
       "fabric_composition": [
@@ -1711,19 +1880,26 @@
           "zero_waste": false,
           "made_to_order": false
         }
-      }
+      },
+      "sizes": [
+        "XS",
+        "S",
+        "M",
+        "XL"
+      ],
+      "color_family": "White & Cream"
     },
     {
       "id": "harvest-chore-coat",
-      "brand_slug": "harvest-workwear",
+      "brand_slug": "patagonia",
       "title": "Field Chore Coat",
       "description": "Built for decades, guaranteed for life. 100% organic cotton canvas (OCS certified), 380gsm duck weave. Triple-stitched seams, corozo buttons, four roomy pockets. If it rips, we repair it free — forever. SA8000-audited factory.",
       "category": "outerwear",
       "gender": "unisex",
-      "price": 5999,
-      "currency": "INR",
-      "retailer": "GreenCart",
-      "buy_url": "https://harvestworkwear.example.com/products/harvest-chore-coat",
+      "price": 60,
+      "currency": "GBP",
+      "retailer": "Zalando",
+      "buy_url": "https://demo.greenthread.example/patagonia/products/harvest-chore-coat",
       "image_url": "https://images.unsplash.com/photo-1551028719-00167b16eac5?auto=format&fit=crop&w=900&h=1200&q=80",
       "color": "duck brown",
       "fabric_composition": [
@@ -1774,19 +1950,26 @@
           "zero_waste": false,
           "made_to_order": false
         }
-      }
+      },
+      "sizes": [
+        "XS",
+        "M",
+        "L",
+        "XL"
+      ],
+      "color_family": "Brown & Tan"
     },
     {
       "id": "harvest-carpenter-pants",
-      "brand_slug": "harvest-workwear",
+      "brand_slug": "patagonia",
       "title": "Carpenter Pants",
       "description": "Workwear that works. 98% organic cotton canvas / 2% elastane, 340gsm. Hammer loop, ruler pocket, gusseted crotch. Reinforced knees double the garment's life. OCS certified fabric, lifetime repair guarantee.",
       "category": "trousers",
       "gender": "men",
-      "price": 4299,
-      "currency": "INR",
-      "retailer": "LeafMart",
-      "buy_url": "https://harvestworkwear.example.com/products/harvest-carpenter-pants",
+      "price": 43,
+      "currency": "GBP",
+      "retailer": "ASOS",
+      "buy_url": "https://demo.greenthread.example/patagonia/products/harvest-carpenter-pants",
       "image_url": "https://images.unsplash.com/photo-1473966968600-fa801b869a1a?auto=format&fit=crop&w=900&h=1200&q=80",
       "color": "tobacco",
       "fabric_composition": [
@@ -1842,19 +2025,25 @@
           "zero_waste": false,
           "made_to_order": false
         }
-      }
+      },
+      "sizes": [
+        "XS",
+        "S",
+        "XL"
+      ],
+      "color_family": "Brown & Tan"
     },
     {
       "id": "harvest-heavy-tee",
-      "brand_slug": "harvest-workwear",
+      "brand_slug": "patagonia",
       "title": "Heavyweight Pocket Tee",
       "description": "A tee with the density of armour. 240gsm heavyweight jersey, 100% organic cotton (OCS). Tubular knit — no side seams to twist. Chest pocket. Pre-washed so it fits the same at year five as day one.",
       "category": "t-shirts",
       "gender": "men",
-      "price": 1799,
-      "currency": "INR",
-      "retailer": "EcoBazaar",
-      "buy_url": "https://harvestworkwear.example.com/products/harvest-heavy-tee",
+      "price": 18,
+      "currency": "GBP",
+      "retailer": "John Lewis",
+      "buy_url": "https://demo.greenthread.example/patagonia/products/harvest-heavy-tee",
       "image_url": "https://images.unsplash.com/photo-1617137968427-85924c800a22?auto=format&fit=crop&w=900&h=1200&q=80",
       "color": "washed navy",
       "fabric_composition": [
@@ -1905,19 +2094,25 @@
           "zero_waste": false,
           "made_to_order": false
         }
-      }
+      },
+      "sizes": [
+        "XS",
+        "M",
+        "XL"
+      ],
+      "color_family": "Blue"
     },
     {
       "id": "harvest-work-apron",
-      "brand_slug": "harvest-workwear",
+      "brand_slug": "patagonia",
       "title": "Waxed Work Apron",
       "description": "For makers. 100% organic cotton canvas with a natural beeswax coating (no PFAS, no plastic films). Cross-back straps distribute weight. Re-wax kit included — the finish is renewable, not disposable.",
       "category": "accessories",
       "gender": "unisex",
-      "price": 2499,
-      "currency": "INR",
+      "price": 25,
+      "currency": "GBP",
       "retailer": "Brand Direct",
-      "buy_url": "https://harvestworkwear.example.com/products/harvest-work-apron",
+      "buy_url": "https://demo.greenthread.example/patagonia/products/harvest-work-apron",
       "image_url": "https://images.unsplash.com/photo-1556905055-8f358a7a47b2?auto=format&fit=crop&w=900&h=1200&q=80",
       "color": "olive drab",
       "fabric_composition": [
@@ -1974,19 +2169,23 @@
           "zero_waste": false,
           "made_to_order": false
         }
-      }
+      },
+      "sizes": [
+        "One size"
+      ],
+      "color_family": "Green"
     },
     {
       "id": "harvest-flannel-shirt",
-      "brand_slug": "harvest-workwear",
+      "brand_slug": "patagonia",
       "title": "Timber Flannel Shirt",
       "description": "Brushed both sides for warmth. 100% organic cotton flannel, 200gsm, yarn-dyed check so the pattern never fades. OCS certified, SA8000-audited stitching unit. Cut roomy for layering.",
       "category": "shirts",
       "gender": "men",
-      "price": 3299,
-      "currency": "INR",
-      "retailer": "GreenCart",
-      "buy_url": "https://harvestworkwear.example.com/products/harvest-flannel-shirt",
+      "price": 33,
+      "currency": "GBP",
+      "retailer": "Zalando",
+      "buy_url": "https://demo.greenthread.example/patagonia/products/harvest-flannel-shirt",
       "image_url": "https://images.unsplash.com/photo-1608744882201-52a7f7f3dd60?auto=format&fit=crop&w=900&h=1200&q=80",
       "color": "rust check",
       "fabric_composition": [
@@ -2037,19 +2236,25 @@
           "zero_waste": false,
           "made_to_order": false
         }
-      }
+      },
+      "sizes": [
+        "XS",
+        "M",
+        "L"
+      ],
+      "color_family": "Brown & Tan"
     },
     {
       "id": "mirien-deadstock-blazer",
-      "brand_slug": "mirien",
+      "brand_slug": "zara",
       "title": "Deadstock Wool Blazer",
       "description": "One of 40, ever. Cut from rescued deadstock suiting — 85% virgin wool / 15% polyamide — sourced from an Italian mill's unsold rolls. Using existing fabric means zero new fibre production for this piece. Half-canvas construction, made to order in 14 days.",
       "category": "outerwear",
       "gender": "women",
-      "price": 8999,
-      "currency": "INR",
+      "price": 90,
+      "currency": "GBP",
       "retailer": "Brand Direct",
-      "buy_url": "https://mirien.example.com/products/mirien-deadstock-blazer",
+      "buy_url": "https://demo.greenthread.example/zara/products/mirien-deadstock-blazer",
       "image_url": "https://images.unsplash.com/photo-1548126032-079a0fb0099d?auto=format&fit=crop&w=900&h=1200&q=80",
       "color": "camel",
       "fabric_composition": [
@@ -2102,19 +2307,27 @@
           "zero_waste": false,
           "made_to_order": true
         }
-      }
+      },
+      "sizes": [
+        "XS",
+        "S",
+        "M",
+        "L",
+        "XL"
+      ],
+      "color_family": "Brown & Tan"
     },
     {
       "id": "mirien-tencel-blouse",
-      "brand_slug": "mirien",
+      "brand_slug": "zara",
       "title": "Air Blouse",
       "description": "Feather-light and fluid. 100% TENCEL Lyocell satin, 120gsm. Made to order — we cut only what's sold, so nothing ends up landfilled. Shell buttons. Cool iron if needed.",
       "category": "shirts",
       "gender": "women",
-      "price": 3899,
-      "currency": "INR",
-      "retailer": "LeafMart",
-      "buy_url": "https://mirien.example.com/products/mirien-tencel-blouse",
+      "price": 39,
+      "currency": "GBP",
+      "retailer": "ASOS",
+      "buy_url": "https://demo.greenthread.example/zara/products/mirien-tencel-blouse",
       "image_url": "https://images.unsplash.com/photo-1564257631407-4deb1f99d992?auto=format&fit=crop&w=900&h=1200&q=80",
       "color": "ivory",
       "fabric_composition": [
@@ -2157,19 +2370,27 @@
           "zero_waste": false,
           "made_to_order": true
         }
-      }
+      },
+      "sizes": [
+        "XS",
+        "S",
+        "M",
+        "L",
+        "XL"
+      ],
+      "color_family": "White & Cream"
     },
     {
       "id": "mirien-slip-dress",
-      "brand_slug": "mirien",
+      "brand_slug": "zara",
       "title": "Eaux Slip Dress",
       "description": "Evening ease. Deadstock viscose satin (rescued from a closed fashion house) — 100% viscose. Bias cut, adjustable straps. Each colourway limited to the fabric we could rescue; when it's gone, it's gone.",
       "category": "dresses",
       "gender": "women",
-      "price": 5299,
-      "currency": "INR",
-      "retailer": "EcoBazaar",
-      "buy_url": "https://mirien.example.com/products/mirien-slip-dress",
+      "price": 53,
+      "currency": "GBP",
+      "retailer": "John Lewis",
+      "buy_url": "https://demo.greenthread.example/zara/products/mirien-slip-dress",
       "image_url": "https://images.unsplash.com/photo-1566174053879-31528523f8ae?auto=format&fit=crop&w=900&h=1200&q=80",
       "color": "midnight",
       "fabric_composition": [
@@ -2212,19 +2433,27 @@
           "zero_waste": false,
           "made_to_order": false
         }
-      }
+      },
+      "sizes": [
+        "XS",
+        "S",
+        "M",
+        "L",
+        "XL"
+      ],
+      "color_family": "Black"
     },
     {
       "id": "mirien-knit-tank",
-      "brand_slug": "mirien",
+      "brand_slug": "zara",
       "title": "Sculpt Knit Tank",
       "description": "Second-skin ribbed tank. 77% TENCEL Modal / 18% recycled polyamide / 5% elastane. Seamless knit construction produces near-zero cutting waste. Made to order.",
       "category": "t-shirts",
       "gender": "women",
-      "price": 2299,
-      "currency": "INR",
-      "retailer": "GreenCart",
-      "buy_url": "https://mirien.example.com/products/mirien-knit-tank",
+      "price": 23,
+      "currency": "GBP",
+      "retailer": "Zalando",
+      "buy_url": "https://demo.greenthread.example/zara/products/mirien-knit-tank",
       "image_url": "https://images.unsplash.com/photo-1618517351616-38fb9c5210c6?auto=format&fit=crop&w=900&h=1200&q=80",
       "color": "black",
       "fabric_composition": [
@@ -2282,19 +2511,25 @@
           "zero_waste": true,
           "made_to_order": true
         }
-      }
+      },
+      "sizes": [
+        "XS",
+        "S",
+        "XL"
+      ],
+      "color_family": "Black"
     },
     {
       "id": "mirien-palazzo-trousers",
-      "brand_slug": "mirien",
+      "brand_slug": "zara",
       "title": "Palazzo Trousers",
       "description": "High-rise, wide-leg, floor-sweeping. 65% TENCEL Lyocell / 35% deadstock viscose blend twill. Made to order in our Lisbon atelier; full cost breakdown published on the product page.",
       "category": "trousers",
       "gender": "women",
-      "price": 4599,
-      "currency": "INR",
+      "price": 46,
+      "currency": "GBP",
       "retailer": "Brand Direct",
-      "buy_url": "https://mirien.example.com/products/mirien-palazzo-trousers",
+      "buy_url": "https://demo.greenthread.example/zara/products/mirien-palazzo-trousers",
       "image_url": "https://images.unsplash.com/photo-1584370848010-d7fe6bc767ec?auto=format&fit=crop&w=900&h=1200&q=80",
       "color": "chocolate",
       "fabric_composition": [
@@ -2347,19 +2582,25 @@
           "zero_waste": false,
           "made_to_order": true
         }
-      }
+      },
+      "sizes": [
+        "S",
+        "M",
+        "L"
+      ],
+      "color_family": "Multi"
     },
     {
       "id": "kanso-run-tee",
-      "brand_slug": "kanso-athletics",
+      "brand_slug": "sweaty-betty",
       "title": "Circuit Run Tee",
       "description": "Race-day light at 110gsm. 100% recycled polyester (GRS certified) from post-consumer bottles — 6 bottles per tee. Wicks fast, dries faster. Ships with a Guppyfriend washing bag to catch microfibres. OEKO-TEX certified.",
       "category": "activewear",
       "gender": "men",
-      "price": 1999,
-      "currency": "INR",
-      "retailer": "LeafMart",
-      "buy_url": "https://kansoathletics.example.com/products/kanso-run-tee",
+      "price": 20,
+      "currency": "GBP",
+      "retailer": "ASOS",
+      "buy_url": "https://demo.greenthread.example/sweaty-betty/products/kanso-run-tee",
       "image_url": "https://images.unsplash.com/photo-1571945153237-4929e783af4a?auto=format&fit=crop&w=900&h=1200&q=80",
       "color": "graphite",
       "fabric_composition": [
@@ -2405,19 +2646,25 @@
           "zero_waste": false,
           "made_to_order": false
         }
-      }
+      },
+      "sizes": [
+        "S",
+        "M",
+        "XL"
+      ],
+      "color_family": "Black"
     },
     {
       "id": "kanso-flow-leggings",
-      "brand_slug": "kanso-athletics",
+      "brand_slug": "sweaty-betty",
       "title": "Flow Leggings",
       "description": "Squat-proof, planet-kinder. 78% ECONYL® regenerated nylon (from recovered fishing nets and carpet waste) / 22% elastane. Four-way stretch, high compression, hidden waistband pocket. We publish our microfibre shedding test results — these shed 40% less than virgin nylon equivalents.",
       "category": "activewear",
       "gender": "women",
-      "price": 3499,
-      "currency": "INR",
-      "retailer": "EcoBazaar",
-      "buy_url": "https://kansoathletics.example.com/products/kanso-flow-leggings",
+      "price": 35,
+      "currency": "GBP",
+      "retailer": "John Lewis",
+      "buy_url": "https://demo.greenthread.example/sweaty-betty/products/kanso-flow-leggings",
       "image_url": "https://images.unsplash.com/photo-1506629082955-511b1aa562c8?auto=format&fit=crop&w=900&h=1200&q=80",
       "color": "deep teal",
       "fabric_composition": [
@@ -2462,19 +2709,26 @@
           "zero_waste": false,
           "made_to_order": false
         }
-      }
+      },
+      "sizes": [
+        "XS",
+        "M",
+        "L",
+        "XL"
+      ],
+      "color_family": "Blue"
     },
     {
       "id": "kanso-swim-shorts",
-      "brand_slug": "kanso-athletics",
+      "brand_slug": "sweaty-betty",
       "title": "Reef Swim Shorts",
       "description": "Beach-to-bar shorts. Shell: 100% recycled polyester (GRS) from ocean-bound plastic collected in coastal Kerala. Quick-dry, chlorine-resistant, PFC-free water repellent. Mesh-free lining in soft recycled jersey.",
       "category": "activewear",
       "gender": "men",
-      "price": 2499,
-      "currency": "INR",
-      "retailer": "GreenCart",
-      "buy_url": "https://kansoathletics.example.com/products/kanso-swim-shorts",
+      "price": 25,
+      "currency": "GBP",
+      "retailer": "Zalando",
+      "buy_url": "https://demo.greenthread.example/sweaty-betty/products/kanso-swim-shorts",
       "image_url": "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=900&h=1200&q=80",
       "color": "coral",
       "fabric_composition": [
@@ -2529,19 +2783,27 @@
           "zero_waste": false,
           "made_to_order": false
         }
-      }
+      },
+      "sizes": [
+        "XS",
+        "S",
+        "M",
+        "L",
+        "XL"
+      ],
+      "color_family": "Red & Orange"
     },
     {
       "id": "kanso-studio-bra",
-      "brand_slug": "kanso-athletics",
+      "brand_slug": "sweaty-betty",
       "title": "Studio Sports Bra",
       "description": "Medium support, maximum recycled. 82% recycled polyester (GRS) / 18% elastane with a brushed matte finish. Removable pads in recycled foam. Bonded seams — fewer stitch lines, less irritation.",
       "category": "activewear",
       "gender": "women",
-      "price": 2299,
-      "currency": "INR",
-      "retailer": "LeafMart",
-      "buy_url": "https://kansoathletics.example.com/products/kanso-studio-bra",
+      "price": 23,
+      "currency": "GBP",
+      "retailer": "ASOS",
+      "buy_url": "https://demo.greenthread.example/sweaty-betty/products/kanso-studio-bra",
       "image_url": "https://images.unsplash.com/photo-1518310383802-640c2de311b2?auto=format&fit=crop&w=900&h=1200&q=80",
       "color": "lilac",
       "fabric_composition": [
@@ -2591,19 +2853,27 @@
           "zero_waste": false,
           "made_to_order": false
         }
-      }
+      },
+      "sizes": [
+        "XS",
+        "S",
+        "M",
+        "L",
+        "XL"
+      ],
+      "color_family": "Pink & Purple"
     },
     {
       "id": "kanso-trail-jacket",
-      "brand_slug": "kanso-athletics",
+      "brand_slug": "sweaty-betty",
       "title": "Ridgeline Trail Jacket",
       "description": "Wind-shedding trail shell. 100% ECONYL regenerated nylon ripstop with PFC-free DWR. Packs to fist-size. Every zip, cord and toggle is recycled or recyclable — designed for single-material recycling at end of life.",
       "category": "activewear",
       "gender": "unisex",
-      "price": 6499,
-      "currency": "INR",
+      "price": 65,
+      "currency": "GBP",
       "retailer": "Brand Direct",
-      "buy_url": "https://kansoathletics.example.com/products/kanso-trail-jacket",
+      "buy_url": "https://demo.greenthread.example/sweaty-betty/products/kanso-trail-jacket",
       "image_url": "https://images.unsplash.com/photo-1547949003-9792a18a2601?auto=format&fit=crop&w=900&h=1200&q=80",
       "color": "pine",
       "fabric_composition": [
@@ -2648,19 +2918,25 @@
           "zero_waste": false,
           "made_to_order": false
         }
-      }
+      },
+      "sizes": [
+        "XS",
+        "L",
+        "XL"
+      ],
+      "color_family": "Green"
     },
     {
       "id": "bloomfield-crew-tee-3pack",
-      "brand_slug": "bloomfield-basics",
+      "brand_slug": "h-and-m",
       "title": "Crew Tee 3-Pack",
       "description": "Three everyday crew necks at an honest price. Soft-touch eco-friendly fabric: 60% cotton (Better Cotton Initiative) / 40% polyester. 160gsm. Tagless neck, ribbed collar. Machine wash warm.",
       "category": "t-shirts",
       "gender": "men",
-      "price": 1299,
-      "currency": "INR",
-      "retailer": "EcoBazaar",
-      "buy_url": "https://bloomfieldbasics.example.com/products/bloomfield-crew-tee-3pack",
+      "price": 13,
+      "currency": "GBP",
+      "retailer": "John Lewis",
+      "buy_url": "https://demo.greenthread.example/hm/products/bloomfield-crew-tee-3pack",
       "image_url": "https://images.unsplash.com/photo-1620799140408-edc6dcb6d633?auto=format&fit=crop&w=900&h=1200&q=80",
       "color": "white/grey/black",
       "fabric_composition": [
@@ -2707,19 +2983,25 @@
           "zero_waste": false,
           "made_to_order": false
         }
-      }
+      },
+      "sizes": [
+        "M",
+        "L",
+        "XL"
+      ],
+      "color_family": "Multi"
     },
     {
       "id": "bloomfield-jogger",
-      "brand_slug": "bloomfield-basics",
+      "brand_slug": "h-and-m",
       "title": "Comfy Jogger",
       "description": "Your new default trousers. Cosy brushed fleece — 65% BCI cotton / 35% polyester, 280gsm. Elastic cuffs, drawstring waist, phone pocket. Sustainably minded and budget friendly.",
       "category": "trousers",
       "gender": "unisex",
-      "price": 1599,
-      "currency": "INR",
-      "retailer": "LeafMart",
-      "buy_url": "https://bloomfieldbasics.example.com/products/bloomfield-jogger",
+      "price": 16,
+      "currency": "GBP",
+      "retailer": "ASOS",
+      "buy_url": "https://demo.greenthread.example/hm/products/bloomfield-jogger",
       "image_url": "https://images.unsplash.com/photo-1598033129183-c4f50c736f10?auto=format&fit=crop&w=900&h=1200&q=80",
       "color": "grey melange",
       "fabric_composition": [
@@ -2766,19 +3048,26 @@
           "zero_waste": false,
           "made_to_order": false
         }
-      }
+      },
+      "sizes": [
+        "XS",
+        "S",
+        "M",
+        "L"
+      ],
+      "color_family": "Grey"
     },
     {
       "id": "bloomfield-oxford-shirt",
-      "brand_slug": "bloomfield-basics",
+      "brand_slug": "h-and-m",
       "title": "Easy Oxford Shirt",
       "description": "A wardrobe staple, responsibly priced. 100% cotton oxford weave sourced through the Better Cotton Initiative. 140gsm, button-down collar, chest pocket. Easy-iron finish.",
       "category": "shirts",
       "gender": "men",
-      "price": 1999,
-      "currency": "INR",
-      "retailer": "GreenCart",
-      "buy_url": "https://bloomfieldbasics.example.com/products/bloomfield-oxford-shirt",
+      "price": 20,
+      "currency": "GBP",
+      "retailer": "Zalando",
+      "buy_url": "https://demo.greenthread.example/hm/products/bloomfield-oxford-shirt",
       "image_url": "https://images.unsplash.com/photo-1611312449408-fcece27cdbb7?auto=format&fit=crop&w=900&h=1200&q=80",
       "color": "light blue",
       "fabric_composition": [
@@ -2818,19 +3107,27 @@
           "zero_waste": false,
           "made_to_order": false
         }
-      }
+      },
+      "sizes": [
+        "XS",
+        "S",
+        "M",
+        "L",
+        "XL"
+      ],
+      "color_family": "Blue"
     },
     {
       "id": "bloomfield-hoodie",
-      "brand_slug": "bloomfield-basics",
+      "brand_slug": "h-and-m",
       "title": "Everyday Hoodie",
       "description": "Green in colour, greener in spirit. Eco-blend fleece: 55% BCI cotton / 45% polyester, 300gsm. Double-lined hood, kangaroo pocket. Planet-conscious comfort for less.",
       "category": "hoodies",
       "gender": "unisex",
-      "price": 1899,
-      "currency": "INR",
-      "retailer": "EcoBazaar",
-      "buy_url": "https://bloomfieldbasics.example.com/products/bloomfield-hoodie",
+      "price": 19,
+      "currency": "GBP",
+      "retailer": "John Lewis",
+      "buy_url": "https://demo.greenthread.example/hm/products/bloomfield-hoodie",
       "image_url": "https://images.unsplash.com/photo-1509942774463-acf339cf87d5?auto=format&fit=crop&w=900&h=1200&q=80",
       "color": "forest green",
       "fabric_composition": [
@@ -2879,19 +3176,26 @@
           "zero_waste": false,
           "made_to_order": false
         }
-      }
+      },
+      "sizes": [
+        "S",
+        "M",
+        "L",
+        "XL"
+      ],
+      "color_family": "Green"
     },
     {
       "id": "bloomfield-summer-dress",
-      "brand_slug": "bloomfield-basics",
+      "brand_slug": "h-and-m",
       "title": "Breezy Summer Dress",
       "description": "Sunshine-ready smock dress in a cheerful floral. Lightweight woven fabric: 100% viscose. Tiered skirt, elasticated cuffs. Hand wash recommended. Feel-good fashion at a feel-good price.",
       "category": "dresses",
       "gender": "women",
-      "price": 1799,
-      "currency": "INR",
-      "retailer": "LeafMart",
-      "buy_url": "https://bloomfieldbasics.example.com/products/bloomfield-summer-dress",
+      "price": 18,
+      "currency": "GBP",
+      "retailer": "ASOS",
+      "buy_url": "https://demo.greenthread.example/hm/products/bloomfield-summer-dress",
       "image_url": "https://images.unsplash.com/photo-1515372039744-b8f02a3ae446?auto=format&fit=crop&w=900&h=1200&q=80",
       "color": "yellow floral",
       "fabric_composition": [
@@ -2926,19 +3230,27 @@
           "zero_waste": false,
           "made_to_order": false
         }
-      }
+      },
+      "sizes": [
+        "XS",
+        "S",
+        "M",
+        "L",
+        "XL"
+      ],
+      "color_family": "Yellow"
     },
     {
       "id": "bloomfield-polo",
-      "brand_slug": "bloomfield-basics",
+      "brand_slug": "h-and-m",
       "title": "Classic Pique Polo",
       "description": "Smart-casual sorted. Pique knit — 70% BCI cotton / 30% polyester, 220gsm. Two-button placket, ribbed cuffs. Colour-locked so it survives the office and the wash.",
       "category": "t-shirts",
       "gender": "men",
-      "price": 1499,
-      "currency": "INR",
+      "price": 15,
+      "currency": "GBP",
       "retailer": "Brand Direct",
-      "buy_url": "https://bloomfieldbasics.example.com/products/bloomfield-polo",
+      "buy_url": "https://demo.greenthread.example/hm/products/bloomfield-polo",
       "image_url": "https://images.unsplash.com/photo-1625910513399-c9fcba54338c?auto=format&fit=crop&w=900&h=1200&q=80",
       "color": "navy",
       "fabric_composition": [
@@ -2983,19 +3295,27 @@
           "zero_waste": false,
           "made_to_order": false
         }
-      }
+      },
+      "sizes": [
+        "XS",
+        "S",
+        "M",
+        "L",
+        "XL"
+      ],
+      "color_family": "Blue"
     },
     {
       "id": "atelier-ondes-peace-silk-blouse",
-      "brand_slug": "atelier-ondes",
+      "brand_slug": "and-other-stories",
       "title": "Lune Peace Silk Blouse",
       "description": "Occasionwear with a clear conscience. 100% Ahimsa (peace) silk — cocoons harvested only after the moth emerges naturally. Handloomed, 90gsm, GOTS-certified processing with azo-free dyes. Each blouse takes an artisan two days.",
       "category": "shirts",
       "gender": "women",
-      "price": 7999,
-      "currency": "INR",
+      "price": 80,
+      "currency": "GBP",
       "retailer": "Brand Direct",
-      "buy_url": "https://atelierondes.example.com/products/atelier-ondes-peace-silk-blouse",
+      "buy_url": "https://demo.greenthread.example/stories/products/atelier-ondes-peace-silk-blouse",
       "image_url": "https://images.unsplash.com/photo-1583744946564-b52ac1c389c8?auto=format&fit=crop&w=900&h=1200&q=80",
       "color": "pearl",
       "fabric_composition": [
@@ -3042,19 +3362,27 @@
           "zero_waste": false,
           "made_to_order": false
         }
-      }
+      },
+      "sizes": [
+        "XS",
+        "S",
+        "M",
+        "L",
+        "XL"
+      ],
+      "color_family": "White & Cream"
     },
     {
       "id": "atelier-ondes-cupro-slip-dress",
-      "brand_slug": "atelier-ondes",
+      "brand_slug": "and-other-stories",
       "title": "Ondine Slip Dress",
       "description": "Liquid black, floor-grazing. 100% cupro satin regenerated from cotton linter waste in a closed-loop Japanese mill. Vegan silk alternative with real weight and drape. French seams throughout; made in a 12-person atelier.",
       "category": "dresses",
       "gender": "women",
-      "price": 6499,
-      "currency": "INR",
-      "retailer": "GreenCart",
-      "buy_url": "https://atelierondes.example.com/products/atelier-ondes-cupro-slip-dress",
+      "price": 65,
+      "currency": "GBP",
+      "retailer": "Zalando",
+      "buy_url": "https://demo.greenthread.example/stories/products/atelier-ondes-cupro-slip-dress",
       "image_url": "https://images.unsplash.com/photo-1566174053879-31528523f8ae?auto=format&fit=crop&w=900&h=1200&q=80",
       "color": "black",
       "fabric_composition": [
@@ -3092,19 +3420,25 @@
           "zero_waste": false,
           "made_to_order": false
         }
-      }
+      },
+      "sizes": [
+        "S",
+        "M",
+        "XL"
+      ],
+      "color_family": "Black"
     },
     {
       "id": "atelier-ondes-organza-skirt",
-      "brand_slug": "atelier-ondes",
+      "brand_slug": "and-other-stories",
       "title": "Brume Organza Skirt",
       "description": "Clouds you can wear. Layered skirt: outer 100% peace silk organza, lining 100% TENCEL Lyocell so it sits softly on skin. GOTS-certified dye house. A-line, hidden side zip, midi length.",
       "category": "skirts",
       "gender": "women",
-      "price": 5999,
-      "currency": "INR",
+      "price": 60,
+      "currency": "GBP",
       "retailer": "Brand Direct",
-      "buy_url": "https://atelierondes.example.com/products/atelier-ondes-organza-skirt",
+      "buy_url": "https://demo.greenthread.example/stories/products/atelier-ondes-organza-skirt",
       "image_url": "https://images.unsplash.com/photo-1487222477894-8943e31ef7b2?auto=format&fit=crop&w=900&h=1200&q=80",
       "color": "blush",
       "fabric_composition": [
@@ -3154,19 +3488,26 @@
           "zero_waste": false,
           "made_to_order": false
         }
-      }
+      },
+      "sizes": [
+        "XS",
+        "S",
+        "M",
+        "L"
+      ],
+      "color_family": "Pink & Purple"
     },
     {
       "id": "atelier-ondes-tencel-jumpsuit",
-      "brand_slug": "atelier-ondes",
+      "brand_slug": "and-other-stories",
       "title": "Voyage Jumpsuit",
       "description": "One piece, endless occasions. 100% TENCEL Lyocell twill with a peached finish, 180gsm. Wide leg, wrap bodice, self-belt. Full cost transparency: fabric ₹1,840 / labour ₹2,100 / everything else on our site.",
       "category": "dresses",
       "gender": "women",
-      "price": 7499,
-      "currency": "INR",
-      "retailer": "LeafMart",
-      "buy_url": "https://atelierondes.example.com/products/atelier-ondes-tencel-jumpsuit",
+      "price": 75,
+      "currency": "GBP",
+      "retailer": "ASOS",
+      "buy_url": "https://demo.greenthread.example/stories/products/atelier-ondes-tencel-jumpsuit",
       "image_url": "https://images.unsplash.com/photo-1610652492500-ded49ceeb378?auto=format&fit=crop&w=900&h=1200&q=80",
       "color": "ink",
       "fabric_composition": [
@@ -3204,19 +3545,26 @@
           "zero_waste": false,
           "made_to_order": false
         }
-      }
+      },
+      "sizes": [
+        "S",
+        "M",
+        "L",
+        "XL"
+      ],
+      "color_family": "Black"
     },
     {
       "id": "moss-mountain-fleece",
-      "brand_slug": "moss-and-mountain",
+      "brand_slug": "finisterre",
       "title": "Summit Grid Fleece",
       "description": "Alpine warmth without the guilt trip. 94% recycled polyester grid fleece (GRS, from post-consumer bottles) / 6% elastane. Bluesign approved fabric, PFC-free. Zoned breathability panels, harness-compatible pockets.",
       "category": "outerwear",
       "gender": "unisex",
-      "price": 5499,
-      "currency": "INR",
-      "retailer": "GreenCart",
-      "buy_url": "https://mossandmountain.example.com/products/moss-mountain-fleece",
+      "price": 55,
+      "currency": "GBP",
+      "retailer": "Zalando",
+      "buy_url": "https://demo.greenthread.example/finisterre/products/moss-mountain-fleece",
       "image_url": "https://images.unsplash.com/photo-1521223890158-f9f7c3d5d504?auto=format&fit=crop&w=900&h=1200&q=80",
       "color": "deep pine",
       "fabric_composition": [
@@ -3275,19 +3623,25 @@
           "zero_waste": false,
           "made_to_order": false
         }
-      }
+      },
+      "sizes": [
+        "XS",
+        "S",
+        "XL"
+      ],
+      "color_family": "Green"
     },
     {
       "id": "moss-mountain-shell-jacket",
-      "brand_slug": "moss-and-mountain",
+      "brand_slug": "finisterre",
       "title": "Cirrus 3L Shell",
       "description": "Fully waterproof, fully PFC-free. 3-layer shell: face 100% recycled nylon (GRS), waterproof-breathable membrane free of fluorocarbons, 20K/20K rating. Bluesign system product. Pit zips, helmet-compatible hood. Repair patches included.",
       "category": "outerwear",
       "gender": "men",
-      "price": 11999,
-      "currency": "INR",
+      "price": 120,
+      "currency": "GBP",
       "retailer": "Brand Direct",
-      "buy_url": "https://mossandmountain.example.com/products/moss-mountain-shell-jacket",
+      "buy_url": "https://demo.greenthread.example/finisterre/products/moss-mountain-shell-jacket",
       "image_url": "https://images.unsplash.com/photo-1544923246-77307dd654cb?auto=format&fit=crop&w=900&h=1200&q=80",
       "color": "storm blue",
       "fabric_composition": [
@@ -3344,19 +3698,26 @@
           "zero_waste": false,
           "made_to_order": false
         }
-      }
+      },
+      "sizes": [
+        "XS",
+        "S",
+        "L",
+        "XL"
+      ],
+      "color_family": "Blue"
     },
     {
       "id": "moss-mountain-hike-pants",
-      "brand_slug": "moss-and-mountain",
+      "brand_slug": "finisterre",
       "title": "Traverse Hike Pants",
       "description": "Scramble-ready stretch. 88% recycled polyamide / 12% elastane double-weave, Bluesign approved, PFC-free DWR. Articulated knees, zip pockets, ankle cinches. 1% of the price goes to trail restoration.",
       "category": "trousers",
       "gender": "women",
-      "price": 4999,
-      "currency": "INR",
-      "retailer": "LeafMart",
-      "buy_url": "https://mossandmountain.example.com/products/moss-mountain-hike-pants",
+      "price": 50,
+      "currency": "GBP",
+      "retailer": "ASOS",
+      "buy_url": "https://demo.greenthread.example/finisterre/products/moss-mountain-hike-pants",
       "image_url": "https://images.unsplash.com/photo-1552902865-b72c031ac5ea?auto=format&fit=crop&w=900&h=1200&q=80",
       "color": "basalt",
       "fabric_composition": [
@@ -3412,19 +3773,27 @@
           "zero_waste": false,
           "made_to_order": false
         }
-      }
+      },
+      "sizes": [
+        "XS",
+        "S",
+        "M",
+        "L",
+        "XL"
+      ],
+      "color_family": "Grey"
     },
     {
       "id": "moss-mountain-base-layer",
-      "brand_slug": "moss-and-mountain",
+      "brand_slug": "finisterre",
       "title": "Alpenglow Base Layer",
       "description": "Next-to-skin warmth for cold starts. 60% RWS merino wool / 40% TENCEL Lyocell jersey, 190gsm — merino for warmth and odour control, TENCEL for wicking and durability. Flatlock seams. Machine wash wool cycle.",
       "category": "activewear",
       "gender": "unisex",
-      "price": 3999,
-      "currency": "INR",
-      "retailer": "EcoBazaar",
-      "buy_url": "https://mossandmountain.example.com/products/moss-mountain-base-layer",
+      "price": 40,
+      "currency": "GBP",
+      "retailer": "John Lewis",
+      "buy_url": "https://demo.greenthread.example/finisterre/products/moss-mountain-base-layer",
       "image_url": "https://images.unsplash.com/photo-1483721310020-03333e577078?auto=format&fit=crop&w=900&h=1200&q=80",
       "color": "ember",
       "fabric_composition": [
@@ -3481,19 +3850,26 @@
           "zero_waste": false,
           "made_to_order": false
         }
-      }
+      },
+      "sizes": [
+        "XS",
+        "S",
+        "L",
+        "XL"
+      ],
+      "color_family": "Red & Orange"
     },
     {
       "id": "moss-mountain-insulated-parka",
-      "brand_slug": "moss-and-mountain",
+      "brand_slug": "finisterre",
       "title": "Basecamp Insulated Parka",
       "description": "Warmest thing we make. Shell: 100% recycled polyester (GRS). Insulation: 100% recycled-content synthetic down alternative — no animal down, no cold spots when wet. PFC-free DWR, Bluesign approved. Thigh-length, storm cuffs, faux-fur-free hood.",
       "category": "outerwear",
       "gender": "women",
-      "price": 13999,
-      "currency": "INR",
-      "retailer": "GreenCart",
-      "buy_url": "https://mossandmountain.example.com/products/moss-mountain-insulated-parka",
+      "price": 140,
+      "currency": "GBP",
+      "retailer": "Zalando",
+      "buy_url": "https://demo.greenthread.example/finisterre/products/moss-mountain-insulated-parka",
       "image_url": "https://images.unsplash.com/photo-1519238263530-99bdd11df2ea?auto=format&fit=crop&w=900&h=1200&q=80",
       "color": "night olive",
       "fabric_composition": [
@@ -3545,19 +3921,27 @@
           "zero_waste": false,
           "made_to_order": false
         }
-      }
+      },
+      "sizes": [
+        "XS",
+        "S",
+        "M",
+        "L",
+        "XL"
+      ],
+      "color_family": "Green"
     },
     {
       "id": "juno-hemp-tee",
-      "brand_slug": "juno-hemp-co",
+      "brand_slug": "cos",
       "title": "Fieldnote Hemp Tee",
       "description": "Hemp does more with less: rain-fed, pesticide-free, and it returns nutrients to the soil. 55% hemp / 45% USDA-certified organic cotton jersey, 190gsm. Undyed — zero dye chemistry, zero dye water. Softens dramatically with wear.",
       "category": "t-shirts",
       "gender": "unisex",
-      "price": 1799,
-      "currency": "INR",
-      "retailer": "LeafMart",
-      "buy_url": "https://junohempco.example.com/products/juno-hemp-tee",
+      "price": 18,
+      "currency": "GBP",
+      "retailer": "ASOS",
+      "buy_url": "https://demo.greenthread.example/cos/products/juno-hemp-tee",
       "image_url": "https://images.unsplash.com/photo-1503341504253-dff4815485f1?auto=format&fit=crop&w=900&h=1200&q=80",
       "color": "undyed natural",
       "fabric_composition": [
@@ -3617,19 +4001,26 @@
           "zero_waste": true,
           "made_to_order": false
         }
-      }
+      },
+      "sizes": [
+        "XS",
+        "S",
+        "L",
+        "XL"
+      ],
+      "color_family": "White & Cream"
     },
     {
       "id": "juno-hemp-workshirt",
-      "brand_slug": "juno-hemp-co",
+      "brand_slug": "cos",
       "title": "Indigo Hemp Workshirt",
       "description": "Dipped 12 times in a natural indigo vat — no synthetic dyes, no heavy metals. 100% hemp chambray, 170gsm. The indigo will fade and patina like good denim. Corozo buttons, boxy fit, zero-waste pattern (every scrap of the lay plan is used).",
       "category": "shirts",
       "gender": "men",
-      "price": 3799,
-      "currency": "INR",
-      "retailer": "EcoBazaar",
-      "buy_url": "https://junohempco.example.com/products/juno-hemp-workshirt",
+      "price": 38,
+      "currency": "GBP",
+      "retailer": "John Lewis",
+      "buy_url": "https://demo.greenthread.example/cos/products/juno-hemp-workshirt",
       "image_url": "https://images.unsplash.com/photo-1589310243389-96a5483213a8?auto=format&fit=crop&w=900&h=1200&q=80",
       "color": "natural indigo",
       "fabric_composition": [
@@ -3677,19 +4068,27 @@
           "zero_waste": true,
           "made_to_order": false
         }
-      }
+      },
+      "sizes": [
+        "XS",
+        "S",
+        "M",
+        "L",
+        "XL"
+      ],
+      "color_family": "White & Cream"
     },
     {
       "id": "juno-hemp-shorts",
-      "brand_slug": "juno-hemp-co",
+      "brand_slug": "cos",
       "title": "Trailhead Hemp Shorts",
       "description": "Tough shorts, gentle footprint. 70% hemp / 30% organic cotton canvas, 260gsm. Hemp's tensile strength means these outlast cotton shorts 2-to-1. Deep pockets, gusseted crotch, natural corozo button.",
       "category": "trousers",
       "gender": "unisex",
-      "price": 2299,
-      "currency": "INR",
-      "retailer": "GreenCart",
-      "buy_url": "https://junohempco.example.com/products/juno-hemp-shorts",
+      "price": 23,
+      "currency": "GBP",
+      "retailer": "Zalando",
+      "buy_url": "https://demo.greenthread.example/cos/products/juno-hemp-shorts",
       "image_url": "https://images.unsplash.com/photo-1591195853828-11db59a44f6b?auto=format&fit=crop&w=900&h=1200&q=80",
       "color": "khaki",
       "fabric_composition": [
@@ -3744,19 +4143,27 @@
           "zero_waste": true,
           "made_to_order": false
         }
-      }
+      },
+      "sizes": [
+        "XS",
+        "S",
+        "M",
+        "L",
+        "XL"
+      ],
+      "color_family": "Brown & Tan"
     },
     {
       "id": "juno-hemp-jacket",
-      "brand_slug": "juno-hemp-co",
+      "brand_slug": "cos",
       "title": "Homestead Hemp Jacket",
       "description": "A chore jacket for the next thirty years. 100% hemp canvas, 320gsm, dyed with walnut hulls from a food-industry byproduct stream. Zero-waste cutting, hand-finished seams. USDA organic certified fibre. Ages beautifully.",
       "category": "outerwear",
       "gender": "unisex",
-      "price": 6299,
-      "currency": "INR",
+      "price": 63,
+      "currency": "GBP",
       "retailer": "Brand Direct",
-      "buy_url": "https://junohempco.example.com/products/juno-hemp-jacket",
+      "buy_url": "https://demo.greenthread.example/cos/products/juno-hemp-jacket",
       "image_url": "https://images.unsplash.com/photo-1495105787522-5334e3ffa0ef?auto=format&fit=crop&w=900&h=1200&q=80",
       "color": "walnut",
       "fabric_composition": [
@@ -3813,19 +4220,25 @@
           "zero_waste": true,
           "made_to_order": false
         }
-      }
+      },
+      "sizes": [
+        "XS",
+        "S",
+        "M"
+      ],
+      "color_family": "Brown & Tan"
     },
     {
       "id": "juno-hemp-dress",
-      "brand_slug": "juno-hemp-co",
+      "brand_slug": "cos",
       "title": "Meadow Hemp Dress",
       "description": "Easy A-line in breathable hemp-blend. 60% hemp / 40% organic cotton poplin, 150gsm, dyed with sage and iron (natural dye, low water). Pockets, square neckline, grown-on sleeves. USDA organic cotton, rain-fed hemp.",
       "category": "dresses",
       "gender": "women",
-      "price": 3999,
-      "currency": "INR",
-      "retailer": "LeafMart",
-      "buy_url": "https://junohempco.example.com/products/juno-hemp-dress",
+      "price": 40,
+      "currency": "GBP",
+      "retailer": "ASOS",
+      "buy_url": "https://demo.greenthread.example/cos/products/juno-hemp-dress",
       "image_url": "https://images.unsplash.com/photo-1445205170230-053b83016050?auto=format&fit=crop&w=900&h=1200&q=80",
       "color": "sage",
       "fabric_composition": [
@@ -3885,19 +4298,26 @@
           "zero_waste": true,
           "made_to_order": false
         }
-      }
+      },
+      "sizes": [
+        "XS",
+        "M",
+        "L",
+        "XL"
+      ],
+      "color_family": "Green"
     },
     {
       "id": "kanso-court-shorts",
-      "brand_slug": "kanso-athletics",
+      "brand_slug": "sweaty-betty",
       "title": "Court Shorts",
       "description": "7-inch training shorts. 90% recycled polyester (GRS) / 10% elastane woven stretch, 130gsm. Laser-cut ventilation, zip back pocket, recycled drawcord. OEKO-TEX Standard 100.",
       "category": "activewear",
       "gender": "men",
-      "price": 1899,
-      "currency": "INR",
-      "retailer": "EcoBazaar",
-      "buy_url": "https://kansoathletics.example.com/products/kanso-court-shorts",
+      "price": 19,
+      "currency": "GBP",
+      "retailer": "John Lewis",
+      "buy_url": "https://demo.greenthread.example/sweaty-betty/products/kanso-court-shorts",
       "image_url": "https://images.unsplash.com/photo-1562183241-b937e95585b6?auto=format&fit=crop&w=900&h=1200&q=80",
       "color": "black",
       "fabric_composition": [
@@ -3948,19 +4368,26 @@
           "zero_waste": false,
           "made_to_order": false
         }
-      }
+      },
+      "sizes": [
+        "XS",
+        "S",
+        "M",
+        "XL"
+      ],
+      "color_family": "Black"
     },
     {
       "id": "cedar-jade-turtleneck",
-      "brand_slug": "cedar-and-jade",
+      "brand_slug": "thought",
       "title": "Ember Rib Turtleneck",
       "description": "Slim rib turtleneck with serious softness. 85% TENCEL Modal / 15% recycled polyamide, tight 14-gauge knit that holds its shape. B Corp made, low-impact dyed. Layers under everything.",
       "category": "knitwear",
       "gender": "women",
-      "price": 3499,
-      "currency": "INR",
-      "retailer": "EcoBazaar",
-      "buy_url": "https://cedarandjade.example.com/products/cedar-jade-turtleneck",
+      "price": 35,
+      "currency": "GBP",
+      "retailer": "John Lewis",
+      "buy_url": "https://demo.greenthread.example/thought/products/cedar-jade-turtleneck",
       "image_url": "https://images.unsplash.com/photo-1610288311735-39b7facbd095?auto=format&fit=crop&w=900&h=1200&q=80",
       "color": "rust",
       "fabric_composition": [
@@ -4012,19 +4439,25 @@
           "zero_waste": false,
           "made_to_order": false
         }
-      }
+      },
+      "sizes": [
+        "XS",
+        "S",
+        "XL"
+      ],
+      "color_family": "Brown & Tan"
     },
     {
       "id": "terra-loom-baby-blanket",
-      "brand_slug": "terra-loom",
+      "brand_slug": "people-tree",
       "title": "Heirloom Baby Blanket",
       "description": "Softest start. 100% GOTS organic cotton muslin, double-layered, 120x120cm. No optical brighteners, no formaldehyde finishes, nothing but cotton — certified safe for newborn skin. Gets softer with every wash for years.",
       "category": "accessories",
       "gender": "unisex",
-      "price": 2999,
-      "currency": "INR",
+      "price": 30,
+      "currency": "GBP",
       "retailer": "Brand Direct",
-      "buy_url": "https://terraloom.example.com/products/terra-loom-baby-blanket",
+      "buy_url": "https://demo.greenthread.example/people-tree/products/terra-loom-baby-blanket",
       "image_url": "https://images.unsplash.com/photo-1620799139507-2a76f79a2f4d?auto=format&fit=crop&w=900&h=1200&q=80",
       "color": "cloud",
       "fabric_composition": [
@@ -4075,19 +4508,23 @@
           "zero_waste": false,
           "made_to_order": false
         }
-      }
+      },
+      "sizes": [
+        "One size"
+      ],
+      "color_family": "White & Cream"
     },
     {
       "id": "north-fibre-wool-socks-3pack",
-      "brand_slug": "north-fibre",
+      "brand_slug": "uniqlo",
       "title": "Boot Socks 3-Pack",
       "description": "Warm feet, wild sourcing. 65% RWS merino wool / 30% recycled polyamide (for durability at heel and toe) / 5% elastane. Cushioned sole, seamless toe. OEKO-TEX yarns, knitted in Denmark.",
       "category": "accessories",
       "gender": "unisex",
-      "price": 1599,
-      "currency": "INR",
-      "retailer": "LeafMart",
-      "buy_url": "https://northfibre.example.com/products/north-fibre-wool-socks-3pack",
+      "price": 16,
+      "currency": "GBP",
+      "retailer": "ASOS",
+      "buy_url": "https://demo.greenthread.example/uniqlo/products/north-fibre-wool-socks-3pack",
       "image_url": "https://images.unsplash.com/photo-1586350977771-b3b0abd50c82?auto=format&fit=crop&w=900&h=1200&q=80",
       "color": "mixed earth",
       "fabric_composition": [
@@ -4148,19 +4585,23 @@
           "zero_waste": false,
           "made_to_order": false
         }
-      }
+      },
+      "sizes": [
+        "One size"
+      ],
+      "color_family": "Multi"
     },
     {
       "id": "salt-stem-bucket-hat",
-      "brand_slug": "salt-and-stem",
+      "brand_slug": "seasalt",
       "title": "Tide Bucket Hat",
       "description": "Sun cover, coastal style. Outer 100% European Flax linen; lining 100% organic cotton. Packable, machine washable, UPF 30. Plastic-free trims.",
       "category": "accessories",
       "gender": "unisex",
-      "price": 1499,
-      "currency": "INR",
-      "retailer": "GreenCart",
-      "buy_url": "https://saltandstem.example.com/products/salt-stem-bucket-hat",
+      "price": 15,
+      "currency": "GBP",
+      "retailer": "Zalando",
+      "buy_url": "https://demo.greenthread.example/seasalt/products/salt-stem-bucket-hat",
       "image_url": "https://images.unsplash.com/photo-1556306535-0f09a537f0a3?auto=format&fit=crop&w=900&h=1200&q=80",
       "color": "stone",
       "fabric_composition": [
@@ -4210,7 +4651,11 @@
           "zero_waste": false,
           "made_to_order": false
         }
-      }
+      },
+      "sizes": [
+        "One size"
+      ],
+      "color_family": "White & Cream"
     }
   ]
 }

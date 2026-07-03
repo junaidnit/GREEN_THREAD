@@ -34,7 +34,7 @@ async function main() {
   await page.goto(BASE);
   await page.getByTestId("concierge-open").click();
   await page.getByTestId("concierge-input").fill(
-    "I need a breathable linen shirt for hot weather, no polyester, under ₹4000",
+    "I need a breathable linen shirt for hot weather, no polyester, under £40",
   );
   await page.getByTestId("concierge-input").press("Enter");
   console.log("… concierge thinking (live Claude call)");

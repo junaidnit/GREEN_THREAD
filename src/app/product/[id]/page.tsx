@@ -76,17 +76,34 @@ export default async function ProductPage({ params }: Props) {
             {formatPrice(product.price, product.currency)}
           </p>
 
+          {/* sizes */}
+          {product.sizes.length > 0 && (
+            <div className="mt-5" data-testid="product-sizes">
+              <p className="mb-2 text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+                Available sizes
+              </p>
+              <div className="flex flex-wrap gap-2">
+                {product.sizes.map((s) => (
+                  <span
+                    key={s}
+                    className="rounded-lg border border-border bg-surface px-3 py-1.5 text-sm font-medium"
+                  >
+                    {s}
+                  </span>
+                ))}
+              </div>
+            </div>
+          )}
+
           <a
-            href={product.buy_url}
-            target="_blank"
-            rel="noopener noreferrer nofollow"
+            href={`/out/${product.id}`}
             data-testid="buy-button"
             className="mt-5 flex h-13 w-full items-center justify-center gap-2 rounded-full bg-primary py-3.5 font-semibold text-primary-foreground transition-transform hover:scale-[1.01] active:scale-[0.99] sm:max-w-sm"
           >
             Buy at {product.retailer} <ArrowUpRight className="size-4" />
           </a>
           <p className="mt-2 text-xs text-muted-foreground">
-            Demo catalog — outbound links are illustrative.
+            Takes you straight to {product.retailer}&apos;s checkout — no re-searching on their site.
           </p>
 
           {/* fabric composition */}

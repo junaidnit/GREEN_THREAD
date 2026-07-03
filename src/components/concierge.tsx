@@ -23,10 +23,10 @@ interface CardProduct {
 }
 
 const SUGGESTIONS = [
-  "A breathable linen shirt for hot weather",
+  "A breathable linen top for summer",
   "Warm winter layer with no animal products",
   "Gym wear that isn't virgin plastic",
-  "An organic cotton dress under ₹4000",
+  "An organic cotton dress under £40",
 ];
 
 export function Concierge() {
@@ -175,7 +175,7 @@ export function Concierge() {
                 data-testid="concierge-input"
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
-                placeholder="e.g. no polyester, under ₹3000…"
+                placeholder="e.g. no polyester, under £30…"
                 className="h-10 flex-1 rounded-full border border-border bg-background px-4 text-sm outline-none placeholder:text-muted-foreground focus:ring-2 focus:ring-ring"
               />
               <button

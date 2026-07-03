@@ -17,8 +17,52 @@ test.describe("home", () => {
   });
 });
 
-test.describe("search & filter", () => {
-  test("instant search narrows results", async ({ page }) => {
+test.describe("the shopper journey: search a top, narrow it down", () => {
+  test('"top" surfaces tops from every brand at once', async ({ page }) => {
+    await page.goto("/search?q=top");
+    const n = await page.getByTestId("product-card").count();
+    expect(n).toBeGreaterThan(10); // tees + shirts + knits across brands
+    await expect(page.getByTestId("results-count")).toContainText("top");
+  });
+
+  test("brand filter: tick Zara, see only Zara; counts stay visible", async ({ page }) => {
+    await page.goto("/search");
+    await page.getByTestId("brand-zara").check();
+    await expect.poll(async () => page.url()).toContain("brand=zara");
+
+    const cards = page.getByTestId("product-card");
+    const n = await cards.count();
+    expect(n).toBeGreaterThanOrEqual(3);
+    for (let i = 0; i < n; i++) {
+      await expect(cards.nth(i)).toContainText("Zara");
+    }
+    // other brands remain selectable (facet counts ignore own group)
+    await expect(page.getByTestId("brand-h-and-m")).toBeVisible();
+  });
+
+  test("fabric filter narrows within a brand (Zara → TENCEL)", async ({ page }) => {
+    await page.goto("/search?brand=zara");
+    await page.getByTestId("fabric-tencel_lyocell").check();
+    await expect.poll(async () => page.url()).toContain("fabric=tencel_lyocell");
+    const cards = page.getByTestId("product-card");
+    const n = await cards.count();
+    expect(n).toBeGreaterThanOrEqual(1);
+    for (let i = 0; i < n; i++) {
+      await expect(cards.nth(i)).toContainText(/tencel|lyocell/i);
+    }
+  });
+
+  test("size filter works with counts", async ({ page }) => {
+    await page.goto("/search");
+    const initial = await page.getByTestId("product-card").count();
+    await page.getByTestId("size-XL").click();
+    await expect
+      .poll(async () => page.getByTestId("product-card").count())
+      .toBeLessThan(initial);
+    await expect.poll(async () => page.url()).toContain("size=XL");
+  });
+
+  test("instant search narrows results and prices show £", async ({ page }) => {
     await page.goto("/search");
     const initial = await page.getByTestId("product-card").count();
     expect(initial).toBeGreaterThan(20);
@@ -28,39 +72,36 @@ test.describe("search & filter", () => {
       .poll(async () => page.getByTestId("product-card").count())
       .toBeLessThan(initial);
     await expect(page.getByTestId("product-card").first()).toContainText(/linen/i);
-  });
-
-  test("fabric chip filters and syncs URL", async ({ page }) => {
-    await page.goto("/search");
-    await page.getByTestId("fabric-chip-hemp").click();
-    await expect.poll(async () => page.url()).toContain("fabric=hemp");
-    const cards = page.getByTestId("product-card");
-    const n = await cards.count();
-    expect(n).toBeGreaterThanOrEqual(3);
-    for (let i = 0; i < n; i++) {
-      await expect(cards.nth(i)).toContainText(/hemp/i);
-    }
+    await expect(page.getByTestId("product-card").first()).toContainText("£");
   });
 
   test("URL filters are applied on load (shareable links)", async ({ page }) => {
     await page.goto("/search?fabric=linen&sort=price-asc");
-    await expect(page.getByTestId("fabric-chip-linen")).toHaveClass(/bg-primary/);
-    const first = page.getByTestId("product-card").first();
-    await expect(first).toContainText(/linen/i);
+    await expect(page.getByTestId("fabric-linen")).toBeChecked();
+    await expect(page.getByTestId("product-card").first()).toContainText(/linen/i);
   });
 
-  test("filter panel: min score slider works", async ({ page }) => {
+  test("min score slider filters low scorers out", async ({ page }) => {
     await page.goto("/search");
     const initial = await page.getByTestId("product-card").count();
-    await page.getByTestId("filters-toggle").click();
-    await page.locator('input[type="range"]').first().fill("70");
+    // keyboard-drive the slider: fill() sets DOM value without firing React's
+    // onChange in React 19, so step from 0 → 70 with arrow keys (step=5)
+    const slider = page.getByTestId("min-score-slider");
+    await slider.focus();
+    for (let i = 0; i < 14; i++) await slider.press("ArrowRight");
+    await expect(page.getByText("Minimum: 70/100")).toBeVisible();
     await expect
       .poll(async () => page.getByTestId("product-card").count())
       .toBeLessThan(initial);
-    // every remaining card's badge score must be >= 70
     const badgeText = await page.getByTestId("grade-badge").first().innerText();
     const score = Number(badgeText.replace(/[^0-9]/g, ""));
     expect(score).toBeGreaterThanOrEqual(70);
+  });
+
+  test("fabric fact card opens with research citation", async ({ page }) => {
+    await page.goto("/search");
+    await page.getByTestId("fabric-filter").getByRole("button", { name: /About Linen/i }).click();
+    await expect(page.getByText("European Confederation of Flax")).toBeVisible();
   });
 
   test("empty state appears for impossible queries", async ({ page }) => {
@@ -70,8 +111,8 @@ test.describe("search & filter", () => {
   });
 });
 
-test.describe("product page", () => {
-  test("full sustainability story renders and buy link is external", async ({ page }) => {
+test.describe("product page & buy flow", () => {
+  test("full sustainability story renders with sizes and £", async ({ page }) => {
     await page.goto("/search?fabric=linen");
     await expect(page.getByTestId("results-count")).toBeVisible();
     await page.getByTestId("product-card").first().click();
@@ -80,19 +121,22 @@ test.describe("product page", () => {
     await expect(page.getByTestId("sustainability-panel")).toBeVisible();
     await expect(page.getByTestId("composition-bars")).toBeVisible();
     await expect(page.getByTestId("score-dial")).toBeVisible();
+    await expect(page.getByTestId("product-sizes")).toBeVisible();
+    await expect(page.getByTestId("product-price")).toContainText("£");
     expect(await page.getByTestId("score-factors").locator("> div").count()).toBeGreaterThanOrEqual(2);
+  });
 
-    const buy = page.getByTestId("buy-button");
-    await expect(buy).toBeVisible();
-    await expect(buy).toHaveAttribute("target", "_blank");
-    await expect(buy).toHaveAttribute("href", /^https?:\/\//);
-
-    // similar items section
-    await expect(page.getByText("Similar, sustainably")).toBeVisible();
+  test("buy button lands straight on the retailer checkout, item in bag", async ({ page }) => {
+    await page.goto("/product/salt-stem-linen-shirt-white");
+    await page.getByTestId("buy-button").click();
+    await expect(page).toHaveURL(/\/retailer\//, { timeout: 30_000 });
+    await expect(page.getByTestId("retailer-checkout")).toBeVisible();
+    await expect(page.getByText("Your bag — 1 item")).toBeVisible();
+    await expect(page.getByTestId("checkout-total")).toContainText("£");
+    await expect(page.getByTestId("retailer-pay-button")).toBeVisible();
   });
 
   test("greenwash flags appear on vague-claim products", async ({ page }) => {
-    // Bloomfield products carry uncertified 'eco-friendly' claims
     await page.goto("/product/bloomfield-crew-tee-3pack");
     await expect(page.getByTestId("greenwash-flags")).toBeVisible();
   });
@@ -103,7 +147,7 @@ test.describe("concierge", () => {
     await page.goto("/");
     await page.getByTestId("concierge-open").click();
     await expect(page.getByTestId("concierge-panel")).toBeVisible();
-    await expect(page.getByText("breathable linen shirt", { exact: false })).toBeVisible();
+    await expect(page.getByText("breathable linen top", { exact: false })).toBeVisible();
     await page.getByTestId("concierge-input").fill("test message");
     await expect(page.getByTestId("concierge-input")).toHaveValue("test message");
   });

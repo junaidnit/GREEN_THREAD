@@ -63,7 +63,7 @@ export async function POST(req: Request) {
       "(fabric properties, certifications, score) in 2-4 sentences, plain language. " +
       "Be honest about trade-offs (e.g. recycled polyester sheds microfibres; conventional cotton is thirsty). " +
       "If a product has greenwash_flags, mention that some of its claims are unverified. " +
-      "If nothing fits, say so and suggest the closest alternative. Prices are in INR. " +
+      "If nothing fits, say so and suggest the closest alternative. Prices are in GBP (£); the shopper is in the UK. " +
       "Write plain conversational text only — no markdown, no asterisks, no bullet lists.",
     messages: await convertToModelMessages(messages),
     stopWhen: stepCountIs(4),
@@ -78,7 +78,7 @@ export async function POST(req: Request) {
           exclude_fabrics: z.array(materialEnum).optional().describe("Exclude products containing ANY of these fibres"),
           category: z.string().optional(),
           gender: z.enum(["men", "women", "unisex"]).optional(),
-          max_price: z.number().optional().describe("Max price in INR"),
+          max_price: z.number().optional().describe("Max price in GBP"),
           min_score: z.number().optional().describe("Minimum sustainability score 0-100"),
           limit: z.number().min(1).max(8).default(5),
         }),

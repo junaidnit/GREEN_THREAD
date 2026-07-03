@@ -83,6 +83,10 @@ export interface Product {
   buy_url: string;
   image_url: string;
   color: string;
+  /** Normalized colour family for filtering, e.g. "Blue", "White & Cream". */
+  color_family: string;
+  /** Available sizes, e.g. ["XS","S","M"] or ["One size"]. */
+  sizes: string[];
   fabric_composition: FabricPart[];
   sustainability: Sustainability;
 }

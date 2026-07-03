@@ -20,6 +20,7 @@ import { resolve } from "node:path";
 import { config } from "dotenv";
 import { computeScore, validateCertifications } from "../src/lib/scoring";
 import type { Practices, SeedProduct } from "../src/lib/types";
+import { colorFamily, sizesFor } from "./product-attrs";
 
 config({ path: resolve(process.cwd(), ".env.local") });
 
@@ -129,6 +130,8 @@ async function extractOne(p: RawProduct, brand: RawBrand): Promise<SeedProduct> 
     buy_url: `${brand.website}/products/${p.slug}`,
     image_url: `https://images.unsplash.com/${p.image}?auto=format&fit=crop&w=900&h=1200&q=80`,
     color: p.color,
+    color_family: colorFamily(p.color),
+    sizes: sizesFor(p.slug, p.category),
     fabric_composition: object.fabric_composition,
     sustainability: {
       score,
