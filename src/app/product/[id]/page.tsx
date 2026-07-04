@@ -15,6 +15,8 @@ import { ProductCard } from "@/components/product-card";
 import { CompositionBars } from "@/components/composition-bars";
 import { ScoreDial } from "@/components/score-dial";
 import { AskConcierge } from "@/components/ask-concierge";
+import { FabricLens } from "@/components/fabric-lens";
+import { SaveButton } from "@/components/saved";
 import { AlertTriangle, ArrowUpRight, BadgeCheck, Leaf, Sparkles } from "@/components/icons";
 
 interface Props {
@@ -79,19 +81,27 @@ export default async function ProductPage({ params }: Props) {
       </nav>
 
       <div className="grid gap-8 lg:grid-cols-2">
-        {/* image */}
-        <div className="relative aspect-[3/4] overflow-hidden rounded-xl2 border border-border bg-surface-2">
-          <Image
-            src={product.image_url}
-            alt={product.title}
-            fill
-            priority
-            sizes="(max-width: 1024px) 100vw, 50vw"
-            className="object-cover"
-          />
+        {/* image — hover to inspect the weave; morphs in from the grid card */}
+        <div
+          className="relative aspect-[3/4] overflow-hidden rounded-xl2 border border-border bg-surface-2"
+          style={{ viewTransitionName: `pimg-${product.id.replace(/[^a-zA-Z0-9-]/g, "")}` }}
+        >
+          <FabricLens imageUrl={product.image_url}>
+            <Image
+              src={product.image_url}
+              alt={product.title}
+              fill
+              priority
+              sizes="(max-width: 1024px) 100vw, 50vw"
+              className="object-cover"
+            />
+          </FabricLens>
           <div className="absolute left-4 top-4">
             <GradeBadge grade={s.grade} score={s.score} size="lg" />
           </div>
+          <p className="pointer-events-none absolute bottom-3 right-3 rounded-full bg-surface/85 px-2.5 py-1 text-[10px] font-medium text-muted-foreground backdrop-blur">
+            hover to inspect the weave
+          </p>
         </div>
 
         {/* info */}
@@ -133,15 +143,18 @@ export default async function ProductPage({ params }: Props) {
             >
               Buy at {product.retailer} <ArrowUpRight className="size-4" />
             </a>
-            <a
-              href={product.buy_url}
-              target="_blank"
-              rel="noopener noreferrer nofollow"
-              data-testid="view-on-retailer"
-              className="flex h-11 w-full items-center justify-center gap-2 rounded-full border border-border bg-surface text-sm font-medium transition-colors hover:border-primary/40 hover:bg-accent"
-            >
-              View it on {product.brand.name}&apos;s site <ArrowUpRight className="size-3.5" />
-            </a>
+            <div className="flex gap-2">
+              <a
+                href={product.buy_url}
+                target="_blank"
+                rel="noopener noreferrer nofollow"
+                data-testid="view-on-retailer"
+                className="flex h-11 flex-1 items-center justify-center gap-2 rounded-full border border-border bg-surface text-sm font-medium transition-colors hover:border-primary/40 hover:bg-accent"
+              >
+                View it on {product.brand.name}&apos;s site <ArrowUpRight className="size-3.5" />
+              </a>
+              <SaveButton productId={product.id} imageUrl={product.image_url} />
+            </div>
           </div>
           <p className="mt-2 text-xs text-muted-foreground">
             Buy takes you straight to {product.retailer}&apos;s checkout — no re-searching on their site.

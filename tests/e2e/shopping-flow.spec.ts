@@ -252,6 +252,31 @@ test.describe("fixes & subtle features", () => {
   });
 });
 
+test.describe("luxury interactions", () => {
+  test("fabric lens appears on product image hover", async ({ page }) => {
+    await page.goto("/product/salt-stem-linen-shirt-white");
+    const lens = page.getByTestId("fabric-lens");
+    await lens.hover({ position: { x: 200, y: 200 } });
+    await expect(page.getByText("Inspecting the weave", { exact: false })).toBeVisible();
+  });
+
+  test("save arcs into the wardrobe and persists", async ({ page }) => {
+    await page.goto("/product/salt-stem-linen-shirt-white");
+    await page.getByTestId("save-button").click();
+    await expect(page.getByTestId("save-button")).toContainText("In your wardrobe");
+    await expect(page.getByTestId("saved-count")).toHaveText("1");
+
+    await page.goto("/saved");
+    await expect(page.getByTestId("saved-grid")).toBeVisible();
+    expect(await page.getByTestId("product-card").count()).toBe(1);
+
+    // unsave from the product page clears it
+    await page.goto("/product/salt-stem-linen-shirt-white");
+    await page.getByTestId("save-button").click();
+    await expect(page.getByTestId("save-button")).toContainText("Save");
+  });
+});
+
 test.describe("concierge", () => {
   test("widget opens with suggestions and accepts input", async ({ page }) => {
     await page.goto("/");

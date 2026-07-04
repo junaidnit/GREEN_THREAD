@@ -18,7 +18,10 @@ export function ProductCard({ product, priority = false }: { product: CatalogCar
       data-testid="product-card"
       className="hover-lift group block overflow-hidden rounded-xl2 border border-border bg-surface"
     >
-      <div className="relative aspect-[3/4] overflow-hidden bg-surface-2">
+      <div
+        className="relative aspect-[3/4] overflow-hidden bg-surface-2"
+        style={{ viewTransitionName: `pimg-${product.id.replace(/[^a-zA-Z0-9-]/g, "")}` }}
+      >
         <Image
           src={product.image_url}
           alt={product.title}

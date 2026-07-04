@@ -6,6 +6,7 @@ import { ThemeToggle } from "@/components/theme-toggle";
 import { Leaf } from "@/components/icons";
 import { Concierge } from "@/components/concierge";
 import { PageExtras } from "@/components/page-extras";
+import { SavedIndicator } from "@/components/saved";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -66,6 +67,7 @@ export default function RootLayout({
               >
                 Fabric Check
               </Link>
+              <SavedIndicator />
               <ThemeToggle />
             </nav>
           </div>
