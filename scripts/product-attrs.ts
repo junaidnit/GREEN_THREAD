@@ -21,8 +21,18 @@ export function colorFamily(color: string): string {
 
 const SIZE_POOLS: Record<string, string[]> = {
   accessories: ["One size"],
+  jeans: ["W26", "W28", "W30", "W32", "W34", "W36"],
   default: ["XS", "S", "M", "L", "XL"],
 };
+
+/** Derive fit from title keywords; default Regular. */
+export function fitFor(title: string): string {
+  if (/boxy|oversized/i.test(title)) return "Oversized";
+  if (/relaxed|drawstring|lounge|comfy/i.test(title)) return "Relaxed";
+  if (/slim|sculpt|slip/i.test(title)) return "Slim";
+  if (/wide|palazzo/i.test(title)) return "Wide";
+  return "Regular";
+}
 
 /** Deterministic per-product size availability: drop 0–2 sizes by slug hash. */
 export function sizesFor(slug: string, category: string): string[] {

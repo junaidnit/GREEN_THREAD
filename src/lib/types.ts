@@ -87,8 +87,32 @@ export interface Product {
   color_family: string;
   /** Available sizes, e.g. ["XS","S","M"] or ["One size"]. */
   sizes: string[];
+  /** Fit type: Regular, Slim, Relaxed, Oversized, Wide. */
+  fit: string;
   fabric_composition: FabricPart[];
   sustainability: Sustainability;
+}
+
+/**
+ * Slim projection shipped to the search page — everything cards, search and
+ * facets need, nothing more. Product is structurally assignable to this.
+ */
+export interface CatalogCard {
+  id: string;
+  brand: Pick<Brand, "slug" | "name">;
+  title: string;
+  category: string;
+  gender: "men" | "women" | "unisex";
+  price: number;
+  currency: string;
+  retailer: string;
+  image_url: string;
+  color: string;
+  color_family: string;
+  sizes: string[];
+  fit: string;
+  fabric_composition: FabricPart[];
+  sustainability: Pick<Sustainability, "score" | "grade" | "certifications" | "greenwash_flags">;
 }
 
 /** Shape stored in data/products_seed.json (brand as slug reference). */
