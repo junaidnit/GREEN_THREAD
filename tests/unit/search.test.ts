@@ -2,6 +2,7 @@ import { describe, expect, it } from "vitest";
 import {
   applyFilters,
   buildIndex,
+  closestMatches,
   EMPTY_FILTERS,
   facetCounts,
   filtersToParams,
@@ -194,6 +195,17 @@ describe("facetCounts", () => {
   it("brand counts ignore the brand filter itself (so Zara stays visible when Seasalt is ticked)", () => {
     const counts = facetCounts(PRODUCTS, { ...EMPTY_FILTERS, brands: ["seasalt"] }, index);
     expect(counts.brands.get("zara")).toBe(2);
+  });
+});
+
+describe("closestMatches", () => {
+  it("finds near misses for a garbled query", () => {
+    const res = closestMatches(PRODUCTS, "linnen shert", index);
+    expect(res.map((p) => p.id)).toContain("linen-shirt");
+  });
+
+  it("returns empty for a blank query", () => {
+    expect(closestMatches(PRODUCTS, "  ", index)).toEqual([]);
   });
 });
 

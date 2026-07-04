@@ -66,7 +66,8 @@
         "L"
       ],
       "color_family": "White & Cream",
-      "fit": "Regular"
+      "fit": "Regular",
+      "source": "extracted"
     },
     {
       "id": "terra-loom-everyday-tee-moss",
@@ -136,7 +137,8 @@
         "XL"
       ],
       "color_family": "Green",
-      "fit": "Regular"
+      "fit": "Regular",
+      "source": "extracted"
     },
     {
       "id": "terra-loom-boxy-crop-tee",
@@ -213,7 +215,8 @@
         "XL"
       ],
       "color_family": "White & Cream",
-      "fit": "Oversized"
+      "fit": "Oversized",
+      "source": "extracted"
     },
     {
       "id": "terra-loom-block-print-shirt",
@@ -284,7 +287,8 @@
         "L"
       ],
       "color_family": "Blue",
-      "fit": "Regular"
+      "fit": "Regular",
+      "source": "extracted"
     },
     {
       "id": "terra-loom-canvas-tote",
@@ -354,7 +358,8 @@
         "One size"
       ],
       "color_family": "White & Cream",
-      "fit": "Regular"
+      "fit": "Regular",
+      "source": "extracted"
     },
     {
       "id": "terra-loom-mud-dye-dress",
@@ -424,7 +429,8 @@
         "XL"
       ],
       "color_family": "Brown & Tan",
-      "fit": "Regular"
+      "fit": "Regular",
+      "source": "extracted"
     },
     {
       "id": "north-fibre-merino-crew",
@@ -500,7 +506,8 @@
         "XL"
       ],
       "color_family": "White & Cream",
-      "fit": "Regular"
+      "fit": "Regular",
+      "source": "extracted"
     },
     {
       "id": "north-fibre-fisherman-rib",
@@ -579,7 +586,8 @@
         "XL"
       ],
       "color_family": "Blue",
-      "fit": "Regular"
+      "fit": "Regular",
+      "source": "extracted"
     },
     {
       "id": "north-fibre-wool-beanie",
@@ -651,7 +659,8 @@
         "One size"
       ],
       "color_family": "Black",
-      "fit": "Regular"
+      "fit": "Regular",
+      "source": "extracted"
     },
     {
       "id": "north-fibre-cardigan-sage",
@@ -727,7 +736,8 @@
         "XL"
       ],
       "color_family": "Green",
-      "fit": "Regular"
+      "fit": "Regular",
+      "source": "extracted"
     },
     {
       "id": "north-fibre-lambswool-scarf",
@@ -795,7 +805,8 @@
         "One size"
       ],
       "color_family": "Grey",
-      "fit": "Regular"
+      "fit": "Regular",
+      "source": "extracted"
     },
     {
       "id": "salt-stem-linen-shirt-white",
@@ -861,7 +872,8 @@
         "XL"
       ],
       "color_family": "White & Cream",
-      "fit": "Regular"
+      "fit": "Regular",
+      "source": "extracted"
     },
     {
       "id": "salt-stem-linen-shirt-sky",
@@ -925,7 +937,8 @@
         "M"
       ],
       "color_family": "Blue",
-      "fit": "Regular"
+      "fit": "Regular",
+      "source": "extracted"
     },
     {
       "id": "salt-stem-linen-trousers",
@@ -996,7 +1009,8 @@
         "L"
       ],
       "color_family": "Brown & Tan",
-      "fit": "Relaxed"
+      "fit": "Relaxed",
+      "source": "extracted"
     },
     {
       "id": "salt-stem-hemp-overshirt",
@@ -1061,7 +1075,8 @@
         "XL"
       ],
       "color_family": "Green",
-      "fit": "Regular"
+      "fit": "Regular",
+      "source": "extracted"
     },
     {
       "id": "salt-stem-linen-dress",
@@ -1128,7 +1143,8 @@
         "L"
       ],
       "color_family": "Brown & Tan",
-      "fit": "Regular"
+      "fit": "Regular",
+      "source": "extracted"
     },
     {
       "id": "salt-stem-striped-linen-top",
@@ -1195,7 +1211,8 @@
         "L"
       ],
       "color_family": "Blue",
-      "fit": "Regular"
+      "fit": "Regular",
+      "source": "extracted"
     },
     {
       "id": "reform-thread-recycled-denim-jacket",
@@ -1271,7 +1288,8 @@
         "XL"
       ],
       "color_family": "Blue",
-      "fit": "Regular"
+      "fit": "Regular",
+      "source": "extracted"
     },
     {
       "id": "reform-thread-re-tee",
@@ -1351,7 +1369,8 @@
         "XL"
       ],
       "color_family": "Black",
-      "fit": "Regular"
+      "fit": "Regular",
+      "source": "extracted"
     },
     {
       "id": "reform-thread-puffer-vest",
@@ -1428,7 +1447,8 @@
         "XL"
       ],
       "color_family": "Black",
-      "fit": "Regular"
+      "fit": "Regular",
+      "source": "extracted"
     },
     {
       "id": "reform-thread-recycled-jeans",
@@ -1507,7 +1527,8 @@
         "XL"
       ],
       "color_family": "Blue",
-      "fit": "Regular"
+      "fit": "Regular",
+      "source": "extracted"
     },
     {
       "id": "reform-thread-sweatshirt",
@@ -1581,7 +1602,8 @@
         "L"
       ],
       "color_family": "Grey",
-      "fit": "Regular"
+      "fit": "Regular",
+      "source": "extracted"
     },
     {
       "id": "cedar-jade-tencel-wrap-dress",
@@ -1648,7 +1670,8 @@
         "XL"
       ],
       "color_family": "Green",
-      "fit": "Regular"
+      "fit": "Regular",
+      "source": "extracted"
     },
     {
       "id": "cedar-jade-modal-tee",
@@ -1719,7 +1742,8 @@
         "XL"
       ],
       "color_family": "Pink & Purple",
-      "fit": "Regular"
+      "fit": "Regular",
+      "source": "extracted"
     },
     {
       "id": "cedar-jade-lyocell-shirt",
@@ -1784,7 +1808,8 @@
         "M"
       ],
       "color_family": "Multi",
-      "fit": "Regular"
+      "fit": "Regular",
+      "source": "extracted"
     },
     {
       "id": "cedar-jade-lounge-set-pants",
@@ -1856,7 +1881,8 @@
         "L"
       ],
       "color_family": "White & Cream",
-      "fit": "Relaxed"
+      "fit": "Relaxed",
+      "source": "extracted"
     },
     {
       "id": "cedar-jade-slip-skirt",
@@ -1914,7 +1940,8 @@
         "XL"
       ],
       "color_family": "White & Cream",
-      "fit": "Slim"
+      "fit": "Slim",
+      "source": "extracted"
     },
     {
       "id": "harvest-chore-coat",
@@ -1985,7 +2012,8 @@
         "XL"
       ],
       "color_family": "Brown & Tan",
-      "fit": "Regular"
+      "fit": "Regular",
+      "source": "extracted"
     },
     {
       "id": "harvest-carpenter-pants",
@@ -2060,7 +2088,8 @@
         "XL"
       ],
       "color_family": "Brown & Tan",
-      "fit": "Regular"
+      "fit": "Regular",
+      "source": "extracted"
     },
     {
       "id": "harvest-heavy-tee",
@@ -2130,7 +2159,8 @@
         "XL"
       ],
       "color_family": "Blue",
-      "fit": "Regular"
+      "fit": "Regular",
+      "source": "extracted"
     },
     {
       "id": "harvest-work-apron",
@@ -2204,7 +2234,8 @@
         "One size"
       ],
       "color_family": "Green",
-      "fit": "Regular"
+      "fit": "Regular",
+      "source": "extracted"
     },
     {
       "id": "harvest-flannel-shirt",
@@ -2274,7 +2305,8 @@
         "L"
       ],
       "color_family": "Brown & Tan",
-      "fit": "Regular"
+      "fit": "Regular",
+      "source": "extracted"
     },
     {
       "id": "mirien-deadstock-blazer",
@@ -2348,7 +2380,8 @@
         "XL"
       ],
       "color_family": "Brown & Tan",
-      "fit": "Regular"
+      "fit": "Regular",
+      "source": "extracted"
     },
     {
       "id": "mirien-tencel-blouse",
@@ -2412,7 +2445,8 @@
         "XL"
       ],
       "color_family": "White & Cream",
-      "fit": "Regular"
+      "fit": "Regular",
+      "source": "extracted"
     },
     {
       "id": "mirien-slip-dress",
@@ -2476,7 +2510,8 @@
         "XL"
       ],
       "color_family": "Black",
-      "fit": "Slim"
+      "fit": "Slim",
+      "source": "extracted"
     },
     {
       "id": "mirien-knit-tank",
@@ -2553,7 +2588,8 @@
         "XL"
       ],
       "color_family": "Black",
-      "fit": "Slim"
+      "fit": "Slim",
+      "source": "extracted"
     },
     {
       "id": "mirien-palazzo-trousers",
@@ -2625,7 +2661,8 @@
         "L"
       ],
       "color_family": "Multi",
-      "fit": "Wide"
+      "fit": "Wide",
+      "source": "extracted"
     },
     {
       "id": "kanso-run-tee",
@@ -2690,7 +2727,8 @@
         "XL"
       ],
       "color_family": "Black",
-      "fit": "Regular"
+      "fit": "Regular",
+      "source": "extracted"
     },
     {
       "id": "kanso-flow-leggings",
@@ -2755,7 +2793,8 @@
         "XL"
       ],
       "color_family": "Blue",
-      "fit": "Regular"
+      "fit": "Regular",
+      "source": "extracted"
     },
     {
       "id": "kanso-swim-shorts",
@@ -2831,7 +2870,8 @@
         "XL"
       ],
       "color_family": "Red & Orange",
-      "fit": "Regular"
+      "fit": "Regular",
+      "source": "extracted"
     },
     {
       "id": "kanso-studio-bra",
@@ -2902,7 +2942,8 @@
         "XL"
       ],
       "color_family": "Pink & Purple",
-      "fit": "Regular"
+      "fit": "Regular",
+      "source": "extracted"
     },
     {
       "id": "kanso-trail-jacket",
@@ -2966,7 +3007,8 @@
         "XL"
       ],
       "color_family": "Green",
-      "fit": "Regular"
+      "fit": "Regular",
+      "source": "extracted"
     },
     {
       "id": "bloomfield-crew-tee-3pack",
@@ -3032,7 +3074,8 @@
         "XL"
       ],
       "color_family": "Multi",
-      "fit": "Regular"
+      "fit": "Regular",
+      "source": "extracted"
     },
     {
       "id": "bloomfield-jogger",
@@ -3099,7 +3142,8 @@
         "L"
       ],
       "color_family": "Grey",
-      "fit": "Relaxed"
+      "fit": "Relaxed",
+      "source": "extracted"
     },
     {
       "id": "bloomfield-oxford-shirt",
@@ -3160,7 +3204,8 @@
         "XL"
       ],
       "color_family": "Blue",
-      "fit": "Regular"
+      "fit": "Regular",
+      "source": "extracted"
     },
     {
       "id": "bloomfield-hoodie",
@@ -3229,7 +3274,8 @@
         "XL"
       ],
       "color_family": "Green",
-      "fit": "Regular"
+      "fit": "Regular",
+      "source": "extracted"
     },
     {
       "id": "bloomfield-summer-dress",
@@ -3285,7 +3331,8 @@
         "XL"
       ],
       "color_family": "Yellow",
-      "fit": "Regular"
+      "fit": "Regular",
+      "source": "extracted"
     },
     {
       "id": "bloomfield-polo",
@@ -3351,7 +3398,8 @@
         "XL"
       ],
       "color_family": "Blue",
-      "fit": "Regular"
+      "fit": "Regular",
+      "source": "extracted"
     },
     {
       "id": "atelier-ondes-peace-silk-blouse",
@@ -3419,7 +3467,8 @@
         "XL"
       ],
       "color_family": "White & Cream",
-      "fit": "Regular"
+      "fit": "Regular",
+      "source": "extracted"
     },
     {
       "id": "atelier-ondes-cupro-slip-dress",
@@ -3476,7 +3525,8 @@
         "XL"
       ],
       "color_family": "Black",
-      "fit": "Slim"
+      "fit": "Slim",
+      "source": "extracted"
     },
     {
       "id": "atelier-ondes-organza-skirt",
@@ -3546,7 +3596,8 @@
         "L"
       ],
       "color_family": "Pink & Purple",
-      "fit": "Regular"
+      "fit": "Regular",
+      "source": "extracted"
     },
     {
       "id": "atelier-ondes-tencel-jumpsuit",
@@ -3604,7 +3655,8 @@
         "XL"
       ],
       "color_family": "Black",
-      "fit": "Regular"
+      "fit": "Regular",
+      "source": "extracted"
     },
     {
       "id": "moss-mountain-fleece",
@@ -3682,7 +3734,8 @@
         "XL"
       ],
       "color_family": "Green",
-      "fit": "Regular"
+      "fit": "Regular",
+      "source": "extracted"
     },
     {
       "id": "moss-mountain-shell-jacket",
@@ -3759,7 +3812,8 @@
         "XL"
       ],
       "color_family": "Blue",
-      "fit": "Regular"
+      "fit": "Regular",
+      "source": "extracted"
     },
     {
       "id": "moss-mountain-hike-pants",
@@ -3836,7 +3890,8 @@
         "XL"
       ],
       "color_family": "Grey",
-      "fit": "Regular"
+      "fit": "Regular",
+      "source": "extracted"
     },
     {
       "id": "moss-mountain-base-layer",
@@ -3913,7 +3968,8 @@
         "XL"
       ],
       "color_family": "Red & Orange",
-      "fit": "Regular"
+      "fit": "Regular",
+      "source": "extracted"
     },
     {
       "id": "moss-mountain-insulated-parka",
@@ -3986,7 +4042,8 @@
         "XL"
       ],
       "color_family": "Green",
-      "fit": "Regular"
+      "fit": "Regular",
+      "source": "extracted"
     },
     {
       "id": "juno-hemp-tee",
@@ -4066,7 +4123,8 @@
         "XL"
       ],
       "color_family": "White & Cream",
-      "fit": "Regular"
+      "fit": "Regular",
+      "source": "extracted"
     },
     {
       "id": "juno-hemp-workshirt",
@@ -4135,7 +4193,8 @@
         "XL"
       ],
       "color_family": "White & Cream",
-      "fit": "Regular"
+      "fit": "Regular",
+      "source": "extracted"
     },
     {
       "id": "juno-hemp-shorts",
@@ -4211,7 +4270,8 @@
         "XL"
       ],
       "color_family": "Brown & Tan",
-      "fit": "Regular"
+      "fit": "Regular",
+      "source": "extracted"
     },
     {
       "id": "juno-hemp-jacket",
@@ -4287,7 +4347,8 @@
         "M"
       ],
       "color_family": "Brown & Tan",
-      "fit": "Regular"
+      "fit": "Regular",
+      "source": "extracted"
     },
     {
       "id": "juno-hemp-dress",
@@ -4367,7 +4428,8 @@
         "XL"
       ],
       "color_family": "Green",
-      "fit": "Regular"
+      "fit": "Regular",
+      "source": "extracted"
     },
     {
       "id": "kanso-court-shorts",
@@ -4438,7 +4500,8 @@
         "XL"
       ],
       "color_family": "Black",
-      "fit": "Regular"
+      "fit": "Regular",
+      "source": "extracted"
     },
     {
       "id": "cedar-jade-turtleneck",
@@ -4509,7 +4572,8 @@
         "XL"
       ],
       "color_family": "Brown & Tan",
-      "fit": "Regular"
+      "fit": "Regular",
+      "source": "extracted"
     },
     {
       "id": "terra-loom-baby-blanket",
@@ -4577,7 +4641,8 @@
         "One size"
       ],
       "color_family": "White & Cream",
-      "fit": "Regular"
+      "fit": "Regular",
+      "source": "extracted"
     },
     {
       "id": "north-fibre-wool-socks-3pack",
@@ -4655,7 +4720,8 @@
         "One size"
       ],
       "color_family": "Multi",
-      "fit": "Regular"
+      "fit": "Regular",
+      "source": "extracted"
     },
     {
       "id": "salt-stem-bucket-hat",
@@ -4722,7 +4788,8 @@
         "One size"
       ],
       "color_family": "White & Cream",
-      "fit": "Regular"
+      "fit": "Regular",
+      "source": "extracted"
     }
   ]
 }

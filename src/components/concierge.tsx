@@ -42,6 +42,18 @@ export function Concierge() {
     scrollRef.current?.scrollTo({ top: scrollRef.current.scrollHeight, behavior: "smooth" });
   }, [messages, status]);
 
+  // other components can open the concierge with a ready-made question
+  useEffect(() => {
+    const onAsk = (e: Event) => {
+      const q = (e as CustomEvent<string>).detail;
+      setOpen(true);
+      if (q && status === "ready") sendMessage({ text: q });
+    };
+    window.addEventListener("gt:concierge", onAsk);
+    return () => window.removeEventListener("gt:concierge", onAsk);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [status]);
+
   const busy = status === "submitted" || status === "streaming";
 
   function submit(text: string) {

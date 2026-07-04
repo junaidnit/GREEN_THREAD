@@ -15,19 +15,25 @@ config({ path: resolve(process.cwd(), ".env.local") });
 const TOKEN = process.env.SUPABASE_ACCESS_TOKEN;
 const REF = process.env.SUPABASE_PROJECT_REF;
 
-async function runSql(query: string): Promise<unknown> {
-  const res = await fetch(`https://api.supabase.com/v1/projects/${REF}/database/query`, {
-    method: "POST",
-    headers: {
-      Authorization: `Bearer ${TOKEN}`,
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({ query }),
-  });
-  if (!res.ok) {
-    throw new Error(`SQL failed (${res.status}): ${await res.text()}`);
+async function runSql(query: string, attempt = 1): Promise<unknown> {
+  try {
+    const res = await fetch(`https://api.supabase.com/v1/projects/${REF}/database/query`, {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${TOKEN}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ query }),
+    });
+    if (!res.ok) {
+      throw new Error(`SQL failed (${res.status}): ${await res.text()}`);
+    }
+    return await res.json();
+  } catch (e) {
+    if (attempt >= 4) throw e;
+    await new Promise((r) => setTimeout(r, attempt * 1500)); // transient network blips
+    return runSql(query, attempt + 1);
   }
-  return res.json();
 }
 
 const q = (s: string) => `'${s.replace(/'/g, "''")}'`;
@@ -79,11 +85,11 @@ async function main() {
         (p) =>
           `(${q(p.id)}, ${q(p.brand_slug)}, ${q(p.title)}, ${q(p.description)}, ${q(p.category)}, ${q(p.gender)}, ` +
           `${p.price}, ${q(p.currency)}, ${q(p.retailer)}, ${q(p.buy_url)}, ${q(p.image_url)}, ${q(p.color)}, ` +
-          `${q(p.color_family)}, ${qa(p.sizes)}, ${q(p.fit)}, ${qj(p.fabric_composition)}, ${qj(p.sustainability)})`,
+          `${q(p.color_family)}, ${qa(p.sizes)}, ${q(p.fit)}, ${q(p.source ?? "generated")}, ${qj(p.fabric_composition)}, ${qj(p.sustainability)})`,
       )
       .join(",\n");
     await runSql(
-      `insert into public.products (id, brand_slug, title, description, category, gender, price, currency, retailer, buy_url, image_url, color, color_family, sizes, fit, fabric_composition, sustainability)
+      `insert into public.products (id, brand_slug, title, description, category, gender, price, currency, retailer, buy_url, image_url, color, color_family, sizes, fit, source, fabric_composition, sustainability)
        values ${rows}
        on conflict (id) do update set
          brand_slug = excluded.brand_slug, title = excluded.title,
@@ -92,7 +98,7 @@ async function main() {
          currency = excluded.currency, retailer = excluded.retailer,
          buy_url = excluded.buy_url, image_url = excluded.image_url,
          color = excluded.color, color_family = excluded.color_family,
-         sizes = excluded.sizes, fit = excluded.fit,
+         sizes = excluded.sizes, fit = excluded.fit, source = excluded.source,
          fabric_composition = excluded.fabric_composition,
          sustainability = excluded.sustainability;`,
     );

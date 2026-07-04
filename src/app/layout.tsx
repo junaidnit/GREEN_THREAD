@@ -5,6 +5,7 @@ import "./globals.css";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { Leaf } from "@/components/icons";
 import { Concierge } from "@/components/concierge";
+import { PageExtras } from "@/components/page-extras";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -60,10 +61,10 @@ export default function RootLayout({
                 Linen
               </Link>
               <Link
-                href="/search?fabric=hemp"
-                className="hidden rounded-full px-4 py-2 font-medium text-muted-foreground transition-colors hover:bg-accent hover:text-accent-foreground sm:block"
+                href="/analyze"
+                className="flex items-center gap-1.5 rounded-full border border-primary/30 px-4 py-2 font-medium text-primary transition-colors hover:bg-accent"
               >
-                Hemp
+                Fabric Check
               </Link>
               <ThemeToggle />
             </nav>
@@ -73,11 +74,22 @@ export default function RootLayout({
         <footer className="mt-16 border-t border-border py-10 text-center text-sm text-muted-foreground">
           <p className="mx-auto max-w-xl px-4">
             GreenThread MVP — demo catalog with illustrative brands and products.
-            Sustainability scores are computed with a transparent rubric; tap any
-            score to see exactly why.
+            Sustainability scores are computed with a transparent rubric —{" "}
+            <Link href="/methodology" className="text-primary underline-offset-2 hover:underline">
+              see how scoring works
+            </Link>
+            .
+          </p>
+          <p className="mt-2 text-xs">
+            <Link href="/analyze" className="underline-offset-2 hover:underline">Fabric Check</Link>
+            <span className="mx-2">·</span>
+            <Link href="/fabric/linen" className="underline-offset-2 hover:underline">Fabric guides</Link>
+            <span className="mx-2">·</span>
+            press <kbd className="rounded border border-border bg-surface px-1.5 py-0.5 font-mono text-[10px]">/</kbd> to search anywhere
           </p>
         </footer>
         <Concierge />
+        <PageExtras />
       </body>
     </html>
   );

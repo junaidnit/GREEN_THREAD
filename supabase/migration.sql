@@ -30,6 +30,18 @@ create table if not exists public.products (
 alter table public.products add column if not exists sizes text[] not null default '{}';
 alter table public.products add column if not exists color_family text not null default '';
 alter table public.products add column if not exists fit text not null default 'Regular';
+alter table public.products add column if not exists source text not null default 'generated';
+
+-- lightweight behavioural events: searches, out-clicks (CRO + affiliate proof)
+create table if not exists public.events (
+  id bigint generated always as identity primary key,
+  type text not null,
+  payload jsonb not null default '{}',
+  created_at timestamptz not null default now()
+);
+alter table public.events enable row level security;
+drop policy if exists "anon insert events" on public.events;
+create policy "anon insert events" on public.events for insert with check (true);
 
 create index if not exists products_category_idx on public.products (category);
 create index if not exists products_brand_idx on public.products (brand_slug);

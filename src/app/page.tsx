@@ -76,7 +76,7 @@ export default async function Home() {
           {FEATURED_FABRICS.map((f) => (
             <Link
               key={f.id}
-              href={`/search?fabric=${f.id}`}
+              href={`/fabric/${f.id}`}
               data-testid={`home-fabric-${f.id}`}
               className="hover-lift group rounded-xl2 border border-border bg-surface p-4"
             >

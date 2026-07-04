@@ -13,7 +13,13 @@ export function HomeSearch() {
       role="search"
       onSubmit={(e) => {
         e.preventDefault();
-        router.push(q.trim() ? `/search?q=${encodeURIComponent(q.trim())}` : "/search");
+        const t = q.trim();
+        // pasted a product link? send it to Fabric Check instead of search
+        if (/^https?:\/\//i.test(t)) {
+          router.push(`/analyze?url=${encodeURIComponent(t)}`);
+          return;
+        }
+        router.push(t ? `/search?q=${encodeURIComponent(t)}` : "/search");
       }}
       className="mx-auto flex h-14 max-w-xl items-center gap-3 rounded-full border border-border bg-surface px-5 shadow-lg shadow-black/[0.04] transition-shadow focus-within:ring-2 focus-within:ring-ring"
     >
@@ -22,7 +28,7 @@ export function HomeSearch() {
         data-testid="home-search-input"
         value={q}
         onChange={(e) => setQ(e.target.value)}
-        placeholder="Try “linen shirt” or “organic cotton dress”…"
+        placeholder="Try “linen shirt” — or paste any product link…"
         className="w-full bg-transparent outline-none placeholder:text-muted-foreground"
         autoComplete="off"
       />

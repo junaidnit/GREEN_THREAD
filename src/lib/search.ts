@@ -13,7 +13,7 @@ const CATEGORY_SYNONYMS: Record<string, string> = {
   "t-shirts": "top tops tee tees t-shirt tshirt",
   shirts: "top tops shirt blouse button-up overshirt",
   knitwear: "top tops jumper sweater pullover cardigan knit turtleneck",
-  hoodies: "top tops hoodie sweatshirt crew fleece",
+  hoodies: "top tops hoodie hoody hoodys sweatshirt jumper crew fleece",
   dresses: "dress dresses midi maxi jumpsuit occasionwear",
   trousers: "trousers pants jeans bottoms shorts joggers chinos",
   skirts: "skirt skirts bottoms",
@@ -102,6 +102,17 @@ function matchesFacets(p: CatalogCard, f: Filters, skip?: keyof Filters): boolea
   return true;
 }
 
+/**
+ * Precision-first text search: multi-word queries must match ALL terms
+ * (stops "t shirt" flooding to the whole catalog via the stray "t");
+ * falls back to ANY-term matching only when strict matching finds little.
+ */
+export function searchHits(index: MiniSearch, q: string) {
+  const strict = index.search(q, { combineWith: "AND" });
+  if (strict.length >= 3 || !q.trim().includes(" ")) return strict;
+  return index.search(q); // OR fallback for sparse multi-word queries
+}
+
 export function applyFilters<T extends CatalogCard>(
   products: T[],
   filters: Filters,
@@ -110,7 +121,7 @@ export function applyFilters<T extends CatalogCard>(
   let pool = products;
 
   if (filters.q.trim() && index) {
-    const hits = index.search(filters.q.trim());
+    const hits = searchHits(index, filters.q.trim());
     const rank = new Map(hits.map((h, i) => [h.id as string, i]));
     pool = products
       .filter((p) => rank.has(p.id))
@@ -150,7 +161,7 @@ export interface FacetCounts {
 export function facetCounts(products: CatalogCard[], filters: Filters, index: MiniSearch | null): FacetCounts {
   let pool = products;
   if (filters.q.trim() && index) {
-    const ids = new Set(index.search(filters.q.trim()).map((h) => h.id as string));
+    const ids = new Set(searchHits(index, filters.q.trim()).map((h) => h.id as string));
     pool = products.filter((p) => ids.has(p.id));
   }
 
@@ -191,6 +202,25 @@ export function facetCounts(products: CatalogCard[], filters: Filters, index: Mi
   }
 
   return { fabrics, brands, sizes, colors, fits, certs, categories };
+}
+
+/**
+ * Closest matches for a query that found nothing under active filters —
+ * fuzzy ANY-term search, ignoring facets. Powers the helpful empty state.
+ */
+export function closestMatches<T extends CatalogCard>(
+  products: T[],
+  q: string,
+  index: MiniSearch | null,
+  limit = 4,
+): T[] {
+  if (!q.trim() || !index) return [];
+  const hits = index.search(q.trim(), { fuzzy: 0.3, prefix: true });
+  const rank = new Map(hits.map((h, i) => [h.id as string, i]));
+  return products
+    .filter((p) => rank.has(p.id))
+    .sort((a, b) => rank.get(a.id)! - rank.get(b.id)!)
+    .slice(0, limit);
 }
 
 /* ── URL <-> Filters (shareable, back-button-friendly state) ── */

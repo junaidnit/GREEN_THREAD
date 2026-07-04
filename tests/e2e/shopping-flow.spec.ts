@@ -174,6 +174,84 @@ test.describe("product page & buy flow", () => {
   });
 });
 
+test.describe("fixes & subtle features", () => {
+  test('"hoody" finds hoodies now', async ({ page }) => {
+    await page.goto("/search?q=hoody");
+    expect(await page.getByTestId("product-card").count()).toBeGreaterThan(5);
+  });
+
+  test('"t shirt" no longer floods the whole catalog', async ({ page }) => {
+    await page.goto("/search?q=t%20shirt");
+    const count = await page.getByTestId("product-card").count();
+    const text = await page.getByTestId("results-count").innerText();
+    const total = Number(text.match(/(\d+)/)?.[1] ?? 0);
+    expect(total).toBeLessThan(800);
+    expect(count).toBeGreaterThan(0);
+  });
+
+  test("methodology page publishes the rubric", async ({ page }) => {
+    await page.goto("/methodology");
+    await expect(page.getByRole("heading", { name: "How we score" })).toBeVisible();
+    await expect(page.getByText("Fibre impact scores")).toBeVisible();
+  });
+
+  test("brand page shows profile and products", async ({ page }) => {
+    await page.goto("/brand/zara");
+    await expect(page.getByRole("heading", { name: "Zara", exact: true })).toBeVisible();
+    await expect(page.getByTestId("grade-badge").first()).toBeVisible();
+    expect(await page.getByTestId("product-card").count()).toBeGreaterThan(8);
+  });
+
+  test("fabric guide page educates and lists products", async ({ page }) => {
+    await page.goto("/fabric/linen");
+    await expect(page.getByRole("heading", { name: "Linen", exact: true })).toBeVisible();
+    await expect(page.getByText("European Confederation of Flax").first()).toBeVisible();
+    expect(await page.getByTestId("product-card").count()).toBeGreaterThan(4);
+  });
+
+  test("product page: retailer link, impact chips, concierge handoff", async ({ page }) => {
+    await page.goto("/product/salt-stem-linen-shirt-white");
+    await expect(page.getByTestId("view-on-retailer")).toBeVisible();
+    await expect(page.getByTestId("view-on-retailer")).toHaveAttribute("target", "_blank");
+    await expect(page.getByTestId("impact-equivalents")).toBeVisible();
+    await expect(page.getByTestId("category-delta")).toBeVisible();
+    await page.getByTestId("ask-concierge").click();
+    await expect(page.getByTestId("concierge-panel")).toBeVisible();
+  });
+
+  test("analyzer page renders and validates input", async ({ page }) => {
+    await page.goto("/analyze");
+    await expect(page.getByTestId("analyze-input")).toBeVisible();
+    // mock the API so e2e stays offline and free
+    await page.route("**/api/analyze", (route) =>
+      route.fulfill({
+        json: {
+          url: "https://example-shop.com/tee", site: "example-shop.com",
+          title: "Test Organic Tee", image: null, price_text: "£25",
+          found_composition: true,
+          fabric_composition: [{ material: "organic_cotton", label: "Organic cotton", pct: 100 }],
+          certifications: ["GOTS"], practices: {}, greenwash_flags: [],
+          explanation: "Solid organic cotton basic.",
+          score: 66, grade: "B",
+          factors: [{ label: "Fibre composition", points: 56, detail: "100% organic cotton" }],
+        },
+      }),
+    );
+    await page.getByTestId("analyze-input").fill("https://example-shop.com/tee");
+    await page.getByTestId("analyze-submit").click();
+    await expect(page.getByTestId("analyze-result")).toBeVisible();
+    await expect(page.getByText("Test Organic Tee")).toBeVisible();
+    await expect(page.getByTestId("analyze-visit")).toHaveAttribute("href", /example-shop/);
+  });
+
+  test("pasting a URL into home search routes to Fabric Check", async ({ page }) => {
+    await page.goto("/");
+    await page.getByTestId("home-search-input").fill("https://shop.example.com/product/1");
+    await page.getByTestId("home-search-input").press("Enter");
+    await page.waitForURL(/\/analyze\?url=/);
+  });
+});
+
 test.describe("concierge", () => {
   test("widget opens with suggestions and accepts input", async ({ page }) => {
     await page.goto("/");

@@ -38,6 +38,106 @@ export interface MaterialFact {
   source: string;
 }
 
+/** Certification explainers — hover-cards, same spirit as fibre facts. */
+export const CERT_INFO: Record<string, string> = {
+  GOTS: "Global Organic Textile Standard — organic fibre plus environmental and social criteria through the whole supply chain. The gold standard for organic textiles.",
+  "USDA Organic": "US federal organic certification — no synthetic pesticides or fertilisers in fibre farming.",
+  GRS: "Global Recycled Standard — verifies recycled content and responsible production, with chain-of-custody tracking.",
+  Bluesign: "Audits chemistry, water and energy at the mill level — screens out harmful substances before they enter production.",
+  RWS: "Responsible Wool Standard — animal welfare (no mulesing) and land management, traceable to the farm.",
+  "European Flax": "Guarantees European-grown flax: rain-fed, zero irrigation, GMO-free.",
+  OCS: "Organic Content Standard — verifies the organic fibre percentage in the final product.",
+  "B Corp": "Whole-company certification for social and environmental performance, not just the product.",
+  "Fair Wear Foundation": "Independent audits of working conditions and wages in garment factories.",
+  "OEKO-TEX Standard 100": "Every component tested against a list of harmful substances — about human safety, not farming.",
+  SA8000: "Social accountability standard: no child labour, safe conditions, living wages.",
+  FSC: "Forest Stewardship Council — wood pulp (for TENCEL/viscose) from responsibly managed forests.",
+  BCI: "Better Cotton Initiative — mass-market programme improving conventional farming. Weaker than organic; fibre is not traceable to your garment.",
+  "1% for the Planet": "Brand donates 1% of revenue to environmental causes.",
+};
+
+/** One-liner fit guides for tooltip chips. */
+export const FIT_INFO: Record<string, string> = {
+  Regular: "True to size, classic cut",
+  Slim: "Closer to the body — size up if between sizes",
+  Relaxed: "Roomy through body, standard shoulders",
+  Oversized: "Intentionally big — drop shoulders, longer body",
+  Wide: "Wide through the leg from hip to hem",
+};
+
+/** Approximate garment fibre weight (grams) by category — for impact equivalents. */
+const CATEGORY_WEIGHT_G: Record<string, number> = {
+  "t-shirts": 180, shirts: 250, jeans: 650, trousers: 450, dresses: 350,
+  skirts: 300, knitwear: 400, hoodies: 500, activewear: 200, outerwear: 700,
+  accessories: 120,
+};
+
+export interface ImpactEquivalent {
+  icon: "bottle" | "water" | "wear";
+  headline: string;
+  detail: string;
+}
+
+/**
+ * Tangible impact equivalents, computed from composition. Deliberately
+ * conservative and phrased as estimates — trust over theatre.
+ * ~25g PET per 500ml bottle; conventional cotton ≈ 10,000 L water/kg vs
+ * organic ≈ 900 L/kg (widely cited Textile Exchange / WWF figures).
+ */
+export function impactEquivalents(
+  category: string,
+  composition: Array<{ material: MaterialId; pct: number }>,
+): ImpactEquivalent[] {
+  const weight = CATEGORY_WEIGHT_G[category] ?? 300;
+  const out: ImpactEquivalent[] = [];
+
+  const rpesPct = composition.find((c) => c.material === "recycled_polyester")?.pct ?? 0;
+  if (rpesPct >= 30) {
+    const bottles = Math.max(1, Math.round((weight * (rpesPct / 100)) / 25));
+    out.push({
+      icon: "bottle",
+      headline: `≈ ${bottles} plastic bottles diverted`,
+      detail: "Estimated from the recycled-polyester share of this garment's fibre weight.",
+    });
+  }
+
+  const lowWaterPct = composition
+    .filter((c) => ["organic_cotton", "linen", "hemp", "recycled_cotton"].includes(c.material))
+    .reduce((s, c) => s + c.pct, 0);
+  if (lowWaterPct >= 50) {
+    const litres = Math.round(((weight * (lowWaterPct / 100)) / 1000) * 9100);
+    out.push({
+      icon: "water",
+      headline: `≈ ${litres.toLocaleString("en-GB")} L water saved`,
+      detail: "Versus the same weight of conventional cotton fibre (industry LCA averages).",
+    });
+  }
+
+  return out;
+}
+
+/** Rough expected wears by dominant fibre — powers price-per-wear. */
+const WEARS: Partial<Record<MaterialId, number>> = {
+  hemp: 200, linen: 150, organic_cotton: 110, recycled_cotton: 90,
+  conventional_cotton: 90, bci_cotton: 90, merino_wool: 150, lambswool: 120,
+  recycled_wool: 120, virgin_wool: 140, tencel_lyocell: 100, modal: 90,
+  cupro: 80, peace_silk: 80, viscose: 60, recycled_polyester: 100,
+  polyester: 80, recycled_polyamide: 110, polyamide: 110, elastane: 60,
+};
+
+export function estimatedWears(composition: Array<{ material: MaterialId; pct: number }>): number {
+  const dominant = [...composition].sort((a, b) => b.pct - a.pct)[0];
+  return WEARS[dominant?.material ?? "other"] ?? 80;
+}
+
+/** Does this garment shed microfibres in the wash? (≥40% synthetic) */
+export function sheddingRisk(composition: Array<{ material: MaterialId; pct: number }>): boolean {
+  const syntheticPct = composition
+    .filter((c) => FIBRE_CLASS[c.material] === "synthetic" && c.material !== "elastane")
+    .reduce((s, c) => s + c.pct, 0);
+  return syntheticPct >= 40;
+}
+
 export const MATERIAL_FACTS: Partial<Record<MaterialId, MaterialFact>> = {
   linen: {
     stat: "≈ 6.4× less water than cotton",

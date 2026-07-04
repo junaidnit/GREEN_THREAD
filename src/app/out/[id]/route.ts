@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { createClient } from "@supabase/supabase-js";
 import { getProduct } from "@/lib/catalog";
 
 /**
@@ -17,6 +18,15 @@ export async function GET(_req: Request, { params }: { params: Promise<{ id: str
   console.log(
     `[out-click] ${new Date().toISOString()} product=${id} retailer=${product.retailer} price=£${product.price}`,
   );
+  // affiliate-grade click log (fire and forget)
+  const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  const key = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+  if (url && key) {
+    createClient(url, key)
+      .from("events")
+      .insert({ type: "out_click", payload: { product: id, retailer: product.retailer, price: product.price } })
+      .then(() => {}, () => {});
+  }
 
   return NextResponse.redirect(new URL(`/retailer/${id}`, _req.url));
 }

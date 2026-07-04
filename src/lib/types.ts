@@ -89,6 +89,8 @@ export interface Product {
   sizes: string[];
   /** Fit type: Regular, Slim, Relaxed, Oversized, Wide. */
   fit: string;
+  /** How the record was produced: "extracted" (AI pipeline from label text) or "generated" (demo). */
+  source?: string;
   fabric_composition: FabricPart[];
   sustainability: Sustainability;
 }

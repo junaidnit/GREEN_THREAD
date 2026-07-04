@@ -33,66 +33,81 @@ function hash(s: string): number {
 }
 const pick = <T,>(rnd: () => number, arr: T[]): T => arr[Math.floor(rnd() * arr.length)];
 
-/* ── palettes ── */
-const COLORS: Array<{ name: string }> = [
-  { name: "Ecru" }, { name: "White" }, { name: "Ivory" }, { name: "Black" },
-  { name: "Charcoal" }, { name: "Grey Marl" }, { name: "Navy" }, { name: "Sky Blue" },
-  { name: "Indigo" }, { name: "Teal" }, { name: "Forest" }, { name: "Sage" },
-  { name: "Olive" }, { name: "Terracotta" }, { name: "Camel" }, { name: "Chocolate" },
-  { name: "Sand" }, { name: "Rust" }, { name: "Blush" }, { name: "Lilac" },
-  { name: "Berry" }, { name: "Coral" }, { name: "Poppy Red" }, { name: "Ochre" },
-];
-
-/* ── verified Unsplash pools per category ── */
-const IMG: Record<string, string[]> = {
+/**
+ * Verified Unsplash pools per category, each image tagged with its actual
+ * dominant garment colour. Products derive their colour FROM the photo, so
+ * a card can never say "Forest" while showing a black tee.
+ */
+type Img = [id: string, colour: string];
+const IMG: Record<string, Img[]> = {
   "t-shirts": [
-    "photo-1521572163474-6864f9cf17ab", "photo-1576566588028-4147f3842f27", "photo-1583743814966-8936f5b7be1a",
-    "photo-1620799140408-edc6dcb6d633", "photo-1617137968427-85924c800a22",
-    "photo-1503341504253-dff4815485f1", "photo-1523381210434-271e8be1f52b", "photo-1554568218-0f1715e72254",
-    "photo-1571455786673-9d9d6c194f90", "photo-1622445275576-721325763afe", "photo-1586363104862-3a5e2ab60d99",
-    "photo-1581655353564-df123a1eb820", "photo-1596609548086-85bbf8ddb6b9", "photo-1603252109303-2751441dd157",
+    ["photo-1521572163474-6864f9cf17ab", "White"], ["photo-1576566588028-4147f3842f27", "White"],
+    ["photo-1583743814966-8936f5b7be1a", "White"], ["photo-1620799140408-edc6dcb6d633", "Ecru"],
+    ["photo-1617137968427-85924c800a22", "Ochre"], ["photo-1503341504253-dff4815485f1", "Ecru"],
+    ["photo-1523381210434-271e8be1f52b", "Multi"], ["photo-1554568218-0f1715e72254", "White"],
+    ["photo-1571455786673-9d9d6c194f90", "Navy"], ["photo-1622445275576-721325763afe", "Black"],
+    ["photo-1586363104862-3a5e2ab60d99", "Black"], ["photo-1581655353564-df123a1eb820", "Black"],
+    ["photo-1596609548086-85bbf8ddb6b9", "Grey Marl"], ["photo-1603252109303-2751441dd157", "White"],
   ],
   shirts: [
-    "photo-1596755094514-f87e34085b2c", "photo-1602810318383-e386cc2a3ccf", "photo-1620012253295-c15cc3e65df4",
-    "photo-1611312449408-fcece27cdbb7", "photo-1589310243389-96a5483213a8", "photo-1608744882201-52a7f7f3dd60",
-    "photo-1562157873-818bc0726f68", "photo-1603251579431-8041402bdeda", "photo-1598961942613-ba897716405b",
-    "photo-1626497764746-6dc36546b388", "photo-1564257631407-4deb1f99d992", "photo-1591369822096-ffd140ec948f",
+    ["photo-1596755094514-f87e34085b2c", "Indigo"], ["photo-1602810318383-e386cc2a3ccf", "White"],
+    ["photo-1620012253295-c15cc3e65df4", "Sky Blue"], ["photo-1611312449408-fcece27cdbb7", "Sky Blue"],
+    ["photo-1589310243389-96a5483213a8", "Indigo"], ["photo-1608744882201-52a7f7f3dd60", "Rust"],
+    ["photo-1562157873-818bc0726f68", "White"], ["photo-1603251579431-8041402bdeda", "White"],
+    ["photo-1598961942613-ba897716405b", "Black"], ["photo-1626497764746-6dc36546b388", "Sage"],
+    ["photo-1564257631407-4deb1f99d992", "Ivory"], ["photo-1591369822096-ffd140ec948f", "White"],
   ],
   jeans: [
-    "photo-1542272604-787c3835535d", "photo-1541099649105-f69ad21f3246", "photo-1604176354204-9268737828e4",
-    "photo-1475178626620-a4d074967452", "photo-1582418702059-97ebafb35d09", "photo-1565084888279-aca607ecce0c",
-    "photo-1598554747436-c9293d6a588f", "photo-1584865288642-42078afe6942", "photo-1555689502-c4b22d76c56f",
+    ["photo-1542272604-787c3835535d", "Indigo"], ["photo-1541099649105-f69ad21f3246", "Indigo"],
+    ["photo-1604176354204-9268737828e4", "Indigo"], ["photo-1475178626620-a4d074967452", "Sky Blue"],
+    ["photo-1582418702059-97ebafb35d09", "Indigo"], ["photo-1565084888279-aca607ecce0c", "Navy"],
+    ["photo-1598554747436-c9293d6a588f", "Sky Blue"], ["photo-1584865288642-42078afe6942", "Indigo"],
+    ["photo-1555689502-c4b22d76c56f", "Navy"],
   ],
   trousers: [
-    "photo-1594633312681-425c7b97ccd1", "photo-1624378439575-d8705ad7ae80", "photo-1584370848010-d7fe6bc767ec",
-    "photo-1598033129183-c4f50c736f10", "photo-1473966968600-fa801b869a1a", "photo-1591195853828-11db59a44f6b",
+    ["photo-1594633312681-425c7b97ccd1", "Sand"], ["photo-1624378439575-d8705ad7ae80", "Ecru"],
+    ["photo-1584370848010-d7fe6bc767ec", "Chocolate"], ["photo-1598033129183-c4f50c736f10", "Grey Marl"],
+    ["photo-1473966968600-fa801b869a1a", "Camel"], ["photo-1591195853828-11db59a44f6b", "Sand"],
   ],
   dresses: [
-    "photo-1515372039744-b8f02a3ae446", "photo-1595777457583-95e059d581b8", "photo-1572804013309-59a88b7e92f1",
-    "photo-1496747611176-843222e1e57c", "photo-1487222477894-8943e31ef7b2", "photo-1610652492500-ded49ceeb378",
-    "photo-1566174053879-31528523f8ae", "photo-1445205170230-053b83016050", "photo-1520903920243-00d872a2d1c9",
+    ["photo-1515372039744-b8f02a3ae446", "Ochre"], ["photo-1595777457583-95e059d581b8", "Coral"],
+    ["photo-1572804013309-59a88b7e92f1", "Terracotta"], ["photo-1496747611176-843222e1e57c", "Forest"],
+    ["photo-1487222477894-8943e31ef7b2", "Blush"], ["photo-1610652492500-ded49ceeb378", "Black"],
+    ["photo-1566174053879-31528523f8ae", "Black"], ["photo-1445205170230-053b83016050", "Multi"],
+    ["photo-1520903920243-00d872a2d1c9", "Ecru"],
   ],
-  skirts: ["photo-1583496661160-fb5886a0aaaa", "photo-1487222477894-8943e31ef7b2", "photo-1594633312681-425c7b97ccd1"],
+  skirts: [
+    ["photo-1583496661160-fb5886a0aaaa", "Ivory"], ["photo-1487222477894-8943e31ef7b2", "Blush"],
+    ["photo-1594633312681-425c7b97ccd1", "Sand"],
+  ],
   knitwear: [
-    "photo-1434389677669-e08b4cac3105", "photo-1544022613-e87ca75a784a", "photo-1509942774463-acf339cf87d5",
-    "photo-1610288311735-39b7facbd095", "photo-1631541909061-71e349d1f203", "photo-1584273143981-41c073dfe8f8",
+    ["photo-1434389677669-e08b4cac3105", "Ecru"], ["photo-1544022613-e87ca75a784a", "Navy"],
+    ["photo-1509942774463-acf339cf87d5", "Sage"], ["photo-1610288311735-39b7facbd095", "Rust"],
+    ["photo-1631541909061-71e349d1f203", "Ecru"], ["photo-1584273143981-41c073dfe8f8", "Camel"],
   ],
-  hoodies: ["photo-1556821840-3a63f95609a7", "photo-1618517351616-38fb9c5210c6", "photo-1565693413579-8ff3fdc1b03b", "photo-1620799139507-2a76f79a2f4d"],
+  hoodies: [
+    ["photo-1556821840-3a63f95609a7", "Grey Marl"], ["photo-1618517351616-38fb9c5210c6", "Black"],
+    ["photo-1565693413579-8ff3fdc1b03b", "Black"], ["photo-1620799139507-2a76f79a2f4d", "Ecru"],
+  ],
   activewear: [
-    "photo-1506629082955-511b1aa562c8", "photo-1571945153237-4929e783af4a", "photo-1518310383802-640c2de311b2",
-    "photo-1483721310020-03333e577078", "photo-1552902865-b72c031ac5ea", "photo-1547949003-9792a18a2601",
-    "photo-1517836357463-d25dfeac3438", "photo-1571019613454-1cb2f99b2d8b", "photo-1562183241-b937e95585b6",
-    "photo-1584466977773-e625c37cdd50", "photo-1507525428034-b723cf961d3e",
+    ["photo-1506629082955-511b1aa562c8", "Charcoal"], ["photo-1571945153237-4929e783af4a", "Black"],
+    ["photo-1518310383802-640c2de311b2", "Black"], ["photo-1483721310020-03333e577078", "Charcoal"],
+    ["photo-1552902865-b72c031ac5ea", "Basalt"], ["photo-1547949003-9792a18a2601", "Forest"],
+    ["photo-1517836357463-d25dfeac3438", "Grey Marl"], ["photo-1571019613454-1cb2f99b2d8b", "Black"],
+    ["photo-1562183241-b937e95585b6", "Black"], ["photo-1584466977773-e625c37cdd50", "Black"],
+    ["photo-1507525428034-b723cf961d3e", "Multi"],
   ],
   outerwear: [
-    "photo-1551028719-00167b16eac5", "photo-1539533018447-63fcce2678e3", "photo-1591047139829-d91aecb6caea",
-    "photo-1548126032-079a0fb0099d", "photo-1521223890158-f9f7c3d5d504", "photo-1544923246-77307dd654cb",
-    "photo-1519238263530-99bdd11df2ea", "photo-1495105787522-5334e3ffa0ef", "photo-1489987707025-afc232f7ea0f",
-    "photo-1525507119028-ed4c629a60a3",
+    ["photo-1551028719-00167b16eac5", "Chocolate"], ["photo-1539533018447-63fcce2678e3", "Sky Blue"],
+    ["photo-1591047139829-d91aecb6caea", "Olive"], ["photo-1548126032-079a0fb0099d", "Camel"],
+    ["photo-1521223890158-f9f7c3d5d504", "Forest"], ["photo-1544923246-77307dd654cb", "Charcoal"],
+    ["photo-1519238263530-99bdd11df2ea", "Camel"], ["photo-1495105787522-5334e3ffa0ef", "Multi"],
+    ["photo-1489987707025-afc232f7ea0f", "Multi"], ["photo-1525507119028-ed4c629a60a3", "Chocolate"],
   ],
   accessories: [
-    "photo-1544816155-12df9643f363", "photo-1510598969022-c4c6c5d05769", "photo-1556905055-8f358a7a47b2",
-    "photo-1586350977771-b3b0abd50c82", "photo-1556306535-0f09a537f0a3", "photo-1620799139507-2a76f79a2f4d",
+    ["photo-1544816155-12df9643f363", "Ecru"], ["photo-1510598969022-c4c6c5d05769", "Charcoal"],
+    ["photo-1556905055-8f358a7a47b2", "Olive"], ["photo-1586350977771-b3b0abd50c82", "Multi"],
+    ["photo-1556306535-0f09a537f0a3", "Sand"], ["photo-1620799139507-2a76f79a2f4d", "Ecru"],
   ],
 };
 
@@ -303,15 +318,24 @@ async function main() {
     const meta = brandMeta.get(brandSlug);
     if (!meta) throw new Error(`Brand ${brandSlug} missing from brands.json`);
 
+    const usedTitles = new Set<string>();
     for (const [cat, def] of Object.entries(CATS)) {
       const count = profile.counts[cat] ?? DEFAULT_COUNTS[cat] ?? 0;
       for (let i = 0; i < count; i++) {
         const id = `${brandSlug}-${cat}-${i + 1}`;
         const rnd = mulberry32(hash(id));
 
-        const style = pick(rnd, def.styles);
-        const color = pick(rnd, COLORS);
-        const fit = pick(rnd, def.fits);
+        // re-roll style/image/fit until the title is unique within the brand
+        let style = "", fit = "", img = "", colorName = "", titleTry = "";
+        for (let attempt = 0; attempt < 8; attempt++) {
+          style = pick(rnd, def.styles);
+          fit = pick(rnd, def.fits);
+          [img, colorName] = pick(rnd, IMG[cat]);
+          titleTry = `${style}|${colorName}|${fit}`;
+          if (!usedTitles.has(titleTry)) break;
+        }
+        usedTitles.add(titleTry);
+
         const gender = pick(rnd, def.genders);
         const blend = pick(rnd, def.pool(profile.tier));
         const parts: FabricPart[] = blend.map(([m, pct]) => ({
@@ -337,10 +361,12 @@ async function main() {
         const price = Math.max(6, Math.round(def.base * profile.mult * (0.8 + rnd() * 0.55)));
         const fitPrefix = fit !== "Regular" && rnd() < 0.7 ? `${fit} ` : "";
         const dominant = parts[0];
-        const fabricAdj = rnd() < 0.5 ? `${dominant.label} ` : "";
-        const title = `${fitPrefix}${fabricAdj}${style} — ${color.name}`;
+        // never repeat the fabric word already in the style ("Linen Linen Shirt")
+        const adjWord = dominant.label.split(" ")[0].toLowerCase();
+        const fabricAdj =
+          rnd() < 0.5 && !style.toLowerCase().includes(adjWord) ? `${dominant.label} ` : "";
+        const title = `${fitPrefix}${fabricAdj}${style} — ${colorName}`;
         const retailer = pick(rnd, ["ASOS", "John Lewis", "Zalando", "Brand Direct"]);
-        const img = pick(rnd, IMG[cat]);
 
         const certText = certs.length > 0 ? ` ${certs[0]}-certified fabric.` : "";
         const description =
@@ -359,10 +385,11 @@ async function main() {
           retailer,
           buy_url: `${meta.website}/products/${id}`,
           image_url: `https://images.unsplash.com/${img}?auto=format&fit=crop&w=900&h=1200&q=80`,
-          color: color.name,
-          color_family: colorFamily(color.name),
+          color: colorName,
+          color_family: colorFamily(colorName),
           sizes: sizesFor(id, cat),
           fit,
+          source: "generated",
           fabric_composition: parts,
           sustainability: {
             score,
@@ -383,11 +410,12 @@ async function main() {
     JSON.stringify({ products }, null, 1),
   );
 
-  // patch fit onto the 67 AI-enriched originals
+  // patch fit + source onto the 67 AI-enriched originals
   const seedPath = resolve(process.cwd(), "data/products_seed.json");
   const seed = JSON.parse(readFileSync(seedPath, "utf8"));
   for (const p of seed.products) {
     if (!p.fit) p.fit = fitFor(p.title);
+    if (!p.source) p.source = "extracted";
   }
   writeFileSync(seedPath, JSON.stringify(seed, null, 2));
 

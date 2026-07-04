@@ -7,6 +7,7 @@ import type { CatalogCard, MaterialId } from "@/lib/types";
 import {
   applyFilters,
   buildIndex,
+  closestMatches,
   EMPTY_FILTERS,
   facetCounts,
   filtersToParams,
@@ -100,8 +101,33 @@ export function SearchExperience({ products }: { products: CatalogCard[] }) {
     io.observe(el);
     return () => io.disconnect();
   }, [results.length]);
-  const shown = results.slice(0, visible);
+  /* never show the same photo twice in a row — swap forward when adjacent
+     cards share an image (demo pools repeat; real feeds won't) */
+  const shown = useMemo(() => {
+    const list = results.slice(0, visible);
+    for (let i = 1; i < list.length; i++) {
+      if (list[i].image_url === list[i - 1].image_url) {
+        const j = list.findIndex((p, k) => k > i && p.image_url !== list[i - 1].image_url);
+        if (j > i) [list[i], list[j]] = [list[j], list[i]];
+      }
+    }
+    return list;
+  }, [results, visible]);
   const animate = results.length <= 60; // keep motion silky on small sets, instant on big ones
+
+  const avgScore = useMemo(
+    () =>
+      results.length
+        ? Math.round(results.reduce((s, p) => s + p.sustainability.score, 0) / results.length)
+        : 0,
+    [results],
+  );
+
+  const [copied, setCopied] = useState(false);
+  const nearMisses = useMemo(
+    () => (results.length === 0 && filters.q.trim() ? closestMatches(products, filters.q, index) : []),
+    [results.length, filters.q, products, index],
+  );
 
   const activeCount =
     filters.fabrics.length + filters.brands.length + filters.sizes.length +
@@ -141,8 +167,16 @@ export function SearchExperience({ products }: { products: CatalogCard[] }) {
               type="search"
               data-testid="search-input"
               value={filters.q}
-              onChange={(e) => set("q", e.target.value)}
-              placeholder="Search tops, linen shirts, dresses…"
+              onChange={(e) => {
+                const v = e.target.value;
+                // pasted a product link? hand off to Fabric Check
+                if (/^https?:\/\/\S+\.\S+/i.test(v.trim())) {
+                  router.push(`/analyze?url=${encodeURIComponent(v.trim())}`);
+                  return;
+                }
+                set("q", v);
+              }}
+              placeholder="Search tops, linen shirts — or paste a product link…"
               className="w-full bg-transparent text-sm outline-none placeholder:text-muted-foreground"
               autoComplete="off"
             />
@@ -225,8 +259,27 @@ export function SearchExperience({ products }: { products: CatalogCard[] }) {
             <p className="text-sm text-muted-foreground" data-testid="results-count">
               <b className="text-foreground">{results.length}</b> {results.length === 1 ? "item" : "items"}
               {filters.q && <> for “{filters.q}”</>}
+              {results.length > 1 && (
+                <span className="ml-2 hidden text-xs sm:inline" title="Average sustainability score of everything matching your filters">
+                  · avg score <b className="text-foreground">{avgScore}</b>
+                </span>
+              )}
             </p>
             <div className="flex items-center gap-2">
+              {(activeCount > 0 || filters.q) && (
+                <button
+                  onClick={() => {
+                    navigator.clipboard?.writeText(window.location.href).then(() => {
+                      setCopied(true);
+                      setTimeout(() => setCopied(false), 1800);
+                    });
+                  }}
+                  className="hidden text-xs font-medium text-muted-foreground underline-offset-2 hover:underline sm:block"
+                  title="Copy a link to exactly this search + filters"
+                >
+                  {copied ? "Copied ✓" : "Share this search"}
+                </button>
+              )}
               {activeCount > 0 && (
                 <button
                   onClick={clearAll}
@@ -279,11 +332,23 @@ export function SearchExperience({ products }: { products: CatalogCard[] }) {
               )}
             </>
           ) : (
-            <div className="rounded-xl2 border border-dashed border-border py-20 text-center" data-testid="empty-state">
+            <div className="rounded-xl2 border border-dashed border-border px-4 py-14 text-center" data-testid="empty-state">
               <p className="font-display text-lg font-semibold">Nothing matches — yet</p>
               <p className="mx-auto mt-1 max-w-sm text-sm text-muted-foreground">
                 Try fewer filters, or ask the concierge for something specific — it knows the whole catalog.
               </p>
+              {nearMisses.length > 0 && (
+                <div className="mt-8 text-left">
+                  <p className="mb-3 text-center text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+                    Closest matches
+                  </p>
+                  <div className="grid grid-cols-2 gap-3 sm:grid-cols-4" data-testid="closest-matches">
+                    {nearMisses.map((p) => (
+                      <ProductCard key={p.id} product={p} />
+                    ))}
+                  </div>
+                </div>
+              )}
             </div>
           )}
         </div>

@@ -4,11 +4,18 @@ import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { getCatalog, getProduct, getSimilar } from "@/lib/catalog";
 import { formatPrice, titleCase } from "@/lib/format";
+import {
+  CERT_INFO,
+  estimatedWears,
+  impactEquivalents,
+  sheddingRisk,
+} from "@/lib/materials";
 import { GradeBadge } from "@/components/grade-badge";
 import { ProductCard } from "@/components/product-card";
 import { CompositionBars } from "@/components/composition-bars";
 import { ScoreDial } from "@/components/score-dial";
-import { AlertTriangle, ArrowUpRight, BadgeCheck } from "@/components/icons";
+import { AskConcierge } from "@/components/ask-concierge";
+import { AlertTriangle, ArrowUpRight, BadgeCheck, Leaf, Sparkles } from "@/components/icons";
 
 interface Props {
   params: Promise<{ id: string }>;
@@ -26,6 +33,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: `${product.title} — ${product.brand.name} | GreenThread`,
     description: product.sustainability.explanation,
+    openGraph: {
+      title: `${product.title} — grade ${product.sustainability.grade} (${product.sustainability.score}/100)`,
+      description: product.sustainability.explanation,
+      images: [{ url: product.image_url }],
+    },
   };
 }
 
@@ -35,6 +47,19 @@ export default async function ProductPage({ params }: Props) {
   if (!product) notFound();
   const similar = await getSimilar(product);
   const s = product.sustainability;
+
+  // category context: how this item compares to everything like it
+  const all = await getCatalog();
+  const peers = all.filter((p) => p.category === product.category);
+  const catAvg = Math.round(peers.reduce((sum, p) => sum + p.sustainability.score, 0) / peers.length);
+  const delta = s.score - catAvg;
+
+  // "same style, greener" — the best similar item that meaningfully beats this one
+  const greener = similar.find((p) => p.sustainability.score >= s.score + 10);
+
+  const impacts = impactEquivalents(product.category, product.fabric_composition);
+  const wears = estimatedWears(product.fabric_composition);
+  const sheds = sheddingRisk(product.fabric_composition);
 
   return (
     <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6">
@@ -95,16 +120,55 @@ export default async function ProductPage({ params }: Props) {
             </div>
           )}
 
-          <a
-            href={`/out/${product.id}`}
-            data-testid="buy-button"
-            className="mt-5 flex h-13 w-full items-center justify-center gap-2 rounded-full bg-primary py-3.5 font-semibold text-primary-foreground transition-transform hover:scale-[1.01] active:scale-[0.99] sm:max-w-sm"
-          >
-            Buy at {product.retailer} <ArrowUpRight className="size-4" />
-          </a>
+          <div className="mt-5 flex flex-col gap-2 sm:max-w-sm">
+            <a
+              href={`/out/${product.id}`}
+              data-testid="buy-button"
+              className="flex h-13 w-full items-center justify-center gap-2 rounded-full bg-primary py-3.5 font-semibold text-primary-foreground transition-transform hover:scale-[1.01] active:scale-[0.99]"
+            >
+              Buy at {product.retailer} <ArrowUpRight className="size-4" />
+            </a>
+            <a
+              href={product.buy_url}
+              target="_blank"
+              rel="noopener noreferrer nofollow"
+              data-testid="view-on-retailer"
+              className="flex h-11 w-full items-center justify-center gap-2 rounded-full border border-border bg-surface text-sm font-medium transition-colors hover:border-primary/40 hover:bg-accent"
+            >
+              View it on {product.brand.name}&apos;s site <ArrowUpRight className="size-3.5" />
+            </a>
+          </div>
           <p className="mt-2 text-xs text-muted-foreground">
-            Takes you straight to {product.retailer}&apos;s checkout — no re-searching on their site.
+            Buy takes you straight to {product.retailer}&apos;s checkout — no re-searching on their site.
           </p>
+
+          {/* tangible impact + longevity */}
+          {(impacts.length > 0 || wears >= 100 || sheds) && (
+            <div className="mt-5 space-y-2" data-testid="impact-equivalents">
+              {impacts.map((imp, i) => (
+                <div key={i} className="flex items-start gap-2.5 rounded-lg bg-accent/40 px-3.5 py-2.5">
+                  <Leaf className="mt-0.5 size-4 shrink-0 text-primary" />
+                  <div>
+                    <p className="text-sm font-semibold text-accent-foreground">{imp.headline}</p>
+                    <p className="text-[11px] text-muted-foreground">{imp.detail}</p>
+                  </div>
+                </div>
+              ))}
+              {wears >= 100 && (
+                <p className="px-1 text-xs text-muted-foreground">
+                  Built to last ≈ <b className="text-foreground">{wears} wears</b> — that&apos;s
+                  about <b className="text-foreground">{formatPrice(Math.max(0.2, product.price / wears), product.currency).replace(/^£/, "£")}</b>{" "}
+                  per wear if you keep it in rotation.
+                </p>
+              )}
+              {sheds && (
+                <p className="px-1 text-xs text-muted-foreground">
+                  ⚠ Mostly synthetic — sheds microfibres in the wash. A filter bag (e.g.
+                  Guppyfriend) catches most of them.
+                </p>
+              )}
+            </div>
+          )}
 
           {/* fabric composition */}
           <section className="mt-8 rounded-xl2 border border-border bg-surface p-5">
@@ -113,18 +177,29 @@ export default async function ProductPage({ params }: Props) {
             <p className="mt-3 text-xs text-muted-foreground">Hover any fibre to learn its impact.</p>
           </section>
 
-          {/* certifications */}
+          {/* certifications — hover any badge to learn what it actually verifies */}
           {s.certifications.length > 0 && (
             <div className="mt-4 flex flex-wrap gap-2" data-testid="certifications">
               {[...new Set(s.certifications)].map((c) => (
-                <span
-                  key={c}
-                  className="flex items-center gap-1.5 rounded-full border border-border bg-surface px-3 py-1.5 text-xs font-medium"
-                >
-                  <BadgeCheck className="size-3.5 text-primary" /> {c}
+                <span key={c} className="group relative">
+                  <span className="flex cursor-help items-center gap-1.5 rounded-full border border-border bg-surface px-3 py-1.5 text-xs font-medium">
+                    <BadgeCheck className="size-3.5 text-primary" /> {c}
+                  </span>
+                  {CERT_INFO[c] && (
+                    <span className="pointer-events-none absolute bottom-full left-0 z-20 mb-2 hidden w-64 rounded-lg border border-border bg-surface p-3 text-xs leading-relaxed text-muted-foreground shadow-xl group-hover:block">
+                      {CERT_INFO[c]}
+                    </span>
+                  )}
                 </span>
               ))}
             </div>
+          )}
+
+          {product.source === "extracted" && (
+            <p className="mt-3 flex items-center gap-1.5 text-[11px] text-muted-foreground" title="Fabric composition was extracted from the product's own label text by our AI pipeline, then validated against a certification evidence check.">
+              <Sparkles className="size-3 text-primary" /> Composition read from the label by our
+              extraction pipeline
+            </p>
           )}
         </div>
       </div>
@@ -134,13 +209,42 @@ export default async function ProductPage({ params }: Props) {
         <div className="grid gap-8 lg:grid-cols-[auto_1fr]">
           <div className="flex flex-col items-center gap-3">
             <ScoreDial score={s.score} grade={s.grade} />
-            <p className="max-w-[180px] text-center text-xs text-muted-foreground">
-              Scored with a transparent rubric — every point accounted for below.
-            </p>
+            {peers.length > 3 && (
+              <p
+                className={`rounded-full px-3 py-1 text-xs font-semibold ${
+                  delta >= 0 ? "bg-grade-a/10 text-grade-a" : "bg-grade-d/10 text-grade-d"
+                }`}
+                data-testid="category-delta"
+              >
+                {delta >= 0 ? `${delta} pts above` : `${Math.abs(delta)} pts below`} the average{" "}
+                {product.category.replace(/s$/, "")}
+              </p>
+            )}
+            <Link
+              href="/methodology"
+              className="max-w-[180px] text-center text-xs text-muted-foreground underline-offset-2 hover:underline"
+            >
+              Scored with a transparent rubric — see how scoring works →
+            </Link>
           </div>
           <div>
             <h2 className="font-display text-xl font-bold">Why this score?</h2>
             <p className="mt-2 max-w-2xl text-sm leading-relaxed text-muted-foreground">{s.explanation}</p>
+
+            {greener && (
+              <Link
+                href={`/product/${greener.id}`}
+                data-testid="greener-nudge"
+                className="mt-4 flex items-center justify-between gap-3 rounded-lg border border-grade-a/40 bg-grade-a/5 px-4 py-3 transition-colors hover:bg-grade-a/10"
+              >
+                <span className="text-sm">
+                  <b className="text-grade-a">Same style, greener:</b> {greener.title} scores{" "}
+                  <b>{greener.sustainability.score}</b> ({greener.sustainability.score - s.score >= 0 ? "+" : ""}
+                  {greener.sustainability.score - s.score} pts) at {formatPrice(greener.price, greener.currency)}
+                </span>
+                <ArrowUpRight className="size-4 shrink-0 text-grade-a" />
+              </Link>
+            )}
 
             <div className="mt-5 space-y-2" data-testid="score-factors">
               {s.factors.map((f, i) => (
@@ -181,6 +285,10 @@ export default async function ProductPage({ params }: Props) {
               <p className="text-sm font-semibold text-accent-foreground">About {product.brand.name}</p>
               <p className="mt-1 text-xs leading-relaxed text-muted-foreground">{product.brand.ethics_summary}</p>
             </div>
+
+            <AskConcierge
+              question={`Tell me more about the ${product.title} by ${product.brand.name} — is it a good sustainable choice, and are there better alternatives?`}
+            />
           </div>
         </div>
       </section>
