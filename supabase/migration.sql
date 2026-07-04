@@ -29,6 +29,7 @@ create table if not exists public.products (
 -- UK-market columns (idempotent for existing deployments)
 alter table public.products add column if not exists sizes text[] not null default '{}';
 alter table public.products add column if not exists color_family text not null default '';
+alter table public.products add column if not exists fit text not null default 'Regular';
 
 create index if not exists products_category_idx on public.products (category);
 create index if not exists products_brand_idx on public.products (brand_slug);

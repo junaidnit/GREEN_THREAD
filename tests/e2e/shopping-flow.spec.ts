@@ -1,4 +1,10 @@
-import { expect, test } from "@playwright/test";
+import { expect, test, type Page } from "@playwright/test";
+
+/** Total match count from the results header (card count is paginated). */
+async function totalResults(page: Page): Promise<number> {
+  const text = await page.getByTestId("results-count").innerText();
+  return Number(text.match(/\d+/)?.[0] ?? 0);
+}
 
 test.describe("home", () => {
   test("hero, fabric categories and top picks render", async ({ page }) => {
@@ -18,22 +24,44 @@ test.describe("home", () => {
 });
 
 test.describe("the shopper journey: search a top, narrow it down", () => {
-  test('"top" surfaces tops from every brand at once', async ({ page }) => {
-    await page.goto("/search?q=top");
-    const n = await page.getByTestId("product-card").count();
-    expect(n).toBeGreaterThan(10); // tees + shirts + knits across brands
-    await expect(page.getByTestId("results-count")).toContainText("top");
+  test('"tshirt" search has marketplace depth (hundreds of items)', async ({ page }) => {
+    await page.goto("/search?q=tshirt");
+    await expect.poll(() => totalResults(page)).toBeGreaterThan(100);
   });
 
-  test("brand filter: tick Zara, see only Zara; counts stay visible", async ({ page }) => {
+  test('"jeans" search has marketplace depth', async ({ page }) => {
+    await page.goto("/search?q=jeans");
+    await expect.poll(() => totalResults(page)).toBeGreaterThan(100);
+  });
+
+  test("refinement banner invites narrowing without hiding results", async ({ page }) => {
+    await page.goto("/search?q=tshirt");
+    await expect(page.getByTestId("refine-banner")).toBeVisible();
+    // results are visible UNDER the banner — no friction
+    expect(await page.getByTestId("product-card").count()).toBeGreaterThan(0);
+
+    const before = await totalResults(page);
+    await page.getByTestId("refine-fit-Oversized").click();
+    await expect.poll(async () => page.url()).toContain("fit=Oversized");
+    await expect.poll(() => totalResults(page)).toBeLessThan(before);
+    // banner steps aside once a refinement is picked
+    await expect(page.getByTestId("refine-banner")).toBeHidden();
+    // and can be dismissed on a fresh broad search
+    await page.goto("/search?q=dress");
+    await page.getByRole("button", { name: "Dismiss refinements" }).click();
+    await expect(page.getByTestId("refine-banner")).toBeHidden();
+  });
+
+  test("brand filter: tick Zara, see only Zara at real depth", async ({ page }) => {
     await page.goto("/search");
     await page.getByTestId("brand-zara").check();
     await expect.poll(async () => page.url()).toContain("brand=zara");
+    await expect.poll(() => totalResults(page)).toBeGreaterThan(100); // 100-200 per brand
 
     const cards = page.getByTestId("product-card");
     const n = await cards.count();
     expect(n).toBeGreaterThanOrEqual(3);
-    for (let i = 0; i < n; i++) {
+    for (let i = 0; i < Math.min(n, 8); i++) {
       await expect(cards.nth(i)).toContainText("Zara");
     }
     // other brands remain selectable (facet counts ignore own group)
@@ -47,32 +75,38 @@ test.describe("the shopper journey: search a top, narrow it down", () => {
     const cards = page.getByTestId("product-card");
     const n = await cards.count();
     expect(n).toBeGreaterThanOrEqual(1);
-    for (let i = 0; i < n; i++) {
+    for (let i = 0; i < Math.min(n, 8); i++) {
       await expect(cards.nth(i)).toContainText(/tencel|lyocell/i);
     }
   });
 
   test("size filter works with counts", async ({ page }) => {
     await page.goto("/search");
-    const initial = await page.getByTestId("product-card").count();
+    const initial = await totalResults(page);
     await page.getByTestId("size-XL").click();
-    await expect
-      .poll(async () => page.getByTestId("product-card").count())
-      .toBeLessThan(initial);
+    await expect.poll(() => totalResults(page)).toBeLessThan(initial);
     await expect.poll(async () => page.url()).toContain("size=XL");
   });
 
   test("instant search narrows results and prices show £", async ({ page }) => {
     await page.goto("/search");
-    const initial = await page.getByTestId("product-card").count();
-    expect(initial).toBeGreaterThan(20);
+    const initial = await totalResults(page);
+    expect(initial).toBeGreaterThan(1000); // full marketplace catalog
 
-    await page.getByTestId("search-input").fill("linen");
-    await expect
-      .poll(async () => page.getByTestId("product-card").count())
-      .toBeLessThan(initial);
+    await page.getByTestId("search-input").fill("linen shirt");
+    await expect.poll(() => totalResults(page)).toBeLessThan(initial);
     await expect(page.getByTestId("product-card").first()).toContainText(/linen/i);
     await expect(page.getByTestId("product-card").first()).toContainText("£");
+  });
+
+  test("infinite scroll loads more products", async ({ page }) => {
+    await page.goto("/search");
+    const firstPage = await page.getByTestId("product-card").count();
+    expect(firstPage).toBeLessThanOrEqual(24);
+    await page.keyboard.press("End"); // jump to bottom → sentinel triggers
+    await expect
+      .poll(async () => page.getByTestId("product-card").count())
+      .toBeGreaterThan(firstPage);
   });
 
   test("URL filters are applied on load (shareable links)", async ({ page }) => {
@@ -83,16 +117,14 @@ test.describe("the shopper journey: search a top, narrow it down", () => {
 
   test("min score slider filters low scorers out", async ({ page }) => {
     await page.goto("/search");
-    const initial = await page.getByTestId("product-card").count();
+    const initial = await totalResults(page);
     // keyboard-drive the slider: fill() sets DOM value without firing React's
     // onChange in React 19, so step from 0 → 70 with arrow keys (step=5)
     const slider = page.getByTestId("min-score-slider");
     await slider.focus();
     for (let i = 0; i < 14; i++) await slider.press("ArrowRight");
     await expect(page.getByText("Minimum: 70/100")).toBeVisible();
-    await expect
-      .poll(async () => page.getByTestId("product-card").count())
-      .toBeLessThan(initial);
+    await expect.poll(() => totalResults(page)).toBeLessThan(initial);
     const badgeText = await page.getByTestId("grade-badge").first().innerText();
     const score = Number(badgeText.replace(/[^0-9]/g, ""));
     expect(score).toBeGreaterThanOrEqual(70);

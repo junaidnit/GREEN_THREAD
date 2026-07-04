@@ -1,6 +1,6 @@
 import { Suspense } from "react";
 import type { Metadata } from "next";
-import { getCatalog } from "@/lib/catalog";
+import { getCatalogCards } from "@/lib/catalog";
 import { SearchExperience } from "@/components/search-experience";
 import { ProductCardSkeleton } from "@/components/product-card";
 
@@ -22,7 +22,7 @@ function GridSkeleton() {
 }
 
 export default async function SearchPage() {
-  const products = await getCatalog();
+  const products = await getCatalogCards();
   return (
     <Suspense fallback={<GridSkeleton />}>
       <SearchExperience products={products} />

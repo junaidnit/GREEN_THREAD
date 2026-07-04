@@ -3,7 +3,7 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { AnimatePresence, motion } from "framer-motion";
-import type { MaterialId, Product } from "@/lib/types";
+import type { CatalogCard, MaterialId } from "@/lib/types";
 import {
   applyFilters,
   buildIndex,
@@ -39,9 +39,11 @@ const COLOR_SWATCHES: Record<string, string> = {
   "Multi": "conic-gradient(#c0563e,#d9b23a,#5c7c5e,#4a6fa5,#c08bb2,#c0563e)",
 };
 
-const SIZE_ORDER = ["XS", "S", "M", "L", "XL", "One size"];
+const SIZE_ORDER = ["XS", "S", "M", "L", "XL", "W26", "W28", "W30", "W32", "W34", "W36", "One size"];
+const FIT_ORDER = ["Regular", "Slim", "Relaxed", "Oversized", "Wide"];
+const PAGE_SIZE = 24;
 
-export function SearchExperience({ products }: { products: Product[] }) {
+export function SearchExperience({ products }: { products: CatalogCard[] }) {
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
@@ -81,10 +83,39 @@ export function SearchExperience({ products }: { products: Product[] }) {
   const set = <K extends keyof Filters>(key: K, value: Filters[K]) =>
     setFilters((f) => ({ ...f, [key]: value }));
 
+  /* infinite scroll: render PAGE_SIZE at a time, grow when sentinel is visible */
+  const [visible, setVisible] = useState(PAGE_SIZE);
+  const sentinelRef = useRef<HTMLDivElement>(null);
+  const filterKey = filtersToParams(filters).toString();
+  useEffect(() => setVisible(PAGE_SIZE), [filterKey]);
+  useEffect(() => {
+    const el = sentinelRef.current;
+    if (!el) return;
+    const io = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting) setVisible((v) => v + PAGE_SIZE);
+      },
+      { rootMargin: "600px" },
+    );
+    io.observe(el);
+    return () => io.disconnect();
+  }, [results.length]);
+  const shown = results.slice(0, visible);
+  const animate = results.length <= 60; // keep motion silky on small sets, instant on big ones
+
   const activeCount =
     filters.fabrics.length + filters.brands.length + filters.sizes.length +
-    filters.colors.length + filters.certs.length + filters.categories.length +
+    filters.colors.length + filters.fits.length + filters.certs.length + filters.categories.length +
     (filters.gender ? 1 : 0) + (filters.maxPrice != null ? 1 : 0) + (filters.minScore != null ? 1 : 0);
+
+  /* refinement banner: invite (not force) narrowing after a broad search */
+  const [bannerDismissed, setBannerDismissed] = useState(false);
+  const showBanner =
+    !bannerDismissed &&
+    results.length > 30 &&
+    (filters.q.trim().length > 0 || filters.categories.length > 0) &&
+    !filters.gender && filters.fits.length === 0 &&
+    filters.sizes.length === 0 && filters.colors.length === 0;
 
   const clearAll = () => setFilters({ ...EMPTY_FILTERS, q: filters.q, sort: filters.sort });
 
@@ -181,6 +212,15 @@ export function SearchExperience({ products }: { products: Product[] }) {
 
         {/* results */}
         <div>
+          <AnimatePresence>
+            {showBanner && (
+              <RefinementBanner
+                counts={counts}
+                onPick={set}
+                onDismiss={() => setBannerDismissed(true)}
+              />
+            )}
+          </AnimatePresence>
           <div className="flex items-center justify-between py-4">
             <p className="text-sm text-muted-foreground" data-testid="results-count">
               <b className="text-foreground">{results.length}</b> {results.length === 1 ? "item" : "items"}
@@ -213,22 +253,31 @@ export function SearchExperience({ products }: { products: Product[] }) {
           </div>
 
           {results.length > 0 ? (
-            <motion.div layout className="grid grid-cols-2 gap-3 sm:gap-5 xl:grid-cols-3">
-              <AnimatePresence mode="popLayout">
-                {results.map((p, i) => (
-                  <motion.div
-                    key={p.id}
-                    layout
-                    initial={{ opacity: 0, y: 12 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, scale: 0.97 }}
-                    transition={{ duration: 0.28, delay: Math.min(i * 0.02, 0.2), ease: [0.22, 1, 0.36, 1] }}
-                  >
-                    <ProductCard product={p} priority={i < 6} />
-                  </motion.div>
-                ))}
-              </AnimatePresence>
-            </motion.div>
+            <>
+              <div className="grid grid-cols-2 gap-3 sm:gap-5 xl:grid-cols-3">
+                {shown.map((p, i) =>
+                  animate ? (
+                    <motion.div
+                      key={p.id}
+                      initial={{ opacity: 0, y: 12 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.28, delay: Math.min(i * 0.02, 0.2), ease: [0.22, 1, 0.36, 1] }}
+                    >
+                      <ProductCard product={p} priority={i < 6} />
+                    </motion.div>
+                  ) : (
+                    <ProductCard key={p.id} product={p} priority={i < 6} />
+                  ),
+                )}
+              </div>
+              {visible < results.length && (
+                <div ref={sentinelRef} className="grid grid-cols-2 gap-3 py-6 sm:gap-5 xl:grid-cols-3">
+                  {Array.from({ length: 3 }).map((_, i) => (
+                    <div key={i} className="skeleton aspect-[3/4] rounded-xl2" />
+                  ))}
+                </div>
+              )}
+            </>
           ) : (
             <div className="rounded-xl2 border border-dashed border-border py-20 text-center" data-testid="empty-state">
               <p className="font-display text-lg font-semibold">Nothing matches — yet</p>
@@ -363,6 +412,29 @@ function FilterSidebar({
                 }`}
               >
                 {s} <span className={active ? "opacity-75" : "text-muted-foreground"}>{counts.sizes.get(s) ?? 0}</span>
+              </button>
+            );
+          })}
+        </div>
+      </FilterGroup>
+
+      {/* ── Fit ── */}
+      <FilterGroup title="Fit" testId="fit-filter">
+        <div className="flex flex-wrap gap-1.5">
+          {FIT_ORDER.filter((f) => (counts.fits.get(f) ?? 0) > 0 || filters.fits.includes(f)).map((f) => {
+            const active = filters.fits.includes(f);
+            return (
+              <button
+                key={f}
+                data-testid={`fit-${f}`}
+                onClick={() => set("fits", toggleIn(filters.fits, f))}
+                className={`rounded-lg border px-2.5 py-1.5 text-xs font-medium transition-colors ${
+                  active
+                    ? "border-primary bg-primary text-primary-foreground"
+                    : "border-border bg-surface hover:border-primary/40"
+                }`}
+              >
+                {f} <span className={active ? "opacity-75" : "text-muted-foreground"}>{counts.fits.get(f) ?? 0}</span>
               </button>
             );
           })}
@@ -510,6 +582,100 @@ function FabricRow({
         )}
       </AnimatePresence>
     </div>
+  );
+}
+
+/**
+ * Post-search refinement strip — an invitation, never a gate. Results stay
+ * visible underneath; one tap applies a filter and the strip slides away.
+ */
+function RefinementBanner({
+  counts,
+  onPick,
+  onDismiss,
+}: {
+  counts: FacetCounts;
+  onPick: <K extends keyof Filters>(key: K, value: Filters[K]) => void;
+  onDismiss: () => void;
+}) {
+  const topColors = [...counts.colors.entries()].sort((a, b) => b[1] - a[1]).slice(0, 8);
+  const fits = FIT_ORDER.filter((f) => (counts.fits.get(f) ?? 0) > 0);
+  const sizes = SIZE_ORDER.filter((s) => (counts.sizes.get(s) ?? 0) > 0).slice(0, 7);
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: -8 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, height: 0, marginTop: 0 }}
+      transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+      data-testid="refine-banner"
+      className="mt-4 overflow-hidden rounded-xl2 border border-primary/20 bg-[linear-gradient(120deg,var(--accent),var(--surface))] p-4 sm:p-5"
+    >
+      <div className="flex items-start justify-between gap-3">
+        <div>
+          <p className="font-display text-sm font-bold">Lots of great matches — make it yours</p>
+          <p className="mt-0.5 text-xs text-muted-foreground">One tap to narrow down. Or just keep scrolling.</p>
+        </div>
+        <button aria-label="Dismiss refinements" onClick={onDismiss} className="text-muted-foreground hover:text-foreground">
+          <X className="size-4" />
+        </button>
+      </div>
+
+      <div className="scrollbar-hide mt-3 flex items-center gap-2 overflow-x-auto pb-1">
+        {/* gender */}
+        {(["women", "men"] as const).map((g) => (
+          <button
+            key={g}
+            data-testid={`refine-${g}`}
+            onClick={() => onPick("gender", g)}
+            className="shrink-0 rounded-full border border-border bg-surface px-3.5 py-1.5 text-xs font-semibold shadow-sm transition-all hover:border-primary hover:text-primary"
+          >
+            {g === "women" ? "For her" : "For him"}
+          </button>
+        ))}
+        <span className="mx-1 h-5 w-px shrink-0 bg-border" />
+        {/* fit */}
+        {fits.map((f) => (
+          <button
+            key={f}
+            data-testid={`refine-fit-${f}`}
+            onClick={() => onPick("fits", [f])}
+            className="shrink-0 rounded-full border border-border bg-surface px-3.5 py-1.5 text-xs font-medium shadow-sm transition-all hover:border-primary hover:text-primary"
+          >
+            {f} fit
+          </button>
+        ))}
+        <span className="mx-1 h-5 w-px shrink-0 bg-border" />
+        {/* sizes */}
+        {sizes.map((s) => (
+          <button
+            key={s}
+            data-testid={`refine-size-${s.replace(" ", "-")}`}
+            onClick={() => onPick("sizes", [s])}
+            className="shrink-0 rounded-full border border-border bg-surface px-3 py-1.5 text-xs font-medium shadow-sm transition-all hover:border-primary hover:text-primary"
+          >
+            {s}
+          </button>
+        ))}
+        <span className="mx-1 h-5 w-px shrink-0 bg-border" />
+        {/* colours */}
+        {topColors.map(([fam]) => {
+          const sw = COLOR_SWATCHES[fam] ?? "#999";
+          return (
+            <button
+              key={fam}
+              data-testid={`refine-color-${fam.replaceAll(" ", "-")}`}
+              onClick={() => onPick("colors", [fam])}
+              title={fam}
+              className="flex shrink-0 items-center gap-1.5 rounded-full border border-border bg-surface px-3 py-1.5 text-xs font-medium shadow-sm transition-all hover:border-primary hover:text-primary"
+            >
+              <span className="inline-block size-3 rounded-full border border-black/10" style={{ background: sw }} />
+              {fam}
+            </button>
+          );
+        })}
+      </div>
+    </motion.div>
   );
 }
 

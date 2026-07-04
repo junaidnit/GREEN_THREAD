@@ -80,7 +80,7 @@ export default async function ProductPage({ params }: Props) {
           {product.sizes.length > 0 && (
             <div className="mt-5" data-testid="product-sizes">
               <p className="mb-2 text-xs font-semibold uppercase tracking-wider text-muted-foreground">
-                Available sizes
+                Available sizes · {product.fit} fit
               </p>
               <div className="flex flex-wrap gap-2">
                 {product.sizes.map((s) => (

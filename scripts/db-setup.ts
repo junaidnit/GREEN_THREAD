@@ -5,7 +5,7 @@
  *
  * Run:  npx tsx scripts/db-setup.ts
  */
-import { readFileSync } from "node:fs";
+import { existsSync, readFileSync } from "node:fs";
 import { resolve } from "node:path";
 import { config } from "dotenv";
 import type { SeedProduct } from "../src/lib/types";
@@ -44,9 +44,14 @@ async function main() {
   await runSql(readFileSync(resolve(process.cwd(), "supabase/migration.sql"), "utf8"));
 
   const brands = JSON.parse(readFileSync(resolve(process.cwd(), "data/raw/brands.json"), "utf8")).brands;
-  const products: SeedProduct[] = JSON.parse(
+  const seedProducts: SeedProduct[] = JSON.parse(
     readFileSync(resolve(process.cwd(), "data/products_seed.json"), "utf8"),
   ).products;
+  const generatedPath = resolve(process.cwd(), "data/products_generated.json");
+  const generated: SeedProduct[] = existsSync(generatedPath)
+    ? JSON.parse(readFileSync(generatedPath, "utf8")).products
+    : [];
+  const products = [...seedProducts, ...generated];
 
   console.log(`2/3 Seeding ${brands.length} brands…`);
   const brandRows = brands
@@ -67,18 +72,18 @@ async function main() {
 
   console.log(`3/3 Seeding ${products.length} products…`);
   // chunk inserts to keep each statement modest
-  for (let i = 0; i < products.length; i += 20) {
-    const chunk = products.slice(i, i + 20);
+  for (let i = 0; i < products.length; i += 50) {
+    const chunk = products.slice(i, i + 50);
     const rows = chunk
       .map(
         (p) =>
           `(${q(p.id)}, ${q(p.brand_slug)}, ${q(p.title)}, ${q(p.description)}, ${q(p.category)}, ${q(p.gender)}, ` +
           `${p.price}, ${q(p.currency)}, ${q(p.retailer)}, ${q(p.buy_url)}, ${q(p.image_url)}, ${q(p.color)}, ` +
-          `${q(p.color_family)}, ${qa(p.sizes)}, ${qj(p.fabric_composition)}, ${qj(p.sustainability)})`,
+          `${q(p.color_family)}, ${qa(p.sizes)}, ${q(p.fit)}, ${qj(p.fabric_composition)}, ${qj(p.sustainability)})`,
       )
       .join(",\n");
     await runSql(
-      `insert into public.products (id, brand_slug, title, description, category, gender, price, currency, retailer, buy_url, image_url, color, color_family, sizes, fabric_composition, sustainability)
+      `insert into public.products (id, brand_slug, title, description, category, gender, price, currency, retailer, buy_url, image_url, color, color_family, sizes, fit, fabric_composition, sustainability)
        values ${rows}
        on conflict (id) do update set
          brand_slug = excluded.brand_slug, title = excluded.title,
@@ -87,10 +92,11 @@ async function main() {
          currency = excluded.currency, retailer = excluded.retailer,
          buy_url = excluded.buy_url, image_url = excluded.image_url,
          color = excluded.color, color_family = excluded.color_family,
-         sizes = excluded.sizes, fabric_composition = excluded.fabric_composition,
+         sizes = excluded.sizes, fit = excluded.fit,
+         fabric_composition = excluded.fabric_composition,
          sustainability = excluded.sustainability;`,
     );
-    console.log(`   …${Math.min(i + 20, products.length)}/${products.length}`);
+    console.log(`   …${Math.min(i + 50, products.length)}/${products.length}`);
   }
 
   const count = (await runSql("select count(*)::int as n from public.products;")) as Array<{ n: number }>;

@@ -38,7 +38,7 @@ const PRODUCTS: Product[] = [
     id: "linen-shirt", brand: seasalt, title: "Breezy Linen Shirt", description: "cool summer shirt",
     category: "shirts", gender: "men", price: 35, currency: "GBP", retailer: "ASOS",
     buy_url: "#", image_url: "#", color: "white", color_family: "White & Cream",
-    sizes: ["S", "M", "L"],
+    sizes: ["S", "M", "L"], fit: "Regular",
     fabric_composition: [{ material: "linen", label: "Linen", pct: 100 }],
     sustainability: sus(85, ["European Flax", "OEKO-TEX Standard 100"]),
   },
@@ -46,7 +46,7 @@ const PRODUCTS: Product[] = [
     id: "hemp-tee", brand: seasalt, title: "Hemp Tee", description: "rugged tee",
     category: "t-shirts", gender: "unisex", price: 18, currency: "GBP", retailer: "ASOS",
     buy_url: "#", image_url: "#", color: "natural", color_family: "White & Cream",
-    sizes: ["XS", "S", "M", "L", "XL"],
+    sizes: ["XS", "S", "M", "L", "XL"], fit: "Relaxed",
     fabric_composition: [
       { material: "hemp", label: "Hemp", pct: 55 },
       { material: "organic_cotton", label: "Organic cotton", pct: 45 },
@@ -57,7 +57,7 @@ const PRODUCTS: Product[] = [
     id: "poly-jogger", brand: zara, title: "Comfy Jogger", description: "cosy fleece jogger",
     category: "trousers", gender: "women", price: 16, currency: "GBP", retailer: "Zalando",
     buy_url: "#", image_url: "#", color: "grey", color_family: "Grey",
-    sizes: ["S", "M"],
+    sizes: ["S", "M"], fit: "Relaxed",
     fabric_composition: [
       { material: "bci_cotton", label: "BCI cotton", pct: 65 },
       { material: "polyester", label: "Polyester", pct: 35 },
@@ -68,7 +68,7 @@ const PRODUCTS: Product[] = [
     id: "trace-elastane", brand: zara, title: "Stretch Blouse", description: "blouse with trace stretch",
     category: "shirts", gender: "women", price: 20, currency: "GBP", retailer: "John Lewis",
     buy_url: "#", image_url: "#", color: "black", color_family: "Black",
-    sizes: ["XS", "S"],
+    sizes: ["XS", "S"], fit: "Slim",
     fabric_composition: [
       { material: "tencel_lyocell", label: "TENCEL", pct: 97 },
       { material: "elastane", label: "Elastane", pct: 3 },
@@ -136,6 +136,11 @@ describe("facet filters", () => {
     expect(res.map((p) => p.id)).toEqual(["trace-elastane"]);
   });
 
+  it("filters by fit", () => {
+    const res = applyFilters(PRODUCTS, { ...EMPTY_FILTERS, fits: ["Relaxed"] }, index);
+    expect(res.map((p) => p.id).sort()).toEqual(["hemp-tee", "poly-jogger"]);
+  });
+
   it("requires ALL selected certifications", () => {
     const res = applyFilters(
       PRODUCTS,
@@ -201,6 +206,7 @@ describe("URL round-trip", () => {
       brands: ["zara", "seasalt"],
       sizes: ["M", "L"],
       colors: ["Black"],
+      fits: ["Relaxed"],
       certs: ["GOTS"],
       maxPrice: 40,
       minScore: 60,

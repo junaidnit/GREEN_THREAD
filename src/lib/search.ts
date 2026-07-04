@@ -1,5 +1,5 @@
 import MiniSearch from "minisearch";
-import type { MaterialId, Product } from "./types";
+import type { CatalogCard, MaterialId } from "./types";
 import { MATERIAL_LABELS } from "./scoring";
 
 /**
@@ -28,6 +28,7 @@ export interface Filters {
   brands: string[];
   sizes: string[];
   colors: string[];
+  fits: string[];
   certs: string[];
   categories: string[];
   gender: string | null;
@@ -42,6 +43,7 @@ export const EMPTY_FILTERS: Filters = {
   brands: [],
   sizes: [],
   colors: [],
+  fits: [],
   certs: [],
   categories: [],
   gender: null,
@@ -50,9 +52,9 @@ export const EMPTY_FILTERS: Filters = {
   sort: "relevance",
 };
 
-export function buildIndex(products: Product[]): MiniSearch {
+export function buildIndex(products: CatalogCard[]): MiniSearch {
   const mini = new MiniSearch({
-    fields: ["title", "description", "brand", "category", "synonyms", "color", "fabrics", "certs"],
+    fields: ["title", "brand", "category", "synonyms", "color", "fabrics", "certs"],
     storeFields: ["id"],
     searchOptions: {
       boost: { title: 3, synonyms: 2.5, fabrics: 2.5, brand: 2, category: 2 },
@@ -64,10 +66,9 @@ export function buildIndex(products: Product[]): MiniSearch {
     products.map((p) => ({
       id: p.id,
       title: p.title,
-      description: p.description,
       brand: p.brand.name,
       category: p.category,
-      synonyms: `${CATEGORY_SYNONYMS[p.category] ?? ""} ${p.gender}`,
+      synonyms: `${CATEGORY_SYNONYMS[p.category] ?? ""} ${p.gender} ${p.fit}`,
       color: `${p.color} ${p.color_family}`,
       fabrics: p.fabric_composition
         .map((f) => `${f.label} ${MATERIAL_LABELS[f.material]}`)
@@ -79,17 +80,18 @@ export function buildIndex(products: Product[]): MiniSearch {
 }
 
 /** Does product contain ANY of the selected fabrics (with a meaningful share)? */
-function matchesFabrics(p: Product, fabrics: MaterialId[]): boolean {
+function matchesFabrics(p: CatalogCard, fabrics: MaterialId[]): boolean {
   if (fabrics.length === 0) return true;
   return p.fabric_composition.some((f) => fabrics.includes(f.material) && f.pct >= 5);
 }
 
-function matchesFacets(p: Product, f: Filters, skip?: keyof Filters): boolean {
+function matchesFacets(p: CatalogCard, f: Filters, skip?: keyof Filters): boolean {
   if (skip !== "fabrics" && !matchesFabrics(p, f.fabrics)) return false;
   if (skip !== "brands" && f.brands.length > 0 && !f.brands.includes(p.brand.slug)) return false;
   if (skip !== "sizes" && f.sizes.length > 0 &&
       !f.sizes.some((s) => p.sizes.includes(s))) return false;
   if (skip !== "colors" && f.colors.length > 0 && !f.colors.includes(p.color_family)) return false;
+  if (skip !== "fits" && f.fits.length > 0 && !f.fits.includes(p.fit)) return false;
   if (skip !== "certs" && f.certs.length > 0 &&
       !f.certs.every((c) => p.sustainability.certifications.includes(c))) return false;
   if (skip !== "categories" && f.categories.length > 0 &&
@@ -100,11 +102,11 @@ function matchesFacets(p: Product, f: Filters, skip?: keyof Filters): boolean {
   return true;
 }
 
-export function applyFilters(
-  products: Product[],
+export function applyFilters<T extends CatalogCard>(
+  products: T[],
   filters: Filters,
   index: MiniSearch | null,
-): Product[] {
+): T[] {
   let pool = products;
 
   if (filters.q.trim() && index) {
@@ -136,6 +138,7 @@ export interface FacetCounts {
   brands: Map<string, number>;
   sizes: Map<string, number>;
   colors: Map<string, number>;
+  fits: Map<string, number>;
   certs: Map<string, number>;
   categories: Map<string, number>;
 }
@@ -144,7 +147,7 @@ export interface FacetCounts {
  * Standard faceting: the count shown next to option X reflects all active
  * filters EXCEPT its own group, so options never look impossible to combine.
  */
-export function facetCounts(products: Product[], filters: Filters, index: MiniSearch | null): FacetCounts {
+export function facetCounts(products: CatalogCard[], filters: Filters, index: MiniSearch | null): FacetCounts {
   let pool = products;
   if (filters.q.trim() && index) {
     const ids = new Set(index.search(filters.q.trim()).map((h) => h.id as string));
@@ -155,6 +158,7 @@ export function facetCounts(products: Product[], filters: Filters, index: MiniSe
   const brands = new Map<string, number>();
   const sizes = new Map<string, number>();
   const colors = new Map<string, number>();
+  const fits = new Map<string, number>();
   const certs = new Map<string, number>();
   const categories = new Map<string, number>();
 
@@ -173,6 +177,9 @@ export function facetCounts(products: Product[], filters: Filters, index: MiniSe
     if (matchesFacets(p, filters, "colors")) {
       colors.set(p.color_family, (colors.get(p.color_family) ?? 0) + 1);
     }
+    if (matchesFacets(p, filters, "fits")) {
+      fits.set(p.fit, (fits.get(p.fit) ?? 0) + 1);
+    }
     if (matchesFacets(p, filters, "certs")) {
       for (const c of p.sustainability.certifications) {
         certs.set(c, (certs.get(c) ?? 0) + 1);
@@ -183,7 +190,7 @@ export function facetCounts(products: Product[], filters: Filters, index: MiniSe
     }
   }
 
-  return { fabrics, brands, sizes, colors, certs, categories };
+  return { fabrics, brands, sizes, colors, fits, certs, categories };
 }
 
 /* ── URL <-> Filters (shareable, back-button-friendly state) ── */
@@ -195,6 +202,7 @@ export function filtersToParams(f: Filters): URLSearchParams {
   if (f.brands.length) sp.set("brand", f.brands.join(","));
   if (f.sizes.length) sp.set("size", f.sizes.join(","));
   if (f.colors.length) sp.set("color", f.colors.join(","));
+  if (f.fits.length) sp.set("fit", f.fits.join(","));
   if (f.certs.length) sp.set("cert", f.certs.join(","));
   if (f.categories.length) sp.set("category", f.categories.join(","));
   if (f.gender) sp.set("gender", f.gender);
@@ -217,6 +225,7 @@ export function paramsToFilters(sp: URLSearchParams): Filters {
     brands: list("brand"),
     sizes: list("size"),
     colors: list("color"),
+    fits: list("fit"),
     certs: list("cert"),
     categories: list("category"),
     gender: sp.get("gender"),

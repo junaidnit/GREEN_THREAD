@@ -20,7 +20,7 @@ import { resolve } from "node:path";
 import { config } from "dotenv";
 import { computeScore, validateCertifications } from "../src/lib/scoring";
 import type { Practices, SeedProduct } from "../src/lib/types";
-import { colorFamily, sizesFor } from "./product-attrs";
+import { colorFamily, fitFor, sizesFor } from "./product-attrs";
 
 config({ path: resolve(process.cwd(), ".env.local") });
 
@@ -132,6 +132,7 @@ async function extractOne(p: RawProduct, brand: RawBrand): Promise<SeedProduct> 
     color: p.color,
     color_family: colorFamily(p.color),
     sizes: sizesFor(p.slug, p.category),
+    fit: fitFor(p.title),
     fabric_composition: object.fabric_composition,
     sustainability: {
       score,

@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import type { Product } from "@/lib/types";
+import type { CatalogCard } from "@/lib/types";
 import { formatPrice } from "@/lib/format";
 import { GradeBadge } from "./grade-badge";
 
@@ -10,7 +10,7 @@ const BLUR =
     `<svg xmlns="http://www.w3.org/2000/svg" width="9" height="12"><rect width="9" height="12" fill="#e8e4da"/></svg>`,
   ).toString("base64");
 
-export function ProductCard({ product, priority = false }: { product: Product; priority?: boolean }) {
+export function ProductCard({ product, priority = false }: { product: CatalogCard; priority?: boolean }) {
   const dominant = [...product.fabric_composition].sort((a, b) => b.pct - a.pct).slice(0, 2);
   return (
     <Link

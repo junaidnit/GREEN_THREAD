@@ -1,9 +1,9 @@
 import "server-only";
 import { cache } from "react";
-import { readFileSync } from "node:fs";
+import { existsSync, readFileSync } from "node:fs";
 import { resolve } from "node:path";
 import { createClient } from "@supabase/supabase-js";
-import type { Brand, Product, SeedProduct } from "./types";
+import type { Brand, CatalogCard, Product, SeedProduct } from "./types";
 
 /**
  * Server-side catalog loader.
@@ -16,11 +16,15 @@ function loadLocal(): Product[] {
   const seed = JSON.parse(
     readFileSync(resolve(process.cwd(), "data/products_seed.json"), "utf8"),
   ).products as SeedProduct[];
+  const generatedPath = resolve(process.cwd(), "data/products_generated.json");
+  const generated: SeedProduct[] = existsSync(generatedPath)
+    ? JSON.parse(readFileSync(generatedPath, "utf8")).products
+    : [];
   const brands = JSON.parse(
     readFileSync(resolve(process.cwd(), "data/raw/brands.json"), "utf8"),
   ).brands as Brand[];
   const brandBySlug = new Map(brands.map((b) => [b.slug, b]));
-  return seed.map(({ brand_slug, ...rest }) => ({
+  return [...seed, ...generated].map(({ brand_slug, ...rest }) => ({
     ...rest,
     brand: brandBySlug.get(brand_slug)!,
   }));
@@ -30,12 +34,21 @@ async function loadSupabase(): Promise<Product[]> {
   const url = process.env.NEXT_PUBLIC_SUPABASE_URL!;
   const key = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!;
   const supabase = createClient(url, key);
-  const { data, error } = await supabase
-    .from("products")
-    .select("*, brand:brands(*)")
-    .order("id");
-  if (error) throw error;
-  return (data ?? []).map((row) => ({
+  // PostgREST caps a single request at 1,000 rows — page through the catalog
+  const PAGE = 1000;
+  const data: Record<string, unknown>[] = [];
+  for (let from = 0; ; from += PAGE) {
+    const { data: page, error } = await supabase
+      .from("products")
+      .select("*, brand:brands(*)")
+      .order("id")
+      .range(from, from + PAGE - 1);
+    if (error) throw error;
+    data.push(...(page ?? []));
+    if (!page || page.length < PAGE) break;
+  }
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  return data.map((row: any) => ({
     id: row.id,
     brand: row.brand as Brand,
     title: row.title,
@@ -50,6 +63,7 @@ async function loadSupabase(): Promise<Product[]> {
     color: row.color,
     color_family: row.color_family ?? "",
     sizes: row.sizes ?? [],
+    fit: row.fit ?? "Regular",
     fabric_composition: row.fabric_composition,
     sustainability: row.sustainability,
   }));
@@ -70,6 +84,37 @@ export const getCatalog = cache(async (): Promise<Product[]> => {
     }
   }
   return loadLocal();
+});
+
+/**
+ * Slim projection for the search page — drops descriptions, factor
+ * breakdowns and buy URLs so shipping ~1,600 products to the client stays
+ * a fraction of the full catalog payload.
+ */
+export const getCatalogCards = cache(async (): Promise<CatalogCard[]> => {
+  const all = await getCatalog();
+  return all.map((p) => ({
+    id: p.id,
+    brand: { slug: p.brand.slug, name: p.brand.name },
+    title: p.title,
+    category: p.category,
+    gender: p.gender,
+    price: p.price,
+    currency: p.currency,
+    retailer: p.retailer,
+    image_url: p.image_url,
+    color: p.color,
+    color_family: p.color_family,
+    sizes: p.sizes,
+    fit: p.fit,
+    fabric_composition: p.fabric_composition,
+    sustainability: {
+      score: p.sustainability.score,
+      grade: p.sustainability.grade,
+      certifications: p.sustainability.certifications,
+      greenwash_flags: p.sustainability.greenwash_flags,
+    },
+  }));
 });
 
 export async function getProduct(id: string): Promise<Product | undefined> {
