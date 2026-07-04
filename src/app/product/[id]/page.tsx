@@ -22,8 +22,13 @@ interface Props {
 }
 
 export async function generateStaticParams() {
+  // Pre-render only the top-scoring pages at build time; the other ~1,600
+  // render on first request (and are then cached). Keeps builds fast.
   const products = await getCatalog();
-  return products.map((p) => ({ id: p.id }));
+  return [...products]
+    .sort((a, b) => b.sustainability.score - a.sustainability.score)
+    .slice(0, 32)
+    .map((p) => ({ id: p.id }));
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
