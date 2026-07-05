@@ -10,7 +10,7 @@ test.describe("home", () => {
   test("hero, fabric categories and top picks render", async ({ page }) => {
     await page.goto("/");
     await expect(page.getByRole("heading", { level: 1 })).toContainText("Wear more");
-    await expect(page.getByTestId("home-fabric-linen")).toBeVisible();
+    await expect(page.getByRole("link", { name: "Linen", exact: true }).first()).toBeVisible();
     expect(await page.getByTestId("product-card").count()).toBeGreaterThanOrEqual(4);
   });
 
@@ -191,8 +191,8 @@ test.describe("fixes & subtle features", () => {
 
   test("methodology page publishes the rubric", async ({ page }) => {
     await page.goto("/methodology");
-    await expect(page.getByRole("heading", { name: "How we score" })).toBeVisible();
-    await expect(page.getByText("Fibre impact scores")).toBeVisible();
+    await expect(page.getByRole("heading", { name: /anatomy of a score/i })).toBeVisible();
+    await expect(page.getByText("Every fibre, ranked")).toBeVisible();
   });
 
   test("brand page shows profile and products", async ({ page }) => {

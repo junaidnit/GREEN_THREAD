@@ -80,6 +80,23 @@
   50% { transform: translate(60px, -40px) scale(1.15); }
   100% { transform: translate(-40px, 30px) scale(0.95); }
 }
+@keyframes gt-kenburns {
+  0% { transform: scale(1.05) translate(0, 0); }
+  100% { transform: scale(1.18) translate(-2%, -3%); }
+}
+
+/* slow cinematic pan on hero imagery */
+.kenburns {
+  animation: gt-kenburns 18s ease-in-out infinite alternate;
+}
+
+/* editorial fashion caption type */
+.eyebrow {
+  font-size: 0.68rem;
+  text-transform: uppercase;
+  letter-spacing: 0.22em;
+  color: var(--muted-foreground);
+}
 
 /* ambient hero blobs */
 .ambient-blob {
