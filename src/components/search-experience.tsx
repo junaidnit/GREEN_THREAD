@@ -399,9 +399,7 @@ function FilterSidebar({
           </span>
           <h3 className="font-display text-sm font-bold">Fabric first</h3>
         </div>
-        <p className="mb-3 text-[11px] leading-relaxed text-muted-foreground">
-          What it&apos;s made of decides how it feels, lasts and impacts the planet.
-        </p>
+        <p className="mb-3 text-[11px] text-muted-foreground">What it&apos;s made of is everything.</p>
 
         {FIBRE_GROUPS.map((group) => {
           const materials = (Object.keys(MATERIAL_LABELS) as MaterialId[]).filter(

@@ -17,6 +17,8 @@ import { ScoreDial } from "@/components/score-dial";
 import { AskConcierge } from "@/components/ask-concierge";
 import { FabricLens } from "@/components/fabric-lens";
 import { SaveButton } from "@/components/saved";
+import { ScoreFactors } from "@/components/score-factors";
+import { ExpandableText } from "@/components/kinetic";
 import { AlertTriangle, ArrowUpRight, BadgeCheck, Leaf, Sparkles } from "@/components/icons";
 
 interface Props {
@@ -247,7 +249,7 @@ export default async function ProductPage({ params }: Props) {
           </div>
           <div>
             <h2 className="font-display text-xl font-bold">Why this score?</h2>
-            <p className="mt-2 max-w-2xl text-sm leading-relaxed text-muted-foreground">{s.explanation}</p>
+            <ExpandableText text={s.explanation} className="mt-2 max-w-2xl" />
 
             {greener && (
               <Link
@@ -264,27 +266,7 @@ export default async function ProductPage({ params }: Props) {
               </Link>
             )}
 
-            <div className="mt-5 space-y-2" data-testid="score-factors">
-              {s.factors.map((f, i) => (
-                <div
-                  key={i}
-                  className="flex items-start justify-between gap-4 rounded-lg bg-surface-2 px-4 py-2.5"
-                >
-                  <div>
-                    <p className="text-sm font-medium">{f.label}</p>
-                    <p className="text-xs text-muted-foreground">{f.detail}</p>
-                  </div>
-                  <span
-                    className={`shrink-0 font-display text-sm font-bold ${
-                      f.points >= 0 ? "text-grade-a" : "text-grade-e"
-                    }`}
-                  >
-                    {f.points >= 0 ? "+" : ""}
-                    {f.points}
-                  </span>
-                </div>
-              ))}
-            </div>
+            <ScoreFactors factors={s.factors} />
 
             {s.greenwash_flags.length > 0 && (
               <div className="mt-5 rounded-lg border border-grade-d/40 bg-grade-d/5 p-4" data-testid="greenwash-flags">

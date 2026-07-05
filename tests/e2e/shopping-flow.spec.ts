@@ -9,7 +9,7 @@ async function totalResults(page: Page): Promise<number> {
 test.describe("home", () => {
   test("hero, fabric categories and top picks render", async ({ page }) => {
     await page.goto("/");
-    await expect(page.getByRole("heading", { level: 1 })).toContainText("fabric");
+    await expect(page.getByRole("heading", { level: 1 })).toContainText("Wear more");
     await expect(page.getByTestId("home-fabric-linen")).toBeVisible();
     expect(await page.getByTestId("product-card").count()).toBeGreaterThanOrEqual(4);
   });
@@ -256,8 +256,15 @@ test.describe("luxury interactions", () => {
   test("fabric lens appears on product image hover", async ({ page }) => {
     await page.goto("/product/salt-stem-linen-shirt-white");
     const lens = page.getByTestId("fabric-lens");
-    await lens.hover({ position: { x: 200, y: 200 } });
-    await expect(page.getByText("Inspecting the weave", { exact: false })).toBeVisible();
+    await lens.scrollIntoViewIfNeeded();
+    // retry the hover: SSR paints the element before React hydrates its
+    // mousemove listener, so a single early hover can land on deaf ears
+    await expect(async () => {
+      const box = (await lens.boundingBox())!;
+      await page.mouse.move(box.x + 180, box.y + 180);
+      await page.mouse.move(box.x + 200, box.y + 210, { steps: 3 });
+      await expect(page.getByText("Inspecting the weave", { exact: false })).toBeVisible({ timeout: 700 });
+    }).toPass({ timeout: 15_000 });
   });
 
   test("save arcs into the wardrobe and persists", async ({ page }) => {

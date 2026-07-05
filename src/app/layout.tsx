@@ -73,21 +73,19 @@ export default function RootLayout({
           </div>
         </header>
         <main className="flex-1">{children}</main>
-        <footer className="mt-16 border-t border-border py-10 text-center text-sm text-muted-foreground">
-          <p className="mx-auto max-w-xl px-4">
-            GreenThread MVP — demo catalog with illustrative brands and products.
-            Sustainability scores are computed with a transparent rubric —{" "}
-            <Link href="/methodology" className="text-primary underline-offset-2 hover:underline">
-              see how scoring works
-            </Link>
-            .
-          </p>
-          <p className="mt-2 text-xs">
-            <Link href="/analyze" className="underline-offset-2 hover:underline">Fabric Check</Link>
-            <span className="mx-2">·</span>
-            <Link href="/fabric/linen" className="underline-offset-2 hover:underline">Fabric guides</Link>
-            <span className="mx-2">·</span>
-            press <kbd className="rounded border border-border bg-surface px-1.5 py-0.5 font-mono text-[10px]">/</kbd> to search anywhere
+        <footer className="mt-16 border-t border-border py-8 text-center text-xs text-muted-foreground">
+          <p className="flex flex-wrap items-center justify-center gap-x-4 gap-y-2 px-4">
+            <Link href="/methodology" className="underline-offset-2 hover:text-primary hover:underline">How we score</Link>
+            <span className="opacity-40">·</span>
+            <Link href="/analyze" className="underline-offset-2 hover:text-primary hover:underline">Fabric Check</Link>
+            <span className="opacity-40">·</span>
+            <Link href="/fabric/linen" className="underline-offset-2 hover:text-primary hover:underline">Fabric guides</Link>
+            <span className="opacity-40">·</span>
+            <span>
+              <kbd className="rounded border border-border bg-surface px-1.5 py-0.5 font-mono text-[10px]">/</kbd> to search
+            </span>
+            <span className="opacity-40">·</span>
+            <span className="opacity-70">demo catalog, illustrative data</span>
           </p>
         </footer>
         <Concierge />
