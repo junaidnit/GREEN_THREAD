@@ -307,7 +307,7 @@ export function SearchExperience({ products }: { products: CatalogCard[] }) {
 
           {results.length > 0 ? (
             <>
-              <div className="grid grid-cols-2 gap-3 sm:gap-5 xl:grid-cols-3">
+              <div className="grid grid-cols-2 gap-x-4 gap-y-8 sm:gap-x-6 xl:grid-cols-3">
                 {shown.map((p, i) =>
                   animate ? (
                     <motion.div
@@ -324,9 +324,9 @@ export function SearchExperience({ products }: { products: CatalogCard[] }) {
                 )}
               </div>
               {visible < results.length && (
-                <div ref={sentinelRef} className="grid grid-cols-2 gap-3 py-6 sm:gap-5 xl:grid-cols-3">
+                <div ref={sentinelRef} className="grid grid-cols-2 gap-x-4 gap-y-8 py-8 sm:gap-x-6 xl:grid-cols-3">
                   {Array.from({ length: 3 }).map((_, i) => (
-                    <div key={i} className="skeleton aspect-[3/4] rounded-xl2" />
+                    <div key={i} className="skeleton aspect-[4/5]" />
                   ))}
                 </div>
               )}
@@ -389,17 +389,11 @@ function FilterSidebar({
       )}
 
       {/* ── NATURAL FABRIC — the top-most, hero filter ── */}
-      <section
-        data-testid="fabric-filter"
-        className="rounded-xl2 border border-primary/25 bg-accent/40 p-4"
-      >
-        <div className="mb-1 flex items-center gap-2">
-          <span className="flex size-6 items-center justify-center rounded-full bg-primary text-primary-foreground">
-            <Leaf className="size-3.5" />
-          </span>
-          <h3 className="font-display text-sm font-bold">Fabric first</h3>
+      <section data-testid="fabric-filter" className="border-b border-border pb-5">
+        <div className="mb-3 flex items-center gap-2">
+          <Leaf className="size-4 text-primary" />
+          <h3 className="eyebrow !text-foreground">Fabric first</h3>
         </div>
-        <p className="mb-3 text-[11px] text-muted-foreground">What it&apos;s made of is everything.</p>
 
         {FIBRE_GROUPS.map((group) => {
           const materials = (Object.keys(MATERIAL_LABELS) as MaterialId[]).filter(
@@ -752,8 +746,8 @@ function FilterGroup({
   testId?: string;
 }) {
   return (
-    <section data-testid={testId} className="rounded-xl2 border border-border bg-surface p-4">
-      <p className="mb-2.5 text-xs font-semibold uppercase tracking-wider text-muted-foreground">{title}</p>
+    <section data-testid={testId}>
+      <p className="eyebrow mb-3">{title}</p>
       <div className="space-y-1.5">{children}</div>
     </section>
   );
