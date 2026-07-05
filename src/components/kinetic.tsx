@@ -4,7 +4,15 @@ import { useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion, useInView } from "framer-motion";
 
 /** Vertical-roll word cycler for kinetic headlines. */
-export function RollingWord({ words, className }: { words: string[]; className?: string }) {
+export function RollingWord({
+  words,
+  className,
+  accentClass = "text-primary",
+}: {
+  words: string[];
+  className?: string;
+  accentClass?: string;
+}) {
   const [i, setI] = useState(0);
   useEffect(() => {
     const t = setInterval(() => setI((v) => (v + 1) % words.length), 2200);
@@ -24,7 +32,7 @@ export function RollingWord({ words, className }: { words: string[]; className?:
           animate={{ y: 0, x: "-50%", opacity: 1 }}
           exit={{ y: "-105%", x: "-50%", opacity: 0 }}
           transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
-          className="absolute left-1/2 whitespace-nowrap text-primary"
+          className={`absolute left-1/2 whitespace-nowrap ${accentClass}`}
         >
           {words[i]}
         </motion.span>

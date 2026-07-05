@@ -3,8 +3,8 @@ import Image from "next/image";
 import type { Metadata } from "next";
 import { getCatalog } from "@/lib/catalog";
 import { ProductCard } from "@/components/product-card";
-import { HomeSearch } from "@/components/home-search";
-import { CountUp, Marquee, Reveal, RollingWord } from "@/components/kinetic";
+import { CinematicHero } from "@/components/cinematic-hero";
+import { Marquee, Reveal } from "@/components/kinetic";
 import { MATERIAL_LABELS, MATERIAL_SCORES } from "@/lib/scoring";
 import { MATERIAL_FACTS } from "@/lib/materials";
 import type { MaterialId } from "@/lib/types";
@@ -13,10 +13,6 @@ import { ArrowUpRight } from "@/components/icons";
 export const metadata: Metadata = {
   title: "GreenThread — shop by fabric, not just price",
 };
-
-const HERO_WORDS = ["linen", "hemp", "TENCEL", "organic cotton", "merino"];
-const HERO_IMAGE =
-  "https://images.unsplash.com/photo-1595777457583-95e059d581b8?auto=format&fit=crop&w=1400&h=1800&q=85";
 
 const MARQUEE_FABRICS: MaterialId[] = [
   "linen", "hemp", "organic_cotton", "tencel_lyocell", "recycled_cotton",
@@ -34,39 +30,8 @@ export default async function Home() {
 
   return (
     <div>
-      {/* ── cinematic split hero ── */}
-      <section className="grid items-stretch lg:min-h-[86vh] lg:grid-cols-[1.05fr_1fr]">
-        <div className="flex flex-col justify-center px-5 py-16 sm:px-10 lg:px-16">
-          <p className="eyebrow">Sustainable fashion, decoded</p>
-          <h1 className="mt-4 font-display text-5xl font-bold leading-[1.02] tracking-tight sm:text-7xl">
-            Wear more
-            <br />
-            <RollingWord words={HERO_WORDS} />
-          </h1>
-          <div className="mt-9 max-w-md">
-            <HomeSearch />
-          </div>
-          <div className="mt-9 flex gap-8">
-            {[
-              { n: products.length, label: "pieces" },
-              { n: brandCount, label: "brands" },
-              { n: fibreCount, label: "fibres" },
-            ].map((s) => (
-              <div key={s.label}>
-                <p className="font-display text-2xl font-bold">
-                  <CountUp to={s.n} />
-                </p>
-                <p className="eyebrow mt-0.5">{s.label}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        <div className="relative min-h-[60vh] overflow-hidden lg:min-h-full">
-          <Image src={HERO_IMAGE} alt="" fill priority sizes="50vw" className="kenburns object-cover" />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent lg:bg-gradient-to-r lg:from-background lg:via-transparent lg:to-transparent" />
-        </div>
-      </section>
+      {/* ── cinematic split-screen video hero ── */}
+      <CinematicHero pieces={products.length} brands={brandCount} fibres={fibreCount} />
 
       {/* ── fibre marquee ── */}
       <Marquee className="border-y border-border py-3.5">

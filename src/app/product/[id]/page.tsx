@@ -17,6 +17,7 @@ import { ScoreDial } from "@/components/score-dial";
 import { AskConcierge } from "@/components/ask-concierge";
 import { FabricLens } from "@/components/fabric-lens";
 import { SaveButton } from "@/components/saved";
+import { viewOnBrandUrl } from "@/lib/brand-links";
 import { ScoreFactors } from "@/components/score-factors";
 import { ExpandableText } from "@/components/kinetic";
 import { AlertTriangle, ArrowUpRight, BadgeCheck, Leaf, Sparkles } from "@/components/icons";
@@ -147,7 +148,7 @@ export default async function ProductPage({ params }: Props) {
             </a>
             <div className="flex gap-2">
               <a
-                href={product.buy_url}
+                href={viewOnBrandUrl(product.brand.slug, product.brand.name, product.title)}
                 target="_blank"
                 rel="noopener noreferrer nofollow"
                 data-testid="view-on-retailer"
