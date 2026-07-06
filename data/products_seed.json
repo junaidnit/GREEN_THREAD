@@ -453,7 +453,7 @@
         }
       ],
       "sustainability": {
-        "score": 60,
+        "score": 58,
         "grade": "C",
         "factors": [
           {
@@ -468,7 +468,7 @@
           },
           {
             "label": "Brand practices",
-            "points": 5,
+            "points": 3,
             "detail": "Brand-level transparency, labour and supply-chain record."
           },
           {
@@ -535,7 +535,7 @@
         }
       ],
       "sustainability": {
-        "score": 63,
+        "score": 61,
         "grade": "C",
         "factors": [
           {
@@ -550,7 +550,7 @@
           },
           {
             "label": "Brand practices",
-            "points": 5,
+            "points": 3,
             "detail": "Brand-level transparency, labour and supply-chain record."
           },
           {
@@ -610,7 +610,7 @@
         }
       ],
       "sustainability": {
-        "score": 62,
+        "score": 60,
         "grade": "C",
         "factors": [
           {
@@ -625,7 +625,7 @@
           },
           {
             "label": "Brand practices",
-            "points": 5,
+            "points": 3,
             "detail": "Brand-level transparency, labour and supply-chain record."
           },
           {
@@ -688,7 +688,7 @@
         }
       ],
       "sustainability": {
-        "score": 62,
+        "score": 60,
         "grade": "C",
         "factors": [
           {
@@ -703,7 +703,7 @@
           },
           {
             "label": "Brand practices",
-            "points": 5,
+            "points": 3,
             "detail": "Brand-level transparency, labour and supply-chain record."
           },
           {
@@ -760,7 +760,7 @@
         }
       ],
       "sustainability": {
-        "score": 58,
+        "score": 56,
         "grade": "C",
         "factors": [
           {
@@ -775,7 +775,7 @@
           },
           {
             "label": "Brand practices",
-            "points": 5,
+            "points": 3,
             "detail": "Brand-level transparency, labour and supply-chain record."
           },
           {
@@ -829,7 +829,7 @@
         }
       ],
       "sustainability": {
-        "score": 71,
+        "score": 70,
         "grade": "B",
         "factors": [
           {
@@ -844,7 +844,7 @@
           },
           {
             "label": "Brand practices",
-            "points": 5,
+            "points": 4,
             "detail": "Brand-level transparency, labour and supply-chain record."
           }
         ],
@@ -896,7 +896,7 @@
         }
       ],
       "sustainability": {
-        "score": 71,
+        "score": 70,
         "grade": "B",
         "factors": [
           {
@@ -911,7 +911,7 @@
           },
           {
             "label": "Brand practices",
-            "points": 5,
+            "points": 4,
             "detail": "Brand-level transparency, labour and supply-chain record."
           }
         ],
@@ -966,7 +966,7 @@
         }
       ],
       "sustainability": {
-        "score": 67,
+        "score": 66,
         "grade": "B",
         "factors": [
           {
@@ -981,7 +981,7 @@
           },
           {
             "label": "Brand practices",
-            "points": 5,
+            "points": 4,
             "detail": "Brand-level transparency, labour and supply-chain record."
           }
         ],
@@ -1038,7 +1038,7 @@
         }
       ],
       "sustainability": {
-        "score": 67,
+        "score": 66,
         "grade": "B",
         "factors": [
           {
@@ -1048,7 +1048,7 @@
           },
           {
             "label": "Brand practices",
-            "points": 5,
+            "points": 4,
             "detail": "Brand-level transparency, labour and supply-chain record."
           }
         ],
@@ -1099,7 +1099,7 @@
         }
       ],
       "sustainability": {
-        "score": 73,
+        "score": 72,
         "grade": "B",
         "factors": [
           {
@@ -1114,7 +1114,7 @@
           },
           {
             "label": "Brand practices",
-            "points": 5,
+            "points": 4,
             "detail": "Brand-level transparency, labour and supply-chain record."
           }
         ],
@@ -1167,7 +1167,7 @@
         }
       ],
       "sustainability": {
-        "score": 71,
+        "score": 70,
         "grade": "B",
         "factors": [
           {
@@ -1182,7 +1182,7 @@
           },
           {
             "label": "Brand practices",
-            "points": 5,
+            "points": 4,
             "detail": "Brand-level transparency, labour and supply-chain record."
           }
         ],
@@ -1240,7 +1240,7 @@
         }
       ],
       "sustainability": {
-        "score": 70,
+        "score": 67,
         "grade": "B",
         "factors": [
           {
@@ -1255,7 +1255,7 @@
           },
           {
             "label": "Brand practices",
-            "points": 5,
+            "points": 2,
             "detail": "Brand-level transparency, labour and supply-chain record."
           },
           {
@@ -1317,7 +1317,7 @@
         }
       ],
       "sustainability": {
-        "score": 72,
+        "score": 69,
         "grade": "B",
         "factors": [
           {
@@ -1332,7 +1332,7 @@
           },
           {
             "label": "Brand practices",
-            "points": 5,
+            "points": 2,
             "detail": "Brand-level transparency, labour and supply-chain record."
           },
           {
@@ -1393,7 +1393,7 @@
         }
       ],
       "sustainability": {
-        "score": 58,
+        "score": 55,
         "grade": "C",
         "factors": [
           {
@@ -1408,7 +1408,7 @@
           },
           {
             "label": "Brand practices",
-            "points": 5,
+            "points": 2,
             "detail": "Brand-level transparency, labour and supply-chain record."
           },
           {
@@ -1481,7 +1481,7 @@
         }
       ],
       "sustainability": {
-        "score": 68,
+        "score": 65,
         "grade": "B",
         "factors": [
           {
@@ -1496,7 +1496,7 @@
           },
           {
             "label": "Brand practices",
-            "points": 5,
+            "points": 2,
             "detail": "Brand-level transparency, labour and supply-chain record."
           },
           {
@@ -1556,7 +1556,7 @@
         }
       ],
       "sustainability": {
-        "score": 64,
+        "score": 61,
         "grade": "C",
         "factors": [
           {
@@ -1571,7 +1571,7 @@
           },
           {
             "label": "Brand practices",
-            "points": 5,
+            "points": 2,
             "detail": "Brand-level transparency, labour and supply-chain record."
           },
           {
@@ -1626,7 +1626,7 @@
         }
       ],
       "sustainability": {
-        "score": 71,
+        "score": 70,
         "grade": "B",
         "factors": [
           {
@@ -1641,7 +1641,7 @@
           },
           {
             "label": "Brand practices",
-            "points": 6,
+            "points": 5,
             "detail": "Brand-level transparency, labour and supply-chain record."
           }
         ],
@@ -1699,7 +1699,7 @@
         }
       ],
       "sustainability": {
-        "score": 58,
+        "score": 57,
         "grade": "C",
         "factors": [
           {
@@ -1714,7 +1714,7 @@
           },
           {
             "label": "Brand practices",
-            "points": 6,
+            "points": 5,
             "detail": "Brand-level transparency, labour and supply-chain record."
           }
         ],
@@ -1766,7 +1766,7 @@
         }
       ],
       "sustainability": {
-        "score": 71,
+        "score": 70,
         "grade": "B",
         "factors": [
           {
@@ -1781,7 +1781,7 @@
           },
           {
             "label": "Brand practices",
-            "points": 6,
+            "points": 5,
             "detail": "Brand-level transparency, labour and supply-chain record."
           }
         ],
@@ -1837,8 +1837,8 @@
         }
       ],
       "sustainability": {
-        "score": 65,
-        "grade": "B",
+        "score": 64,
+        "grade": "C",
         "factors": [
           {
             "label": "Fibre composition",
@@ -1852,7 +1852,7 @@
           },
           {
             "label": "Brand practices",
-            "points": 6,
+            "points": 5,
             "detail": "Brand-level transparency, labour and supply-chain record."
           }
         ],
@@ -1905,7 +1905,7 @@
         }
       ],
       "sustainability": {
-        "score": 59,
+        "score": 58,
         "grade": "C",
         "factors": [
           {
@@ -1915,7 +1915,7 @@
           },
           {
             "label": "Brand practices",
-            "points": 6,
+            "points": 5,
             "detail": "Brand-level transparency, labour and supply-chain record."
           }
         ],
@@ -1964,7 +1964,7 @@
         }
       ],
       "sustainability": {
-        "score": 67,
+        "score": 69,
         "grade": "B",
         "factors": [
           {
@@ -1979,7 +1979,7 @@
           },
           {
             "label": "Brand practices",
-            "points": 4,
+            "points": 6,
             "detail": "Brand-level transparency, labour and supply-chain record."
           },
           {
@@ -2041,7 +2041,7 @@
         }
       ],
       "sustainability": {
-        "score": 66,
+        "score": 68,
         "grade": "B",
         "factors": [
           {
@@ -2056,7 +2056,7 @@
           },
           {
             "label": "Brand practices",
-            "points": 4,
+            "points": 6,
             "detail": "Brand-level transparency, labour and supply-chain record."
           },
           {
@@ -2112,7 +2112,7 @@
         }
       ],
       "sustainability": {
-        "score": 67,
+        "score": 69,
         "grade": "B",
         "factors": [
           {
@@ -2127,7 +2127,7 @@
           },
           {
             "label": "Brand practices",
-            "points": 4,
+            "points": 6,
             "detail": "Brand-level transparency, labour and supply-chain record."
           },
           {
@@ -2183,7 +2183,7 @@
         }
       ],
       "sustainability": {
-        "score": 65,
+        "score": 67,
         "grade": "B",
         "factors": [
           {
@@ -2198,7 +2198,7 @@
           },
           {
             "label": "Brand practices",
-            "points": 4,
+            "points": 6,
             "detail": "Brand-level transparency, labour and supply-chain record."
           },
           {
@@ -2258,7 +2258,7 @@
         }
       ],
       "sustainability": {
-        "score": 67,
+        "score": 69,
         "grade": "B",
         "factors": [
           {
@@ -2273,7 +2273,7 @@
           },
           {
             "label": "Brand practices",
-            "points": 4,
+            "points": 6,
             "detail": "Brand-level transparency, labour and supply-chain record."
           },
           {
@@ -2334,7 +2334,7 @@
         }
       ],
       "sustainability": {
-        "score": 42,
+        "score": 40,
         "grade": "D",
         "factors": [
           {
@@ -2344,7 +2344,7 @@
           },
           {
             "label": "Brand practices",
-            "points": 3,
+            "points": 1,
             "detail": "Brand-level transparency, labour and supply-chain record."
           },
           {
@@ -2404,7 +2404,7 @@
         }
       ],
       "sustainability": {
-        "score": 64,
+        "score": 62,
         "grade": "C",
         "factors": [
           {
@@ -2414,7 +2414,7 @@
           },
           {
             "label": "Brand practices",
-            "points": 3,
+            "points": 1,
             "detail": "Brand-level transparency, labour and supply-chain record."
           },
           {
@@ -2469,7 +2469,7 @@
         }
       ],
       "sustainability": {
-        "score": 41,
+        "score": 39,
         "grade": "D",
         "factors": [
           {
@@ -2479,7 +2479,7 @@
           },
           {
             "label": "Brand practices",
-            "points": 3,
+            "points": 1,
             "detail": "Brand-level transparency, labour and supply-chain record."
           },
           {
@@ -2544,7 +2544,7 @@
         }
       ],
       "sustainability": {
-        "score": 54,
+        "score": 52,
         "grade": "C",
         "factors": [
           {
@@ -2554,7 +2554,7 @@
           },
           {
             "label": "Brand practices",
-            "points": 3,
+            "points": 1,
             "detail": "Brand-level transparency, labour and supply-chain record."
           },
           {
@@ -2617,7 +2617,7 @@
         }
       ],
       "sustainability": {
-        "score": 60,
+        "score": 58,
         "grade": "C",
         "factors": [
           {
@@ -2627,7 +2627,7 @@
           },
           {
             "label": "Brand practices",
-            "points": 3,
+            "points": 1,
             "detail": "Brand-level transparency, labour and supply-chain record."
           },
           {
@@ -2685,7 +2685,7 @@
         }
       ],
       "sustainability": {
-        "score": 56,
+        "score": 55,
         "grade": "C",
         "factors": [
           {
@@ -2700,7 +2700,7 @@
           },
           {
             "label": "Brand practices",
-            "points": 4,
+            "points": 3,
             "detail": "Brand-level transparency, labour and supply-chain record."
           }
         ],
@@ -2756,7 +2756,7 @@
         }
       ],
       "sustainability": {
-        "score": 43,
+        "score": 42,
         "grade": "D",
         "factors": [
           {
@@ -2766,7 +2766,7 @@
           },
           {
             "label": "Brand practices",
-            "points": 4,
+            "points": 3,
             "detail": "Brand-level transparency, labour and supply-chain record."
           }
         ],
@@ -2822,7 +2822,7 @@
         }
       ],
       "sustainability": {
-        "score": 55,
+        "score": 54,
         "grade": "C",
         "factors": [
           {
@@ -2837,7 +2837,7 @@
           },
           {
             "label": "Brand practices",
-            "points": 4,
+            "points": 3,
             "detail": "Brand-level transparency, labour and supply-chain record."
           },
           {
@@ -2899,7 +2899,7 @@
         }
       ],
       "sustainability": {
-        "score": 48,
+        "score": 47,
         "grade": "D",
         "factors": [
           {
@@ -2914,7 +2914,7 @@
           },
           {
             "label": "Brand practices",
-            "points": 4,
+            "points": 3,
             "detail": "Brand-level transparency, labour and supply-chain record."
           }
         ],
@@ -2966,7 +2966,7 @@
         }
       ],
       "sustainability": {
-        "score": 51,
+        "score": 50,
         "grade": "C",
         "factors": [
           {
@@ -2976,7 +2976,7 @@
           },
           {
             "label": "Brand practices",
-            "points": 4,
+            "points": 3,
             "detail": "Brand-level transparency, labour and supply-chain record."
           },
           {
@@ -3422,7 +3422,7 @@
         }
       ],
       "sustainability": {
-        "score": 64,
+        "score": 61,
         "grade": "C",
         "factors": [
           {
@@ -3437,7 +3437,7 @@
           },
           {
             "label": "Brand practices",
-            "points": 5,
+            "points": 2,
             "detail": "Brand-level transparency, labour and supply-chain record."
           }
         ],
@@ -3491,7 +3491,7 @@
         }
       ],
       "sustainability": {
-        "score": 58,
+        "score": 55,
         "grade": "C",
         "factors": [
           {
@@ -3501,7 +3501,7 @@
           },
           {
             "label": "Brand practices",
-            "points": 5,
+            "points": 2,
             "detail": "Brand-level transparency, labour and supply-chain record."
           }
         ],
@@ -3554,8 +3554,8 @@
         }
       ],
       "sustainability": {
-        "score": 67,
-        "grade": "B",
+        "score": 64,
+        "grade": "C",
         "factors": [
           {
             "label": "Fibre composition",
@@ -3569,7 +3569,7 @@
           },
           {
             "label": "Brand practices",
-            "points": 5,
+            "points": 2,
             "detail": "Brand-level transparency, labour and supply-chain record."
           }
         ],
@@ -3620,8 +3620,8 @@
         }
       ],
       "sustainability": {
-        "score": 65,
-        "grade": "B",
+        "score": 62,
+        "grade": "C",
         "factors": [
           {
             "label": "Fibre composition",
@@ -3630,7 +3630,7 @@
           },
           {
             "label": "Brand practices",
-            "points": 5,
+            "points": 2,
             "detail": "Brand-level transparency, labour and supply-chain record."
           }
         ],
@@ -3684,7 +3684,7 @@
         }
       ],
       "sustainability": {
-        "score": 59,
+        "score": 60,
         "grade": "C",
         "factors": [
           {
@@ -3699,7 +3699,7 @@
           },
           {
             "label": "Brand practices",
-            "points": 5,
+            "points": 6,
             "detail": "Brand-level transparency, labour and supply-chain record."
           },
           {
@@ -3758,7 +3758,7 @@
         }
       ],
       "sustainability": {
-        "score": 63,
+        "score": 64,
         "grade": "C",
         "factors": [
           {
@@ -3773,7 +3773,7 @@
           },
           {
             "label": "Brand practices",
-            "points": 5,
+            "points": 6,
             "detail": "Brand-level transparency, labour and supply-chain record."
           },
           {
@@ -3841,7 +3841,7 @@
         }
       ],
       "sustainability": {
-        "score": 53,
+        "score": 54,
         "grade": "C",
         "factors": [
           {
@@ -3856,7 +3856,7 @@
           },
           {
             "label": "Brand practices",
-            "points": 5,
+            "points": 6,
             "detail": "Brand-level transparency, labour and supply-chain record."
           },
           {
@@ -3919,7 +3919,7 @@
         }
       ],
       "sustainability": {
-        "score": 67,
+        "score": 68,
         "grade": "B",
         "factors": [
           {
@@ -3934,7 +3934,7 @@
           },
           {
             "label": "Brand practices",
-            "points": 5,
+            "points": 6,
             "detail": "Brand-level transparency, labour and supply-chain record."
           },
           {
@@ -3992,7 +3992,7 @@
         }
       ],
       "sustainability": {
-        "score": 61,
+        "score": 62,
         "grade": "C",
         "factors": [
           {
@@ -4007,7 +4007,7 @@
           },
           {
             "label": "Brand practices",
-            "points": 5,
+            "points": 6,
             "detail": "Brand-level transparency, labour and supply-chain record."
           },
           {
@@ -4071,7 +4071,7 @@
         }
       ],
       "sustainability": {
-        "score": 75,
+        "score": 73,
         "grade": "B",
         "factors": [
           {
@@ -4086,7 +4086,7 @@
           },
           {
             "label": "Brand practices",
-            "points": 5,
+            "points": 3,
             "detail": "Brand-level transparency, labour and supply-chain record."
           },
           {
@@ -4147,7 +4147,7 @@
         }
       ],
       "sustainability": {
-        "score": 75,
+        "score": 73,
         "grade": "B",
         "factors": [
           {
@@ -4157,7 +4157,7 @@
           },
           {
             "label": "Brand practices",
-            "points": 5,
+            "points": 3,
             "detail": "Brand-level transparency, labour and supply-chain record."
           },
           {
@@ -4222,7 +4222,7 @@
         }
       ],
       "sustainability": {
-        "score": 71,
+        "score": 69,
         "grade": "B",
         "factors": [
           {
@@ -4232,7 +4232,7 @@
           },
           {
             "label": "Brand practices",
-            "points": 5,
+            "points": 3,
             "detail": "Brand-level transparency, labour and supply-chain record."
           },
           {
@@ -4294,7 +4294,7 @@
         }
       ],
       "sustainability": {
-        "score": 79,
+        "score": 77,
         "grade": "B",
         "factors": [
           {
@@ -4309,7 +4309,7 @@
           },
           {
             "label": "Brand practices",
-            "points": 5,
+            "points": 3,
             "detail": "Brand-level transparency, labour and supply-chain record."
           },
           {
@@ -4376,7 +4376,7 @@
         }
       ],
       "sustainability": {
-        "score": 74,
+        "score": 72,
         "grade": "B",
         "factors": [
           {
@@ -4391,7 +4391,7 @@
           },
           {
             "label": "Brand practices",
-            "points": 5,
+            "points": 3,
             "detail": "Brand-level transparency, labour and supply-chain record."
           },
           {
@@ -4457,7 +4457,7 @@
         }
       ],
       "sustainability": {
-        "score": 52,
+        "score": 51,
         "grade": "C",
         "factors": [
           {
@@ -4472,7 +4472,7 @@
           },
           {
             "label": "Brand practices",
-            "points": 4,
+            "points": 3,
             "detail": "Brand-level transparency, labour and supply-chain record."
           }
         ],
@@ -4529,7 +4529,7 @@
         }
       ],
       "sustainability": {
-        "score": 61,
+        "score": 60,
         "grade": "C",
         "factors": [
           {
@@ -4544,7 +4544,7 @@
           },
           {
             "label": "Brand practices",
-            "points": 6,
+            "points": 5,
             "detail": "Brand-level transparency, labour and supply-chain record."
           }
         ],
@@ -4675,7 +4675,7 @@
         }
       ],
       "sustainability": {
-        "score": 58,
+        "score": 56,
         "grade": "C",
         "factors": [
           {
@@ -4690,7 +4690,7 @@
           },
           {
             "label": "Brand practices",
-            "points": 5,
+            "points": 3,
             "detail": "Brand-level transparency, labour and supply-chain record."
           },
           {
@@ -4749,7 +4749,7 @@
         }
       ],
       "sustainability": {
-        "score": 70,
+        "score": 69,
         "grade": "B",
         "factors": [
           {
@@ -4764,7 +4764,7 @@
           },
           {
             "label": "Brand practices",
-            "points": 5,
+            "points": 4,
             "detail": "Brand-level transparency, labour and supply-chain record."
           }
         ],

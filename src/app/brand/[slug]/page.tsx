@@ -7,6 +7,7 @@ import { GradeBadge } from "@/components/grade-badge";
 import { BadgeCheck, Leaf } from "@/components/icons";
 import { CERT_INFO } from "@/lib/materials";
 import { gradeFor } from "@/lib/scoring";
+import { spreadByImage } from "@/lib/spread";
 
 interface Props {
   params: Promise<{ slug: string }>;
@@ -84,8 +85,8 @@ export default async function BrandPage({ params }: Props) {
           Filter & refine →
         </Link>
       </div>
-      <div className="grid grid-cols-2 gap-3 sm:gap-5 md:grid-cols-4">
-        {products.slice(0, 24).map((p, i) => (
+      <div className="grid grid-cols-2 gap-x-4 gap-y-8 sm:gap-x-6 md:grid-cols-4">
+        {spreadByImage(products.slice(0, 24)).map((p, i) => (
           <ProductCard key={p.id} product={p} priority={i < 4} />
         ))}
       </div>

@@ -68,8 +68,8 @@ test.describe("the shopper journey: search a top, narrow it down", () => {
     await expect(page.getByTestId("brand-h-and-m")).toBeVisible();
   });
 
-  test("fabric filter narrows within a brand (Zara → TENCEL)", async ({ page }) => {
-    await page.goto("/search?brand=zara");
+  test("fabric filter narrows within a brand (COS → TENCEL)", async ({ page }) => {
+    await page.goto("/search?brand=cos");
     await page.getByTestId("fabric-tencel_lyocell").check();
     await expect.poll(async () => page.url()).toContain("fabric=tencel_lyocell");
     const cards = page.getByTestId("product-card");

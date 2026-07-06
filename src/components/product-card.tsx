@@ -54,19 +54,21 @@ export function ProductCard({ product, priority = false }: { product: CatalogCar
           <span className="opacity-70">{s.score}</span>
         </span>
 
-        {/* hover reveal: fabric story + view cue */}
+        {/* hover reveal: fabric story */}
         <div className="pointer-events-none absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent p-3 pt-10 opacity-0 transition-opacity duration-500 group-hover:opacity-100">
-          <p className="truncate text-xs font-medium text-white">{product.title}</p>
-          <p className="truncate text-[11px] text-white/75">
+          <p className="truncate text-[11px] font-medium text-white/90">
             {dominant.pct}% {dominant.label}
           </p>
         </div>
       </div>
 
       {/* editorial caption */}
-      <div className="flex items-baseline justify-between gap-2 pt-2.5">
+      <div className="pt-2.5">
         <p className="eyebrow truncate">{product.brand.name}</p>
-        <p className="text-sm font-medium tabular-nums">{formatPrice(product.price, product.currency)}</p>
+        <div className="mt-1 flex items-baseline justify-between gap-3">
+          <h3 className="truncate text-sm leading-snug">{product.title}</h3>
+          <p className="shrink-0 text-sm font-medium tabular-nums">{formatPrice(product.price, product.currency)}</p>
+        </div>
       </div>
     </Link>
   );

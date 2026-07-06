@@ -3,8 +3,8 @@
     {
       "slug": "people-tree",
       "name": "People Tree",
-      "website": "https://demo.greenthread.example/people-tree",
-      "ethics_summary": "Small-batch weaver using GOTS-certified organic cotton and natural dyes. Publishes full supplier list and pays living wages audited by Fair Wear Foundation.",
+      "website": "https://www.peopletree.co.uk",
+      "ethics_summary": "Fair Trade pioneer and long-standing Fair Wear Foundation member, working largely in GOTS-certified organic cotton with artisan producer groups.",
       "certifications": [
         "GOTS",
         "Fair Wear Foundation"
@@ -14,81 +14,81 @@
     {
       "slug": "uniqlo",
       "name": "Uniqlo",
-      "website": "https://demo.greenthread.example/uniqlo",
-      "ethics_summary": "Scandinavian knitwear label working with mulesing-free merino and traceable wool lots. Carbon-neutral shipping, repairs-for-life program.",
+      "website": "https://www.uniqlo.com/uk/en/",
+      "ethics_summary": "Japanese everyday-basics retailer. Runs the RE.UNIQLO garment take-back and down-recycling schemes, though scale and synthetic use remain challenges.",
       "certifications": [
         "RWS",
         "OEKO-TEX Standard 100"
       ],
-      "ethics_modifier": 5
+      "ethics_modifier": 3
     },
     {
       "slug": "seasalt",
       "name": "Seasalt Cornwall",
-      "website": "https://demo.greenthread.example/seasalt",
-      "ethics_summary": "Coastal label making linen and hemp staples. Flax sourced from European farms, low-impact dyes, plastic-free packaging.",
+      "website": "https://www.seasaltcornwall.com",
+      "ethics_summary": "Cornish clothing brand and an early adopter of organic cotton (Soil Association certified), focused on durable everyday pieces.",
       "certifications": [
         "European Flax",
         "OEKO-TEX Standard 100"
       ],
-      "ethics_modifier": 5
+      "ethics_modifier": 4
     },
     {
       "slug": "marks-and-spencer",
       "name": "M&S",
-      "website": "https://demo.greenthread.example/ms",
-      "ethics_summary": "Circular-fashion brand: garments made from GRS-certified recycled fibres with take-back recycling program. Transparent factory scorecards.",
+      "website": "https://www.marksandspencer.com",
+      "ethics_summary": "UK high-street retailer. Its long-running 'Plan A' programme targets recycled and responsibly-sourced materials across a very broad range.",
       "certifications": [
         "GRS"
       ],
-      "ethics_modifier": 5
+      "ethics_modifier": 2
     },
     {
       "slug": "thought",
       "name": "Thought",
-      "website": "https://demo.greenthread.example/thought",
-      "ethics_summary": "TENCEL and modal specialist. Closed-loop lyocell from FSC-certified eucalyptus, water-based prints, B Corp certified.",
+      "website": "https://www.wearethought.com",
+      "ethics_summary": "UK brand built around natural, lower-impact fibres — organic cotton, hemp, bamboo and TENCEL — with a considered slow-fashion positioning.",
       "certifications": [
         "B Corp",
         "FSC"
       ],
-      "ethics_modifier": 6
+      "ethics_modifier": 5
     },
     {
       "slug": "patagonia",
       "name": "Patagonia",
-      "website": "https://demo.greenthread.example/patagonia",
-      "ethics_summary": "Durable workwear in organic and recycled cotton canvas. Lifetime repair guarantee; factories audited by SA8000.",
+      "website": "https://www.patagonia.com",
+      "ethics_summary": "Outdoor brand and certified B Corp; an industry leader on recycled materials, repairs (Worn Wear), fair labour and environmental activism.",
       "certifications": [
         "OCS",
         "SA8000"
       ],
-      "ethics_modifier": 4
+      "ethics_modifier": 6
     },
     {
       "slug": "zara",
       "name": "Zara",
-      "website": "https://demo.greenthread.example/zara",
-      "ethics_summary": "Contemporary womenswear using deadstock fabrics and TENCEL. Made-to-order model to avoid overproduction; some blends include conventional elastane.",
+      "website": "https://www.zara.com/uk/en/",
+      "ethics_summary": "Inditex's flagship fast-fashion label. Its 'Join Life' line uses some preferred materials, but high volume and rapid turnover raise real overproduction concerns.",
       "certifications": [],
-      "ethics_modifier": 3
+      "ethics_modifier": 1
     },
     {
       "slug": "sweaty-betty",
       "name": "Sweaty Betty",
-      "website": "https://demo.greenthread.example/sweaty-betty",
-      "ethics_summary": "Activewear from recycled ocean-bound nylon (ECONYL) and recycled polyester. Publishes microfibre-shedding test results; ships with Guppyfriend bag.",
+      "website": "https://www.sweatybetty.com",
+      "ethics_summary": "UK activewear brand increasingly using recycled polyester and nylon, though performance synthetics still dominate the range.",
       "certifications": [
         "GRS",
         "OEKO-TEX Standard 100"
       ],
-      "ethics_modifier": 4
+      "ethics_modifier": 3
     },
     {
       "slug": "h-and-m",
       "name": "H&M",
-      "website": "https://demo.greenthread.example/hm",
-      "ethics_summary": "Affordable everyday basics. Uses BCI cotton and some conventional blends; sustainability program is early-stage with limited transparency.",
+      "website": "https://www2.hm.com/en_gb/",
+      "ethics_summary": "Global fast-fashion retailer. Runs 'Conscious' lines and in-store recycling, but has faced scrutiny over greenwashing and sheer production volume.",
       "certifications": [
         "BCI"
       ],
@@ -97,33 +97,33 @@
     {
       "slug": "and-other-stories",
       "name": "& Other Stories",
-      "website": "https://demo.greenthread.example/stories",
-      "ethics_summary": "French atelier making occasionwear from GOTS silk alternatives, cupro and peace silk. Small runs, artisan-made, full cost transparency.",
+      "website": "https://www.stories.com/en_gbp/",
+      "ethics_summary": "H&M-group brand with a design-led range that includes some responsibly-sourced and recycled materials.",
       "certifications": [
         "GOTS"
       ],
-      "ethics_modifier": 5
+      "ethics_modifier": 2
     },
     {
       "slug": "finisterre",
       "name": "Finisterre",
-      "website": "https://demo.greenthread.example/finisterre",
-      "ethics_summary": "Outdoor apparel with PFC-free finishes, recycled shells and traceable down alternatives. 1% for the Planet member, Bluesign system partner.",
+      "website": "https://finisterre.com",
+      "ethics_summary": "Cornish cold-water and outdoor brand, a certified B Corp focused on recycled, traceable materials, PFC-free finishes and repairs.",
       "certifications": [
         "Bluesign",
         "1% for the Planet"
       ],
-      "ethics_modifier": 5
+      "ethics_modifier": 6
     },
     {
       "slug": "cos",
       "name": "COS",
-      "website": "https://demo.greenthread.example/cos",
-      "ethics_summary": "Hemp-first label; rain-fed hemp grown without pesticides, blended with organic cotton. Natural indigo dye house, zero-waste pattern cutting.",
+      "website": "https://www.cos.com/en_gbp/",
+      "ethics_summary": "H&M-group label known for minimal, longer-lasting design; incorporates some recycled and responsibly-sourced fabrics.",
       "certifications": [
-        "USDA Organic"
+        "OEKO-TEX Standard 100"
       ],
-      "ethics_modifier": 5
+      "ethics_modifier": 3
     }
   ]
 }

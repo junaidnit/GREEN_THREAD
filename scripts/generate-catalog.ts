@@ -269,7 +269,7 @@ const BRANDS: Record<string, BrandProfile> = {
   "marks-and-spencer": { tier: "mid", mult: 0.95, certs: ["GRS", "BCI", "OEKO-TEX Standard 100"], certChance: 0.6, greenwash: 0.2, practices: { take_back: 0.3 }, counts: {} },
   thought: { tier: "hero", mult: 1.1, certs: ["GOTS", "OEKO-TEX Standard 100"], certChance: 0.8, greenwash: 0.05, practices: { natural_dye: 0.2 }, counts: { activewear: 2 } },
   patagonia: { tier: "hero", mult: 1.5, certs: ["OCS", "SA8000", "Bluesign"], certChance: 0.85, greenwash: 0, practices: { repair_program: 0.8, pfc_free: 0.5, take_back: 0.4 }, counts: { outerwear: 22, activewear: 14, dresses: 3, skirts: 0 } },
-  zara: { tier: "mid", mult: 1.0, certs: ["OEKO-TEX Standard 100"], certChance: 0.25, greenwash: 0.35, practices: { deadstock: 0.08 }, counts: { dresses: 22, skirts: 10 } },
+  zara: { tier: "budget", mult: 1.0, certs: ["OEKO-TEX Standard 100"], certChance: 0.2, greenwash: 0.4, practices: {}, counts: { dresses: 22, skirts: 10 } },
   "sweaty-betty": { tier: "mid", mult: 1.35, certs: ["GRS", "OEKO-TEX Standard 100"], certChance: 0.7, greenwash: 0.1, practices: { pfc_free: 0.3 }, counts: { activewear: 44, "t-shirts": 16, jeans: 2, shirts: 4, dresses: 4, knitwear: 4, outerwear: 6 } },
   "h-and-m": { tier: "budget", mult: 0.55, certs: ["BCI"], certChance: 0.5, greenwash: 0.6, practices: { take_back: 0.2 }, counts: { "t-shirts": 30, dresses: 20 } },
   "and-other-stories": { tier: "mid", mult: 1.25, certs: ["GOTS", "OEKO-TEX Standard 100"], certChance: 0.35, greenwash: 0.25, practices: { deadstock: 0.1 }, counts: { dresses: 22, skirts: 12, jeans: 8 } },
