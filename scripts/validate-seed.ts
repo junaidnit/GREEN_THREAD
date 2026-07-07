@@ -36,6 +36,12 @@ for (const p of seed.products) {
     }
   }
 
+  // sold direct by the brand — never a mismatched retailer name
+  if (p.retailer !== brand.name) {
+    p.retailer = brand.name;
+    changed++;
+  }
+
   const validCerts = validateCertifications(
     p.sustainability.certifications,
     rawText,

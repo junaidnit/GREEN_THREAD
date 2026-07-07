@@ -18,6 +18,7 @@ import { AskConcierge } from "@/components/ask-concierge";
 import { FabricLens } from "@/components/fabric-lens";
 import { SaveButton } from "@/components/saved";
 import { viewOnBrandUrl } from "@/lib/brand-links";
+import { spreadByImage } from "@/lib/spread";
 import { ScoreFactors } from "@/components/score-factors";
 import { ExpandableText } from "@/components/kinetic";
 import { AlertTriangle, ArrowUpRight, BadgeCheck, Leaf, Sparkles } from "@/components/icons";
@@ -110,7 +111,9 @@ export default async function ProductPage({ params }: Props) {
         {/* info */}
         <div>
           <p className="text-sm font-medium uppercase tracking-wide text-muted-foreground">
-            {product.brand.name} · sold by {product.retailer}
+            {product.retailer === product.brand.name
+              ? product.brand.name
+              : `${product.brand.name} · sold by ${product.retailer}`}
           </p>
           <h1 className="mt-1 font-display text-3xl font-bold leading-tight sm:text-4xl">
             {product.title}
@@ -298,8 +301,8 @@ export default async function ProductPage({ params }: Props) {
       {similar.length > 0 && (
         <section className="mt-12">
           <h2 className="mb-4 font-display text-xl font-bold">Similar, sustainably</h2>
-          <div className="grid grid-cols-2 gap-3 sm:gap-5 md:grid-cols-4">
-            {similar.map((p) => (
+          <div className="grid grid-cols-2 gap-x-4 gap-y-8 sm:gap-x-6 md:grid-cols-4">
+            {spreadByImage(similar).map((p) => (
               <ProductCard key={p.id} product={p} />
             ))}
           </div>

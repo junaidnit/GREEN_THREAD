@@ -365,7 +365,7 @@ async function main() {
         const fabricAdj =
           rnd() < 0.5 && !style.toLowerCase().includes(adjWord) ? `${dominant.label} ` : "";
         const title = `${fitPrefix}${fabricAdj}${style} — ${colorName}`;
-        const retailer = pick(rnd, ["ASOS", "John Lewis", "Zalando", "Brand Direct"]);
+        const retailer = meta.name; // sold direct by the brand — always accurate
 
         const certText = certs.length > 0 ? ` ${certs[0]}-certified fabric.` : "";
         const description =
