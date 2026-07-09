@@ -6,6 +6,7 @@ import { motion } from "framer-motion";
 import { CompositionBars } from "@/components/composition-bars";
 import { ScoreDial } from "@/components/score-dial";
 import { ArrowUpRight, AlertTriangle, BadgeCheck, Leaf, Search, Sparkles } from "@/components/icons";
+import { fibreMark, misleadingName } from "@/lib/materials";
 import type { FabricPart, ScoreFactor } from "@/lib/types";
 
 interface Analysis {
@@ -161,9 +162,35 @@ export function AnalyzeClient() {
           <div className="space-y-5 p-5">
             {result.found_composition ? (
               <div>
-                <h3 className="mb-3 flex items-center gap-2 font-display font-bold">
-                  <Leaf className="size-4 text-primary" /> What it&apos;s made of
-                </h3>
+                <div className="mb-3 flex items-center justify-between gap-3">
+                  <h3 className="flex items-center gap-2 font-display font-bold">
+                    <Leaf className="size-4 text-primary" /> What it&apos;s made of
+                  </h3>
+                  {(() => {
+                    const mark = fibreMark(result.fabric_composition);
+                    return (
+                      <span
+                        className={`rounded-full px-3 py-1 text-xs font-semibold text-white ${
+                          mark.tone === "natural" ? "bg-grade-a" : mark.tone === "plastic-free" ? "bg-grade-b" : "bg-grade-d"
+                        }`}
+                      >
+                        {mark.label}
+                      </span>
+                    );
+                  })()}
+                </div>
+                {(() => {
+                  const misnamed = misleadingName(result.title, result.fabric_composition);
+                  return misnamed ? (
+                    <div
+                      data-testid="analyze-misnamed"
+                      className="mb-3 rounded-lg border border-grade-d/40 bg-grade-d/10 px-3.5 py-2.5 text-sm"
+                    >
+                      <b className="text-grade-d">Label check:</b> sold under a {misnamed.fibre} name,
+                      but the label says only <b>{misnamed.actualPct}% {misnamed.fibre}</b>.
+                    </div>
+                  ) : null;
+                })()}
                 <CompositionBars parts={result.fabric_composition} />
               </div>
             ) : (

@@ -132,7 +132,8 @@ export function SearchExperience({ products }: { products: CatalogCard[] }) {
   const activeCount =
     filters.fabrics.length + filters.brands.length + filters.sizes.length +
     filters.colors.length + filters.fits.length + filters.certs.length + filters.categories.length +
-    (filters.gender ? 1 : 0) + (filters.maxPrice != null ? 1 : 0) + (filters.minScore != null ? 1 : 0);
+    (filters.gender ? 1 : 0) + (filters.maxPrice != null ? 1 : 0) + (filters.minScore != null ? 1 : 0) +
+    (filters.noSynthetics ? 1 : 0);
 
   /* refinement banner: invite (not force) narrowing after a broad search */
   const [bannerDismissed, setBannerDismissed] = useState(false);
@@ -186,6 +187,21 @@ export function SearchExperience({ products }: { products: CatalogCard[] }) {
               </button>
             )}
           </label>
+          {/* the master switch: exclude oil-derived synthetics entirely */}
+          <button
+            data-testid="pure-toggle"
+            onClick={() => set("noSynthetics", !filters.noSynthetics)}
+            aria-pressed={filters.noSynthetics}
+            title="Hide everything containing oil-derived synthetic fibre — including recycled polyester and nylon"
+            className={`flex h-12 shrink-0 items-center gap-2 rounded-full border px-4 text-sm font-semibold transition-all ${
+              filters.noSynthetics
+                ? "border-grade-a bg-grade-a text-white shadow-[0_0_16px_-4px_var(--grade-a)]"
+                : "border-border bg-surface hover:border-grade-a/50"
+            }`}
+          >
+            <Leaf className="size-4" />
+            <span className="hidden sm:inline">No synthetics</span>
+          </button>
           {/* mobile filter drawer trigger */}
           <button
             data-testid="filters-toggle"
@@ -296,6 +312,7 @@ export function SearchExperience({ products }: { products: CatalogCard[] }) {
                   className="appearance-none rounded-full border border-border bg-surface py-1.5 pl-3 pr-8 text-xs font-medium outline-none hover:bg-surface-2"
                 >
                   <option value="relevance">Most relevant</option>
+                  <option value="natural">Most natural fibre</option>
                   <option value="score">Highest sustainability</option>
                   <option value="price-asc">Price: low → high</option>
                   <option value="price-desc">Price: high → low</option>

@@ -1,6 +1,7 @@
 import MiniSearch from "minisearch";
 import type { CatalogCard, MaterialId } from "./types";
 import { MATERIAL_LABELS } from "./scoring";
+import { oilDerivedPct } from "./materials";
 
 /**
  * Client-side instant search + faceted filtering.
@@ -34,7 +35,9 @@ export interface Filters {
   gender: string | null;
   maxPrice: number | null;
   minScore: number | null;
-  sort: "relevance" | "score" | "price-asc" | "price-desc";
+  /** The master switch: hide anything containing oil-derived plastic (incl. recycled). */
+  noSynthetics: boolean;
+  sort: "relevance" | "natural" | "score" | "price-asc" | "price-desc";
 }
 
 export const EMPTY_FILTERS: Filters = {
@@ -49,6 +52,7 @@ export const EMPTY_FILTERS: Filters = {
   gender: null,
   maxPrice: null,
   minScore: null,
+  noSynthetics: false,
   sort: "relevance",
 };
 
@@ -86,6 +90,7 @@ function matchesFabrics(p: CatalogCard, fabrics: MaterialId[]): boolean {
 }
 
 function matchesFacets(p: CatalogCard, f: Filters, skip?: keyof Filters): boolean {
+  if (skip !== "noSynthetics" && f.noSynthetics && oilDerivedPct(p.fabric_composition) > 0) return false;
   if (skip !== "fabrics" && !matchesFabrics(p, f.fabrics)) return false;
   if (skip !== "brands" && f.brands.length > 0 && !f.brands.includes(p.brand.slug)) return false;
   if (skip !== "sizes" && f.sizes.length > 0 &&
@@ -131,6 +136,12 @@ export function applyFilters<T extends CatalogCard>(
   const filtered = pool.filter((p) => matchesFacets(p, filters));
 
   switch (filters.sort) {
+    case "natural":
+      return [...filtered].sort(
+        (a, b) =>
+          oilDerivedPct(a.fabric_composition) - oilDerivedPct(b.fabric_composition) ||
+          b.sustainability.score - a.sustainability.score,
+      );
     case "score":
       return [...filtered].sort((a, b) => b.sustainability.score - a.sustainability.score);
     case "price-asc":
@@ -238,6 +249,7 @@ export function filtersToParams(f: Filters): URLSearchParams {
   if (f.gender) sp.set("gender", f.gender);
   if (f.maxPrice != null) sp.set("max", String(f.maxPrice));
   if (f.minScore != null) sp.set("minScore", String(f.minScore));
+  if (f.noSynthetics) sp.set("pure", "1");
   if (f.sort !== "relevance") sp.set("sort", f.sort);
   return sp;
 }
@@ -261,6 +273,10 @@ export function paramsToFilters(sp: URLSearchParams): Filters {
     gender: sp.get("gender"),
     maxPrice: num("max"),
     minScore: num("minScore"),
-    sort: sort === "score" || sort === "price-asc" || sort === "price-desc" ? sort : "relevance",
+    noSynthetics: sp.get("pure") === "1",
+    sort:
+      sort === "natural" || sort === "score" || sort === "price-asc" || sort === "price-desc"
+        ? sort
+        : "relevance",
   };
 }

@@ -80,6 +80,9 @@ const PRODUCTS: Product[] = [
 
 const index = buildIndex(PRODUCTS);
 
+import { oilDerivedPct } from "@/lib/materials";
+const oilDerivedPctOf = (p: Product) => oilDerivedPct(p.fabric_composition);
+
 describe("text search", () => {
   it("finds products by fabric word", () => {
     const res = applyFilters(PRODUCTS, { ...EMPTY_FILTERS, q: "linen" }, index);
@@ -140,6 +143,17 @@ describe("facet filters", () => {
   it("filters by fit", () => {
     const res = applyFilters(PRODUCTS, { ...EMPTY_FILTERS, fits: ["Relaxed"] }, index);
     expect(res.map((p) => p.id).sort()).toEqual(["hemp-tee", "poly-jogger"]);
+  });
+
+  it("noSynthetics hides ANY oil-derived content, even 3% elastane (purist)", () => {
+    const res = applyFilters(PRODUCTS, { ...EMPTY_FILTERS, noSynthetics: true }, index);
+    expect(res.map((p) => p.id).sort()).toEqual(["hemp-tee", "linen-shirt"]);
+  });
+
+  it("sorts by most natural fibre", () => {
+    const res = applyFilters(PRODUCTS, { ...EMPTY_FILTERS, sort: "natural" }, index);
+    expect(res[res.length - 1].id).toBe("poly-jogger"); // most plastic sinks
+    expect(oilDerivedPctOf(res[0])).toBe(0);
   });
 
   it("requires ALL selected certifications", () => {

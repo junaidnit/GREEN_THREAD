@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { HomeSearch } from "./home-search";
 import { CountUp, RollingWord } from "./kinetic";
 
@@ -76,7 +77,7 @@ export function CinematicHero({
 
       {/* ── overlaid content ── */}
       <div className="relative z-20 mx-auto flex h-full max-w-5xl flex-col items-center justify-center px-5 text-center text-white">
-        <p className="eyebrow !text-white/75">Sustainable fashion, decoded</p>
+        <p className="eyebrow !text-white/75">Natural fibres, decoded — no plastic surprises</p>
         <h1 className="mt-4 font-display text-5xl font-bold leading-[1.02] tracking-tight sm:text-7xl">
           Wear more
           <br />
@@ -85,6 +86,13 @@ export function CinematicHero({
         <div className="mt-9 w-full max-w-md">
           <HomeSearch />
         </div>
+        <Link
+          href="/search?pure=1"
+          data-testid="hero-pure-cta"
+          className="mt-4 rounded-full border border-white/40 px-5 py-2 text-sm font-medium text-white/90 backdrop-blur-sm transition-colors hover:bg-white hover:text-black"
+        >
+          Shop 100% plastic-free →
+        </Link>
         <div className="mt-9 flex gap-10">
           {[
             { n: pieces, label: "pieces" },

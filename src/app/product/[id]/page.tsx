@@ -7,7 +7,10 @@ import { formatPrice, titleCase } from "@/lib/format";
 import {
   CERT_INFO,
   estimatedWears,
+  fibreMark,
   impactEquivalents,
+  misleadingName,
+  naturalPct,
   sheddingRisk,
 } from "@/lib/materials";
 import { GradeBadge } from "@/components/grade-badge";
@@ -71,6 +74,9 @@ export default async function ProductPage({ params }: Props) {
   const impacts = impactEquivalents(product.category, product.fabric_composition);
   const wears = estimatedWears(product.fabric_composition);
   const sheds = sheddingRisk(product.fabric_composition);
+  const mark = fibreMark(product.fabric_composition);
+  const misnamed = misleadingName(product.title, product.fabric_composition);
+  const natural = naturalPct(product.fabric_composition);
 
   return (
     <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6">
@@ -194,9 +200,28 @@ export default async function ProductPage({ params }: Props) {
             </div>
           )}
 
-          {/* fabric composition */}
-          <section className="mt-8 rounded-xl2 border border-border bg-surface p-5">
-            <h2 className="mb-4 font-display text-lg font-bold">What it&apos;s made of</h2>
+          {/* fabric composition — the platform's core promise */}
+          <section className="mt-8 rounded-xl2 border border-border bg-surface p-5" data-testid="composition-section">
+            <div className="mb-4 flex items-center justify-between gap-3">
+              <h2 className="font-display text-lg font-bold">What it&apos;s made of</h2>
+              <span
+                data-testid="pdp-fibre-mark"
+                className={`rounded-full px-3 py-1 text-xs font-semibold text-white ${
+                  mark.tone === "natural" ? "bg-grade-a" : mark.tone === "plastic-free" ? "bg-grade-b" : "bg-grade-d"
+                }`}
+              >
+                {mark.tone === "plastic" ? `${natural}% natural · ${mark.plastic}% plastic` : mark.label}
+              </span>
+            </div>
+            {misnamed && (
+              <div
+                data-testid="misnamed-warning"
+                className="mb-4 rounded-lg border border-grade-d/40 bg-grade-d/10 px-3.5 py-2.5 text-sm"
+              >
+                <b className="text-grade-d">Label check:</b> named after {misnamed.fibre}, but it&apos;s
+                only <b>{misnamed.actualPct}% {misnamed.fibre}</b>.
+              </div>
+            )}
             <CompositionBars parts={product.fabric_composition} />
             <p className="mt-3 text-xs text-muted-foreground">Hover any fibre to learn its impact.</p>
           </section>

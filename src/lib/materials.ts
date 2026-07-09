@@ -38,6 +38,81 @@ export interface MaterialFact {
   source: string;
 }
 
+/* ── natural-fibre-first: the platform's core metric ─────────────────────
+   Purist stance: recycled polyester/nylon are still oil-derived plastics,
+   so they count as synthetic. Regenerated cellulosics (TENCEL, modal,
+   cupro, viscose) are plant-derived — plastic-free, but not "natural". */
+
+/** % of the garment that is oil-derived plastic (incl. recycled synthetics). */
+export function oilDerivedPct(composition: Array<{ material: MaterialId; pct: number }>): number {
+  return Math.round(
+    composition
+      .filter((c) => FIBRE_CLASS[c.material] === "synthetic")
+      .reduce((s, c) => s + c.pct, 0),
+  );
+}
+
+/** % grown fibre (plant/animal): cotton, linen, hemp, wool, silk families. */
+export function naturalPct(composition: Array<{ material: MaterialId; pct: number }>): number {
+  return Math.round(
+    composition
+      .filter((c) => FIBRE_CLASS[c.material] === "natural")
+      .reduce((s, c) => s + c.pct, 0),
+  );
+}
+
+export interface FibreMark {
+  label: string;
+  tone: "natural" | "plastic-free" | "plastic";
+  /** plastic percentage, for sorting/filtering */
+  plastic: number;
+}
+
+/** The one mark every card carries — the thesis in two words. */
+export function fibreMark(composition: Array<{ material: MaterialId; pct: number }>): FibreMark {
+  const plastic = oilDerivedPct(composition);
+  if (plastic === 0) {
+    return naturalPct(composition) === 100
+      ? { label: "100% natural", tone: "natural", plastic }
+      : { label: "Plastic-free", tone: "plastic-free", plastic };
+  }
+  return { label: `${plastic}% plastic`, tone: "plastic", plastic };
+}
+
+/** Fibre words shoppers read in product names, mapped to material ids. */
+const NAME_FIBRES: Array<{ re: RegExp; label: string; materials: MaterialId[] }> = [
+  { re: /\blinen\b/i, label: "linen", materials: ["linen"] },
+  { re: /\bhemp\b/i, label: "hemp", materials: ["hemp"] },
+  { re: /\bcotton\b/i, label: "cotton", materials: ["organic_cotton", "recycled_cotton", "conventional_cotton", "bci_cotton"] },
+  { re: /\bwool\b|\bmerino\b|\blambswool\b/i, label: "wool", materials: ["merino_wool", "lambswool", "recycled_wool", "virgin_wool"] },
+  { re: /\bsilk\b/i, label: "silk", materials: ["peace_silk"] },
+  { re: /\btencel\b|\blyocell\b/i, label: "TENCEL", materials: ["tencel_lyocell"] },
+  { re: /\bmodal\b/i, label: "modal", materials: ["modal"] },
+];
+
+export interface MisleadingName {
+  fibre: string;
+  actualPct: number;
+}
+
+/**
+ * The "Linen blend (90% polyester)" detector: a product named after a fibre
+ * it contains less than half of. The platform's flagship transparency call.
+ */
+export function misleadingName(
+  title: string,
+  composition: Array<{ material: MaterialId; pct: number }>,
+): MisleadingName | null {
+  for (const f of NAME_FIBRES) {
+    if (!f.re.test(title)) continue;
+    const actual = Math.round(
+      composition.filter((c) => f.materials.includes(c.material)).reduce((s, c) => s + c.pct, 0),
+    );
+    if (actual < 50) return { fibre: f.label, actualPct: actual };
+  }
+  return null;
+}
+
 /** Certification explainers — hover-cards, same spirit as fibre facts. */
 export const CERT_INFO: Record<string, string> = {
   GOTS: "Global Organic Textile Standard — organic fibre plus environmental and social criteria through the whole supply chain. The gold standard for organic textiles.",

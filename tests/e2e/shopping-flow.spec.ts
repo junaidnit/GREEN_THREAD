@@ -252,6 +252,42 @@ test.describe("fixes & subtle features", () => {
   });
 });
 
+test.describe("natural-fibre-first", () => {
+  test("'No synthetics' master toggle purges all plastic", async ({ page }) => {
+    await page.goto("/search");
+    const totalOf = async () =>
+      Number((await page.getByTestId("results-count").innerText()).match(/([\d,]+)/)![1].replace(/,/g, ""));
+    const initial = await totalOf();
+    await page.getByTestId("pure-toggle").click();
+    await expect.poll(async () => page.url()).toContain("pure=1");
+    await expect.poll(totalOf).toBeLessThan(initial);
+    // every visible fibre mark must be natural or plastic-free
+    const marks = await page.getByTestId("fibre-mark").allInnerTexts();
+    for (const m of marks.slice(0, 12)) {
+      expect(m).toMatch(/100% natural|Plastic-free/i);
+    }
+  });
+
+  test("mislabelled 'blend' items carry the label-check flag", async ({ page }) => {
+    await page.goto("/search?q=blend");
+    await expect(page.getByTestId("misnamed-flag").first()).toBeVisible();
+    const flag = await page.getByTestId("misnamed-flag").first().innerText();
+    expect(flag).toMatch(/only \d+%/i);
+
+    // click through: the product page spells it out
+    await page.getByTestId("product-card").filter({ has: page.getByTestId("misnamed-flag") }).first().click();
+    await expect(page).toHaveURL(/\/product\//, { timeout: 30_000 });
+    await expect(page.getByTestId("misnamed-warning")).toBeVisible();
+  });
+
+  test("hero CTA lands on plastic-free results", async ({ page }) => {
+    await page.goto("/");
+    await page.getByTestId("hero-pure-cta").click();
+    await page.waitForURL(/pure=1/);
+    await expect(page.getByTestId("results-count")).toBeVisible();
+  });
+});
+
 test.describe("luxury interactions", () => {
   test("fabric lens appears on product image hover", async ({ page }) => {
     await page.goto("/product/salt-stem-linen-shirt-white");

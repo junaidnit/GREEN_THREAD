@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import type { CatalogCard } from "@/lib/types";
 import { formatPrice } from "@/lib/format";
+import { fibreMark, misleadingName } from "@/lib/materials";
 
 const BLUR =
   "data:image/svg+xml;base64," +
@@ -23,9 +24,17 @@ const GRADE_DOT: Record<string, string> = {
  * on hover. Sustainability shows as a single subtle glass mark, full
  * breakdown one tap away on the product page.
  */
+const MARK_TONE: Record<string, string> = {
+  natural: "bg-grade-a/90 text-white",
+  "plastic-free": "bg-grade-b/90 text-white",
+  plastic: "bg-black/45 text-white",
+};
+
 export function ProductCard({ product, priority = false }: { product: CatalogCard; priority?: boolean }) {
   const dominant = [...product.fabric_composition].sort((a, b) => b.pct - a.pct)[0];
   const s = product.sustainability;
+  const mark = fibreMark(product.fabric_composition);
+  const misnamed = misleadingName(product.title, product.fabric_composition);
   return (
     <Link href={`/product/${product.id}`} data-testid="product-card" className="group block">
       <div
@@ -43,10 +52,23 @@ export function ProductCard({ product, priority = false }: { product: CatalogCar
           className="object-cover transition-transform duration-[900ms] ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.06]"
         />
 
-        {/* subtle sustainability mark */}
+        {/* THE mark: what it's actually made of */}
+        <span
+          data-testid="fibre-mark"
+          className={`absolute left-3 top-3 rounded-full px-2.5 py-1 text-[10px] font-semibold backdrop-blur-md ${MARK_TONE[mark.tone]}`}
+          title={
+            mark.plastic > 0
+              ? `${mark.plastic}% oil-derived synthetic fibre`
+              : "No oil-derived synthetic fibres"
+          }
+        >
+          {mark.label}
+        </span>
+
+        {/* secondary: sustainability grade */}
         <span
           data-testid="grade-badge"
-          className="absolute left-3 top-3 flex items-center gap-1.5 rounded-full bg-black/30 px-2 py-1 text-[10px] font-medium text-white backdrop-blur-md"
+          className="absolute right-3 top-3 flex items-center gap-1.5 rounded-full bg-black/30 px-2 py-1 text-[10px] font-medium text-white backdrop-blur-md"
           title={`Sustainability ${s.score}/100`}
         >
           <span className="size-1.5 rounded-full" style={{ background: GRADE_DOT[s.grade] }} />
@@ -54,10 +76,22 @@ export function ProductCard({ product, priority = false }: { product: CatalogCar
           <span className="opacity-70">{s.score}</span>
         </span>
 
+        {/* mislabelling flag — the platform's transparency promise */}
+        {misnamed && (
+          <span
+            data-testid="misnamed-flag"
+            className="absolute bottom-3 left-3 rounded-full bg-grade-d/95 px-2.5 py-1 text-[10px] font-semibold text-white backdrop-blur-md"
+            title={`Named after ${misnamed.fibre}, but only ${misnamed.actualPct}% ${misnamed.fibre}`}
+          >
+            ⚠ only {misnamed.actualPct}% {misnamed.fibre}
+          </span>
+        )}
+
         {/* hover reveal: fabric story */}
         <div className="pointer-events-none absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent p-3 pt-10 opacity-0 transition-opacity duration-500 group-hover:opacity-100">
           <p className="truncate text-[11px] font-medium text-white/90">
             {dominant.pct}% {dominant.label}
+            {s.greenwash_flags.length > 0 && <span className="text-white/70"> · unverified eco-claims</span>}
           </p>
         </div>
       </div>

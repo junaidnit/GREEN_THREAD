@@ -277,6 +277,15 @@ const BRANDS: Record<string, BrandProfile> = {
   cos: { tier: "mid", mult: 1.2, certs: ["OEKO-TEX Standard 100"], certChance: 0.45, greenwash: 0.15, practices: { zero_waste: 0.1 }, counts: { dresses: 18 } },
 };
 
+/* The thesis problem, reproduced: garments named after a natural fibre
+   they contain a minority of. Only budget/fast-fashion brands get these. */
+const FAUX_NATURAL: Array<{ word: string; blend: Blend }> = [
+  { word: "Linen", blend: [["polyester", 72], ["linen", 28]] },
+  { word: "Linen", blend: [["viscose", 52], ["polyester", 33], ["linen", 15]] },
+  { word: "Cotton", blend: [["polyester", 68], ["conventional_cotton", 32]] },
+  { word: "Wool", blend: [["polyester", 62], ["viscose", 18], ["virgin_wool", 20]] },
+];
+
 const GREENWASH_TEMPLATES = [
   "'Conscious collection' label with no certification behind it",
   "Described as 'eco-friendly' with no verifiable standard",
@@ -336,7 +345,14 @@ async function main() {
         usedTitles.add(titleTry);
 
         const gender = pick(rnd, def.genders);
-        const blend = pick(rnd, def.pool(profile.tier));
+        let blend = pick(rnd, def.pool(profile.tier));
+        // fast-fashion mislabelling: "Linen-Blend" that's mostly polyester
+        let fauxWord: string | null = null;
+        if (profile.tier === "budget" && cat !== "accessories" && rnd() < 0.16) {
+          const faux = pick(rnd, FAUX_NATURAL);
+          blend = faux.blend;
+          fauxWord = faux.word;
+        }
         const parts: FabricPart[] = blend.map(([m, pct]) => ({
           material: m,
           label: MATERIAL_LABELS[m],
@@ -362,8 +378,11 @@ async function main() {
         const dominant = parts[0];
         // never repeat the fabric word already in the style ("Linen Linen Shirt")
         const adjWord = dominant.label.split(" ")[0].toLowerCase();
-        const fabricAdj =
-          rnd() < 0.5 && !style.toLowerCase().includes(adjWord) ? `${dominant.label} ` : "";
+        const fabricAdj = fauxWord
+          ? `${fauxWord}-Blend `
+          : rnd() < 0.5 && !style.toLowerCase().includes(adjWord)
+            ? `${dominant.label} `
+            : "";
         const title = `${fitPrefix}${fabricAdj}${style} — ${colorName}`;
         const retailer = meta.name; // sold direct by the brand — always accurate
 
