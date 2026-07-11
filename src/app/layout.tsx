@@ -3,6 +3,7 @@ import { Inter, Playfair_Display, Space_Grotesk } from "next/font/google";
 import Link from "next/link";
 import "./globals.css";
 import { ThemeToggle } from "@/components/theme-toggle";
+import { LogoLockup } from "@/components/animated-logo";
 import { Concierge } from "@/components/concierge";
 import { PageExtras } from "@/components/page-extras";
 import { SavedIndicator } from "@/components/saved";
@@ -56,8 +57,8 @@ export default function RootLayout({
         </Link>
         <header className="sticky top-0 z-40 border-b border-border bg-background/80 backdrop-blur-md">
           <div className="mx-auto flex h-16 max-w-7xl items-center justify-between gap-4 px-4 sm:px-6">
-            <Link href="/" className="font-serif text-[1.55rem] font-semibold italic leading-none tracking-tight">
-              greenthread
+            <Link href="/" aria-label="GreenThread home">
+              <LogoLockup size={26} />
             </Link>
             <nav className="flex items-center gap-1 text-sm">
               <Link

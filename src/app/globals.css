@@ -111,6 +111,29 @@
 }
 .hero-divider { animation: gt-divider 4s ease-in-out infinite; }
 
+/* logo: a thread draws itself into a leaf */
+@keyframes gt-draw {
+  to { stroke-dashoffset: 0; }
+}
+.draw-path {
+  stroke-dasharray: 300;
+  stroke-dashoffset: 300;
+  animation: gt-draw 1.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+.draw-path-slow {
+  stroke-dasharray: 300;
+  stroke-dashoffset: 300;
+  animation: gt-draw 2.2s 0.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+/* floating label-verdict card (the Phia price-card motif) */
+@keyframes gt-float {
+  0%, 100% { transform: translateY(0) rotate(-0.5deg); }
+  50% { transform: translateY(-10px) rotate(0.5deg); }
+}
+.float-card { animation: gt-float 5.5s ease-in-out infinite; }
+.float-card-alt { animation: gt-float 6.5s 1.2s ease-in-out infinite; }
+
 /* editorial fashion caption type */
 .eyebrow {
   font-size: 0.68rem;

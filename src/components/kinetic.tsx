@@ -58,7 +58,12 @@ export function CountUp({ to, suffix = "", className }: { to: number; suffix?: s
       if (p < 1) raf = requestAnimationFrame(tick);
     };
     raf = requestAnimationFrame(tick);
-    return () => cancelAnimationFrame(raf);
+    // guarantee the final value even if the rAF loop is torn down mid-flight
+    const settle = setTimeout(() => setN(to), dur + 200);
+    return () => {
+      cancelAnimationFrame(raf);
+      clearTimeout(settle);
+    };
   }, [inView, to]);
 
   return (
