@@ -121,7 +121,7 @@ export default async function ProductPage({ params }: Props) {
               ? product.brand.name
               : `${product.brand.name} · sold by ${product.retailer}`}
           </p>
-          <h1 className="mt-1 font-display text-3xl font-bold leading-tight sm:text-4xl">
+          <h1 className="mt-1 font-serif text-3xl font-medium leading-tight tracking-tight sm:text-4xl">
             {product.title}
           </h1>
           <p className="mt-3 font-display text-2xl font-semibold" data-testid="product-price">

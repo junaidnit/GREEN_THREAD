@@ -55,6 +55,7 @@
 
   --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
   --font-display: var(--font-space-grotesk), var(--font-inter), sans-serif;
+  --font-serif: var(--font-playfair), Georgia, serif;
 
   --radius-xl2: 1.25rem;
 
@@ -148,9 +149,12 @@ body {
   text-rendering: optimizeLegibility;
 }
 
-h1, h2, h3, .font-display {
-  font-family: var(--font-display);
-  letter-spacing: -0.02em;
+/* base layer so font utilities (font-serif etc.) can override per element */
+@layer base {
+  h1, h2, h3, .font-display {
+    font-family: var(--font-display);
+    letter-spacing: -0.02em;
+  }
 }
 
 /* skeleton shimmer block */

@@ -49,7 +49,7 @@ export default async function FabricPage({ params }: Props) {
           <Leaf className="size-3.5 text-primary" /> {fibreClass === "natural" ? "Natural fibre" : fibreClass === "regenerated" ? "Regenerated fibre" : "Synthetic fibre"}
           <span>· impact score {score}/10</span>
         </p>
-        <h1 className="font-display text-3xl font-bold sm:text-4xl">{MATERIAL_LABELS[material]}</h1>
+        <h1 className="font-serif text-4xl font-medium italic tracking-tight sm:text-5xl">{MATERIAL_LABELS[material]}</h1>
         <p className="mt-2 max-w-2xl text-sm leading-relaxed text-muted-foreground">{MATERIAL_NOTES[material]}</p>
         {fact && (
           <div className="mt-4 max-w-md rounded-lg border-l-2 border-primary bg-surface p-4">

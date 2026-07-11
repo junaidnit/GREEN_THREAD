@@ -34,8 +34,8 @@ export default function MethodologyPage() {
       <p className="mb-3 inline-flex items-center gap-2 rounded-full border border-border bg-surface px-3 py-1 text-xs font-medium text-muted-foreground">
         <Leaf className="size-3.5 text-primary" /> Methodology
       </p>
-      <h1 className="font-display text-4xl font-bold sm:text-5xl">
-        The anatomy of a <span className="text-primary">score</span>
+      <h1 className="font-serif text-4xl font-medium tracking-tight sm:text-5xl">
+        The anatomy of a <span className="italic text-primary">score</span>
       </h1>
       <p className="mt-3 max-w-md text-muted-foreground">No black box. Watch 100 points come together.</p>
 

@@ -28,6 +28,18 @@ export default async function Home() {
   const fibreCount = new Set(products.flatMap((p) => p.fabric_composition.map((f) => f.material))).size;
   const campaign = topPicks[0];
 
+  // brand gallery aggregates, best average first
+  const byBrand = new Map<string, { name: string; count: number; sum: number }>();
+  for (const p of products) {
+    const b = byBrand.get(p.brand.slug) ?? { name: p.brand.name, count: 0, sum: 0 };
+    b.count++;
+    b.sum += p.sustainability.score;
+    byBrand.set(p.brand.slug, b);
+  }
+  const brandTiles = [...byBrand.entries()]
+    .map(([slug, b]) => ({ slug, name: b.name, count: b.count, avg: Math.round(b.sum / b.count) }))
+    .sort((a, b) => b.avg - a.avg);
+
   return (
     <div>
       {/* ── cinematic split-screen video hero ── */}
@@ -49,13 +61,50 @@ export default async function Home() {
         ))}
       </Marquee>
 
+      {/* ── the brand gallery: dark hero flips to bright desire (Phia pattern) ── */}
+      <section className="mx-auto mt-16 max-w-7xl px-5 sm:px-8">
+        <Reveal>
+          <div className="mb-6 flex items-end justify-between">
+            <div>
+              <p className="eyebrow">The directory</p>
+              <h2 className="mt-1 font-serif text-3xl font-medium italic tracking-tight sm:text-4xl">
+                Brands, label-checked
+              </h2>
+            </div>
+            <Link href="/brands" className="eyebrow flex items-center gap-1 hover:text-primary">
+              All brands <ArrowUpRight className="size-3.5" />
+            </Link>
+          </div>
+        </Reveal>
+        <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-6">
+          {brandTiles.map((b, i) => (
+            <Reveal key={b.slug} delay={Math.min(i * 0.05, 0.3)}>
+              <Link
+                href={`/brand/${b.slug}`}
+                data-testid={`brand-tile-${b.slug}`}
+                className="hover-lift group block border border-border bg-surface p-5 text-center"
+              >
+                <p className="font-serif text-lg font-medium italic leading-tight group-hover:text-primary">
+                  {b.name}
+                </p>
+                <p className="mt-2 text-[11px] tracking-wide text-muted-foreground">
+                  {b.count} pieces · avg {b.avg}
+                </p>
+              </Link>
+            </Reveal>
+          ))}
+        </div>
+      </section>
+
       {/* ── editorial top picks ── */}
-      <section className="mx-auto mt-14 max-w-7xl px-5 sm:px-8">
+      <section className="mx-auto mt-16 max-w-7xl px-5 sm:px-8">
         <Reveal>
           <div className="mb-6 flex items-end justify-between">
             <div>
               <p className="eyebrow">The index</p>
-              <h2 className="mt-1 font-display text-2xl font-bold tracking-tight sm:text-3xl">Highest scoring</h2>
+              <h2 className="mt-1 font-serif text-3xl font-medium italic tracking-tight sm:text-4xl">
+                Highest scoring
+              </h2>
             </div>
             <Link href="/search?sort=score" className="eyebrow flex items-center gap-1 hover:text-primary">
               All <ArrowUpRight className="size-3.5" />
@@ -85,7 +134,7 @@ export default async function Home() {
             <div className="absolute inset-0 bg-black/25" />
             <div className="absolute inset-0 flex flex-col items-center justify-center text-center text-white">
               <p className="eyebrow !text-white/80">Every fibre, scored</p>
-              <p className="mt-3 max-w-2xl px-6 font-display text-4xl font-bold leading-tight sm:text-6xl">
+              <p className="mt-3 max-w-2xl px-6 font-serif text-4xl font-medium italic leading-tight sm:text-6xl">
                 Beautiful clothes, nothing to hide
               </p>
               <span className="mt-6 flex items-center gap-2 rounded-full border border-white/40 px-6 py-2.5 text-sm font-medium backdrop-blur-sm transition-colors group-hover:bg-white group-hover:text-black">

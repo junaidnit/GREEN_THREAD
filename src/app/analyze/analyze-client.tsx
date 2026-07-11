@@ -73,10 +73,10 @@ export function AnalyzeClient() {
         <p className="mx-auto mb-3 inline-flex items-center gap-2 rounded-full border border-border bg-surface px-3 py-1 text-xs font-medium text-muted-foreground">
           <Sparkles className="size-3.5 text-primary" /> Fabric Check
         </p>
-        <h1 className="font-display text-3xl font-bold sm:text-4xl">
+        <h1 className="font-serif text-4xl font-medium tracking-tight sm:text-5xl">
           Paste any product link.
           <br />
-          <span className="text-primary">We read the label for you.</span>
+          <span className="italic text-primary">We read the label for you.</span>
         </h1>
         <p className="mx-auto mt-3 max-w-md text-sm text-muted-foreground">
           Shopping somewhere else? Drop the product URL here — we&apos;ll pull what the page

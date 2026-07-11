@@ -2,7 +2,7 @@ import Link from "next/link";
 import { HomeSearch } from "./home-search";
 import { CountUp, RollingWord } from "./kinetic";
 
-const HERO_WORDS = ["linen", "hemp", "TENCEL", "organic cotton", "merino"];
+const HERO_WORDS = ["linen", "hemp", "organic cotton", "wool", "TENCEL"];
 
 /* lightweight, hotlink-friendly Pexels CDN clips (SD, ~2–7MB each) */
 const V = {
@@ -16,10 +16,10 @@ const POSTER = {
 };
 
 /**
- * Cinematic split-screen video hero. Left: nature sourcing ↔ cloth-making
- * crossfade (the sustainable story). Right: a desaturated fast-fashion
- * waste clip (the contrast). Text sits on a heavy scrim for legibility;
- * posters + a graceful degrade mean it looks right even before clips load.
+ * Editorial dark hero, Phia-style: the story films are ghosted layers behind
+ * a serif-italic headline; one light pill CTA is the only accent; social
+ * proof sits beside the point of decision. The split (grown-with-care vs
+ * fast-fashion waste) survives as a whispered backdrop, not a shout.
  */
 export function CinematicHero({
   pieces,
@@ -32,10 +32,9 @@ export function CinematicHero({
 }) {
   const vid = "absolute inset-0 h-full w-full object-cover";
   return (
-    <section className="relative h-[92vh] min-h-[560px] w-full overflow-hidden bg-black">
-      {/* ── background split ── */}
-      <div className="absolute inset-0 grid grid-cols-[1.1fr_0.9fr]">
-        {/* sustainable side — sourcing ↔ making */}
+    <section className="relative min-h-[88vh] w-full overflow-hidden bg-[#0c0f0d]">
+      {/* ── ghosted film layers ── */}
+      <div className="absolute inset-0 grid grid-cols-2 opacity-40">
         <div className="relative overflow-hidden">
           {/* eslint-disable-next-line jsx-a11y/media-has-caption */}
           <video className={`${vid} cf-a`} autoPlay muted loop playsInline preload="auto" poster={POSTER.nature}>
@@ -45,15 +44,11 @@ export function CinematicHero({
           <video className={`${vid} cf-b`} autoPlay muted loop playsInline preload="auto">
             <source src={V.weaving} type="video/mp4" />
           </video>
-          <div className="absolute inset-0 bg-gradient-to-br from-primary/25 to-transparent mix-blend-multiply" />
-          <p className="eyebrow absolute bottom-5 left-5 z-10 !text-white/85">Grown &amp; made with care</p>
         </div>
-
-        {/* fast-fashion side — the true cost */}
         <div className="relative overflow-hidden">
           {/* eslint-disable-next-line jsx-a11y/media-has-caption */}
           <video
-            className={`${vid} [filter:grayscale(0.85)_contrast(1.05)_brightness(0.8)]`}
+            className={`${vid} [filter:grayscale(0.9)_brightness(0.75)]`}
             autoPlay
             muted
             loop
@@ -63,50 +58,59 @@ export function CinematicHero({
           >
             <source src={V.waste} type="video/mp4" />
           </video>
-          <div className="absolute inset-0 bg-black/45" />
-          <p className="eyebrow absolute bottom-5 right-5 z-10 !text-white/70">The true cost of fast fashion</p>
         </div>
       </div>
 
-      {/* luminous divider */}
-      <div className="hero-divider absolute inset-y-0 left-[55%] z-10 w-px bg-white/70 shadow-[0_0_20px_rgba(255,255,255,0.6)]" />
+      {/* deep editorial scrim — type must float, imagery must whisper */}
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_60%_55%_at_50%_42%,rgba(12,15,13,0.42)_0%,rgba(12,15,13,0.85)_100%)]" />
+      <div className="absolute inset-0 bg-gradient-to-b from-[#0c0f0d]/70 via-transparent to-[#0c0f0d]" />
 
-      {/* legibility scrim */}
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_10%,rgba(0,0,0,0.55)_100%)]" />
-      <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-black/30" />
+      {/* corner captions — the two worlds, named quietly */}
+      <p className="eyebrow absolute bottom-6 left-6 z-10 !text-white/50">Grown &amp; made with care</p>
+      <p className="eyebrow absolute bottom-6 right-6 z-10 !text-white/40">The true cost of fast fashion</p>
 
-      {/* ── overlaid content ── */}
-      <div className="relative z-20 mx-auto flex h-full max-w-5xl flex-col items-center justify-center px-5 text-center text-white">
-        <p className="eyebrow !text-white/75">Natural fibres, decoded — no plastic surprises</p>
-        <h1 className="mt-4 font-display text-5xl font-bold leading-[1.02] tracking-tight sm:text-7xl">
+      {/* ── centred editorial content ── */}
+      <div className="relative z-20 mx-auto flex min-h-[88vh] max-w-4xl flex-col items-center justify-center px-5 py-24 text-center text-white">
+        <p className="eyebrow !text-white/60">Natural fibres, decoded</p>
+
+        <h1 className="mt-6 font-serif text-6xl font-medium leading-[1.04] tracking-tight sm:text-8xl">
           Wear more
           <br />
-          <RollingWord words={HERO_WORDS} accentClass="text-[#7fe3b0]" />
+          <span className="italic">
+            <RollingWord words={HERO_WORDS} accentClass="text-[#d9e8d3]" />
+          </span>
         </h1>
-        <div className="mt-9 w-full max-w-md">
+
+        <p className="mt-6 max-w-md text-[15px] leading-relaxed text-white/65">
+          Most high-street clothing is oil-derived plastic. We read the labels,
+          so you don&apos;t have to.
+        </p>
+
+        {/* the one accent: a light pill, Phia-style */}
+        <Link
+          href="/analyze"
+          data-testid="hero-check-cta"
+          className="mt-9 rounded-full bg-[#f4f1e9] px-8 py-3.5 text-sm font-semibold text-[#141714] shadow-[0_8px_32px_-8px_rgba(244,241,233,0.45)] transition-transform hover:scale-[1.03] active:scale-[0.98]"
+        >
+          Check any label — it&apos;s free
+        </Link>
+
+        {/* social proof at the point of decision */}
+        <p className="mt-4 text-xs tracking-wide text-white/50" data-testid="hero-proof">
+          <CountUp to={pieces} /> pieces · <CountUp to={brands} /> brands ·{" "}
+          <CountUp to={fibres} /> fibres — every label read
+        </p>
+
+        <div className="mt-10 w-full max-w-md">
           <HomeSearch />
         </div>
         <Link
           href="/search?pure=1"
           data-testid="hero-pure-cta"
-          className="mt-4 rounded-full border border-white/40 px-5 py-2 text-sm font-medium text-white/90 backdrop-blur-sm transition-colors hover:bg-white hover:text-black"
+          className="mt-4 text-xs font-medium tracking-wide text-white/60 underline-offset-4 transition-colors hover:text-white hover:underline"
         >
-          Shop 100% plastic-free →
+          or shop 100% plastic-free →
         </Link>
-        <div className="mt-9 flex gap-10">
-          {[
-            { n: pieces, label: "pieces" },
-            { n: brands, label: "brands" },
-            { n: fibres, label: "fibres" },
-          ].map((s) => (
-            <div key={s.label}>
-              <p className="font-display text-2xl font-bold">
-                <CountUp to={s.n} />
-              </p>
-              <p className="eyebrow mt-0.5 !text-white/70">{s.label}</p>
-            </div>
-          ))}
-        </div>
       </div>
     </section>
   );

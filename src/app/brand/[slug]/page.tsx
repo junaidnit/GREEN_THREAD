@@ -47,7 +47,7 @@ export default async function BrandPage({ params }: Props) {
       <div className="rounded-xl2 border border-border bg-surface p-6 sm:p-8">
         <div className="flex flex-wrap items-start justify-between gap-4">
           <div className="max-w-2xl">
-            <h1 className="font-display text-3xl font-bold">{brand.name}</h1>
+            <h1 className="font-serif text-4xl font-medium italic tracking-tight">{brand.name}</h1>
             <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{brand.ethics_summary}</p>
             {brand.certifications.length > 0 && (
               <div className="mt-3 flex flex-wrap gap-2">
