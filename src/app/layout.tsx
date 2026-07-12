@@ -74,10 +74,10 @@ export default function RootLayout({
                 Browse
               </Link>
               <Link
-                href="/search?fabric=linen"
+                href="/diary"
                 className="hidden rounded-full px-4 py-2 font-medium text-muted-foreground transition-colors hover:bg-accent hover:text-accent-foreground lg:block"
               >
-                Linen
+                Diary
               </Link>
               <Link
                 href="/analyze"

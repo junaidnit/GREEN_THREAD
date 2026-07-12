@@ -122,6 +122,32 @@ export async function getProduct(id: string): Promise<Product | undefined> {
   return all.find((p) => p.id === id);
 }
 
+/**
+ * "Better fibre, same money": same category, similar price (±25%),
+ * strictly less oil-derived plastic — the upgrade path, not an upsell.
+ */
+export async function getBetterFibre(product: Product, limit = 4): Promise<Product[]> {
+  const { oilDerivedPct } = await import("./materials");
+  const all = await getCatalog();
+  const myPlastic = oilDerivedPct(product.fabric_composition);
+  if (myPlastic === 0) return []; // already plastic-free — nothing to upgrade
+  return all
+    .filter(
+      (p) =>
+        p.id !== product.id &&
+        p.category === product.category &&
+        p.gender !== (product.gender === "men" ? "women" : product.gender === "women" ? "men" : "") &&
+        Math.abs(p.price - product.price) <= product.price * 0.25 &&
+        oilDerivedPct(p.fabric_composition) < myPlastic,
+    )
+    .sort(
+      (a, b) =>
+        oilDerivedPct(a.fabric_composition) - oilDerivedPct(b.fabric_composition) ||
+        Math.abs(a.price - product.price) - Math.abs(b.price - product.price),
+    )
+    .slice(0, limit);
+}
+
 /** Naive similar-items: shared dominant fabric or category, ranked by score. */
 export async function getSimilar(product: Product, limit = 4): Promise<Product[]> {
   const all = await getCatalog();

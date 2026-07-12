@@ -14,7 +14,7 @@ const BRANDS: Record<string, BrandLink> = {
   "people-tree": { home: "https://www.peopletree.co.uk", search: (t) => `https://www.peopletree.co.uk/catalogsearch/result/?q=${t}` },
   uniqlo: { home: "https://www.uniqlo.com/uk/en/", search: (t) => `https://www.uniqlo.com/uk/en/search?q=${t}` },
   seasalt: { home: "https://www.seasaltcornwall.com", search: (t) => `https://www.seasaltcornwall.com/search?q=${t}` },
-  "marks-and-spencer": { home: "https://www.marksandspencer.com", search: (t) => `https://www.marksandspencer.com/search?q=${t}` },
+  "marks-and-spencer": { home: "https://www.marksandspencer.com", search: (t) => `https://www.marksandspencer.com/l/search?searchTerm=${t}` },
   thought: { home: "https://www.wearethought.com", search: (t) => `https://www.wearethought.com/search?q=${t}` },
   patagonia: { home: "https://www.patagonia.com", search: (t) => `https://www.patagonia.com/search/?q=${t}` },
   zara: { home: "https://www.zara.com/uk/en/", search: (t) => `https://www.zara.com/uk/en/search?searchTerm=${t}` },

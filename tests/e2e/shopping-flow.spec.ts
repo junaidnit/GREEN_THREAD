@@ -10,7 +10,7 @@ test.describe("home", () => {
   test("hero, fabric categories and top picks render", async ({ page }) => {
     await page.goto("/");
     await expect(page.getByRole("heading", { level: 1 })).toContainText("Wear more");
-    await expect(page.getByRole("link", { name: "Linen", exact: true }).first()).toBeVisible();
+    await expect(page.getByTestId("edit-tile-0")).toBeVisible();
     expect(await page.getByTestId("product-card").count()).toBeGreaterThanOrEqual(4);
   });
 
@@ -285,6 +285,39 @@ test.describe("natural-fibre-first", () => {
     await page.getByTestId("hero-pure-cta").click();
     await page.waitForURL(/pure=1/);
     await expect(page.getByTestId("results-count")).toBeVisible();
+  });
+});
+
+test.describe("diary, better fibre, resale", () => {
+  test("plastic-heavy product offers 'better fibre at this price'", async ({ page }) => {
+    await page.goto("/product/zara-t-shirts-3"); // 100% polyester tank
+    await expect(page.getByTestId("better-fibre")).toBeVisible();
+    const cards = page.getByTestId("better-fibre").getByTestId("product-card");
+    expect(await cards.count()).toBeGreaterThanOrEqual(1);
+    // every recommendation must show less plastic than 100%
+    const marks = await page.getByTestId("better-fibre").getByTestId("fibre-mark").allInnerTexts();
+    for (const m of marks) expect(m).not.toMatch(/100% plastic/);
+  });
+
+  test("secondhand check links to live resale searches", async ({ page }) => {
+    await page.goto("/product/salt-stem-linen-shirt-white");
+    await expect(page.getByTestId("secondhand")).toBeVisible();
+    await expect(page.getByTestId("resale-vinted")).toHaveAttribute("href", /vinted\.co\.uk.*search_text=/);
+    await expect(page.getByTestId("resale-ebay")).toHaveAttribute("href", /ebay\.co\.uk/);
+  });
+
+  test("buying writes the Fibre Diary and the diary sums spend", async ({ page }) => {
+    await page.goto("/product/salt-stem-linen-shirt-white"); // £35, 100% natural
+    await page.getByTestId("buy-button").click();
+    await expect(page).toHaveURL(/\/retailer\//, { timeout: 30_000 });
+
+    await page.goto("/diary");
+    await expect(page.getByTestId("diary-stats")).toBeVisible();
+    await expect(page.getByTestId("diary-entries")).toContainText("Breezy Linen Shirt");
+    await expect(page.getByTestId("diary-stats")).toContainText("£35");
+    // 100% natural purchase → natural spend equals total
+    const stats = await page.getByTestId("diary-stats").innerText();
+    expect((stats.match(/£35/g) ?? []).length).toBeGreaterThanOrEqual(2);
   });
 });
 

@@ -2,7 +2,9 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
-import { getCatalog, getProduct, getSimilar } from "@/lib/catalog";
+import { getBetterFibre, getCatalog, getProduct, getSimilar } from "@/lib/catalog";
+import { BuyButton } from "@/components/buy-button";
+import { RESALE_PLATFORMS, resaleTerm } from "@/lib/resale-links";
 import { formatPrice, titleCase } from "@/lib/format";
 import {
   CERT_INFO,
@@ -77,6 +79,8 @@ export default async function ProductPage({ params }: Props) {
   const mark = fibreMark(product.fabric_composition);
   const misnamed = misleadingName(product.title, product.fabric_composition);
   const natural = naturalPct(product.fabric_composition);
+  const betterFibre = await getBetterFibre(product);
+  const secondhandTerm = resaleTerm(product.brand.name, product.title);
 
   return (
     <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6">
@@ -148,13 +152,15 @@ export default async function ProductPage({ params }: Props) {
           )}
 
           <div className="mt-5 flex flex-col gap-2 sm:max-w-sm">
-            <a
-              href={`/out/${product.id}`}
-              data-testid="buy-button"
-              className="flex h-13 w-full items-center justify-center gap-2 rounded-full bg-primary py-3.5 font-semibold text-primary-foreground transition-transform hover:scale-[1.01] active:scale-[0.99]"
-            >
-              Buy at {product.retailer} <ArrowUpRight className="size-4" />
-            </a>
+            <BuyButton
+              id={product.id}
+              title={product.title}
+              brand={product.brand.name}
+              price={product.price}
+              plastic={mark.plastic}
+              natural={natural}
+              retailer={product.retailer}
+            />
             <div className="flex gap-2">
               <a
                 href={viewOnBrandUrl(product.brand.slug, product.brand.name, product.title)}
@@ -322,10 +328,55 @@ export default async function ProductPage({ params }: Props) {
         </div>
       </section>
 
+      {/* better fibre, same money — the upgrade path */}
+      {betterFibre.length > 0 && (
+        <section className="mt-12" data-testid="better-fibre">
+          <p className="eyebrow">Same money, less plastic</p>
+          <h2 className="mb-4 mt-1 font-serif text-2xl font-medium italic tracking-tight sm:text-3xl">
+            Better fibre at this price
+          </h2>
+          <div className="grid grid-cols-2 gap-x-4 gap-y-8 sm:gap-x-6 md:grid-cols-4">
+            {betterFibre.map((p) => (
+              <ProductCard key={p.id} product={p} />
+            ))}
+          </div>
+        </section>
+      )}
+
+      {/* find it secondhand — the resale check */}
+      <section className="mt-12 rounded-xl2 border border-border bg-surface p-6" data-testid="secondhand">
+        <p className="eyebrow">Already made</p>
+        <h2 className="mt-1 font-serif text-2xl font-medium italic tracking-tight sm:text-3xl">
+          Check it secondhand first
+        </h2>
+        <p className="mt-2 max-w-lg text-sm text-muted-foreground">
+          The lowest-impact garment is one that already exists. Search this piece across the
+          resale platforms before buying new.
+        </p>
+        <div className="mt-5 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+          {RESALE_PLATFORMS.map((r) => (
+            <a
+              key={r.name}
+              href={r.search(secondhandTerm)}
+              target="_blank"
+              rel="noopener noreferrer nofollow"
+              data-testid={`resale-${r.name.split(" ")[0].toLowerCase()}`}
+              className="group rounded-xl border border-border bg-background p-4 transition-colors hover:border-primary/40"
+            >
+              <p className="flex items-center justify-between font-medium">
+                {r.name}
+                <ArrowUpRight className="size-4 text-muted-foreground transition-transform group-hover:translate-x-0.5 group-hover:text-primary" />
+              </p>
+              <p className="mt-1 text-xs text-muted-foreground">{r.tagline}</p>
+            </a>
+          ))}
+        </div>
+      </section>
+
       {/* similar */}
       {similar.length > 0 && (
         <section className="mt-12">
-          <h2 className="mb-4 font-display text-xl font-bold">Similar, sustainably</h2>
+          <h2 className="mb-4 font-serif text-2xl font-medium italic tracking-tight">Similar, sustainably</h2>
           <div className="grid grid-cols-2 gap-x-4 gap-y-8 sm:gap-x-6 md:grid-cols-4">
             {spreadByImage(similar).map((p) => (
               <ProductCard key={p.id} product={p} />
