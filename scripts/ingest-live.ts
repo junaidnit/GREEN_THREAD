@@ -145,7 +145,8 @@ async function ingestBrand(src: (typeof SOURCES)[number], brandMeta: { certifica
   return { out, scanned };
 }
 
-async function main() {
+/** Harvest every source and return the garment-first balanced product list. */
+export async function harvestAll(): Promise<SeedProduct[]> {
   const brands = new Map<string, { certifications: string[]; ethics_modifier: number }>(
     JSON.parse(readFileSync(resolve(process.cwd(), "data/raw/brands.json"), "utf8")).brands.map(
       (b: { slug: string }) => [b.slug, b],
@@ -166,17 +167,23 @@ async function main() {
   // clothing searches surface real garments, not 100 sock variants
   const garments = all.filter((p) => p.category !== "accessories");
   const accessories = all.filter((p) => p.category === "accessories").slice(0, 40);
-  const balanced = [...garments, ...accessories];
+  return [...garments, ...accessories];
+}
 
+async function main() {
+  const balanced = await harvestAll();
   writeFileSync(
     resolve(process.cwd(), "data/products_live.json"),
     JSON.stringify({ ingested_at: new Date().toISOString(), products: balanced }, null, 1),
   );
-  console.log(`\n✓ TOTAL LIVE PRODUCTS: ${balanced.length} (${garments.length} garments + ${accessories.length} accessories) → data/products_live.json`);
+  console.log(`\n✓ TOTAL LIVE PRODUCTS: ${balanced.length} → data/products_live.json`);
   if (balanced.length > 0) {
     const s = balanced[0];
     console.log(`  sample: ${s.title} | £${s.price} | ${s.fabric_composition.map((c) => c.pct + "% " + c.material).join(", ")} | ${s.buy_url}`);
   }
 }
 
-main();
+// run only when invoked directly (the sentinel imports harvestAll instead)
+if (process.argv[1]?.replace(/\\/g, "/").endsWith("ingest-live.ts")) {
+  main();
+}

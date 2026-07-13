@@ -1,8 +1,8 @@
 import "server-only";
 import { cache } from "react";
 import { existsSync, readFileSync } from "node:fs";
-import { resolve } from "node:path";
 import { createClient } from "@supabase/supabase-js";
+import { dataPath } from "./data-root";
 import type { Brand, CatalogCard, Product, SeedProduct } from "./types";
 
 /**
@@ -14,19 +14,19 @@ import type { Brand, CatalogCard, Product, SeedProduct } from "./types";
 
 function loadLocal(): Product[] {
   const seed = JSON.parse(
-    readFileSync(resolve(process.cwd(), "data/products_seed.json"), "utf8"),
+    readFileSync(dataPath("data", "products_seed.json"), "utf8"),
   ).products as SeedProduct[];
-  const generatedPath = resolve(process.cwd(), "data/products_generated.json");
+  const generatedPath = dataPath("data", "products_generated.json");
   const generated: SeedProduct[] = existsSync(generatedPath)
     ? JSON.parse(readFileSync(generatedPath, "utf8")).products
     : [];
   // real products ingested from live brand feeds — real URLs, photos, prices
-  const livePath = resolve(process.cwd(), "data/products_live.json");
+  const livePath = dataPath("data", "products_live.json");
   const live: SeedProduct[] = existsSync(livePath)
     ? JSON.parse(readFileSync(livePath, "utf8")).products
     : [];
   const brands = JSON.parse(
-    readFileSync(resolve(process.cwd(), "data/raw/brands.json"), "utf8"),
+    readFileSync(dataPath("data", "raw", "brands.json"), "utf8"),
   ).brands as Brand[];
   const brandBySlug = new Map(brands.map((b) => [b.slug, b]));
   return [...live, ...seed, ...generated].map(({ brand_slug, ...rest }) => ({
@@ -70,6 +70,7 @@ async function loadSupabase(): Promise<Product[]> {
     sizes: row.sizes ?? [],
     fit: row.fit ?? "Regular",
     source: row.source ?? undefined,
+    price_history: row.price_history ?? undefined,
     fabric_composition: row.fabric_composition,
     sustainability: row.sustainability,
   }));
@@ -99,7 +100,14 @@ export const getCatalog = cache(async (): Promise<Product[]> => {
  */
 export const getCatalogCards = cache(async (): Promise<CatalogCard[]> => {
   const all = await getCatalog();
+  const drop = (p: Product) => {
+    const h = p.price_history;
+    if (!h || h.length < 2) return {};
+    const prev = h[h.length - 2].price;
+    return prev > p.price ? { price_dropped: true, was_price: prev } : {};
+  };
   return all.map((p) => ({
+    ...drop(p),
     id: p.id,
     brand: { slug: p.brand.slug, name: p.brand.name },
     title: p.title,

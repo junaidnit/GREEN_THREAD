@@ -89,8 +89,10 @@ export interface Product {
   sizes: string[];
   /** Fit type: Regular, Slim, Relaxed, Oversized, Wide. */
   fit: string;
-  /** How the record was produced: "extracted" (AI pipeline from label text) or "generated" (demo). */
+  /** How the record was produced: "extracted" (AI pipeline from label text), "generated" (demo), or "live" (brand feed). */
   source?: string;
+  /** Price observations from the sentinel, oldest first. */
+  price_history?: Array<{ date: string; price: number }>;
   fabric_composition: FabricPart[];
   sustainability: Sustainability;
 }
@@ -115,6 +117,10 @@ export interface CatalogCard {
   fit: string;
   /** "live" = real product ingested from the brand's own feed. */
   source?: string;
+  /** True when the sentinel saw the price fall on its last pass. */
+  price_dropped?: boolean;
+  /** The price before the drop (only set when price_dropped). */
+  was_price?: number;
   fabric_composition: FabricPart[];
   sustainability: Pick<Sustainability, "score" | "grade" | "certifications" | "greenwash_flags">;
 }

@@ -27,6 +27,16 @@ DEMO:  data/raw/*.json ──► scripts/enrich.ts (Claude extraction, resumable
                 ──► scripts/validate-seed.ts (cert evidence-check, label hygiene)
                 ──► data/products_seed.json + products_generated.json (committed)
 
+TWINS: scripts/embed-catalog.ts ──► CLIP image embeddings (local ONNX via
+       @xenova/transformers — no API key) ──► data/twins.json (id → visually
+       nearest neighbours; powers "Same look", twin-ranked better-fibre, and
+       the concept→LIVE lookalike callout). Vector cache in data/cache/ (gitignored).
+
+WATCH: scripts/sentinel.ts ──► re-harvests feeds, diffs against products_live.json:
+       price changes → price_history (price-drop badges), vanished items →
+       deleted locally + from Supabase, new items → added. `npm run sentinel`
+       chains a Supabase reseed. Schedule nightly.
+
 BOTH   ──► scripts/db-setup.ts ──► Supabase (brands, products, events)
                                               │
 Next.js 16 App Router ◄───────────────────────┘  (server components read Supabase,
@@ -133,10 +143,13 @@ greenthread/
 npm run dev            # dev server (http://localhost:3000)
 npm run build          # production build (~74 static pages + server routes)
 npm start              # serve production build
-npm run test           # 61 unit tests (Vitest)
-npm run test:e2e       # 35 Playwright e2e (uses local seed, port 3100 — stop dev server first)
+npm run test           # 71 unit tests (Vitest)
+npm run test:e2e       # 40 Playwright e2e (uses local seed, port 3100 — stop dev server first)
 npm run enrich         # re-run Claude extraction over data/raw (resumable, needs ANTHROPIC_API_KEY)
-npm run db:setup       # push schema + seed 1,628 products to Supabase (Management API)
+npm run db:setup       # push schema + seed all 2,892 products to Supabase (Management API)
+npm run ingest:live    # harvest live brand feeds fresh → data/products_live.json
+npm run sentinel       # THE WATCHDOG: re-harvest, diff prices/stock, purge dead items, reseed
+npm run embed          # rebuild the visual twin index (CLIP, local; resumable via data/cache)
 npx tsx scripts/generate-catalog.ts   # regenerate the 1,561 deterministic products
 npx tsx scripts/validate-seed.ts      # deterministic re-validation/rescore (no AI)
 npx tsx scripts/audit-scores.ts       # recompute + diff every stored score

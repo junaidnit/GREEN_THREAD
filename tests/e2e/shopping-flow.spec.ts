@@ -1,3 +1,4 @@
+import { existsSync, readFileSync } from "node:fs";
 import { expect, test, type Page } from "@playwright/test";
 
 /** Total match count from the results header (card count is paginated). */
@@ -416,5 +417,42 @@ test.describe("live listings — real products, real merchant links", () => {
     await expect(page.getByText(/Concept item — illustrative/)).toBeVisible();
     await expect(page.getByText(/Find similar at/)).toBeVisible();
     await expect(page.getByTestId("live-badge")).toHaveCount(0);
+  });
+});
+
+test.describe("twin-finder", () => {
+  interface TwinProduct { id: string; category: string; gender: string; source?: string }
+
+  /** Find a concept product whose live-twin index has a strong same-category match. */
+  function lookalikeCandidate(): string | null {
+    if (!existsSync("data/twins.json")) return null;
+    const liveTwins = (JSON.parse(readFileSync("data/twins.json", "utf8")).liveTwins ?? {}) as Record<
+      string,
+      Array<{ id: string; sim: number }>
+    >;
+    const read = (f: string): TwinProduct[] =>
+      existsSync(f) ? JSON.parse(readFileSync(f, "utf8")).products : [];
+    const live = read("data/products_live.json");
+    const concept = [...read("data/products_seed.json"), ...read("data/products_generated.json")];
+    const liveById = new Map(live.map((p) => [p.id, p]));
+    const compatible = (a: TwinProduct, b: TwinProduct) =>
+      a.gender === "unisex" || b.gender === "unisex" || a.gender === b.gender;
+    const hit = concept.find((p) =>
+      liveTwins[p.id]?.some((t) => {
+        const l = liveById.get(t.id);
+        return l && t.sim >= 0.6 && l.category === p.category && compatible(p, l);
+      }),
+    );
+    return hit?.id ?? null;
+  }
+
+  test("concept item points to its real live lookalike", async ({ page }) => {
+    const id = lookalikeCandidate();
+    test.skip(!id, "twin index not built for a qualifying concept item yet");
+    await page.goto(`/product/${id}`);
+    await expect(page.getByTestId("live-lookalike")).toBeVisible();
+    await expect(page.getByText("The real thing")).toBeVisible();
+    // the recommended card is a real listing
+    await expect(page.getByTestId("live-lookalike").getByTestId("live-mark")).toBeVisible();
   });
 });

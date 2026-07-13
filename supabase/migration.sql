@@ -32,6 +32,9 @@ alter table public.products add column if not exists color_family text not null 
 alter table public.products add column if not exists fit text not null default 'Regular';
 alter table public.products add column if not exists source text not null default 'generated';
 
+-- price history for the stock & price sentinel (live items)
+alter table public.products add column if not exists price_history jsonb not null default '[]';
+
 -- lightweight behavioural events: searches, out-clicks (CRO + affiliate proof)
 create table if not exists public.events (
   id bigint generated always as identity primary key,

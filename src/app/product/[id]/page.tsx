@@ -3,6 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { getBetterFibre, getCatalog, getProduct, getSimilar } from "@/lib/catalog";
+import { getLiveLookalike, getSameLook, getTwinBetterFibre } from "@/lib/twins";
 import { BuyButton } from "@/components/buy-button";
 import { RESALE_PLATFORMS, resaleTerm } from "@/lib/resale-links";
 import { formatPrice, titleCase } from "@/lib/format";
@@ -61,11 +62,15 @@ export default async function ProductPage({ params }: Props) {
   const { id } = await params;
   const product = await getProduct(id);
   if (!product) notFound();
-  const similar = await getSimilar(product);
   const s = product.sustainability;
 
   // category context: how this item compares to everything like it
   const all = await getCatalog();
+
+  // twin-finder: visually closest items (precomputed CLIP index) — falls back
+  // to attribute matching when the index hasn't been built for this item
+  const sameLook = getSameLook(product, all);
+  const similar = sameLook.length >= 4 ? sameLook : await getSimilar(product);
   const peers = all.filter((p) => p.category === product.category);
   const catAvg = Math.round(peers.reduce((sum, p) => sum + p.sustainability.score, 0) / peers.length);
   const delta = s.score - catAvg;
@@ -79,7 +84,9 @@ export default async function ProductPage({ params }: Props) {
   const mark = fibreMark(product.fabric_composition);
   const misnamed = misleadingName(product.title, product.fabric_composition);
   const natural = naturalPct(product.fabric_composition);
-  const betterFibre = await getBetterFibre(product);
+  const twinBetter = getTwinBetterFibre(product, all);
+  const betterFibre = twinBetter.length > 0 ? twinBetter : await getBetterFibre(product);
+  const lookalike = getLiveLookalike(product, all);
   const secondhandTerm = resaleTerm(product.brand.name, product.title);
 
   return (
@@ -351,6 +358,31 @@ export default async function ProductPage({ params }: Props) {
         </div>
       </section>
 
+      {/* concept item? show the closest REAL listing — buyable today */}
+      {lookalike && (
+        <section
+          className="mt-12 rounded-xl2 border border-grade-a/30 bg-grade-a/5 p-6"
+          data-testid="live-lookalike"
+        >
+          <div className="flex flex-col gap-6 sm:flex-row sm:items-center">
+            <div className="w-44 shrink-0 sm:w-52">
+              <ProductCard product={lookalike.product} />
+            </div>
+            <div>
+              <p className="eyebrow text-grade-a">The real thing</p>
+              <h2 className="mt-1 font-serif text-2xl font-medium italic tracking-tight sm:text-3xl">
+                This look, live at {lookalike.product.brand.name}
+              </h2>
+              <p className="mt-2 max-w-lg text-sm text-muted-foreground">
+                You&apos;re viewing a concept piece. This is the closest real listing —
+                pulled from {lookalike.product.brand.name}&apos;s own store, composition
+                verified from their page, and one click from checkout.
+              </p>
+            </div>
+          </div>
+        </section>
+      )}
+
       {/* better fibre, same money — the upgrade path */}
       {betterFibre.length > 0 && (
         <section className="mt-12" data-testid="better-fibre">
@@ -399,7 +431,9 @@ export default async function ProductPage({ params }: Props) {
       {/* similar */}
       {similar.length > 0 && (
         <section className="mt-12">
-          <h2 className="mb-4 font-serif text-2xl font-medium italic tracking-tight">Similar, sustainably</h2>
+          <h2 className="mb-4 font-serif text-2xl font-medium italic tracking-tight">
+            {sameLook.length >= 4 ? "Same look, sustainably" : "Similar, sustainably"}
+          </h2>
           <div className="grid grid-cols-2 gap-x-4 gap-y-8 sm:gap-x-6 md:grid-cols-4">
             {spreadByImage(similar).map((p) => (
               <ProductCard key={p.id} product={p} />

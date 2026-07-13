@@ -113,7 +113,18 @@ export function ProductCard({ product, priority = false }: { product: CatalogCar
         <p className="eyebrow truncate">{product.brand.name}</p>
         <div className="mt-1 flex items-baseline justify-between gap-3">
           <h3 className="truncate text-sm leading-snug">{product.title}</h3>
-          <p className="shrink-0 text-sm font-medium tabular-nums">{formatPrice(product.price, product.currency)}</p>
+          <p className="shrink-0 text-sm font-medium tabular-nums">
+            {product.price_dropped && product.was_price && (
+              <span
+                data-testid="price-drop"
+                className="mr-1.5 text-xs text-muted-foreground line-through"
+                title="Price dropped since our last check of the brand's store"
+              >
+                {formatPrice(product.was_price, product.currency)}
+              </span>
+            )}
+            {formatPrice(product.price, product.currency)}
+          </p>
         </div>
       </div>
     </Link>

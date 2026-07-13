@@ -89,11 +89,11 @@ async function main() {
         (p) =>
           `(${q(p.id)}, ${q(p.brand_slug)}, ${q(p.title)}, ${q(p.description)}, ${q(p.category)}, ${q(p.gender)}, ` +
           `${p.price}, ${q(p.currency)}, ${q(p.retailer)}, ${q(p.buy_url)}, ${q(p.image_url)}, ${q(p.color)}, ` +
-          `${q(p.color_family)}, ${qa(p.sizes)}, ${q(p.fit)}, ${q(p.source ?? "generated")}, ${qj(p.fabric_composition)}, ${qj(p.sustainability)})`,
+          `${q(p.color_family)}, ${qa(p.sizes)}, ${q(p.fit)}, ${q(p.source ?? "generated")}, ${qj(p.price_history ?? [])}, ${qj(p.fabric_composition)}, ${qj(p.sustainability)})`,
       )
       .join(",\n");
     await runSql(
-      `insert into public.products (id, brand_slug, title, description, category, gender, price, currency, retailer, buy_url, image_url, color, color_family, sizes, fit, source, fabric_composition, sustainability)
+      `insert into public.products (id, brand_slug, title, description, category, gender, price, currency, retailer, buy_url, image_url, color, color_family, sizes, fit, source, price_history, fabric_composition, sustainability)
        values ${rows}
        on conflict (id) do update set
          brand_slug = excluded.brand_slug, title = excluded.title,
@@ -103,6 +103,7 @@ async function main() {
          buy_url = excluded.buy_url, image_url = excluded.image_url,
          color = excluded.color, color_family = excluded.color_family,
          sizes = excluded.sizes, fit = excluded.fit, source = excluded.source,
+         price_history = excluded.price_history,
          fabric_composition = excluded.fabric_composition,
          sustainability = excluded.sustainability;`,
     );
