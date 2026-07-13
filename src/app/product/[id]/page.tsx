@@ -120,11 +120,23 @@ export default async function ProductPage({ params }: Props) {
 
         {/* info */}
         <div>
-          <p className="text-sm font-medium uppercase tracking-wide text-muted-foreground">
-            {product.retailer === product.brand.name
-              ? product.brand.name
-              : `${product.brand.name} · sold by ${product.retailer}`}
-          </p>
+          <div className="flex items-center gap-2">
+            <p className="text-sm font-medium uppercase tracking-wide text-muted-foreground">
+              {product.retailer === product.brand.name
+                ? product.brand.name
+                : `${product.brand.name} · sold by ${product.retailer}`}
+            </p>
+            {product.source === "live" && (
+              <span
+                data-testid="live-badge"
+                className="inline-flex items-center gap-1 rounded-full bg-grade-a/10 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-grade-a"
+                title={`Real listing — details verified from ${product.brand.name}'s own product page`}
+              >
+                <span className="size-1.5 animate-pulse rounded-full bg-grade-a" />
+                Live listing
+              </span>
+            )}
+          </div>
           <h1 className="mt-1 font-serif text-3xl font-medium leading-tight tracking-tight sm:text-4xl">
             {product.title}
           </h1>
@@ -163,19 +175,30 @@ export default async function ProductPage({ params }: Props) {
             />
             <div className="flex gap-2">
               <a
-                href={viewOnBrandUrl(product.brand.slug, product.brand.name, product.title)}
+                href={
+                  product.source === "live"
+                    ? product.buy_url
+                    : viewOnBrandUrl(product.brand.slug, product.brand.name, product.title)
+                }
                 target="_blank"
                 rel="noopener noreferrer nofollow"
                 data-testid="view-on-retailer"
                 className="flex h-11 flex-1 items-center justify-center gap-2 rounded-full border border-border bg-surface text-sm font-medium transition-colors hover:border-primary/40 hover:bg-accent"
               >
-                View it on {product.brand.name}&apos;s site <ArrowUpRight className="size-3.5" />
+                {product.source === "live"
+                  ? <>View this exact item at {product.brand.name}</>
+                  : <>Find similar at {product.brand.name}</>}{" "}
+                <ArrowUpRight className="size-3.5" />
               </a>
               <SaveButton productId={product.id} imageUrl={product.image_url} />
             </div>
           </div>
           <p className="mt-2 text-xs text-muted-foreground">
-            Buy takes you straight to {product.retailer}&apos;s checkout — no re-searching on their site.
+            {product.source === "live" ? (
+              <>Buy opens this exact product on {product.retailer}&apos;s own site — composition verified from their page.</>
+            ) : (
+              <>Concept item — illustrative catalogue entry. Buy opens a simulated checkout to demo the journey.</>
+            )}
           </p>
 
           {/* tangible impact + longevity */}
@@ -272,7 +295,7 @@ export default async function ProductPage({ params }: Props) {
                 data-testid="category-delta"
               >
                 {delta >= 0 ? `${delta} pts above` : `${Math.abs(delta)} pts below`} the average{" "}
-                {product.category.replace(/s$/, "")}
+                {{ dresses: "dress", accessories: "accessory", hoodies: "hoodie", jeans: "pair of jeans", trousers: "pair of trousers" }[product.category] ?? product.category.replace(/s$/, "")}
               </p>
             )}
             <Link

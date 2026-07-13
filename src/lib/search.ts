@@ -37,6 +37,8 @@ export interface Filters {
   minScore: number | null;
   /** The master switch: hide anything containing oil-derived plastic (incl. recycled). */
   noSynthetics: boolean;
+  /** Only real listings ingested from a brand's own live feed. */
+  liveOnly: boolean;
   sort: "relevance" | "natural" | "score" | "price-asc" | "price-desc";
 }
 
@@ -53,6 +55,7 @@ export const EMPTY_FILTERS: Filters = {
   maxPrice: null,
   minScore: null,
   noSynthetics: false,
+  liveOnly: false,
   sort: "relevance",
 };
 
@@ -91,6 +94,7 @@ function matchesFabrics(p: CatalogCard, fabrics: MaterialId[]): boolean {
 
 function matchesFacets(p: CatalogCard, f: Filters, skip?: keyof Filters): boolean {
   if (skip !== "noSynthetics" && f.noSynthetics && oilDerivedPct(p.fabric_composition) > 0) return false;
+  if (skip !== "liveOnly" && f.liveOnly && p.source !== "live") return false;
   if (skip !== "fabrics" && !matchesFabrics(p, f.fabrics)) return false;
   if (skip !== "brands" && f.brands.length > 0 && !f.brands.includes(p.brand.slug)) return false;
   if (skip !== "sizes" && f.sizes.length > 0 &&
@@ -250,6 +254,7 @@ export function filtersToParams(f: Filters): URLSearchParams {
   if (f.maxPrice != null) sp.set("max", String(f.maxPrice));
   if (f.minScore != null) sp.set("minScore", String(f.minScore));
   if (f.noSynthetics) sp.set("pure", "1");
+  if (f.liveOnly) sp.set("live", "1");
   if (f.sort !== "relevance") sp.set("sort", f.sort);
   return sp;
 }
@@ -274,6 +279,7 @@ export function paramsToFilters(sp: URLSearchParams): Filters {
     maxPrice: num("max"),
     minScore: num("minScore"),
     noSynthetics: sp.get("pure") === "1",
+    liveOnly: sp.get("live") === "1",
     sort:
       sort === "natural" || sort === "score" || sort === "price-asc" || sort === "price-desc"
         ? sort

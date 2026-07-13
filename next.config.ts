@@ -11,6 +11,15 @@ const nextConfig: NextConfig = {
         protocol: "https",
         hostname: "images.unsplash.com",
       },
+      {
+        // live-ingested product photos (Shopify-hosted brand stores)
+        protocol: "https",
+        hostname: "cdn.shopify.com",
+      },
+      {
+        protocol: "https",
+        hostname: "**.shopify.com",
+      },
     ],
   },
 };

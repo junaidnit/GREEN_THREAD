@@ -16,11 +16,18 @@
 ## 2. Architecture overview
 
 ```
-data/raw/*.json ──► scripts/enrich.ts (Claude extraction, resumable, £~pennies)
+LIVE:  scripts/ingest-live.ts ──► real brand Shopify feeds (/products.json, paginated,
+       backoff, politeness sleeps) ──► parseComposition (only keeps items whose label
+       discloses fibre %) ──► data/products_live.json  (1,264 REAL products,
+       source:"live", real buy_url / photo / price — Thought, Lucy & Yak,
+       Beaumont Organic, Komodo)
+
+DEMO:  data/raw/*.json ──► scripts/enrich.ts (Claude extraction, resumable, £~pennies)
                 ──► scripts/generate-catalog.ts (deterministic ~1,561 items, no AI)
                 ──► scripts/validate-seed.ts (cert evidence-check, label hygiene)
                 ──► data/products_seed.json + products_generated.json (committed)
-                ──► scripts/db-setup.ts ──► Supabase (brands, products, events)
+
+BOTH   ──► scripts/db-setup.ts ──► Supabase (brands, products, events)
                                               │
 Next.js 16 App Router ◄───────────────────────┘  (server components read Supabase,
   │                                                fall back to local JSON — app
@@ -28,7 +35,8 @@ Next.js 16 App Router ◄──────────────────�
   ├─ /api/concierge  — Claude tool-calling chat (streaming, AI SDK v7)
   ├─ /api/analyze    — Fabric Check: fetch any URL → extract label → score
   ├─ /api/event      — behavioural events → Supabase
-  └─ /out/[id]       — tracked affiliate-style redirect → /retailer/[id] (simulated checkout)
+  └─ /out/[id]       — tracked redirect: source:"live" → REAL merchant product page;
+                       concept items → /retailer/[id] (simulated checkout)
 ```
 
 **Key principle:** all AI work happens offline in the pipeline or in explicit user actions; browsing never waits on a model. Scoring is deterministic code (`computeScore`), never the LLM.
@@ -77,7 +85,8 @@ greenthread/
 4. **Fabric Check** — paste any product URL; live-verified against a real Uniqlo page.
 5. **Natural-fibre-first reframe** — fibre mark as hero metric, "No synthetics" purist toggle (`?pure=1`), mislabelling detector, "Most natural" sort.
 6. **Phia design transformation** — Playfair serif, label-truth hero with floating verdict cards, thread-leaf animated logo, brand gallery, fibre edits, /brands.
-7. **Latest batch** — better-fibre recommendations (±25% price, less plastic), Fibre Diary, secondhand deeplinks, score + retailer-link audits.
+7. **Better-fibre batch** — better-fibre recommendations (±25% price, less plastic), Fibre Diary, secondhand deeplinks, score + retailer-link audits.
+8. **Live ingestion** — `scripts/ingest-live.ts` + `src/lib/live-ingest.ts`: 1,264 REAL products pulled from 4 real UK sustainable brands' own Shopify feeds (Thought 77, Lucy & Yak 185, Beaumont Organic 592, Komodo 410). Real titles/photos/prices/URLs; only items whose label discloses full composition are kept. Buy + "View this exact item" land on the exact merchant product page; concept items are now labelled honestly ("Find similar at…", "concept item" note). `?live=1` filter + LIVE badges.
 
 ## 5. Important code decisions
 
@@ -93,7 +102,8 @@ greenthread/
 
 ## 6. Current bugs / known issues
 
-- **Image↔title mismatch (accepted demo limitation):** small Unsplash pools mean a "Rib Tank" can show a striped tee. Only real retailer feeds fix this.
+- **Image↔title mismatch (concept items only):** small Unsplash pools mean a "Rib Tank" can show a striped tee. The 1,264 live items are immune — their photos come from the brand's own store. Concept items are now labelled as such on the PDP.
+- **Thought pivoted to socks:** `wearethought.com` 301s to `thoughtsocks.com` (ingest uses the canonical domain). Their remaining garments are mostly clearance-priced — real, but a thin garment range.
 - **Fabric lens is desktop/hover-only** — mobile users don't see it (no broken UX, just absent).
 - **Some outbound links 403 to bots** (COS, Depop, eBay, People Tree, & Other Stories, Vestiaire, H&M) — they work in real browsers; can't verify programmatically. M&S was a real 404, fixed to `/l/search?searchTerm=`.
 - **Hydration-timing flakiness in dev** — first paint before hydration shows framer-motion elements at opacity 0 and counters at 0; fine in prod but screenshots/tests need explicit waits.
@@ -104,7 +114,8 @@ greenthread/
 
 - **Sponsor/ad slots** for fibre orgs (Woolmark, TENCEL, Better Cotton, GOTS) — planned secondary revenue, not built.
 - **"Why fibre matters / EU DPP 2028" narrative page** — regulatory-tailwind story, not built.
-- Real retailer feeds/scrapers through the existing enrichment pipeline (replaces demo data; unblocks public marketing).
+- More live brand feeds: any Shopify store with disclosed compositions is a 5-line addition to `SOURCES` in `scripts/ingest-live.ts` (People Tree hard-blocks bots with 503s; Seasalt/Finisterre/Patagonia aren't public-Shopify). Re-run the script any time — data refreshes in place.
+- Affiliate network integration (AWIN/Rakuten) so live buy-clicks earn commission — the redirect plumbing in `/out/[id]` is ready for deeplink wrapping.
 - Semantic search (pgvector), compare view, price-drop alerts, Android/extension surfaces (Phia parity ideas).
 - Cloth-physics 3D viewer + shoppable video (parked: need real 3D/video assets).
 

@@ -1,6 +1,37 @@
 {
   "brands": [
     {
+      "slug": "lucy-and-yak",
+      "name": "Lucy & Yak",
+      "website": "https://www.lucyandyak.com",
+      "ethics_summary": "Brighton-born independent brand known for organic-cotton dungarees and colourful separates, made in audited factories with published supplier lists.",
+      "certifications": [
+        "GOTS"
+      ],
+      "ethics_modifier": 5
+    },
+    {
+      "slug": "beaumont-organic",
+      "name": "Beaumont Organic",
+      "website": "https://www.beaumontorganic.com",
+      "ethics_summary": "Manchester-based contemporary-conscious label working in organic cotton and linen, produced in small runs in Portugal with a focus on garment longevity.",
+      "certifications": [
+        "GOTS"
+      ],
+      "ethics_modifier": 5
+    },
+    {
+      "slug": "komodo",
+      "name": "Komodo",
+      "website": "https://komodo.co.uk",
+      "ethics_summary": "London label trading since 1988, an early adopter of organic cotton, hemp and TENCEL with Soil Association-certified supply chains.",
+      "certifications": [
+        "GOTS",
+        "Soil Association"
+      ],
+      "ethics_modifier": 5
+    },
+    {
       "slug": "people-tree",
       "name": "People Tree",
       "website": "https://www.peopletree.co.uk",

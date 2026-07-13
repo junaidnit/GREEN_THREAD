@@ -103,7 +103,7 @@ export default function RootLayout({
               <kbd className="rounded border border-border bg-surface px-1.5 py-0.5 font-mono text-[10px]">/</kbd> to search
             </span>
             <span className="opacity-40">·</span>
-            <span className="opacity-70">demo catalog, illustrative data</span>
+            <span className="opacity-70">LIVE items from brands&apos; own stores · rest is concept catalogue</span>
           </p>
         </footer>
         <Concierge />

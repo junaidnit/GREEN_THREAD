@@ -20,11 +20,16 @@ function loadLocal(): Product[] {
   const generated: SeedProduct[] = existsSync(generatedPath)
     ? JSON.parse(readFileSync(generatedPath, "utf8")).products
     : [];
+  // real products ingested from live brand feeds — real URLs, photos, prices
+  const livePath = resolve(process.cwd(), "data/products_live.json");
+  const live: SeedProduct[] = existsSync(livePath)
+    ? JSON.parse(readFileSync(livePath, "utf8")).products
+    : [];
   const brands = JSON.parse(
     readFileSync(resolve(process.cwd(), "data/raw/brands.json"), "utf8"),
   ).brands as Brand[];
   const brandBySlug = new Map(brands.map((b) => [b.slug, b]));
-  return [...seed, ...generated].map(({ brand_slug, ...rest }) => ({
+  return [...live, ...seed, ...generated].map(({ brand_slug, ...rest }) => ({
     ...rest,
     brand: brandBySlug.get(brand_slug)!,
   }));
@@ -64,6 +69,7 @@ async function loadSupabase(): Promise<Product[]> {
     color_family: row.color_family ?? "",
     sizes: row.sizes ?? [],
     fit: row.fit ?? "Regular",
+    source: row.source ?? undefined,
     fabric_composition: row.fabric_composition,
     sustainability: row.sustainability,
   }));
@@ -107,6 +113,7 @@ export const getCatalogCards = cache(async (): Promise<CatalogCard[]> => {
     color_family: p.color_family,
     sizes: p.sizes,
     fit: p.fit,
+    source: p.source,
     fabric_composition: p.fabric_composition,
     sustainability: {
       score: p.sustainability.score,

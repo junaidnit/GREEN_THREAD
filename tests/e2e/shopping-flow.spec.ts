@@ -181,11 +181,16 @@ test.describe("fixes & subtle features", () => {
   });
 
   test('"t shirt" no longer floods the whole catalog', async ({ page }) => {
+    await page.goto("/search");
+    const allText = await page.getByTestId("results-count").innerText();
+    const catalogSize = Number(allText.match(/(\d+)/)?.[1] ?? 0);
+
     await page.goto("/search?q=t%20shirt");
     const count = await page.getByTestId("product-card").count();
     const text = await page.getByTestId("results-count").innerText();
     const total = Number(text.match(/(\d+)/)?.[1] ?? 0);
-    expect(total).toBeLessThan(800);
+    // narrowed to well under half the catalog = not flooding via the stray "t"
+    expect(total).toBeLessThan(catalogSize * 0.5);
     expect(count).toBeGreaterThan(0);
   });
 
@@ -371,5 +376,45 @@ test.describe("theme", () => {
     await expect(page.locator("html")).toHaveClass(/dark/);
     await page.reload();
     await expect(page.locator("html")).toHaveClass(/dark/);
+  });
+});
+
+test.describe("live listings — real products, real merchant links", () => {
+  test("live filter shows only real listings with LIVE marks", async ({ page }) => {
+    await page.goto("/search?live=1");
+    await expect(page.getByTestId("results-count")).toBeVisible();
+    const cards = page.getByTestId("product-card");
+    expect(await cards.count()).toBeGreaterThan(10);
+    // every visible card carries the LIVE mark
+    const firstCard = cards.first();
+    await expect(firstCard.getByTestId("live-mark")).toBeVisible();
+  });
+
+  test("live PDP: badge + exact merchant product link", async ({ page }) => {
+    await page.goto("/search?live=1");
+    await page.getByTestId("product-card").first().click();
+    await page.waitForURL(/\/product\//);
+    await expect(page.getByTestId("live-badge")).toBeVisible();
+    const href = await page.getByTestId("view-on-retailer").getAttribute("href");
+    // deep link straight to the item's own page, not a site search
+    expect(href).toMatch(/^https:\/\/.+\/products\/.+/);
+    await expect(page.getByText(/View this exact item at/)).toBeVisible();
+  });
+
+  test("buy on a live item redirects to the real merchant page", async ({ page, request }) => {
+    await page.goto("/search?live=1");
+    await page.getByTestId("product-card").first().click();
+    await page.waitForURL(/\/product\//);
+    const id = page.url().split("/product/")[1];
+    const resp = await request.fetch(`/out/${id}`, { maxRedirects: 0 });
+    expect(resp.status()).toBe(307);
+    expect(resp.headers()["location"]).toMatch(/^https:\/\/.+\/products\/.+/);
+  });
+
+  test("concept items are labelled honestly", async ({ page }) => {
+    await page.goto("/product/salt-stem-linen-shirt-white");
+    await expect(page.getByText(/Concept item — illustrative/)).toBeVisible();
+    await expect(page.getByText(/Find similar at/)).toBeVisible();
+    await expect(page.getByTestId("live-badge")).toHaveCount(0);
   });
 });

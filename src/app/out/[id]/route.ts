@@ -28,5 +28,10 @@ export async function GET(_req: Request, { params }: { params: Promise<{ id: str
       .then(() => {}, () => {});
   }
 
+  // live-ingested products have a REAL product page — send the shopper there.
+  // concept/demo items go to the simulated checkout instead.
+  if (product.source === "live" && /^https?:\/\//.test(product.buy_url)) {
+    return NextResponse.redirect(product.buy_url);
+  }
   return NextResponse.redirect(new URL(`/retailer/${id}`, _req.url));
 }

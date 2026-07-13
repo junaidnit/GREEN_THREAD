@@ -57,7 +57,11 @@ async function main() {
   const generated: SeedProduct[] = existsSync(generatedPath)
     ? JSON.parse(readFileSync(generatedPath, "utf8")).products
     : [];
-  const products = [...seedProducts, ...generated];
+  const livePath = resolve(process.cwd(), "data/products_live.json");
+  const live: SeedProduct[] = existsSync(livePath)
+    ? JSON.parse(readFileSync(livePath, "utf8")).products
+    : [];
+  const products = [...live, ...seedProducts, ...generated];
 
   console.log(`2/3 Seeding ${brands.length} brands…`);
   const brandRows = brands

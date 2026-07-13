@@ -133,7 +133,7 @@ export function SearchExperience({ products }: { products: CatalogCard[] }) {
     filters.fabrics.length + filters.brands.length + filters.sizes.length +
     filters.colors.length + filters.fits.length + filters.certs.length + filters.categories.length +
     (filters.gender ? 1 : 0) + (filters.maxPrice != null ? 1 : 0) + (filters.minScore != null ? 1 : 0) +
-    (filters.noSynthetics ? 1 : 0);
+    (filters.noSynthetics ? 1 : 0) + (filters.liveOnly ? 1 : 0);
 
   /* refinement banner: invite (not force) narrowing after a broad search */
   const [bannerDismissed, setBannerDismissed] = useState(false);
@@ -201,6 +201,21 @@ export function SearchExperience({ products }: { products: CatalogCard[] }) {
           >
             <Leaf className="size-4" />
             <span className="hidden sm:inline">No synthetics</span>
+          </button>
+          {/* real listings only: items ingested live from the brand's own feed */}
+          <button
+            data-testid="live-toggle"
+            onClick={() => set("liveOnly", !filters.liveOnly)}
+            aria-pressed={filters.liveOnly}
+            title="Only real listings pulled live from brands' own stores — buy lands on that exact product"
+            className={`flex h-12 shrink-0 items-center gap-2 rounded-full border px-4 text-sm font-semibold transition-all ${
+              filters.liveOnly
+                ? "border-grade-a bg-grade-a text-white shadow-[0_0_16px_-4px_var(--grade-a)]"
+                : "border-border bg-surface hover:border-grade-a/50"
+            }`}
+          >
+            <span className={`size-2 rounded-full ${filters.liveOnly ? "bg-white" : "animate-pulse bg-grade-a"}`} />
+            <span className="hidden sm:inline">Live</span>
           </button>
           {/* mobile filter drawer trigger */}
           <button

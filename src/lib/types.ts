@@ -113,6 +113,8 @@ export interface CatalogCard {
   color_family: string;
   sizes: string[];
   fit: string;
+  /** "live" = real product ingested from the brand's own feed. */
+  source?: string;
   fabric_composition: FabricPart[];
   sustainability: Pick<Sustainability, "score" | "grade" | "certifications" | "greenwash_flags">;
 }
