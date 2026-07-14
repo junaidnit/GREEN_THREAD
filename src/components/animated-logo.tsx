@@ -1,42 +1,61 @@
+import { useId } from "react";
+
 /**
- * The GreenThread mark: a single thread that draws itself into a leaf —
- * fibre becoming garment. Pure SVG stroke animation, inherits currentColor.
+ * The GreenThread mark — the business logo, recreated as vector: a single
+ * ribbon of thread loops into a needle's-eye teardrop and ties itself into
+ * an open knot, weaving over-and-under like cloth.
+ *
+ * Geometry (viewBox 120×168): strand A (back) runs apex → right flank →
+ * pinch → SW sweep → elbow → bar east; strand B (front) runs apex → left
+ * flank → pinch → SE to the cut end. The two crossings (pinch + bar) are
+ * carved out of strand A with a mask, so the over-under weave reads on any
+ * surface. Pure currentColor strokes; the thread draws itself on load.
+ * (Bezier flanks, not circle arcs — arcs read padlock, not teardrop.)
  */
 export function LogoMark({ size = 28, animate = true }: { size?: number; animate?: boolean }) {
+  const maskId = useId();
   return (
     <svg
-      width={size}
+      width={Math.round((size * 120) / 168)}
       height={size}
-      viewBox="0 0 48 48"
+      viewBox="0 0 120 168"
       fill="none"
       aria-hidden="true"
       className="shrink-0"
     >
-      {/* the thread: trails in from the left, curls, and rises into the stem */}
+      <defs>
+        <mask id={maskId} maskUnits="userSpaceOnUse" x="0" y="0" width="120" height="168">
+          <rect width="120" height="168" fill="white" />
+          {/* gaps where the front strand weaves over: pinch + bar */}
+          <path d="M 50 73 L 59 92" stroke="black" strokeWidth="24" />
+          <path d="M 63.5 124 L 67.5 148" stroke="black" strokeWidth="24" />
+        </mask>
+      </defs>
+      {/* strand A (back): right flank → pinch → SW sweep → elbow → bar */}
       <path
         className={animate ? "draw-path" : undefined}
-        d="M3 40c6 2 10-2 9-6s-6-4-7-1 2 6 7 6c7 0 10-5 12-11"
+        mask={`url(#${maskId})`}
+        d="M 58 13
+           C 86 13, 94 44, 74 64
+           C 68 71, 62 77, 55 85
+           C 42 100, 30 110, 22 116
+           C 8 126, 10 138, 26 139
+           L 76 141"
         stroke="currentColor"
-        strokeWidth="2.2"
-        strokeLinecap="round"
+        strokeWidth="17"
         strokeLinejoin="round"
       />
-      {/* the leaf: grown from the thread */}
+      {/* strand B (front): left flank → pinch → down to the cut end */}
       <path
         className={animate ? "draw-path-slow" : undefined}
-        d="M24 28C22 14 30 5 43 4c1 13-5 23-19 24Z"
+        d="M 58 13
+           C 30 13, 22 44, 42 64
+           C 48 70, 53 77, 57 86
+           C 62 100, 64 112, 65 124
+           C 66 136, 68 146, 71 158"
         stroke="currentColor"
-        strokeWidth="2.2"
-        strokeLinecap="round"
+        strokeWidth="17"
         strokeLinejoin="round"
-      />
-      {/* central vein */}
-      <path
-        className={animate ? "draw-path-slow" : undefined}
-        d="M27 24c3-6 8-12 13-16"
-        stroke="currentColor"
-        strokeWidth="1.6"
-        strokeLinecap="round"
       />
     </svg>
   );

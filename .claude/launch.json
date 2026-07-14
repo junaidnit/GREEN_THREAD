@@ -2,11 +2,12 @@
   "version": "0.0.1",
   "configurations": [
     {
-      "name": "greenthread",
+      "name": "greenthread-dev",
       "runtimeExecutable": "npm",
       "runtimeArgs": ["--prefix", "C:\\Users\\mhmdj\\Downloads\\greenthread", "run", "dev"],
       "cwd": "C:\\Users\\mhmdj\\Downloads\\greenthread",
-      "port": 3000
+      "port": 3210,
+      "autoPort": true
     }
   ]
 }
