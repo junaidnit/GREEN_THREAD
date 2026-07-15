@@ -1,4 +1,5 @@
 import { extractComposition, scoreExtraction } from "@/lib/extract";
+import { hasAnthropicKey } from "@/lib/env";
 
 export const maxDuration = 60;
 
@@ -74,7 +75,7 @@ function extractMeta(html: string): PageMeta {
 }
 
 export async function POST(req: Request) {
-  if (!process.env.ANTHROPIC_API_KEY) {
+  if (!hasAnthropicKey()) {
     return Response.json({ error: "Analyzer is not configured." }, { status: 503 });
   }
   const { url } = await req.json();

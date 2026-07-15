@@ -1,4 +1,3 @@
-import { anthropic } from "@ai-sdk/anthropic";
 import {
   convertToModelMessages,
   stepCountIs,
@@ -7,6 +6,7 @@ import {
   type UIMessage,
 } from "ai";
 import { z } from "zod";
+import { anthropic, hasAnthropicKey } from "@/lib/env";
 import { getCatalog } from "@/lib/catalog";
 import { applyFilters, buildIndex, EMPTY_FILTERS } from "@/lib/search";
 import type { MaterialId, Product } from "@/lib/types";
@@ -43,7 +43,7 @@ function compact(p: Product) {
 }
 
 export async function POST(req: Request) {
-  if (!process.env.ANTHROPIC_API_KEY) {
+  if (!hasAnthropicKey()) {
     return Response.json(
       { error: "Concierge is not configured (missing ANTHROPIC_API_KEY)." },
       { status: 503 },

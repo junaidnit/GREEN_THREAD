@@ -1,6 +1,6 @@
 import { generateObject } from "ai";
-import { anthropic } from "@ai-sdk/anthropic";
 import { z } from "zod";
+import { anthropic } from "./env";
 import { computeScore } from "./scoring";
 import type { Practices, ScoreFactor } from "./types";
 

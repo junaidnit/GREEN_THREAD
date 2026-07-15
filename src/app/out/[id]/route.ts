@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { createClient } from "@supabase/supabase-js";
 import { getProduct } from "@/lib/catalog";
+import { supabaseConfig } from "@/lib/env";
 
 /**
  * Outbound click handler — the affiliate deeplink pattern.
@@ -19,10 +20,9 @@ export async function GET(_req: Request, { params }: { params: Promise<{ id: str
     `[out-click] ${new Date().toISOString()} product=${id} retailer=${product.retailer} price=£${product.price}`,
   );
   // affiliate-grade click log (fire and forget)
-  const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
-  const key = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
-  if (url && key) {
-    createClient(url, key)
+  const cfg = supabaseConfig();
+  if (cfg) {
+    createClient(cfg.url, cfg.key)
       .from("events")
       .insert({ type: "out_click", payload: { product: id, retailer: product.retailer, price: product.price } })
       .then(() => {}, () => {});

@@ -3,6 +3,7 @@ import { cache } from "react";
 import { existsSync, readFileSync } from "node:fs";
 import { createClient } from "@supabase/supabase-js";
 import { dataPath } from "./data-root";
+import { supabaseConfig } from "./env";
 import type { Brand, CatalogCard, FabricPart, Product, SeedProduct } from "./types";
 
 /**
@@ -36,8 +37,7 @@ function loadLocal(): Product[] {
 }
 
 async function loadSupabase(): Promise<Product[]> {
-  const url = process.env.NEXT_PUBLIC_SUPABASE_URL!;
-  const key = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!;
+  const { url, key } = supabaseConfig()!;
   const supabase = createClient(url, key);
   // PostgREST caps a single request at 1,000 rows — page through the catalog
   const PAGE = 1000;
@@ -77,11 +77,7 @@ async function loadSupabase(): Promise<Product[]> {
 }
 
 export const getCatalog = cache(async (): Promise<Product[]> => {
-  if (
-    process.env.NEXT_PUBLIC_SUPABASE_URL &&
-    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY &&
-    process.env.CATALOG_SOURCE !== "local"
-  ) {
+  if (supabaseConfig() && process.env.CATALOG_SOURCE !== "local") {
     try {
       const products = await loadSupabase();
       if (products.length > 0) return products;

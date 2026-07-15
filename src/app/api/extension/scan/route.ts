@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { extractComposition, scoreExtraction } from "@/lib/extract";
+import { hasAnthropicKey } from "@/lib/env";
 import { getBetterFibreMatch } from "@/lib/catalog";
 import { mapCategory } from "@/lib/live-ingest";
 import { fibreMark, misleadingName } from "@/lib/materials";
@@ -26,7 +27,7 @@ export async function OPTIONS() {
 }
 
 export async function POST(req: Request) {
-  if (!process.env.ANTHROPIC_API_KEY) {
+  if (!hasAnthropicKey()) {
     return NextResponse.json({ error: "Not configured." }, { status: 503, headers: CORS_HEADERS });
   }
 
