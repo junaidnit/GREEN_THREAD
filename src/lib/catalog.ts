@@ -3,7 +3,7 @@ import { cache } from "react";
 import { existsSync, readFileSync } from "node:fs";
 import { createClient } from "@supabase/supabase-js";
 import { dataPath } from "./data-root";
-import type { Brand, CatalogCard, Product, SeedProduct } from "./types";
+import type { Brand, CatalogCard, FabricPart, Product, SeedProduct } from "./types";
 
 /**
  * Server-side catalog loader.
@@ -159,6 +159,36 @@ export async function getBetterFibre(product: Product, limit = 4): Promise<Produ
       (a, b) =>
         oilDerivedPct(a.fabric_composition) - oilDerivedPct(b.fabric_composition) ||
         Math.abs(a.price - product.price) - Math.abs(b.price - product.price),
+    )
+    .slice(0, limit);
+}
+
+/**
+ * Cross-site "better fibre" match — for products we don't have a Product
+ * record for (an item on someone else's site, scraped by the browser
+ * extension). Same upgrade logic as getBetterFibre, working from
+ * a guessed category + composition instead of a catalog id.
+ */
+export async function getBetterFibreMatch(
+  input: { category: string; price: number | null; fabricComposition: FabricPart[] },
+  limit = 4,
+): Promise<CatalogCard[]> {
+  const { oilDerivedPct } = await import("./materials");
+  const cards = await getCatalogCards();
+  const myPlastic = oilDerivedPct(input.fabricComposition);
+  if (myPlastic === 0) return [];
+  return cards
+    .filter(
+      (c) =>
+        c.category === input.category &&
+        oilDerivedPct(c.fabric_composition) < myPlastic &&
+        (input.price == null || Math.abs(c.price - input.price) <= input.price * 0.35),
+    )
+    .sort(
+      (a, b) =>
+        (a.source === "live" ? 0 : 1) - (b.source === "live" ? 0 : 1) ||
+        oilDerivedPct(a.fabric_composition) - oilDerivedPct(b.fabric_composition) ||
+        (input.price == null ? 0 : Math.abs(a.price - input.price) - Math.abs(b.price - input.price)),
     )
     .slice(0, limit);
 }

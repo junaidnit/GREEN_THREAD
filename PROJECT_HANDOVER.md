@@ -44,9 +44,17 @@ Next.js 16 App Router ◄──────────────────�
   ├─ client: MiniSearch instant search + facets    always works offline)
   ├─ /api/concierge  — Claude tool-calling chat (streaming, AI SDK v7)
   ├─ /api/analyze    — Fabric Check: fetch any URL → extract label → score
+  ├─ /api/extension/scan — browser extension endpoint: score pre-scraped text
+  │                        (no fetch — dodges bot-blocked retailer sites) → recs
   ├─ /api/event      — behavioural events → Supabase
   └─ /out/[id]       — tracked redirect: source:"live" → REAL merchant product page;
                        concept items → /retailer/[id] (simulated checkout)
+
+extension/  (Chrome MV3, separate from the Next.js build — see extension/README.md)
+  content.js → scrapes the rendered page (JSON-LD + composition text),
+               shows a ribbon badge + result panel in a Shadow DOM
+  background.js → cross-origin POST to /api/extension/scan (avoids host-page CSP)
+  popup.html/js  → set the API endpoint (localhost while DNS/protection are blocked)
 ```
 
 **Key principle:** all AI work happens offline in the pipeline or in explicit user actions; browsing never waits on a model. Scoring is deterministic code (`computeScore`), never the LLM.
@@ -79,7 +87,9 @@ greenthread/
 │     │                    validateCertifications (anti-hallucination)
 │     ├─ materials.ts      fibreMark, oilDerivedPct, misleadingName, facts, cert info
 │     ├─ search.ts         MiniSearch index, facets, noSynthetics filter, URL state
-│     ├─ catalog.ts        Supabase/local loader, getBetterFibre, getSimilar, cards
+│     ├─ catalog.ts        Supabase/local loader, getBetterFibre(Match), getSimilar, cards
+│     ├─ extract.ts        shared Claude extraction schema + scoring — used by both
+│     │                    /api/analyze (server fetch) and /api/extension/scan (pre-scraped)
 │     ├─ brand-links.ts    real brand search URLs   ├─ resale-links.ts  Vinted/eBay/Depop/VC
 │     ├─ diary.ts          on-device purchase log   └─ spread.ts, format.ts, types.ts
 ├─ supabase/migration.sql  brands, products, events (+RLS)
@@ -97,6 +107,9 @@ greenthread/
 6. **Phia design transformation** — Playfair serif, label-truth hero with floating verdict cards, thread-leaf animated logo, brand gallery, fibre edits, /brands.
 7. **Better-fibre batch** — better-fibre recommendations (±25% price, less plastic), Fibre Diary, secondhand deeplinks, score + retailer-link audits.
 8. **Live ingestion** — `scripts/ingest-live.ts` + `src/lib/live-ingest.ts`: 1,264 REAL products pulled from 4 real UK sustainable brands' own Shopify feeds (Thought 77, Lucy & Yak 185, Beaumont Organic 592, Komodo 410). Real titles/photos/prices/URLs; only items whose label discloses full composition are kept. Buy + "View this exact item" land on the exact merchant product page; concept items are now labelled honestly ("Find similar at…", "concept item" note). `?live=1` filter + LIVE badges.
+9. **Twin-finder + sentinel** — `scripts/embed-catalog.ts` computes CLIP image embeddings locally (no API cost) into `data/twins.json`; powers "Same look, sustainably", twin-ranked better-fibre, and a "The real thing" callout that points concept items at their closest real LIVE lookalike (~49% of concept items have one). `scripts/sentinel.ts` (`npm run sentinel`) re-harvests live feeds, tracks price history (price-drop badges), and purges vanished listings from Supabase so Buy never 404s.
+10. **Business logo adopted** — the mark supplied by the owner (woven thread-ribbon) replaced the placeholder leaf mark everywhere: header/hero lockup (`src/components/animated-logo.tsx`), favicon (`src/app/icon.svg`), and a rasteriser (`scripts/render-logo.mjs`) for marketing assets at any colour.
+11. **Browser extension (MVP)** — `extension/`: a ribbon badge that follows the user across any clothing site. Click it → scrapes the *already-rendered* page (title, JSON-LD, composition text) in the user's own browser (defeats bot-blocking that stops server fetches) → posts to `/api/extension/scan` (new route, reuses the exact same extraction+scoring as Fabric Check via the newly shared `src/lib/extract.ts`) → shows the fibre verdict plus real "better fibre, similar price" alternatives from the catalog (`getBetterFibreMatch` in catalog.ts). Buy always lands on GreenThread via `/out/[id]` — the real merchant page for LIVE items. See `extension/README.md` for load-unpacked testing steps and the (owner-only) Chrome Web Store publishing flow.
 
 ## 5. Important code decisions
 
@@ -126,8 +139,9 @@ greenthread/
 - **"Why fibre matters / EU DPP 2028" narrative page** — regulatory-tailwind story, not built.
 - More live brand feeds: any Shopify store with disclosed compositions is a 5-line addition to `SOURCES` in `scripts/ingest-live.ts` (People Tree hard-blocks bots with 503s; Seasalt/Finisterre/Patagonia aren't public-Shopify). Re-run the script any time — data refreshes in place.
 - Affiliate network integration (AWIN/Rakuten) so live buy-clicks earn commission — the redirect plumbing in `/out/[id]` is ready for deeplink wrapping.
-- Semantic search (pgvector), compare view, price-drop alerts, Android/extension surfaces (Phia parity ideas).
+- Semantic search (pgvector), compare view, price-drop alerts (Phia parity ideas).
 - Cloth-physics 3D viewer + shoppable video (parked: need real 3D/video assets).
+- **Extension polish**: Firefox/Edge manifest variants, an options page beyond the bare API-base field, auto-detecting whether a page even looks like a product page (skip the ribbon on obviously irrelevant pages), and publishing to the Chrome Web Store (owner-only — needs the owner's Google developer account).
 
 ## 8. Next steps (in order)
 
