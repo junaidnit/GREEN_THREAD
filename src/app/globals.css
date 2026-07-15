@@ -126,6 +126,16 @@
   animation: gt-draw 2.2s 0.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
 }
 
+/* logo: the exact traced brand mark settles in (fills can't stroke-draw) */
+@keyframes gt-logo-reveal {
+  from { opacity: 0; transform: scale(0.9) rotate(-6deg); }
+  to { opacity: 1; transform: scale(1) rotate(0deg); }
+}
+.gt-logo-reveal {
+  animation: gt-logo-reveal 0.9s cubic-bezier(0.22, 1, 0.36, 1) both;
+  transform-origin: center;
+}
+
 /* floating label-verdict card (the Phia price-card motif) */
 @keyframes gt-float {
   0%, 100% { transform: translateY(0) rotate(-0.5deg); }
