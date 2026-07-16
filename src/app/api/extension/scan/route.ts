@@ -64,13 +64,15 @@ export async function POST(req: Request) {
   const priceNum = Number((object.price_text.match(/[\d.,]+/)?.[0] ?? "").replace(/,/g, ""));
   const price = Number.isFinite(priceNum) && priceNum > 0 ? priceNum : null;
 
-  const recommendations = await getBetterFibreMatch({
+  const { items: recommendations, withinPrice } = await getBetterFibreMatch({
     category,
     price,
     fabricComposition: object.fabric_composition,
   });
 
-  console.log(`[ext-scan] ${new URL(url).hostname} score=${scored.score} recs=${recommendations.length}`);
+  console.log(
+    `[ext-scan] ${new URL(url).hostname} score=${scored.score} recs=${recommendations.length} withinPrice=${withinPrice}`,
+  );
 
   return NextResponse.json(
     {
@@ -84,6 +86,8 @@ export async function POST(req: Request) {
       certifications: object.certifications,
       greenwashFlags: object.greenwash_flags,
       explanation: object.explanation,
+      /** false = no natural-fibre option at this price; these cost more */
+      recommendationsWithinPrice: withinPrice,
       recommendations: recommendations.map((c) => ({
         id: c.id,
         title: c.title,

@@ -246,8 +246,12 @@
       <p class="comp-list">${compList}</p>
       ${
         recsHtml
-          ? `<p class="section-title">Same look, better fibre</p>${recsHtml}`
-          : `<p class="empty">No close natural-fibre match in stock right now.</p>`
+          ? `<p class="section-title">${
+              data.recommendationsWithinPrice
+                ? "Same look, better fibre"
+                : "Nothing natural at this price — closest is"
+            }</p>${recsHtml}`
+          : `<p class="empty">No natural-fibre alternative in this category yet.</p>`
       }
       <a class="cta" href="${apiBase}/search?pure=1" target="_blank" rel="noopener">Shop plastic-free on GreenThread →</a>
     `;
