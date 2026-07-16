@@ -50,6 +50,15 @@ describe("consolidateComposition — multi-part garments", () => {
     expect(out.map((p) => p.label)).toEqual(["Cotton", "Polyester"]);
   });
 
+  it("strips long component prefixes the model merges together", () => {
+    // the extractor sometimes lumps components: "Sleeve Lining/Pocket Lining:"
+    const out = consolidateComposition([
+      { material: "conventional_cotton", label: "Shell/Body Lining/Collar: Cotton", pct: 100 },
+      { material: "polyester", label: "Sleeve Lining/Pocket Lining: Polyester", pct: 100 },
+    ]);
+    expect(out.map((p) => p.label)).toEqual(["Cotton", "Polyester"]);
+  });
+
   it("leaves an ordinary single-garment label untouched", () => {
     const out = consolidateComposition([
       { material: "organic_cotton", label: "Organic Cotton", pct: 95 },

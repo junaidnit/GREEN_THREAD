@@ -193,7 +193,8 @@ export function consolidateComposition(parts: FabricPart[]): FabricPart[] {
 
   const cleanLabel = (label: string, material: MaterialId): string => {
     const stripped = label
-      .replace(/^[^:]{1,24}:\s*/, "") // drop "Shell: ", "Body Lining: "
+      // drop component prefixes: "Shell: ", "Sleeve Lining/Pocket Lining: "
+      .replace(/^[^:]{1,48}:\s*/, "")
       .replace(/\d{1,3}\s*%\s*/g, "") // drop percentages embedded in the label
       .trim();
     return stripped || MATERIAL_LABELS[material];
