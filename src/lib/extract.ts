@@ -1,7 +1,7 @@
 import { generateObject } from "ai";
 import { z } from "zod";
 import { anthropic } from "./env";
-import { computeScore } from "./scoring";
+import { computeScore, consolidateComposition } from "./scoring";
 import type { Practices, ScoreFactor } from "./types";
 
 /**
@@ -66,7 +66,10 @@ export async function extractComposition(signal: PageSignal): Promise<Extraction
     prompt:
       `Page title: ${signal.title}\nSite: ${signal.siteName}\n\nPage content:\n"""${signal.text.slice(0, 7000)}"""`,
   });
-  return object;
+  // Fold multi-part garments ("Shell: 100% Cotton, Lining: 100% Polyester")
+  // into one garment's composition before anything downstream reads it —
+  // otherwise the fibre mark reports totals like "200% plastic".
+  return { ...object, fabric_composition: consolidateComposition(object.fabric_composition) };
 }
 
 export function scoreExtraction(

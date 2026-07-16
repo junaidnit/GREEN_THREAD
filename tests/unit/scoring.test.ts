@@ -2,11 +2,13 @@ import { describe, expect, it } from "vitest";
 import {
   CERT_CAP,
   computeScore,
+  consolidateComposition,
   fibreScore,
   gradeFor,
   normalizeComposition,
   validateCertifications,
 } from "@/lib/scoring";
+import { fibreMark, oilDerivedPct } from "@/lib/materials";
 import type { Practices } from "@/lib/types";
 
 const NO_PRACTICES: Practices = {
@@ -19,6 +21,61 @@ const NO_PRACTICES: Practices = {
   zero_waste: false,
   made_to_order: false,
 };
+
+describe("consolidateComposition — multi-part garments", () => {
+  // the real shape of a Uniqlo jacket label, which reported "200% plastic"
+  const uniqloJacket = [
+    { material: "conventional_cotton" as const, label: "Shell: 100% Cotton", pct: 100 },
+    { material: "conventional_cotton" as const, label: "Body Lining: 100% Cotton", pct: 100 },
+    { material: "polyester" as const, label: "Sleeve Lining: 100% Polyester", pct: 100 },
+    { material: "conventional_cotton" as const, label: "Collar: 100% Cotton", pct: 100 },
+    { material: "polyester" as const, label: "Pocket Lining: 100% Polyester", pct: 100 },
+  ];
+
+  it("folds a 5-part garment into one garment summing to 100", () => {
+    const out = consolidateComposition(uniqloJacket);
+    expect(out.reduce((s, p) => s + p.pct, 0)).toBe(100);
+    expect(out).toHaveLength(2); // cotton + polyester, duplicates merged
+  });
+
+  it("produces a believable fibre mark instead of '200% plastic'", () => {
+    expect(fibreMark(uniqloJacket).label).toBe("200% plastic"); // the bug
+    const out = consolidateComposition(uniqloJacket);
+    expect(oilDerivedPct(out)).toBe(40); // 2 of 5 parts are polyester
+    expect(fibreMark(out).label).toBe("40% plastic");
+  });
+
+  it("strips component prefixes and embedded percentages from labels", () => {
+    const out = consolidateComposition(uniqloJacket);
+    expect(out.map((p) => p.label)).toEqual(["Cotton", "Polyester"]);
+  });
+
+  it("leaves an ordinary single-garment label untouched", () => {
+    const out = consolidateComposition([
+      { material: "organic_cotton", label: "Organic Cotton", pct: 95 },
+      { material: "elastane", label: "Elastane", pct: 5 },
+    ]);
+    expect(out).toEqual([
+      { material: "organic_cotton", label: "Organic Cotton", pct: 95 },
+      { material: "elastane", label: "Elastane", pct: 5 },
+    ]);
+  });
+
+  it("absorbs rounding drift so the total is exactly 100", () => {
+    const out = consolidateComposition([
+      { material: "organic_cotton", label: "Cotton", pct: 100 },
+      { material: "linen", label: "Linen", pct: 100 },
+      { material: "hemp", label: "Hemp", pct: 100 },
+    ]);
+    expect(out.reduce((s, p) => s + p.pct, 0)).toBe(100); // 33.3 each
+  });
+
+  it("does not invent fibre when the label under-discloses", () => {
+    // only 60% stated — scaling to 100 would claim fibre the label never did
+    const out = consolidateComposition([{ material: "conventional_cotton", label: "Cotton", pct: 60 }]);
+    expect(out[0].pct).toBe(60);
+  });
+});
 
 describe("normalizeComposition", () => {
   it("scales percentages to sum to 100", () => {

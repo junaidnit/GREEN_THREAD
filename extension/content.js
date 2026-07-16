@@ -26,6 +26,38 @@
   }
 
   // ---------- scrape the rendered page ----------
+  const COMPOSITION_RE =
+    /composition|material|fabric|% (cotton|polyester|linen|wool|viscose|elastane|nylon|hemp)/i;
+
+  /**
+   * An actual stated fibre percentage ("95% Organic Cotton"). Deliberately
+   * strict: a bare `\d+%` also matches "50% off" in a sale banner, and the
+   * word "material" shows up in site nav — so a loose test wrongly concludes
+   * the visible text already holds the composition and skips the fallback.
+   */
+  const FIBRE_PCT_RE =
+    /\d{1,3}\s*%\s*(organic\s+|recycled\s+|virgin\s+)?(cotton|polyester|nylon|polyamide|linen|flax|wool|merino|cashmere|viscose|rayon|lyocell|tencel|modal|elastane|spandex|silk|hemp|acrylic|bamboo|cupro)/i;
+
+  /**
+   * Text of the whole document, including DOM that is present but not
+   * visible. Retailers routinely park the fibre composition inside a
+   * collapsed "Product details" accordion (Uniqlo does exactly this), and
+   * body.innerText omits anything hidden — so scraping innerText alone
+   * reports "no composition disclosed" on pages that plainly disclose it.
+   * Stripping tags off the live outerHTML mirrors what the server-side
+   * Fabric Check does, and sees the collapsed content too.
+   */
+  function documentText() {
+    return document.documentElement.outerHTML
+      .replace(/<script[\s\S]*?<\/script>/gi, " ")
+      .replace(/<style[\s\S]*?<\/style>/gi, " ")
+      .replace(/<[^>]+>/g, " ")
+      .replace(/&nbsp;/g, " ")
+      .replace(/&amp;/g, "&")
+      .replace(/\s+/g, " ")
+      .trim();
+  }
+
   function scrapePage() {
     const meta = (prop) =>
       document.querySelector(`meta[property="${prop}"]`)?.content ||
@@ -48,14 +80,18 @@
       }
     }
 
-    const bodyText = (document.body.innerText || "").replace(/\s+/g, " ").trim();
-    const compIdx = bodyText.search(
-      /composition|material|fabric|% (cotton|polyester|linen|wool|viscose|elastane|nylon|hemp)/i,
-    );
+    // visible text first (cleanest), then fall back to the full DOM text
+    // when the composition is hidden behind a collapsed panel
+    const visible = (document.body.innerText || "").replace(/\s+/g, " ").trim();
+    const source = FIBRE_PCT_RE.test(visible) ? visible : documentText();
+
+    // anchor the window on a real fibre percentage when there is one;
+    // otherwise fall back to the looser keyword hit
+    const compIdx = source.search(FIBRE_PCT_RE) >= 0 ? source.search(FIBRE_PCT_RE) : source.search(COMPOSITION_RE);
     const window_ =
       compIdx > 2000
-        ? bodyText.slice(0, 1200) + " … " + bodyText.slice(compIdx - 400, compIdx + 3500)
-        : bodyText.slice(0, 5000);
+        ? source.slice(0, 1200) + " … " + source.slice(compIdx - 400, compIdx + 3500)
+        : source.slice(0, 5000);
 
     return {
       url: location.href,

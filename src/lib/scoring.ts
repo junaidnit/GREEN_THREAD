@@ -174,6 +174,53 @@ export function normalizeComposition(parts: FabricPart[]): FabricPart[] {
   return parts.map((p) => ({ ...p, pct: Math.round((p.pct / total) * 100) }));
 }
 
+/**
+ * Turn a raw extracted composition into one garment's worth of fibre.
+ *
+ * Labels list multi-part garments per component — "Shell: 100% Cotton,
+ * Sleeve Lining: 100% Polyester, Collar: 100% Cotton" — so the parts sum to
+ * n×100. `fibreScore` normalises internally so the score stays right, but
+ * `fibreMark`/`oilDerivedPct` read the percentages literally and report
+ * nonsense like "200% plastic". Merge duplicate materials, scale a
+ * multi-part total back to a single garment, and clean the per-part label
+ * prefixes so the composition reads like a label, not a parts list.
+ *
+ * A total under 90 is left untouched: the disclosure is incomplete, and
+ * scaling it to 100 would invent fibre the label never claimed.
+ */
+export function consolidateComposition(parts: FabricPart[]): FabricPart[] {
+  if (parts.length === 0) return parts;
+
+  const cleanLabel = (label: string, material: MaterialId): string => {
+    const stripped = label
+      .replace(/^[^:]{1,24}:\s*/, "") // drop "Shell: ", "Body Lining: "
+      .replace(/\d{1,3}\s*%\s*/g, "") // drop percentages embedded in the label
+      .trim();
+    return stripped || MATERIAL_LABELS[material];
+  };
+
+  const merged = new Map<MaterialId, FabricPart>();
+  for (const p of parts) {
+    if (p.pct <= 0) continue;
+    const prev = merged.get(p.material);
+    if (prev) prev.pct += p.pct;
+    else merged.set(p.material, { material: p.material, label: cleanLabel(p.label, p.material), pct: p.pct });
+  }
+
+  const out = [...merged.values()];
+  const total = out.reduce((s, p) => s + p.pct, 0);
+  if (total <= 0 || total < 90) return out; // incomplete label — don't invent fibre
+
+  const scaled = out.map((p) => ({ ...p, pct: Math.round((p.pct / total) * 100) }));
+  // absorb rounding drift into the dominant fibre so it sums to exactly 100
+  const drift = 100 - scaled.reduce((s, p) => s + p.pct, 0);
+  if (drift !== 0) {
+    const dominant = scaled.reduce((a, b) => (b.pct > a.pct ? b : a));
+    dominant.pct += drift;
+  }
+  return scaled.sort((a, b) => b.pct - a.pct);
+}
+
 export function fibreScore(parts: FabricPart[]): number {
   const normalized = normalizeComposition(parts);
   const weighted = normalized.reduce(
