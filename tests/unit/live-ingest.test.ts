@@ -62,4 +62,23 @@ describe("mapCategory — Shopify product types to our taxonomy", () => {
     expect(mapCategory("", "Pointelle Beret - Berry Pink")).toBe("accessories");
     expect(mapCategory("", "Shearling Hooded Mitten - Light Grey")).toBe("accessories");
   });
+
+  it("treats 'short' as an adjective, not a garment", () => {
+    // these were all filed as trousers because bare /short/ matched
+    expect(mapCategory("", "Short Sleeve Rib Henley Top - Navy")).toBe("t-shirts");
+    expect(mapCategory("", "Vita - Ribbed Cotton Scoop Neck Short Sleeve T-Shirt")).toBe("t-shirts");
+    expect(mapCategory("", "Utility Short Blouson Jacket")).toBe("outerwear");
+    expect(mapCategory("", "Short Sleeve Linen Shirt")).toBe("shirts");
+  });
+
+  it("still maps actual shorts to trousers", () => {
+    expect(mapCategory("", "Calum Organic Cotton Shorts - Green")).toBe("trousers");
+    expect(mapCategory("Shorts", "Sylvia Organic Cotton Shorts in Crepe")).toBe("trousers");
+  });
+
+  it("lets the garment type beat the fabric", () => {
+    expect(mapCategory("", "Denim Jacket - Indigo")).toBe("outerwear");
+    expect(mapCategory("", "Denim Skirt - Black")).toBe("skirts");
+    expect(mapCategory("", "Slim Straight Jeans - Dark Indigo")).toBe("jeans");
+  });
 });

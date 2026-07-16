@@ -60,18 +60,27 @@ export function parseComposition(text: string): FabricPart[] | null {
   return out.map((p) => ({ ...p, pct: Math.round((p.pct / total) * 100) }));
 }
 
-/** Map a Shopify product_type / title to our category taxonomy. */
+/**
+ * Map a Shopify product_type / title to our category taxonomy.
+ *
+ * Order matters, and two traps are worth spelling out:
+ *  · "short" is an adjective far more often than a garment — "Short Sleeve
+ *    Henley Top", "Utility Short Blouson Jacket". Matching bare /short/ filed
+ *    tops and jackets as trousers, so only the plural \bshorts\b counts.
+ *  · The garment type beats the fabric: a "Denim Jacket" is outerwear, not
+ *    jeans, so outerwear is tested before the denim rule.
+ */
 export function mapCategory(productType: string, title: string): string {
   const t = `${productType} ${title}`.toLowerCase();
-  if (/dress|jumpsuit/.test(t)) return "dresses";
+  if (/sock|scarf|\bhat\b|beanie|beret|\bbag\b|belt|glove|mitten|headband|accessor/.test(t)) return "accessories";
+  if (/jacket|coat|gilet|blazer|parka|blouson|anorak|outerwear/.test(t)) return "outerwear";
+  if (/dress|jumpsuit|playsuit/.test(t)) return "dresses";
   if (/skirt/.test(t)) return "skirts";
-  if (/jean|denim/.test(t)) return "jeans";
-  if (/trouser|pant|legging|short|culotte/.test(t)) return "trousers";
   if (/hoodie|sweatshirt/.test(t)) return "hoodies";
   if (/jumper|cardigan|knit|sweater/.test(t)) return "knitwear";
-  if (/jacket|coat|gilet|outerwear/.test(t)) return "outerwear";
-  if (/t-?shirt|\btee\b|\btop\b|vest/.test(t)) return "t-shirts";
+  if (/jean|denim/.test(t)) return "jeans";
+  if (/trouser|\bpant|legging|\bshorts\b|culotte|chino/.test(t)) return "trousers";
+  if (/t-?shirt|\btee\b|\btop\b|vest|henley|camisole/.test(t)) return "t-shirts";
   if (/shirt|blouse/.test(t)) return "shirts";
-  if (/sock|scarf|hat|beanie|beret|bag|belt|glove|mitten|headband|accessor/.test(t)) return "accessories";
   return "shirts";
 }

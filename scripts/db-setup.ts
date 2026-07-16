@@ -110,6 +110,24 @@ async function main() {
     console.log(`   …${Math.min(i + 50, products.length)}/${products.length}`);
   }
 
+  // Prune live rows that are no longer in the feed. Seeding only upserts, so
+  // an item the brand has pulled would linger in Supabase forever and hand a
+  // shopper a dead buy link. Guarded on a non-empty live file so a missing
+  // products_live.json can never wipe the live catalog.
+  if (live.length > 0) {
+    const keep = live.map((p) => q(p.id)).join(",");
+    const pruned = (await runSql(
+      `delete from public.products
+       where source = 'live' and id not in (${keep})
+       returning id;`,
+    )) as Array<{ id: string }>;
+    console.log(
+      pruned.length
+        ? `   pruned ${pruned.length} live item(s) no longer in the brand feeds`
+        : "   no stale live items to prune",
+    );
+  }
+
   const count = (await runSql("select count(*)::int as n from public.products;")) as Array<{ n: number }>;
   console.log(`✓ Done. products table now has ${count[0]?.n} rows.`);
 }
