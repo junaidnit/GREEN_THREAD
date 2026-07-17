@@ -2,16 +2,17 @@ import "server-only";
 import { existsSync, readFileSync } from "node:fs";
 import { dataPath } from "./data-root";
 import type { Product } from "./types";
-import { oilDerivedPct } from "./materials";
+import { rankSameButBetter, rankSameLook, type MatchResult } from "./match";
 
 /**
- * Twin-finder runtime: answers "is there a similar shirt?" from the
- * precomputed visual-neighbour index (data/twins.json, built offline by
- * scripts/embed-catalog.ts with CLIP). No model runs at request time.
+ * Visual-similarity lookups over the precomputed CLIP twin index
+ * (data/twins.json, built offline by scripts/embed-catalog.ts). No model runs
+ * at request time.
  *
- * Category is a hard constraint — a shirt's lookalike must be a shirt;
- * visual similarity ranks candidates *within* the category (CLIP alone
- * over-weights photo style/background).
+ * Similarity is a RANKING signal only, never a gate: CLIP scores cluster
+ * around ~0.73 for almost any two catalogue photos because it keys on
+ * studio style as much as on the garment. What the item actually IS —
+ * garment type, gender, colour, pattern — is decided in match.ts.
  */
 
 interface TwinEntry {
@@ -34,57 +35,31 @@ function loadIndex(): TwinIndex | null {
   return _index ?? null;
 }
 
-function genderCompatible(a: Product, b: Product): boolean {
-  return a.gender === "unisex" || b.gender === "unisex" || a.gender === b.gender;
+/** Visual similarity to this product, by candidate id. */
+export function simsFor(id: string): Map<string, number> {
+  const idx = loadIndex();
+  const sims = new Map<string, number>();
+  for (const e of idx?.twins?.[id] ?? []) sims.set(e.id, e.sim);
+  for (const e of idx?.liveTwins?.[id] ?? []) sims.set(e.id, e.sim);
+  return sims;
 }
 
-function resolveEntries(
-  product: Product,
-  entries: TwinEntry[] | undefined,
-  all: Product[],
-): Array<{ p: Product; sim: number }> {
-  if (!entries) return [];
-  const byId = new Map(all.map((p) => [p.id, p]));
-  const seen = new Set<string>([product.image_url]); // concept items share photo pools —
-  const out: Array<{ p: Product; sim: number }> = []; // identical photos aren't "similar items"
-  for (const e of entries) {
-    const p = byId.get(e.id);
-    if (!p || !genderCompatible(product, p) || seen.has(p.image_url)) continue;
-    seen.add(p.image_url);
-    out.push({ p, sim: e.sim });
-  }
-  return out;
-}
-
-function resolveTwins(product: Product, all: Product[]): Array<{ p: Product; sim: number }> {
-  return resolveEntries(product, loadIndex()?.twins?.[product.id], all);
-}
-
-/** Visually closest items in the same category — the "similar shirt" answer. */
+/** Same garment, same design — the browse rail. Fibre-agnostic. */
 export function getSameLook(product: Product, all: Product[], limit = 8): Product[] {
-  const twins = resolveTwins(product, all);
-  const sameCategory = twins.filter((x) => x.p.category === product.category);
-  const pool = sameCategory.length >= 4 ? sameCategory : twins;
-  return pool.slice(0, limit).map((x) => x.p);
+  return rankSameLook(product, all, { limit, sims: simsFor(product.id) });
 }
 
-/** Lookalikes that beat this item on plastic at a similar price. */
-export function getTwinBetterFibre(product: Product, all: Product[], limit = 4): Product[] {
-  const myPlastic = oilDerivedPct(product.fabric_composition);
-  if (myPlastic === 0) return [];
-  return resolveTwins(product, all)
-    .filter(
-      (x) =>
-        x.p.category === product.category &&
-        oilDerivedPct(x.p.fabric_composition) < myPlastic &&
-        Math.abs(x.p.price - product.price) <= product.price * 0.25,
-    )
-    .slice(0, limit)
-    .map((x) => x.p);
+/** THE core promise: the same item, in a better fabric. */
+export function getSameButBetter(
+  product: Product,
+  all: Product[],
+  limit = 4,
+): MatchResult<Product> {
+  return rankSameButBetter(product, all, { limit, sims: simsFor(product.id) });
 }
 
 /**
- * For concept items: the closest REAL listing that looks like it —
+ * For concept items: the closest REAL listing of the same garment —
  * "here's the version of this you can actually buy today".
  */
 export function getLiveLookalike(
@@ -92,7 +67,8 @@ export function getLiveLookalike(
   all: Product[],
 ): { product: Product; sim: number } | null {
   if (product.source === "live") return null;
-  const candidates = resolveEntries(product, loadIndex()?.liveTwins?.[product.id], all);
-  const hit = candidates.find((x) => x.p.category === product.category && x.sim >= 0.6);
-  return hit ? { product: hit.p, sim: hit.sim } : null;
+  const sims = simsFor(product.id);
+  const live = all.filter((p) => p.source === "live");
+  const hit = rankSameLook(product, live, { limit: 1, sims })[0];
+  return hit ? { product: hit, sim: sims.get(hit.id) ?? 0 } : null;
 }

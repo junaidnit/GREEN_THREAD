@@ -38,6 +38,7 @@ const CARDS: CatalogCard[] = [
 
 /** A £20 high-street jacket, 60% polyester — the fast-fashion case. */
 const HIGH_STREET_JACKET = {
+  title: "Padded Jacket",
   category: "outerwear",
   price: 20,
   fabricComposition: [
@@ -67,13 +68,14 @@ describe("rankBetterFibre", () => {
     expect(items.map((i) => i.id)).not.toContain("plastic-jacket");
   });
 
-  it("stays inside the category", () => {
+  it("stays inside the garment type — a jacket is never answered with a tee", () => {
     const { items } = rankBetterFibre(CARDS, HIGH_STREET_JACKET);
     expect(items.map((i) => i.id)).not.toContain("natural-tee");
   });
 
   it("recommends nothing for an already plastic-free garment", () => {
     const { items } = rankBetterFibre(CARDS, {
+      title: "Linen Jacket",
       category: "outerwear",
       price: 40,
       fabricComposition: [{ material: "linen", label: "Linen", pct: 100 }],

@@ -65,6 +65,7 @@ export async function POST(req: Request) {
   const price = Number.isFinite(priceNum) && priceNum > 0 ? priceNum : null;
 
   const { items: recommendations, withinPrice } = await getBetterFibreMatch({
+    title: object.product_name || title || "",
     category,
     price,
     fabricComposition: object.fabric_composition,

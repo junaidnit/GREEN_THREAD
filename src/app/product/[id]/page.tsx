@@ -2,8 +2,9 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
-import { getBetterFibre, getCatalog, getProduct, getSimilar } from "@/lib/catalog";
-import { getLiveLookalike, getSameLook, getTwinBetterFibre } from "@/lib/twins";
+import { getCatalog, getProduct } from "@/lib/catalog";
+import { getLiveLookalike, getSameButBetter, getSameLook } from "@/lib/twins";
+import { garmentLabel } from "@/lib/garment";
 import { BuyButton } from "@/components/buy-button";
 import { RESALE_PLATFORMS, resaleTerm } from "@/lib/resale-links";
 import { formatPrice, titleCase } from "@/lib/format";
@@ -67,10 +68,9 @@ export default async function ProductPage({ params }: Props) {
   // category context: how this item compares to everything like it
   const all = await getCatalog();
 
-  // twin-finder: visually closest items (precomputed CLIP index) — falls back
-  // to attribute matching when the index hasn't been built for this item
-  const sameLook = getSameLook(product, all);
-  const similar = sameLook.length >= 4 ? sameLook : await getSimilar(product);
+  // same garment type, same design, same wearer — never a fallback to
+  // "anything in this category", which is how a polo got shown a camisole
+  const similar = getSameLook(product, all);
   const peers = all.filter((p) => p.category === product.category);
   const catAvg = Math.round(peers.reduce((sum, p) => sum + p.sustainability.score, 0) / peers.length);
   const delta = s.score - catAvg;
@@ -84,8 +84,9 @@ export default async function ProductPage({ params }: Props) {
   const mark = fibreMark(product.fabric_composition);
   const misnamed = misleadingName(product.title, product.fabric_composition);
   const natural = naturalPct(product.fabric_composition);
-  const twinBetter = getTwinBetterFibre(product, all);
-  const betterFibre = twinBetter.length > 0 ? twinBetter : await getBetterFibre(product);
+  // THE promise: this exact garment, in a better fabric
+  const { matches: betterMatches, reason: noMatchReason } = getSameButBetter(product, all);
+  const noun = garmentLabel(product.title, product.category); // "polo", "dress", …
   const lookalike = getLiveLookalike(product, all);
   const secondhandTerm = resaleTerm(product.brand.name, product.title);
 
@@ -383,18 +384,62 @@ export default async function ProductPage({ params }: Props) {
         </section>
       )}
 
-      {/* better fibre, same money — the upgrade path */}
-      {betterFibre.length > 0 && (
+      {/* THE promise: this exact garment, in a better fabric */}
+      {betterMatches.length > 0 && (
         <section className="mt-12" data-testid="better-fibre">
-          <p className="eyebrow">Same money, less plastic</p>
-          <h2 className="mb-4 mt-1 font-serif text-2xl font-medium italic tracking-tight sm:text-3xl">
-            Better fibre at this price
+          <p className="eyebrow">The same {noun}, better fabric</p>
+          <h2 className="mb-1 mt-1 font-serif text-2xl font-medium italic tracking-tight sm:text-3xl">
+            {betterMatches[0].tier === "exact"
+              ? `This ${noun}, without the plastic`
+              : `Closest ${noun} without the plastic`}
           </h2>
+          <p className="mb-4 max-w-xl text-sm text-muted-foreground">
+            Same garment, same cut{betterMatches[0].sameColour ? ", same colour" : ""} — we only
+            swap the fibre. Nothing here is a different kind of clothing.
+          </p>
           <div className="grid grid-cols-2 gap-x-4 gap-y-8 sm:gap-x-6 md:grid-cols-4">
-            {betterFibre.map((p) => (
-              <ProductCard key={p.id} product={p} />
+            {betterMatches.map((m) => (
+              <div key={m.item.id}>
+                <ProductCard product={m.item} />
+                <p className="mt-1.5 flex flex-wrap items-center gap-1.5 text-[10px]">
+                  <span
+                    className={`rounded-full px-1.5 py-0.5 font-semibold ${
+                      m.tier === "exact" ? "bg-grade-a/15 text-grade-a" : "bg-surface-2 text-muted-foreground"
+                    }`}
+                  >
+                    {m.tier === "exact" ? "SAME COLOUR & DESIGN" : m.sameColour ? "SAME COLOUR" : "OTHER COLOUR"}
+                  </span>
+                  <span className="text-grade-a">−{m.plasticSaved}% plastic</span>
+                  <span className="text-muted-foreground">
+                    {m.priceDelta === 0
+                      ? "same price"
+                      : m.priceDelta < 0
+                        ? `${formatPrice(Math.abs(m.priceDelta), product.currency)} cheaper`
+                        : `${formatPrice(m.priceDelta, product.currency)} more`}
+                  </span>
+                </p>
+              </div>
             ))}
           </div>
+        </section>
+      )}
+
+      {/* nothing qualified — say so, rather than filling the space with junk */}
+      {betterMatches.length === 0 && noMatchReason === "no-better-fibre-in-this-style" && (
+        <section className="mt-12 rounded-xl2 border border-border bg-surface p-6" data-testid="no-better-fibre">
+          <p className="eyebrow">The same {noun}, better fabric</p>
+          <h2 className="mt-1 font-serif text-2xl font-medium italic tracking-tight">
+            No better-fibre {noun} yet
+          </h2>
+          <p className="mt-2 max-w-xl text-sm text-muted-foreground">
+            We haven&apos;t found a {noun} with less plastic that we&apos;d call the
+            same garment. We&apos;d rather show you nothing than a different item — try the
+            secondhand check below, or browse every plastic-free{" "}
+            <Link href={`/search?category=${product.category}&pure=1`} className="underline underline-offset-2 hover:text-primary">
+              {titleCase(product.category)}
+            </Link>
+            .
+          </p>
         </section>
       )}
 
@@ -432,7 +477,7 @@ export default async function ProductPage({ params }: Props) {
       {similar.length > 0 && (
         <section className="mt-12">
           <h2 className="mb-4 font-serif text-2xl font-medium italic tracking-tight">
-            {sameLook.length >= 4 ? "Same look, sustainably" : "Similar, sustainably"}
+            More {noun === "piece" ? "like this" : `${noun}s`}
           </h2>
           <div className="grid grid-cols-2 gap-x-4 gap-y-8 sm:gap-x-6 md:grid-cols-4">
             {spreadByImage(similar).map((p) => (

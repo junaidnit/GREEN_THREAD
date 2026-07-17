@@ -295,13 +295,20 @@ test.describe("natural-fibre-first", () => {
 });
 
 test.describe("diary, better fibre, resale", () => {
-  test("plastic-heavy product offers 'better fibre at this price'", async ({ page }) => {
-    await page.goto("/product/zara-t-shirts-3"); // 100% polyester tank
-    await expect(page.getByTestId("better-fibre")).toBeVisible();
-    const cards = page.getByTestId("better-fibre").getByTestId("product-card");
-    expect(await cards.count()).toBeGreaterThanOrEqual(1);
-    // every recommendation must show less plastic than 100%
-    const marks = await page.getByTestId("better-fibre").getByTestId("fibre-mark").allInnerTexts();
+  test("plastic-heavy product offers the SAME garment in a better fabric", async ({ page }) => {
+    await page.goto("/product/zara-t-shirts-3"); // 100% polyester men's tank
+    const panel = page.getByTestId("better-fibre");
+    await expect(panel).toBeVisible();
+    // the promise is same-garment: a tank must be answered with tanks/vests,
+    // never a dress or a camisole
+    const titles = await panel.getByTestId("product-card").getByRole("heading").allInnerTexts();
+    expect(titles.length).toBeGreaterThanOrEqual(1);
+    for (const t of titles) {
+      expect(t).toMatch(/tank|vest/i);
+      expect(t).not.toMatch(/dress|camisole|skirt|trouser/i);
+    }
+    // and every one is a real fibre upgrade
+    const marks = await panel.getByTestId("fibre-mark").allInnerTexts();
     for (const m of marks) expect(m).not.toMatch(/100% plastic/);
   });
 

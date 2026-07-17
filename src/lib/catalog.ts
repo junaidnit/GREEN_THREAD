@@ -134,31 +134,15 @@ export async function getProduct(id: string): Promise<Product | undefined> {
   return all.find((p) => p.id === id);
 }
 
-/**
- * "Better fibre, same money": same category, similar price (±25%),
- * strictly less oil-derived plastic — the upgrade path, not an upsell.
+/*
+ * Recommendation matching lives in match.ts (pure) and twins.ts (index-aware).
+ * There were two matchers here — getBetterFibre and getSimilar — that ranked
+ * on `category` alone and, in getSimilar's case, ignored gender entirely
+ * while letting a shared fibre outweigh the category. That is how a navy
+ * men's polo came to be offered a pink camisole and a women's dress. Do not
+ * reintroduce category-only matching: the promise is "the SAME garment,
+ * better fabric", and garment identity has to be a hard gate.
  */
-export async function getBetterFibre(product: Product, limit = 4): Promise<Product[]> {
-  const { oilDerivedPct } = await import("./materials");
-  const all = await getCatalog();
-  const myPlastic = oilDerivedPct(product.fabric_composition);
-  if (myPlastic === 0) return []; // already plastic-free — nothing to upgrade
-  return all
-    .filter(
-      (p) =>
-        p.id !== product.id &&
-        p.category === product.category &&
-        p.gender !== (product.gender === "men" ? "women" : product.gender === "women" ? "men" : "") &&
-        Math.abs(p.price - product.price) <= product.price * 0.25 &&
-        oilDerivedPct(p.fabric_composition) < myPlastic,
-    )
-    .sort(
-      (a, b) =>
-        oilDerivedPct(a.fabric_composition) - oilDerivedPct(b.fabric_composition) ||
-        Math.abs(a.price - product.price) - Math.abs(b.price - product.price),
-    )
-    .slice(0, limit);
-}
 
 /**
  * Cross-site "better fibre" match — for products we don't have a Product
@@ -173,21 +157,3 @@ export async function getBetterFibreMatch(
   return rankBetterFibre(await getCatalogCards(), input, limit);
 }
 
-/** Naive similar-items: shared dominant fabric or category, ranked by score. */
-export async function getSimilar(product: Product, limit = 4): Promise<Product[]> {
-  const all = await getCatalog();
-  const dominant = [...product.fabric_composition].sort((a, b) => b.pct - a.pct)[0]?.material;
-  return all
-    .filter((p) => p.id !== product.id)
-    .map((p) => {
-      let affinity = 0;
-      if (p.category === product.category) affinity += 2;
-      if (p.fabric_composition.some((f) => f.material === dominant && f.pct >= 30)) affinity += 3;
-      if (p.brand.slug === product.brand.slug) affinity += 1;
-      return { p, affinity };
-    })
-    .filter((x) => x.affinity > 0)
-    .sort((a, b) => b.affinity - a.affinity || b.p.sustainability.score - a.p.sustainability.score)
-    .slice(0, limit)
-    .map((x) => x.p);
-}
