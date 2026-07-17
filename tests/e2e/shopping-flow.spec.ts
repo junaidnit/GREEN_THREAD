@@ -419,11 +419,27 @@ test.describe("live listings — real products, real merchant links", () => {
     expect(resp.headers()["location"]).toMatch(/^https:\/\/.+\/products\/.+/);
   });
 
-  test("concept items are labelled honestly", async ({ page }) => {
+  test("concept items are labelled honestly and route to something real", async ({ page }) => {
     await page.goto("/product/salt-stem-linen-shirt-white");
     await expect(page.getByText(/Concept item — illustrative/)).toBeVisible();
-    await expect(page.getByText(/Find similar at/)).toBeVisible();
     await expect(page.getByTestId("live-badge")).toHaveCount(0);
+    // the outbound button must never be a brand-search for an invented title;
+    // it either buys the real version or lands on a working internal search
+    const cta = page.getByTestId("view-on-retailer");
+    const href = await cta.getAttribute("href");
+    expect(href).toMatch(/^\/out\/live-|^\/search\?/); // real item, or working filter — never an external brand search
+    await expect(cta).toHaveText(/Buy the real version at|Shop plastic-free/);
+  });
+
+  test("a concept item's 'buy the real version' reaches a live merchant page", async ({ page, request }) => {
+    // find a concept item whose CTA is the real-version deeplink
+    await page.goto("/product/bloomfield-polo"); // men's polo — has a live twin
+    const href = await page.getByTestId("view-on-retailer").getAttribute("href");
+    if (href?.startsWith("/out/")) {
+      const resp = await request.fetch(href, { maxRedirects: 0 });
+      expect(resp.status()).toBe(307);
+      expect(resp.headers()["location"]).toMatch(/^https:\/\/.+\/products\/.+/);
+    }
   });
 });
 

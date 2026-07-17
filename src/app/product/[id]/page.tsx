@@ -24,7 +24,6 @@ import { ScoreDial } from "@/components/score-dial";
 import { AskConcierge } from "@/components/ask-concierge";
 import { FabricLens } from "@/components/fabric-lens";
 import { SaveButton } from "@/components/saved";
-import { viewOnBrandUrl } from "@/lib/brand-links";
 import { spreadByImage } from "@/lib/spread";
 import { ScoreFactors } from "@/components/score-factors";
 import { ExpandableText } from "@/components/kinetic";
@@ -182,30 +181,49 @@ export default async function ProductPage({ params }: Props) {
               retailer={product.retailer}
             />
             <div className="flex gap-2">
-              <a
-                href={
-                  product.source === "live"
-                    ? product.buy_url
-                    : viewOnBrandUrl(product.brand.slug, product.brand.name, product.title)
-                }
-                target="_blank"
-                rel="noopener noreferrer nofollow"
-                data-testid="view-on-retailer"
-                className="flex h-11 flex-1 items-center justify-center gap-2 rounded-full border border-border bg-surface text-sm font-medium transition-colors hover:border-primary/40 hover:bg-accent"
-              >
-                {product.source === "live"
-                  ? <>View this exact item at {product.brand.name}</>
-                  : <>Find similar at {product.brand.name}</>}{" "}
-                <ArrowUpRight className="size-3.5" />
-              </a>
+              {product.source === "live" ? (
+                // real listing — deep-link straight to the item on the brand's own site
+                <a
+                  href={product.buy_url}
+                  target="_blank"
+                  rel="noopener noreferrer nofollow"
+                  data-testid="view-on-retailer"
+                  className="flex h-11 flex-1 items-center justify-center gap-2 rounded-full border border-border bg-surface text-sm font-medium transition-colors hover:border-primary/40 hover:bg-accent"
+                >
+                  View this exact item at {product.brand.name} <ArrowUpRight className="size-3.5" />
+                </a>
+              ) : lookalike ? (
+                // concept item, but we found the real version — send them to it,
+                // NOT a brand search for an invented title (which returns nothing)
+                <a
+                  href={`/out/${lookalike.product.id}`}
+                  target="_blank"
+                  rel="noopener noreferrer nofollow"
+                  data-testid="view-on-retailer"
+                  className="flex h-11 flex-1 items-center justify-center gap-2 rounded-full border border-grade-a/40 bg-grade-a/5 text-sm font-medium text-grade-a transition-colors hover:bg-grade-a/10"
+                >
+                  Buy the real version at {lookalike.product.brand.name} <ArrowUpRight className="size-3.5" />
+                </a>
+              ) : (
+                // no real match yet — keep them in the funnel on a link that WORKS
+                <Link
+                  href={`/search?category=${product.category}&pure=1`}
+                  data-testid="view-on-retailer"
+                  className="flex h-11 flex-1 items-center justify-center gap-2 rounded-full border border-border bg-surface text-sm font-medium transition-colors hover:border-primary/40 hover:bg-accent"
+                >
+                  Shop plastic-free {noun === "piece" ? "options" : `${noun}s`} <ArrowUpRight className="size-3.5" />
+                </Link>
+              )}
               <SaveButton productId={product.id} imageUrl={product.image_url} />
             </div>
           </div>
           <p className="mt-2 text-xs text-muted-foreground">
             {product.source === "live" ? (
               <>Buy opens this exact product on {product.retailer}&apos;s own site — composition verified from their page.</>
+            ) : lookalike ? (
+              <>Concept item — illustrative. The button opens the closest real, buyable {noun} on {lookalike.product.brand.name}&apos;s own site.</>
             ) : (
-              <>Concept item — illustrative catalogue entry. Buy opens a simulated checkout to demo the journey.</>
+              <>Concept item — illustrative catalogue entry, to show the journey.</>
             )}
           </p>
 
