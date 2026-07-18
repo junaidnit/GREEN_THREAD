@@ -1,5 +1,8 @@
+import { existsSync, readFileSync } from "node:fs";
 import { describe, expect, it } from "vitest";
 import { rankSameButBetter, rankSameLook, type MatchItem } from "@/lib/match";
+import { garmentType, genderFor } from "@/lib/garment";
+import { oilDerivedPct } from "@/lib/materials";
 import type { FabricPart } from "@/lib/types";
 
 /**
@@ -144,5 +147,59 @@ describe("rankSameLook", () => {
       item({ id: "navy", title: "Organic Polo - Navy", gender: "men" }),
     ]);
     expect(out[0].id).toBe("navy");
+  });
+});
+
+describe("newly-classified types match same-type only", () => {
+  const target = (title: string) => item({ id: "t", title, gender: "unisex", fabric_composition: HALF });
+
+  it("a base layer is answered only with base layers", () => {
+    const { matches } = rankSameButBetter(target("Recycled polyester Base Layer — Navy"), [
+      item({ id: "bl", title: "Merino Wool Base Layer — Navy", fabric_composition: COTTON }),
+      item({ id: "tee", title: "Organic Cotton Tee — Navy", fabric_composition: COTTON }),
+      item({ id: "jumper", title: "Wool Jumper — Navy", fabric_composition: COTTON }),
+    ]);
+    expect(matches.map((m) => m.item.id)).toEqual(["bl"]);
+  });
+
+  it("a belt never matches trousers or a bag", () => {
+    const { matches, reason } = rankSameButBetter(target("Recycled polyester Belt — Black"), [
+      item({ id: "trews", title: "Organic Cotton Trousers — Black", fabric_composition: COTTON }),
+      item({ id: "bag", title: "Canvas Tote Bag — Black", fabric_composition: COTTON }),
+    ]);
+    expect(matches).toEqual([]);
+    expect(reason).toBe("no-better-fibre-in-this-style");
+  });
+});
+
+// Data-driven guard: the invariant the user actually cares about, locked into
+// CI against the REAL catalog (the audit script checks it too, at runtime).
+describe("no-leak invariant across the real catalog", () => {
+  const read = (f: string): MatchItem[] =>
+    existsSync(f) ? JSON.parse(readFileSync(f, "utf8")).products : [];
+  const all = [
+    ...read("data/products_live.json"),
+    ...read("data/products_seed.json"),
+    ...read("data/products_generated.json"),
+  ];
+
+  it("never recommends a different garment type or gender", () => {
+    if (all.length === 0) return; // data not present in this checkout
+    const plastic = all.filter((p) => oilDerivedPct(p.fabric_composition) >= 20);
+    const sample = plastic.filter((_, i) => i % 11 === 0); // ~1/11 for speed
+    let typeLeaks = 0;
+    let genderLeaks = 0;
+    for (const t of sample) {
+      const { matches } = rankSameButBetter(t, all, { limit: 4 });
+      const tType = garmentType(t.title, t.category);
+      const tGender = genderFor(t.title, tType, t.gender);
+      for (const m of matches) {
+        const mType = garmentType(m.item.title, m.item.category);
+        if (mType !== tType) typeLeaks++;
+        const mGender = genderFor(m.item.title, mType, m.item.gender);
+        if (!(tGender === "unisex" || mGender === "unisex" || tGender === mGender)) genderLeaks++;
+      }
+    }
+    expect({ typeLeaks, genderLeaks }).toEqual({ typeLeaks: 0, genderLeaks: 0 });
   });
 });
