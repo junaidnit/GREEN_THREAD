@@ -88,7 +88,13 @@ export function SearchExperience({ products }: { products: CatalogCard[] }) {
   const [visible, setVisible] = useState(PAGE_SIZE);
   const sentinelRef = useRef<HTMLDivElement>(null);
   const filterKey = filtersToParams(filters).toString();
-  useEffect(() => setVisible(PAGE_SIZE), [filterKey]);
+  // reset the page window when the filters change — adjusted during render
+  // (React's "reset state on key change" pattern), not via setState-in-effect
+  const [prevKey, setPrevKey] = useState(filterKey);
+  if (filterKey !== prevKey) {
+    setPrevKey(filterKey);
+    setVisible(PAGE_SIZE);
+  }
   useEffect(() => {
     const el = sentinelRef.current;
     if (!el) return;

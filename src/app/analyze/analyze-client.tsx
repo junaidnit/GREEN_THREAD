@@ -60,10 +60,14 @@ export function AnalyzeClient() {
     }
   }
 
-  // auto-run when arriving with ?url= (e.g. pasted a link into search)
+  // auto-run when arriving with ?url= (e.g. pasted a link into search).
+  // deferred a tick so the fetch's first setState isn't synchronous inside
+  // the effect (avoids the cascading-render warning); behaviour is unchanged.
   useEffect(() => {
     const fromParam = searchParams.get("url");
-    if (fromParam) analyze(fromParam);
+    if (!fromParam) return;
+    const id = setTimeout(() => analyze(fromParam), 0);
+    return () => clearTimeout(id);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 

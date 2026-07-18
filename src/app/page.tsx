@@ -169,7 +169,6 @@ export default async function Home() {
       {campaign && (
         <Reveal className="mt-20">
           <Link href="/search" className="group relative block h-[70vh] overflow-hidden bg-[#0c0f0d]">
-            {/* eslint-disable-next-line jsx-a11y/media-has-caption */}
             <video
               className="absolute inset-0 h-full w-full object-cover opacity-70"
               autoPlay

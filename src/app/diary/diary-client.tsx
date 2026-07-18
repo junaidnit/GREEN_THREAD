@@ -109,7 +109,7 @@ export function DiaryClient() {
 
           {/* entries */}
           <div className="mt-10 space-y-0" data-testid="diary-entries">
-            {[...entries].reverse().map((e, i) => (
+            {[...entries].reverse().map((e) => (
               <Link
                 key={`${e.id}-${e.date}`}
                 href={`/product/${e.id}`}

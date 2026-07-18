@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, useSyncExternalStore } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
 
@@ -18,6 +18,16 @@ export function getSaved(): string[] {
 function setSaved(ids: string[]) {
   localStorage.setItem(KEY, JSON.stringify(ids));
   window.dispatchEvent(new CustomEvent("gt:saved"));
+}
+
+/** Subscribe to wardrobe changes (this tab + other tabs). */
+function subscribeSaved(onChange: () => void): () => void {
+  window.addEventListener("gt:saved", onChange);
+  window.addEventListener("storage", onChange);
+  return () => {
+    window.removeEventListener("gt:saved", onChange);
+    window.removeEventListener("storage", onChange);
+  };
 }
 
 function Heart({ filled, className }: { filled?: boolean; className?: string }) {
@@ -74,19 +84,20 @@ export function SavedIndicator() {
  * arcs from the button into the header heart, which bounces on catch.
  */
 export function SaveButton({ productId, imageUrl }: { productId: string; imageUrl: string }) {
-  const [saved, setSavedState] = useState(false);
+  // derived from the wardrobe store — no setState-in-effect, and it stays in
+  // sync if the item is saved/removed elsewhere (e.g. the /saved page)
+  const saved = useSyncExternalStore(
+    subscribeSaved,
+    () => getSaved().includes(productId),
+    () => false,
+  );
   const [flying, setFlying] = useState<{ from: DOMRect; to: DOMRect } | null>(null);
   const btnRef = useRef<HTMLButtonElement>(null);
-
-  useEffect(() => {
-    setSavedState(getSaved().includes(productId));
-  }, [productId]);
 
   function toggle() {
     const ids = getSaved();
     if (ids.includes(productId)) {
       setSaved(ids.filter((i) => i !== productId));
-      setSavedState(false);
       return;
     }
     // launch the arc before the state lands — the reward IS the moment
@@ -95,7 +106,6 @@ export function SaveButton({ productId, imageUrl }: { productId: string; imageUr
     if (from && to) setFlying({ from, to });
     setTimeout(() => {
       setSaved([...ids, productId]);
-      setSavedState(true);
       setFlying(null);
     }, 620);
   }

@@ -36,17 +36,14 @@ export function CinematicHero({
       {/* ── ghosted film layers ── */}
       <div className="absolute inset-0 grid grid-cols-2 opacity-40">
         <div className="relative overflow-hidden">
-          {/* eslint-disable-next-line jsx-a11y/media-has-caption */}
           <video className={`${vid} cf-a`} autoPlay muted loop playsInline preload="auto" poster={POSTER.nature}>
             <source src={V.nature} type="video/mp4" />
           </video>
-          {/* eslint-disable-next-line jsx-a11y/media-has-caption */}
           <video className={`${vid} cf-b`} autoPlay muted loop playsInline preload="auto">
             <source src={V.weaving} type="video/mp4" />
           </video>
         </div>
         <div className="relative overflow-hidden">
-          {/* eslint-disable-next-line jsx-a11y/media-has-caption */}
           <video
             className={`${vid} [filter:grayscale(0.9)_brightness(0.75)]`}
             autoPlay
