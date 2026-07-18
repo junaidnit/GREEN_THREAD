@@ -1,5 +1,6 @@
 import { extractComposition, scoreExtraction } from "@/lib/extract";
 import { hasAnthropicKey } from "@/lib/env";
+import { safeFetchUrl } from "@/lib/url-safety";
 
 export const maxDuration = 60;
 
@@ -78,13 +79,13 @@ export async function POST(req: Request) {
   if (!hasAnthropicKey()) {
     return Response.json({ error: "Analyzer is not configured." }, { status: 503 });
   }
-  const { url } = await req.json();
-  let target: URL;
-  try {
-    target = new URL(url);
-    if (!/^https?:$/.test(target.protocol)) throw new Error();
-  } catch {
-    return Response.json({ error: "That doesn't look like a valid product link." }, { status: 400 });
+  const body = await req.json().catch(() => null);
+  const target = safeFetchUrl(body?.url);
+  if (!target) {
+    return Response.json(
+      { error: "That doesn't look like a valid public product link." },
+      { status: 400 },
+    );
   }
 
   let html: string;
@@ -115,11 +116,20 @@ export async function POST(req: Request) {
 
   const meta = extractMeta(html);
 
-  const object = await extractComposition({
-    title: meta.title,
-    siteName: meta.siteName ?? target.hostname,
-    text: meta.text,
-  });
+  let object: Awaited<ReturnType<typeof extractComposition>>;
+  try {
+    object = await extractComposition({
+      title: meta.title,
+      siteName: meta.siteName ?? target.hostname,
+      text: meta.text,
+    });
+  } catch (e) {
+    console.error(`[analyze] extraction failed for ${target.hostname}:`, e);
+    return Response.json(
+      { error: "We read the page but couldn't analyse the label just now — please try again." },
+      { status: 502 },
+    );
+  }
 
   const scored = scoreExtraction(object);
 

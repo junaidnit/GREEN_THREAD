@@ -50,9 +50,27 @@ export async function POST(req: Request) {
     );
   }
 
-  const { messages }: { messages: UIMessage[] } = await req.json();
-  const products = await getCatalog();
-  const index = buildIndex(products);
+  const body = await req.json().catch(() => null);
+  const messages: UIMessage[] | undefined = body?.messages;
+  if (!Array.isArray(messages) || messages.length === 0) {
+    return Response.json({ error: "No message to respond to." }, { status: 400 });
+  }
+
+  let products, index;
+  try {
+    products = await getCatalog();
+    index = buildIndex(products);
+  } catch (e) {
+    console.error("[concierge] catalog load failed:", e);
+    return Response.json({ error: "The concierge is temporarily unavailable." }, { status: 503 });
+  }
+
+  let modelMessages;
+  try {
+    modelMessages = await convertToModelMessages(messages);
+  } catch {
+    return Response.json({ error: "That message couldn't be read." }, { status: 400 });
+  }
 
   const result = streamText({
     model: anthropic("claude-sonnet-5"),
@@ -65,7 +83,7 @@ export async function POST(req: Request) {
       "If a product has greenwash_flags, mention that some of its claims are unverified. " +
       "If nothing fits, say so and suggest the closest alternative. Prices are in GBP (£); the shopper is in the UK. " +
       "Write plain conversational text only — no markdown, no asterisks, no bullet lists.",
-    messages: await convertToModelMessages(messages),
+    messages: modelMessages,
     stopWhen: stepCountIs(4),
     tools: {
       search_catalog: tool({

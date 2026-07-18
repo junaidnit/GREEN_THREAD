@@ -40,11 +40,25 @@ export async function POST(req: Request) {
     );
   }
 
-  const object = await extractComposition({
-    title: typeof title === "string" && title ? title : "Untitled product",
-    siteName: typeof siteName === "string" && siteName ? siteName : new URL(url).hostname,
-    text,
-  });
+  // hostname is best-effort context for the model — never let a malformed
+  // url string throw here
+  let host = "";
+  try { host = new URL(url).hostname; } catch { /* leave blank */ }
+
+  let object: Awaited<ReturnType<typeof extractComposition>>;
+  try {
+    object = await extractComposition({
+      title: typeof title === "string" && title ? title : "Untitled product",
+      siteName: typeof siteName === "string" && siteName ? siteName : host,
+      text,
+    });
+  } catch (e) {
+    console.error("[ext-scan] extraction failed:", e);
+    return NextResponse.json(
+      { error: "Couldn't analyse this item just now — try again." },
+      { status: 502, headers: CORS_HEADERS },
+    );
+  }
   const scored = scoreExtraction(object);
 
   if (!scored) {
