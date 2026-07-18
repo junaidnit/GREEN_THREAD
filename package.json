@@ -14,7 +14,8 @@
     "db:setup": "tsx scripts/db-setup.ts",
     "ingest:live": "tsx scripts/ingest-live.ts",
     "embed": "tsx scripts/embed-catalog.ts",
-    "sentinel": "tsx scripts/sentinel.ts && tsx scripts/db-setup.ts"
+    "sentinel": "tsx scripts/sentinel.ts && tsx scripts/db-setup.ts",
+    "audit:site": "tsx scripts/diagnose-site.ts"
   },
   "dependencies": {
     "@ai-sdk/anthropic": "^4.0.7",

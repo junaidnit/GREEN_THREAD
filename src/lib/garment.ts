@@ -12,13 +12,14 @@
  */
 
 export type GarmentType =
-  | "polo" | "tee" | "tank" | "henley" | "sweatshirt" | "hoodie"
+  | "polo" | "tee" | "tank" | "henley" | "sweatshirt" | "hoodie" | "baselayer"
   | "shirt" | "blouse"
   | "dress" | "jumpsuit" | "skirt"
   | "jeans" | "trousers" | "shorts" | "leggings" | "dungarees"
   | "jumper" | "cardigan"
   | "jacket" | "coat" | "gilet"
-  | "socks" | "scarf" | "hat" | "gloves" | "bag" | "underwear" | "swimwear"
+  | "socks" | "scarf" | "hat" | "gloves" | "belt" | "bag" | "underwear" | "swimwear"
+  | "homeware"
   | "other";
 
 export type Pattern = "check" | "stripe" | "floral" | "print" | "spot" | "plain";
@@ -36,6 +37,7 @@ const TYPE_RULES: Array<[RegExp, GarmentType]> = [
   [/\bgilet\b|\bbodywarmer\b/i, "gilet"], // before "vest": a gilet is not a tank
   [/\btank\b|\bvests?\b|\bsleeveless top\b|\bstrappy\b/i, "tank"], // UK "vest" = tank
   [/\bhoodie\b|\bhooded\b/i, "hoodie"],
+  [/\bbase ?layer\b/i, "baselayer"], // next-to-skin thermal top/legging
   [/\bsweatshirt\b|\bsweat\b|\bcrew ?neck sweat|\bfleece\b/i, "sweatshirt"],
   [/\bdungarees?\b|\boveralls?\b/i, "dungarees"],
   [/\bjumpsuit\b|\bplaysuit\b|\bboilersuit\b/i, "jumpsuit"],
@@ -56,9 +58,12 @@ const TYPE_RULES: Array<[RegExp, GarmentType]> = [
   [/\bscarf\b|\bsnood\b/i, "scarf"],
   [/\bhat\b|\bbeanie\b|\bcap\b|\bberet\b/i, "hat"],
   [/\bgloves?\b|\bmittens?\b/i, "gloves"],
+  [/\bbelt\b/i, "belt"],
   [/\bbag\b|\btote\b|\bbackpack\b|\bwashbag\b|\bbumbag\b|\bpouch\b/i, "bag"],
   [/\bbriefs?\b|\bboxers?\b|\bknickers\b|\bthong\b|\bbra\b/i, "underwear"],
   [/\bswim|\bbikini\b|\btrunks\b/i, "swimwear"],
+  // non-garment homewares — their own type so the matcher never cross-matches
+  [/\bblanket\b|\bapron\b|\bcushion\b|\bthrow\b|\btowel\b|\bnapkin\b|\btea ?towel\b/i, "homeware"],
 ];
 
 /** Coarse feed categories, for titles that name no garment at all. */
@@ -90,14 +95,16 @@ export function garmentType(title: string, category = ""): GarmentType {
 /** Shopper-facing noun for a type — "the same polo, better fabric". */
 const TYPE_LABEL: Record<GarmentType, string> = {
   polo: "polo", tee: "tee", tank: "vest", henley: "henley",
-  sweatshirt: "sweatshirt", hoodie: "hoodie", shirt: "shirt", blouse: "blouse",
+  sweatshirt: "sweatshirt", hoodie: "hoodie", baselayer: "base layer",
+  shirt: "shirt", blouse: "blouse",
   dress: "dress", jumpsuit: "jumpsuit", skirt: "skirt",
   jeans: "jeans", trousers: "trousers", shorts: "shorts",
   leggings: "leggings", dungarees: "dungarees",
   jumper: "jumper", cardigan: "cardigan",
   jacket: "jacket", coat: "coat", gilet: "gilet",
   socks: "socks", scarf: "scarf", hat: "hat", gloves: "gloves",
-  bag: "bag", underwear: "piece", swimwear: "swimwear",
+  belt: "belt", bag: "bag", underwear: "piece", swimwear: "swimwear",
+  homeware: "piece",
   other: "piece",
 };
 

@@ -16,7 +16,9 @@ const seed = read("data/products_seed.json");
 const gen = read("data/products_generated.json");
 const all = [...live, ...seed, ...gen];
 
+let hardFails = 0;
 const bad = (label: string, items: string[]) => {
+  if (items.length > 0) hardFails += items.length;
   console.log(`\n${items.length === 0 ? "✓" : "✗"} ${label}: ${items.length}`);
   for (const s of items.slice(0, 6)) console.log(`    · ${s}`);
 };
@@ -90,15 +92,21 @@ for (const t of sample) {
     if (!(tGender === "unisex" || mg === "unisex" || tGender === mg)) genderLeaks++;
   }
 }
+hardFails += typeLeaks + genderLeaks + scoreDrift;
 console.log(`\nmatcher sample: ${sample.length} plastic items checked`);
 console.log(`  ${typeLeaks === 0 ? "✓" : "✗"} cross-garment-type recommendations: ${typeLeaks}`);
 console.log(`  ${genderLeaks === 0 ? "✓" : "✗"} cross-gender recommendations:     ${genderLeaks}`);
 console.log(`  ⓘ plastic items with NO same-item match: ${emptyForPlastic}/${sample.length} (${Math.round((emptyForPlastic / sample.length) * 100)}%)`);
 
-// 8. colour coverage
+// ── informational warnings (do NOT fail the gate) ──
 const noColour = all.filter((p) => colourFamily(p.title, p.color) === null).length;
 console.log(`\nⓘ items with no derivable colour: ${noColour} (${Math.round((noColour / all.length) * 100)}%)`);
-
-// 9. unknown garment type
 const other = all.filter((p) => garmentType(p.title, p.category) === "other");
-bad("unidentified garment type", other.map((p) => p.title));
+console.log(`ⓘ unidentified garment type: ${other.length}`);
+for (const p of other.slice(0, 6)) console.log(`    · ${p.title}`);
+
+// ── the gate ──
+console.log(
+  `\n${hardFails === 0 ? "✓ ALL HARD CHECKS PASS" : `✗ ${hardFails} HARD FAILURE(S)`}`,
+);
+process.exit(hardFails === 0 ? 0 : 1);

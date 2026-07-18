@@ -39,6 +39,21 @@ describe("garmentType — a polo is not a tee", () => {
     expect(garmentType("Quilted Gilet - Navy")).toBe("gilet");
   });
 
+  it("classifies base layers, belts and homeware (was 'other')", () => {
+    expect(garmentType("Alpenglow Base Layer", "activewear")).toBe("baselayer");
+    expect(garmentType("Relaxed Merino wool Base Layer — Charcoal")).toBe("baselayer");
+    expect(garmentType("Linen Belt — Black", "accessories")).toBe("belt");
+    expect(garmentType("Organic cotton Belt — Forest")).toBe("belt");
+    expect(garmentType("Waxed Work Apron")).toBe("homeware");
+    expect(garmentType("Heirloom Baby Blanket")).toBe("homeware");
+  });
+
+  it("keeps belt/homeware words from hijacking real garments", () => {
+    expect(garmentType("Belted Wool Coat - Camel")).toBe("coat"); // "belted" ≠ belt
+    expect(garmentType("Terry Towelling Polo")).toBe("polo"); // "towelling" ≠ towel
+    expect(garmentType("Throw-on Linen Dress")).toBe("dress");
+  });
+
   it("falls back to the category when the title is opaque", () => {
     expect(garmentType("Byeol - Delano", "dresses")).toBe("dress");
     expect(garmentType("Mystery Item")).toBe("other");
