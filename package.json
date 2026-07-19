@@ -16,7 +16,8 @@
     "embed": "tsx scripts/embed-catalog.ts",
     "sentinel": "tsx scripts/sentinel.ts && tsx scripts/db-setup.ts && tsx scripts/record-truth.ts",
     "audit:site": "tsx scripts/diagnose-site.ts",
-    "truth": "tsx scripts/record-truth.ts"
+    "truth": "tsx scripts/record-truth.ts",
+    "grow": "tsx scripts/grow.ts"
   },
   "dependencies": {
     "@ai-sdk/anthropic": "^4.0.7",

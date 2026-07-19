@@ -1,6 +1,14 @@
 {
   "brands": [
     {
+      "slug": "bibico",
+      "name": "Bibico",
+      "website": "https://bibico.co.uk",
+      "ethics_summary": "Onboarded by the Scout agent from bibico.co.uk's own product feed — every listed item discloses its full fibre composition. Brand ethics profile pending manual review.",
+      "certifications": [],
+      "ethics_modifier": 3
+    },
+    {
       "slug": "lucy-and-yak",
       "name": "Lucy & Yak",
       "website": "https://www.lucyandyak.com",

@@ -18,13 +18,18 @@ import { colorFamily, fitFor } from "./product-attrs";
 const UA =
   "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0 Safari/537.36";
 
-const SOURCES = [
-  // canonical domain — wearethought.com now 301s here (brand pivoted to socks)
-  { brandSlug: "thought", name: "Thought", base: "https://thoughtsocks.com" },
-  { brandSlug: "lucy-and-yak", name: "Lucy & Yak", base: "https://www.lucyandyak.com" },
-  { brandSlug: "beaumont-organic", name: "Beaumont Organic", base: "https://www.beaumontorganic.com" },
-  { brandSlug: "komodo", name: "Komodo", base: "https://komodo.co.uk" },
-];
+export interface LiveSource {
+  brandSlug: string;
+  name: string;
+  base: string;
+}
+
+/** Sources are data, not code — the Scout agent (scripts/grow.ts) appends here. */
+function loadSources(): LiveSource[] {
+  const p = resolve(process.cwd(), "data/raw/live-sources.json");
+  return (JSON.parse(readFileSync(p, "utf8")) as { sources: LiveSource[] }).sources;
+}
+const SOURCES = loadSources();
 
 const NO_PRACTICES: Practices = {
   natural_dye: false, undyed: false, deadstock: false, pfc_free: false,
@@ -145,16 +150,20 @@ async function ingestBrand(src: (typeof SOURCES)[number], brandMeta: { certifica
   return { out, scanned };
 }
 
-/** Harvest every source and return the garment-first balanced product list. */
-export async function harvestAll(): Promise<SeedProduct[]> {
+/**
+ * Harvest sources and return the garment-first balanced product list.
+ * Pass `onlySlug` to ingest a single brand (the Scout's onboarding flow).
+ */
+export async function harvestAll(onlySlug?: string): Promise<SeedProduct[]> {
   const brands = new Map<string, { certifications: string[]; ethics_modifier: number }>(
     JSON.parse(readFileSync(resolve(process.cwd(), "data/raw/brands.json"), "utf8")).brands.map(
       (b: { slug: string }) => [b.slug, b],
     ),
   );
 
+  const sources = onlySlug ? SOURCES.filter((s) => s.brandSlug === onlySlug) : SOURCES;
   const all: SeedProduct[] = [];
-  for (const src of SOURCES) {
+  for (const src of sources) {
     console.log(`▶ ${src.name} (${src.base})`);
     const meta = brands.get(src.brandSlug);
     if (!meta) { console.log("   no brand meta, skipping"); continue; }

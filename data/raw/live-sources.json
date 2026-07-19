@@ -1,0 +1,29 @@
+{
+  "sources": [
+    {
+      "brandSlug": "thought",
+      "name": "Thought",
+      "base": "https://thoughtsocks.com"
+    },
+    {
+      "brandSlug": "lucy-and-yak",
+      "name": "Lucy & Yak",
+      "base": "https://www.lucyandyak.com"
+    },
+    {
+      "brandSlug": "beaumont-organic",
+      "name": "Beaumont Organic",
+      "base": "https://www.beaumontorganic.com"
+    },
+    {
+      "brandSlug": "komodo",
+      "name": "Komodo",
+      "base": "https://komodo.co.uk"
+    },
+    {
+      "brandSlug": "bibico",
+      "name": "Bibico",
+      "base": "https://bibico.co.uk"
+    }
+  ]
+}

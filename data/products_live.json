@@ -1,5 +1,5 @@
 {
- "ingested_at": "2026-07-16T21:40:30.548Z",
+ "ingested_at": "2026-07-19T23:07:47.116Z",
  "products": [
   {
    "id": "live-thought-organic-cotton-essential-slip-dress",
@@ -76615,6 +76615,5536 @@
      }
     ],
     "explanation": "Verified from Thought's own product page: 81% Organic Cotton, 19% Recycled Polyester. No certifications stated on the page.",
+    "greenwash_flags": [],
+    "certifications": [],
+    "practices": {
+     "natural_dye": false,
+     "undyed": false,
+     "deadstock": false,
+     "pfc_free": false,
+     "repair_program": false,
+     "take_back": false,
+     "zero_waste": false,
+     "made_to_order": false
+    }
+   }
+  },
+  {
+   "id": "live-bibico-aria-roll-neck-rust-coloured-lambswool-jumper",
+   "brand_slug": "bibico",
+   "title": "Aria Roll Neck Jumper",
+   "description": "colour selected – Tiger Rust Description This superfine roll-neck jumper, crafted from rare Super Geelong Merino lambswool, is the epitome of luxury and comfort. With its lightweight, warm, and incredibly soft feel, it’s a standout piece in our collection. Super Geelong Merino combines the tactile softness of cashmere with the superior durability of Merino. Expertly spun at a 200-year-old mill in the Scottish Highlands, this yarn makes our fine knits very special. This style is perfect for layering or wearing solo, keeping you lusciously snug on colder days. It features a subtle A-line silhoue",
+   "category": "knitwear",
+   "gender": "women",
+   "price": 119,
+   "currency": "GBP",
+   "retailer": "Bibico",
+   "buy_url": "https://bibico.co.uk/products/aria-roll-neck-rust-coloured-lambswool-jumper",
+   "image_url": "https://cdn.shopify.com/s/files/1/0023/0082/files/kt014tiger-11.jpg",
+   "color": "Multi",
+   "color_family": "Multi",
+   "sizes": [
+    "S",
+    "M",
+    "L"
+   ],
+   "fit": "Regular",
+   "source": "live",
+   "fabric_composition": [
+    {
+     "material": "merino_wool",
+     "label": "pure Super Geelong Merino lambswool",
+     "pct": 50
+    },
+    {
+     "material": "virgin_wool",
+     "label": "wool",
+     "pct": 50
+    }
+   ],
+   "sustainability": {
+    "score": 45,
+    "grade": "D",
+    "factors": [
+     {
+      "label": "Fibre composition",
+      "points": 42,
+      "detail": "50% Merino wool, 50% Virgin wool — weighted fibre impact (max 70)."
+     },
+     {
+      "label": "Brand practices",
+      "points": 3,
+      "detail": "Brand-level transparency, labour and supply-chain record."
+     }
+    ],
+    "explanation": "Verified from Bibico's own product page: 50% pure Super Geelong Merino lambswool, 50% wool. No certifications stated on the page.",
+    "greenwash_flags": [],
+    "certifications": [],
+    "practices": {
+     "natural_dye": false,
+     "undyed": false,
+     "deadstock": false,
+     "pfc_free": false,
+     "repair_program": false,
+     "take_back": false,
+     "zero_waste": false,
+     "made_to_order": false
+    }
+   }
+  },
+  {
+   "id": "live-bibico-kyra-mint-blouse",
+   "brand_slug": "bibico",
+   "title": "Kyra Relaxed Blouse",
+   "description": "colour selected – Mint Description Pull-on pale-mint blouse in a beautiful lightweight cambric cotton. 100% cotton. Round collar with a deep V cut at the centre front. Gathers around the collar at the front and back. Drop shoulders. Delicate handmade block print, made by the women at the cooperative we work with. Wear it loose for a relaxed look or tucked into trousers, skirts, or shorts. Breezy summer blouse. Also made in pale-mint, ecru and our summer-meadow print. Relaxed fit Soft and supple cambric cotton 100% cotton Details and Fit Fair Trade Machine wash 30° Made in India Length:67/26.4”",
+   "category": "t-shirts",
+   "gender": "women",
+   "price": 29,
+   "currency": "GBP",
+   "retailer": "Bibico",
+   "buy_url": "https://bibico.co.uk/products/kyra-mint-blouse",
+   "image_url": "https://cdn.shopify.com/s/files/1/0023/0082/products/wt005mint2270.jpg",
+   "color": "Mint",
+   "color_family": "Multi",
+   "sizes": [
+    "S",
+    "M",
+    "L",
+    "XL"
+   ],
+   "fit": "Relaxed",
+   "source": "live",
+   "fabric_composition": [
+    {
+     "material": "conventional_cotton",
+     "label": "cotton",
+     "pct": 100
+    }
+   ],
+   "sustainability": {
+    "score": 28,
+    "grade": "E",
+    "factors": [
+     {
+      "label": "Fibre composition",
+      "points": 24.5,
+      "detail": "100% Conventional cotton — weighted fibre impact (max 70)."
+     },
+     {
+      "label": "Brand practices",
+      "points": 3,
+      "detail": "Brand-level transparency, labour and supply-chain record."
+     }
+    ],
+    "explanation": "Verified from Bibico's own product page: 100% cotton. No certifications stated on the page.",
+    "greenwash_flags": [],
+    "certifications": [],
+    "practices": {
+     "natural_dye": false,
+     "undyed": false,
+     "deadstock": false,
+     "pfc_free": false,
+     "repair_program": false,
+     "take_back": false,
+     "zero_waste": false,
+     "made_to_order": false
+    }
+   }
+  },
+  {
+   "id": "live-bibico-amber-jumpsuit-stripe",
+   "brand_slug": "bibico",
+   "title": "Amber Striped Jumpsuit",
+   "description": "colour selected – Stripe Description An improved version of our favourite jumpsuit in 100% cotton. Fine indigo pinstripe, for a fresh, classic look. Longer, slightly tapered legs which can also be rolled up. Sleeveless, with a scoop neck. Two deep carpenter pockets at the waist seam. Front opening with five imitation shell buttons. Easy to wear as it comes, or with a long-sleeved T on cooler days. Comfortable and relaxed, a jumpsuit for every day. Also available in a linen-cotton blend in Olive. Regular fit Fair Trade Details and Fit 100% cotton Machine wash 30°C Made in India Front shoulder p",
+   "category": "dresses",
+   "gender": "women",
+   "price": 49,
+   "currency": "GBP",
+   "retailer": "Bibico",
+   "buy_url": "https://bibico.co.uk/products/amber-jumpsuit-stripe",
+   "image_url": "https://cdn.shopify.com/s/files/1/0023/0082/products/js001stripes1076.jpg",
+   "color": "Stripe",
+   "color_family": "Blue",
+   "sizes": [
+    "S",
+    "M",
+    "L"
+   ],
+   "fit": "Regular",
+   "source": "live",
+   "fabric_composition": [
+    {
+     "material": "conventional_cotton",
+     "label": "cotton",
+     "pct": 100
+    }
+   ],
+   "sustainability": {
+    "score": 28,
+    "grade": "E",
+    "factors": [
+     {
+      "label": "Fibre composition",
+      "points": 24.5,
+      "detail": "100% Conventional cotton — weighted fibre impact (max 70)."
+     },
+     {
+      "label": "Brand practices",
+      "points": 3,
+      "detail": "Brand-level transparency, labour and supply-chain record."
+     }
+    ],
+    "explanation": "Verified from Bibico's own product page: 100% cotton. No certifications stated on the page.",
+    "greenwash_flags": [],
+    "certifications": [],
+    "practices": {
+     "natural_dye": false,
+     "undyed": false,
+     "deadstock": false,
+     "pfc_free": false,
+     "repair_program": false,
+     "take_back": false,
+     "zero_waste": false,
+     "made_to_order": false
+    }
+   }
+  },
+  {
+   "id": "live-bibico-margate-relaxed-olive-cotton-twill-trousers",
+   "brand_slug": "bibico",
+   "title": "Margate Relaxed Trousers",
+   "description": "colour selected – Olive Description Flat front lightweight cotton twill trousers. Classic olive green. Durable industrial/workwear style. Mid-rise waist. Full length, slightly tapered leg with twin needle detail. Front zip fly closure with hook and bar fastening at the waistband. Belt loops. Two deep side pockets. Back patch pockets.This is our most tailored trouser. Please look at side chart and consider going up a size if you want a more relaxed fit. Regular fit Sturdy cotton twill 100% Organic Cotton Fair Trade Details &amp; Fit Machine wash 30°C Made in India Regular fit. Waist: 76cm/29.9”",
+   "category": "trousers",
+   "gender": "women",
+   "price": 59,
+   "currency": "GBP",
+   "retailer": "Bibico",
+   "buy_url": "https://bibico.co.uk/products/margate-relaxed-olive-cotton-twill-trousers",
+   "image_url": "https://cdn.shopify.com/s/files/1/0023/0082/files/DSCF4704.jpg",
+   "color": "Multi",
+   "color_family": "Multi",
+   "sizes": [
+    "8UK",
+    "10UK",
+    "12UK",
+    "14UK",
+    "16UK"
+   ],
+   "fit": "Relaxed",
+   "source": "live",
+   "fabric_composition": [
+    {
+     "material": "organic_cotton",
+     "label": "Organic Cotton Fair Trade Details &amp",
+     "pct": 100
+    }
+   ],
+   "sustainability": {
+    "score": 59,
+    "grade": "C",
+    "factors": [
+     {
+      "label": "Fibre composition",
+      "points": 56,
+      "detail": "100% Organic cotton — weighted fibre impact (max 70)."
+     },
+     {
+      "label": "Brand practices",
+      "points": 3,
+      "detail": "Brand-level transparency, labour and supply-chain record."
+     }
+    ],
+    "explanation": "Verified from Bibico's own product page: 100% Organic Cotton Fair Trade Details &amp. No certifications stated on the page.",
+    "greenwash_flags": [],
+    "certifications": [],
+    "practices": {
+     "natural_dye": false,
+     "undyed": false,
+     "deadstock": false,
+     "pfc_free": false,
+     "repair_program": false,
+     "take_back": false,
+     "zero_waste": false,
+     "made_to_order": false
+    }
+   }
+  },
+  {
+   "id": "live-bibico-tara-striped-denim-shirt-dress",
+   "brand_slug": "bibico",
+   "title": "Tara Shirt Dress",
+   "description": "colour selected – Denim Stripe Description Effortless, roomy, versatile, simple yet stylish shirt dress. The pin striped blue denim fabric is new for this season. Very soft and supple denim, cool to wear. Hangs beautifully. Straight cut. Shirt collar with halfway buttoned placket. Imitation shell buttons. ¾ length bracelet sleeves. Deep carpenter pockets. Falls at mid-calf. Relaxed fit Soft and supple striped denim cotton 100% Cotton Fair Trade Details &amp; Fit Machine wash 30°C Made in India Length: 108cm/42.5” Model wears size Small The model is 173cm/ 5.8” tall. Bust 84cm/33”. Waist 62cm/2",
+   "category": "dresses",
+   "gender": "women",
+   "price": 69,
+   "currency": "GBP",
+   "retailer": "Bibico",
+   "buy_url": "https://bibico.co.uk/products/tara-striped-denim-shirt-dress",
+   "image_url": "https://cdn.shopify.com/s/files/1/0023/0082/files/wd001denimstripe-5.jpg",
+   "color": "Multi",
+   "color_family": "Multi",
+   "sizes": [
+    "XS",
+    "S",
+    "M",
+    "L",
+    "XL"
+   ],
+   "fit": "Regular",
+   "source": "live",
+   "fabric_composition": [
+    {
+     "material": "conventional_cotton",
+     "label": "Cotton Fair Trade Details &amp",
+     "pct": 100
+    }
+   ],
+   "sustainability": {
+    "score": 28,
+    "grade": "E",
+    "factors": [
+     {
+      "label": "Fibre composition",
+      "points": 24.5,
+      "detail": "100% Conventional cotton — weighted fibre impact (max 70)."
+     },
+     {
+      "label": "Brand practices",
+      "points": 3,
+      "detail": "Brand-level transparency, labour and supply-chain record."
+     }
+    ],
+    "explanation": "Verified from Bibico's own product page: 100% Cotton Fair Trade Details &amp. No certifications stated on the page.",
+    "greenwash_flags": [],
+    "certifications": [],
+    "practices": {
+     "natural_dye": false,
+     "undyed": false,
+     "deadstock": false,
+     "pfc_free": false,
+     "repair_program": false,
+     "take_back": false,
+     "zero_waste": false,
+     "made_to_order": false
+    }
+   }
+  },
+  {
+   "id": "live-bibico-petra-linen-shorts-sea-green",
+   "brand_slug": "bibico",
+   "title": "PETRA SHORTS",
+   "description": "-100% LINEN - FAIRTRADE",
+   "category": "trousers",
+   "gender": "women",
+   "price": 89,
+   "currency": "GBP",
+   "retailer": "Bibico",
+   "buy_url": "https://bibico.co.uk/products/petra-linen-shorts-sea-green",
+   "image_url": "https://cdn.shopify.com/s/files/1/0023/0082/files/wp006seagreenlinen_wt007ecru1540_df67a539-bdd9-49d0-a60d-67397c3577c0.jpg",
+   "color": "Multi",
+   "color_family": "Multi",
+   "sizes": [
+    "8UK",
+    "10UK",
+    "12UK",
+    "14UK",
+    "16UK"
+   ],
+   "fit": "Regular",
+   "source": "live",
+   "fabric_composition": [
+    {
+     "material": "linen",
+     "label": "LINEN - FAIRTRADE",
+     "pct": 100
+    }
+   ],
+   "sustainability": {
+    "score": 66,
+    "grade": "B",
+    "factors": [
+     {
+      "label": "Fibre composition",
+      "points": 63,
+      "detail": "100% Linen — weighted fibre impact (max 70)."
+     },
+     {
+      "label": "Brand practices",
+      "points": 3,
+      "detail": "Brand-level transparency, labour and supply-chain record."
+     }
+    ],
+    "explanation": "Verified from Bibico's own product page: 100% LINEN - FAIRTRADE. No certifications stated on the page.",
+    "greenwash_flags": [],
+    "certifications": [],
+    "practices": {
+     "natural_dye": false,
+     "undyed": false,
+     "deadstock": false,
+     "pfc_free": false,
+     "repair_program": false,
+     "take_back": false,
+     "zero_waste": false,
+     "made_to_order": false
+    }
+   }
+  },
+  {
+   "id": "live-bibico-lauren-pure-lambswool-round-neck-navy-jumper",
+   "brand_slug": "bibico",
+   "title": "Lauren Jumper",
+   "description": "Fine-knit jumper made from rare Super Geelong merino lambswool, milled in Yorkshire, chosen for its exceptional softness and lightweight warmth. This fine-knit jumper isn’t just about feeling good—it’s also about lasting quality. The yarn is as soft as cashmere but has the resilience of Merino, giving you both comfort and durability. A simple, boxy shape with a classic round neckline and a slightly longer length through the body for added warmth. Comfortable, breathable, and easy to wear across seasons. A timeless staple. -100% merino lambswool -Made in the EU",
+   "category": "knitwear",
+   "gender": "women",
+   "price": 105,
+   "currency": "GBP",
+   "retailer": "Bibico",
+   "buy_url": "https://bibico.co.uk/products/lauren-pure-lambswool-round-neck-navy-jumper",
+   "image_url": "https://cdn.shopify.com/s/files/1/0023/0082/files/ws002navycheck_kt009navy1006.jpg",
+   "color": "Multi",
+   "color_family": "Multi",
+   "sizes": [
+    "S",
+    "M",
+    "L"
+   ],
+   "fit": "Regular",
+   "source": "live",
+   "fabric_composition": [
+    {
+     "material": "merino_wool",
+     "label": "merino lambswool -Made in the EU",
+     "pct": 100
+    }
+   ],
+   "sustainability": {
+    "score": 52,
+    "grade": "C",
+    "factors": [
+     {
+      "label": "Fibre composition",
+      "points": 49,
+      "detail": "100% Merino wool — weighted fibre impact (max 70)."
+     },
+     {
+      "label": "Brand practices",
+      "points": 3,
+      "detail": "Brand-level transparency, labour and supply-chain record."
+     }
+    ],
+    "explanation": "Verified from Bibico's own product page: 100% merino lambswool -Made in the EU. No certifications stated on the page.",
+    "greenwash_flags": [],
+    "certifications": [],
+    "practices": {
+     "natural_dye": false,
+     "undyed": false,
+     "deadstock": false,
+     "pfc_free": false,
+     "repair_program": false,
+     "take_back": false,
+     "zero_waste": false,
+     "made_to_order": false
+    }
+   }
+  },
+  {
+   "id": "live-bibico-lisa-boxy-organic-cotton-jumper-biege",
+   "brand_slug": "bibico",
+   "title": "LISA JUMPER",
+   "description": "A boxy organic cotton knit with a relaxed, cropped shape. Cleanly finished with a simple crew neckline, subtle stitch detailing, and small side splits at the hem. Knitted in a mid-weight organic cotton that feels soft and smooth against the skin. Designed to be worn often, on its own or as a light layer over a T. -100% Organic Cotton -Made in the EU.",
+   "category": "knitwear",
+   "gender": "women",
+   "price": 79,
+   "currency": "GBP",
+   "retailer": "Bibico",
+   "buy_url": "https://bibico.co.uk/products/lisa-boxy-organic-cotton-jumper-biege",
+   "image_url": "https://cdn.shopify.com/s/files/1/0023/0082/files/1080x1350-i.jpg",
+   "color": "Multi",
+   "color_family": "Multi",
+   "sizes": [
+    "S",
+    "M",
+    "L"
+   ],
+   "fit": "Regular",
+   "source": "live",
+   "fabric_composition": [
+    {
+     "material": "organic_cotton",
+     "label": "Organic Cotton -Made in the EU",
+     "pct": 100
+    }
+   ],
+   "sustainability": {
+    "score": 59,
+    "grade": "C",
+    "factors": [
+     {
+      "label": "Fibre composition",
+      "points": 56,
+      "detail": "100% Organic cotton — weighted fibre impact (max 70)."
+     },
+     {
+      "label": "Brand practices",
+      "points": 3,
+      "detail": "Brand-level transparency, labour and supply-chain record."
+     }
+    ],
+    "explanation": "Verified from Bibico's own product page: 100% Organic Cotton -Made in the EU. No certifications stated on the page.",
+    "greenwash_flags": [],
+    "certifications": [],
+    "practices": {
+     "natural_dye": false,
+     "undyed": false,
+     "deadstock": false,
+     "pfc_free": false,
+     "repair_program": false,
+     "take_back": false,
+     "zero_waste": false,
+     "made_to_order": false
+    }
+   }
+  },
+  {
+   "id": "live-bibico-rosie-long-organic-cotton-cardigan-navy",
+   "brand_slug": "bibico",
+   "title": "ROSIE CARDIGAN",
+   "description": "An easy, throw-on open cardigan designed for light layering. Knitted in soft organic cotton with a subtle all-over texture, it has a relaxed, slightly boxy shape with dropped shoulders and a clean, edge-to-edge front. Falls to the high hip with two generous patch pockets. A simple piece for cooler summer evenings and in-between days, worn loose over dresses, tops, or T-shirts. -100% Organic Cotton - Made in the EU.",
+   "category": "knitwear",
+   "gender": "women",
+   "price": 79,
+   "currency": "GBP",
+   "retailer": "Bibico",
+   "buy_url": "https://bibico.co.uk/products/rosie-long-organic-cotton-cardigan-navy",
+   "image_url": "https://cdn.shopify.com/s/files/1/0023/0082/files/wp003navystripe_kt003navy0836.jpg",
+   "color": "Multi",
+   "color_family": "Multi",
+   "sizes": [
+    "S",
+    "M",
+    "L"
+   ],
+   "fit": "Regular",
+   "source": "live",
+   "fabric_composition": [
+    {
+     "material": "organic_cotton",
+     "label": "Organic Cotton - Made in the EU",
+     "pct": 100
+    }
+   ],
+   "sustainability": {
+    "score": 59,
+    "grade": "C",
+    "factors": [
+     {
+      "label": "Fibre composition",
+      "points": 56,
+      "detail": "100% Organic cotton — weighted fibre impact (max 70)."
+     },
+     {
+      "label": "Brand practices",
+      "points": 3,
+      "detail": "Brand-level transparency, labour and supply-chain record."
+     }
+    ],
+    "explanation": "Verified from Bibico's own product page: 100% Organic Cotton - Made in the EU. No certifications stated on the page.",
+    "greenwash_flags": [],
+    "certifications": [],
+    "practices": {
+     "natural_dye": false,
+     "undyed": false,
+     "deadstock": false,
+     "pfc_free": false,
+     "repair_program": false,
+     "take_back": false,
+     "zero_waste": false,
+     "made_to_order": false
+    }
+   }
+  },
+  {
+   "id": "live-bibico-alba-polo-neck-organic-cotton-cardigan-navy",
+   "brand_slug": "bibico",
+   "title": "ALBA CARDIGAN",
+   "description": "A fine-knit cardigan made from soft organic cotton, chosen for its gentle feel and easy wear. Simple and considered, with a polo collar, buttoned placket, and clean, straight shape. It sits neatly on the shoulders, with full-length sleeves. An understated, lightweight layering piece. Easy to wear with skirts, trousers, or shorts, and well suited to everyday dressing. -100% Organic Cotton - Made in the EU",
+   "category": "knitwear",
+   "gender": "women",
+   "price": 79,
+   "currency": "GBP",
+   "retailer": "Bibico",
+   "buy_url": "https://bibico.co.uk/products/alba-polo-neck-organic-cotton-cardigan-navy",
+   "image_url": "https://cdn.shopify.com/s/files/1/0023/0082/files/wp003navystripe_kt004navy0787.jpg",
+   "color": "Multi",
+   "color_family": "Multi",
+   "sizes": [
+    "S",
+    "M",
+    "L"
+   ],
+   "fit": "Regular",
+   "source": "live",
+   "fabric_composition": [
+    {
+     "material": "organic_cotton",
+     "label": "Organic Cotton - Made in the EU",
+     "pct": 100
+    }
+   ],
+   "sustainability": {
+    "score": 59,
+    "grade": "C",
+    "factors": [
+     {
+      "label": "Fibre composition",
+      "points": 56,
+      "detail": "100% Organic cotton — weighted fibre impact (max 70)."
+     },
+     {
+      "label": "Brand practices",
+      "points": 3,
+      "detail": "Brand-level transparency, labour and supply-chain record."
+     }
+    ],
+    "explanation": "Verified from Bibico's own product page: 100% Organic Cotton - Made in the EU. No certifications stated on the page.",
+    "greenwash_flags": [],
+    "certifications": [],
+    "practices": {
+     "natural_dye": false,
+     "undyed": false,
+     "deadstock": false,
+     "pfc_free": false,
+     "repair_program": false,
+     "take_back": false,
+     "zero_waste": false,
+     "made_to_order": false
+    }
+   }
+  },
+  {
+   "id": "live-bibico-anna-culottes-striped-slate-grey",
+   "brand_slug": "bibico",
+   "title": "ANNA CULOTTES",
+   "description": "-100% COTTON -FAIRTRADE",
+   "category": "trousers",
+   "gender": "women",
+   "price": 95,
+   "currency": "GBP",
+   "retailer": "Bibico",
+   "buy_url": "https://bibico.co.uk/products/anna-culottes-striped-slate-grey",
+   "image_url": "https://cdn.shopify.com/s/files/1/0023/0082/files/wp001slatestripe_jodyjumper1640_4f860dbf-5209-4d94-a10e-899ef8f2d53a.jpg",
+   "color": "Multi",
+   "color_family": "Multi",
+   "sizes": [
+    "8UK",
+    "10UK",
+    "12UK",
+    "14UK",
+    "16UK"
+   ],
+   "fit": "Regular",
+   "source": "live",
+   "fabric_composition": [
+    {
+     "material": "conventional_cotton",
+     "label": "COTTON -FAIRTRADE",
+     "pct": 100
+    }
+   ],
+   "sustainability": {
+    "score": 28,
+    "grade": "E",
+    "factors": [
+     {
+      "label": "Fibre composition",
+      "points": 24.5,
+      "detail": "100% Conventional cotton — weighted fibre impact (max 70)."
+     },
+     {
+      "label": "Brand practices",
+      "points": 3,
+      "detail": "Brand-level transparency, labour and supply-chain record."
+     }
+    ],
+    "explanation": "Verified from Bibico's own product page: 100% COTTON -FAIRTRADE. No certifications stated on the page.",
+    "greenwash_flags": [],
+    "certifications": [],
+    "practices": {
+     "natural_dye": false,
+     "undyed": false,
+     "deadstock": false,
+     "pfc_free": false,
+     "repair_program": false,
+     "take_back": false,
+     "zero_waste": false,
+     "made_to_order": false
+    }
+   }
+  },
+  {
+   "id": "live-bibico-lauren-pure-lambswool-round-neck-orange-jumper",
+   "brand_slug": "bibico",
+   "title": "Lauren Jumper",
+   "description": "Fine-knit jumper made from rare Super Geelong merino lambswool, milled in Yorkshire, chosen for its exceptional softness and lightweight warmth. This fine-knit jumper isn’t just about feeling good—it’s also about lasting quality. The yarn is as soft as cashmere but has the resilience of Merino, giving you both comfort and durability. A simple, boxy shape with a classic round neckline and a slightly longer length through the body for added warmth. Comfortable, breathable, and easy to wear across seasons. Warm and bright, bringing colour to cooler days. -100% merino lambswool -Made in the EU",
+   "category": "knitwear",
+   "gender": "women",
+   "price": 105,
+   "currency": "GBP",
+   "retailer": "Bibico",
+   "buy_url": "https://bibico.co.uk/products/lauren-pure-lambswool-round-neck-orange-jumper",
+   "image_url": "https://cdn.shopify.com/s/files/1/0023/0082/files/wp003navystripe_kt009orange0775.jpg",
+   "color": "Multi",
+   "color_family": "Multi",
+   "sizes": [
+    "S",
+    "M",
+    "L"
+   ],
+   "fit": "Regular",
+   "source": "live",
+   "fabric_composition": [
+    {
+     "material": "merino_wool",
+     "label": "merino lambswool -Made in the EU",
+     "pct": 100
+    }
+   ],
+   "sustainability": {
+    "score": 52,
+    "grade": "C",
+    "factors": [
+     {
+      "label": "Fibre composition",
+      "points": 49,
+      "detail": "100% Merino wool — weighted fibre impact (max 70)."
+     },
+     {
+      "label": "Brand practices",
+      "points": 3,
+      "detail": "Brand-level transparency, labour and supply-chain record."
+     }
+    ],
+    "explanation": "Verified from Bibico's own product page: 100% merino lambswool -Made in the EU. No certifications stated on the page.",
+    "greenwash_flags": [],
+    "certifications": [],
+    "practices": {
+     "natural_dye": false,
+     "undyed": false,
+     "deadstock": false,
+     "pfc_free": false,
+     "repair_program": false,
+     "take_back": false,
+     "zero_waste": false,
+     "made_to_order": false
+    }
+   }
+  },
+  {
+   "id": "live-bibico-lauren-pure-lambswool-round-neck-light-green-jumper",
+   "brand_slug": "bibico",
+   "title": "Lauren Jumper",
+   "description": "Fine-knit jumper made from rare Super Geelong merino lambswool, milled in Yorkshire, chosen for its exceptional softness and lightweight warmth. This fine-knit jumper isn’t just about feeling good—it’s also about lasting quality. The yarn is as soft as cashmere but has the resilience of Merino, giving you both comfort and durability. A simple, boxy shape with a classic round neckline and a slightly longer length through the body for added warmth. Comfortable, breathable, and easy to wear across seasons. Warm and bright, bringing colour to cooler days. -100% merino lambswool -Made in the EU",
+   "category": "knitwear",
+   "gender": "women",
+   "price": 105,
+   "currency": "GBP",
+   "retailer": "Bibico",
+   "buy_url": "https://bibico.co.uk/products/lauren-pure-lambswool-round-neck-light-green-jumper",
+   "image_url": "https://cdn.shopify.com/s/files/1/0023/0082/files/1080x1350-14.jpg",
+   "color": "Multi",
+   "color_family": "Multi",
+   "sizes": [
+    "S",
+    "M",
+    "L"
+   ],
+   "fit": "Regular",
+   "source": "live",
+   "fabric_composition": [
+    {
+     "material": "merino_wool",
+     "label": "merino lambswool -Made in the EU",
+     "pct": 100
+    }
+   ],
+   "sustainability": {
+    "score": 52,
+    "grade": "C",
+    "factors": [
+     {
+      "label": "Fibre composition",
+      "points": 49,
+      "detail": "100% Merino wool — weighted fibre impact (max 70)."
+     },
+     {
+      "label": "Brand practices",
+      "points": 3,
+      "detail": "Brand-level transparency, labour and supply-chain record."
+     }
+    ],
+    "explanation": "Verified from Bibico's own product page: 100% merino lambswool -Made in the EU. No certifications stated on the page.",
+    "greenwash_flags": [],
+    "certifications": [],
+    "practices": {
+     "natural_dye": false,
+     "undyed": false,
+     "deadstock": false,
+     "pfc_free": false,
+     "repair_program": false,
+     "take_back": false,
+     "zero_waste": false,
+     "made_to_order": false
+    }
+   }
+  },
+  {
+   "id": "live-bibico-kora-bright-blue-pure-merino-wool-cardigan",
+   "brand_slug": "bibico",
+   "title": "KORA CARDIGAN",
+   "description": "Soft, oversized cardigan made from pure merino lambswool, milled in Yorkshire. A relaxed, boxy shape with drop shoulders and long sleeves, finished with a V-neck opening, ribbed cuffs and hem, and two deep patch pockets. Buttoned through with four large corozo buttons. Warm without feeling heavy, this is an easy layer to add colour and softness to early spring dressing. The wool feels soft and comforting to wear. -100% merino lambswool -Made in the EU",
+   "category": "knitwear",
+   "gender": "women",
+   "price": 129,
+   "currency": "GBP",
+   "retailer": "Bibico",
+   "buy_url": "https://bibico.co.uk/products/kora-bright-blue-pure-merino-wool-cardigan",
+   "image_url": "https://cdn.shopify.com/s/files/1/0023/0082/files/1080x1350-32.jpg",
+   "color": "Multi",
+   "color_family": "Multi",
+   "sizes": [
+    "SM",
+    "ML"
+   ],
+   "fit": "Regular",
+   "source": "live",
+   "fabric_composition": [
+    {
+     "material": "merino_wool",
+     "label": "merino lambswool -Made in the EU",
+     "pct": 100
+    }
+   ],
+   "sustainability": {
+    "score": 52,
+    "grade": "C",
+    "factors": [
+     {
+      "label": "Fibre composition",
+      "points": 49,
+      "detail": "100% Merino wool — weighted fibre impact (max 70)."
+     },
+     {
+      "label": "Brand practices",
+      "points": 3,
+      "detail": "Brand-level transparency, labour and supply-chain record."
+     }
+    ],
+    "explanation": "Verified from Bibico's own product page: 100% merino lambswool -Made in the EU. No certifications stated on the page.",
+    "greenwash_flags": [],
+    "certifications": [],
+    "practices": {
+     "natural_dye": false,
+     "undyed": false,
+     "deadstock": false,
+     "pfc_free": false,
+     "repair_program": false,
+     "take_back": false,
+     "zero_waste": false,
+     "made_to_order": false
+    }
+   }
+  },
+  {
+   "id": "live-bibico-kora-orange-pure-merino-wool-cardigan",
+   "brand_slug": "bibico",
+   "title": "KORA CARDIGAN",
+   "description": "Soft, lofty oversized cardigan made from pure merino lambswool, milled in Yorkshire. A relaxed, boxy shape with drop shoulders and long sleeves, finished with a V-neck opening, ribbed cuffs and hem, and two deep patch pockets. Buttoned through with four large corozo buttons. Warm without feeling heavy, this is an easy layer to add colour and softness to early spring dressing. The wool feels soft and comforting to wear. -100% merino lambswool -Made in the EU",
+   "category": "knitwear",
+   "gender": "women",
+   "price": 129,
+   "currency": "GBP",
+   "retailer": "Bibico",
+   "buy_url": "https://bibico.co.uk/products/kora-orange-pure-merino-wool-cardigan",
+   "image_url": "https://cdn.shopify.com/s/files/1/0023/0082/files/kt006orange0893.jpg",
+   "color": "Multi",
+   "color_family": "Multi",
+   "sizes": [
+    "SM",
+    "ML"
+   ],
+   "fit": "Regular",
+   "source": "live",
+   "fabric_composition": [
+    {
+     "material": "merino_wool",
+     "label": "merino lambswool -Made in the EU",
+     "pct": 100
+    }
+   ],
+   "sustainability": {
+    "score": 52,
+    "grade": "C",
+    "factors": [
+     {
+      "label": "Fibre composition",
+      "points": 49,
+      "detail": "100% Merino wool — weighted fibre impact (max 70)."
+     },
+     {
+      "label": "Brand practices",
+      "points": 3,
+      "detail": "Brand-level transparency, labour and supply-chain record."
+     }
+    ],
+    "explanation": "Verified from Bibico's own product page: 100% merino lambswool -Made in the EU. No certifications stated on the page.",
+    "greenwash_flags": [],
+    "certifications": [],
+    "practices": {
+     "natural_dye": false,
+     "undyed": false,
+     "deadstock": false,
+     "pfc_free": false,
+     "repair_program": false,
+     "take_back": false,
+     "zero_waste": false,
+     "made_to_order": false
+    }
+   }
+  },
+  {
+   "id": "live-bibico-layla-split-hem-boxy-wool-jumper-light-blue",
+   "brand_slug": "bibico",
+   "title": "LAYLA JUMPER",
+   "description": "Boxy, relaxed jumper made from mid-weight pure merino lambswool, spun at a Yorkshire mill. Designed with a simple round neckline, drop shoulders, and ribbed detailing at the cuffs and hem, with small side splits for ease. Soft, breathable and warm, this is a lighter knit that gives warmth without feeling heavy, it works well year round. Fresh and luminous, adding light to cooler days. -100% merino lambswool -Made in the EU",
+   "category": "knitwear",
+   "gender": "women",
+   "price": 109,
+   "currency": "GBP",
+   "retailer": "Bibico",
+   "buy_url": "https://bibico.co.uk/products/layla-split-hem-boxy-wool-jumper-light-blue",
+   "image_url": "https://cdn.shopify.com/s/files/1/0023/0082/files/wp007denim_kt007aqua1404.jpg",
+   "color": "Multi",
+   "color_family": "Multi",
+   "sizes": [
+    "SM",
+    "ML"
+   ],
+   "fit": "Regular",
+   "source": "live",
+   "fabric_composition": [
+    {
+     "material": "merino_wool",
+     "label": "merino lambswool -Made in the EU",
+     "pct": 100
+    }
+   ],
+   "sustainability": {
+    "score": 52,
+    "grade": "C",
+    "factors": [
+     {
+      "label": "Fibre composition",
+      "points": 49,
+      "detail": "100% Merino wool — weighted fibre impact (max 70)."
+     },
+     {
+      "label": "Brand practices",
+      "points": 3,
+      "detail": "Brand-level transparency, labour and supply-chain record."
+     }
+    ],
+    "explanation": "Verified from Bibico's own product page: 100% merino lambswool -Made in the EU. No certifications stated on the page.",
+    "greenwash_flags": [],
+    "certifications": [],
+    "practices": {
+     "natural_dye": false,
+     "undyed": false,
+     "deadstock": false,
+     "pfc_free": false,
+     "repair_program": false,
+     "take_back": false,
+     "zero_waste": false,
+     "made_to_order": false
+    }
+   }
+  },
+  {
+   "id": "live-bibico-layla-split-hem-boxy-wool-jumper-lilac",
+   "brand_slug": "bibico",
+   "title": "LAYLA JUMPER",
+   "description": "Boxy, relaxed jumper made from mid-weight pure merino lambswool, milled in Yorkshire. Designed with a simple round neckline, drop shoulders, and ribbed detailing at the cuffs and hem, with small side splits for ease. Soft, breathable and warm, this is a lighter knit that works well year round. A vibrant yarn that brings early season colour. -100% merino lambswool -Made in the EU",
+   "category": "knitwear",
+   "gender": "women",
+   "price": 109,
+   "currency": "GBP",
+   "retailer": "Bibico",
+   "buy_url": "https://bibico.co.uk/products/layla-split-hem-boxy-wool-jumper-lilac",
+   "image_url": "https://cdn.shopify.com/s/files/1/0023/0082/files/1080x1350-a.jpg",
+   "color": "Multi",
+   "color_family": "Multi",
+   "sizes": [
+    "SM",
+    "ML"
+   ],
+   "fit": "Regular",
+   "source": "live",
+   "fabric_composition": [
+    {
+     "material": "merino_wool",
+     "label": "merino lambswool -Made in the EU",
+     "pct": 100
+    }
+   ],
+   "sustainability": {
+    "score": 52,
+    "grade": "C",
+    "factors": [
+     {
+      "label": "Fibre composition",
+      "points": 49,
+      "detail": "100% Merino wool — weighted fibre impact (max 70)."
+     },
+     {
+      "label": "Brand practices",
+      "points": 3,
+      "detail": "Brand-level transparency, labour and supply-chain record."
+     }
+    ],
+    "explanation": "Verified from Bibico's own product page: 100% merino lambswool -Made in the EU. No certifications stated on the page.",
+    "greenwash_flags": [],
+    "certifications": [],
+    "practices": {
+     "natural_dye": false,
+     "undyed": false,
+     "deadstock": false,
+     "pfc_free": false,
+     "repair_program": false,
+     "take_back": false,
+     "zero_waste": false,
+     "made_to_order": false
+    }
+   }
+  },
+  {
+   "id": "live-bibico-eva-classic-pure-wool-cardigan-orange",
+   "brand_slug": "bibico",
+   "title": "EVA CARDIGAN",
+   "description": "Classic crew-neck cardigan made from soft, mid-weight pure merino wool, milled in Yorkshire. Neat through the shoulders with full-length sleeves, finished with ribbed detailing at the neckline, cuffs and hem. Buttoned through with corozo buttons. Designed for layering and everyday wear. Adds colour to early spring. -100% merino lambswool -Made in the EU",
+   "category": "knitwear",
+   "gender": "women",
+   "price": 119,
+   "currency": "GBP",
+   "retailer": "Bibico",
+   "buy_url": "https://bibico.co.uk/products/eva-classic-pure-wool-cardigan-orange",
+   "image_url": "https://cdn.shopify.com/s/files/1/0023/0082/files/1080x1350-g.jpg",
+   "color": "Multi",
+   "color_family": "Multi",
+   "sizes": [
+    "S",
+    "M",
+    "L"
+   ],
+   "fit": "Regular",
+   "source": "live",
+   "fabric_composition": [
+    {
+     "material": "merino_wool",
+     "label": "merino lambswool -Made in the EU",
+     "pct": 100
+    }
+   ],
+   "sustainability": {
+    "score": 52,
+    "grade": "C",
+    "factors": [
+     {
+      "label": "Fibre composition",
+      "points": 49,
+      "detail": "100% Merino wool — weighted fibre impact (max 70)."
+     },
+     {
+      "label": "Brand practices",
+      "points": 3,
+      "detail": "Brand-level transparency, labour and supply-chain record."
+     }
+    ],
+    "explanation": "Verified from Bibico's own product page: 100% merino lambswool -Made in the EU. No certifications stated on the page.",
+    "greenwash_flags": [],
+    "certifications": [],
+    "practices": {
+     "natural_dye": false,
+     "undyed": false,
+     "deadstock": false,
+     "pfc_free": false,
+     "repair_program": false,
+     "take_back": false,
+     "zero_waste": false,
+     "made_to_order": false
+    }
+   }
+  },
+  {
+   "id": "live-bibico-eva-classic-pure-wool-cardigan-bright-blue",
+   "brand_slug": "bibico",
+   "title": "EVA CARDIGAN",
+   "description": "Classic crew-neck cardigan made from soft, mid-weight pure merino wool, milled in Yorkshire. Neat through the shoulders with full-length sleeves, finished with ribbed detailing at the neckline, cuffs and hem. Buttoned through with corozo buttons. Designed for layering and everyday wear. Versatile deep Med blue. -100% merino lambswool -Made in the EU",
+   "category": "knitwear",
+   "gender": "women",
+   "price": 119,
+   "currency": "GBP",
+   "retailer": "Bibico",
+   "buy_url": "https://bibico.co.uk/products/eva-classic-pure-wool-cardigan-bright-blue",
+   "image_url": "https://cdn.shopify.com/s/files/1/0023/0082/files/1080x1350-10.jpg",
+   "color": "Multi",
+   "color_family": "Multi",
+   "sizes": [
+    "S",
+    "M",
+    "L"
+   ],
+   "fit": "Regular",
+   "source": "live",
+   "fabric_composition": [
+    {
+     "material": "merino_wool",
+     "label": "merino lambswool -Made in the EU",
+     "pct": 100
+    }
+   ],
+   "sustainability": {
+    "score": 52,
+    "grade": "C",
+    "factors": [
+     {
+      "label": "Fibre composition",
+      "points": 49,
+      "detail": "100% Merino wool — weighted fibre impact (max 70)."
+     },
+     {
+      "label": "Brand practices",
+      "points": 3,
+      "detail": "Brand-level transparency, labour and supply-chain record."
+     }
+    ],
+    "explanation": "Verified from Bibico's own product page: 100% merino lambswool -Made in the EU. No certifications stated on the page.",
+    "greenwash_flags": [],
+    "certifications": [],
+    "practices": {
+     "natural_dye": false,
+     "undyed": false,
+     "deadstock": false,
+     "pfc_free": false,
+     "repair_program": false,
+     "take_back": false,
+     "zero_waste": false,
+     "made_to_order": false
+    }
+   }
+  },
+  {
+   "id": "live-bibico-eva-classic-pure-wool-cardigan-lilac",
+   "brand_slug": "bibico",
+   "title": "EVA CARDIGAN",
+   "description": "Classic crew-neck cardigan made from soft, mid-weight pure merino wool, milled in Yorkshire. Neat through the shoulders with full-length sleeves, finished with ribbed detailing at the neckline, cuffs and hem. Buttoned through with corozo buttons. Designed for layering and everyday wear. A vibrant colour that pairs easily with denim and neutrals. -100% merino lambswool -Made in the EU",
+   "category": "knitwear",
+   "gender": "women",
+   "price": 119,
+   "currency": "GBP",
+   "retailer": "Bibico",
+   "buy_url": "https://bibico.co.uk/products/eva-classic-pure-wool-cardigan-lilac",
+   "image_url": "https://cdn.shopify.com/s/files/1/0023/0082/files/wd008Ikatkt008lilac1193.jpg",
+   "color": "Multi",
+   "color_family": "Multi",
+   "sizes": [
+    "S",
+    "M",
+    "L"
+   ],
+   "fit": "Regular",
+   "source": "live",
+   "fabric_composition": [
+    {
+     "material": "merino_wool",
+     "label": "merino lambswool -Made in the EU",
+     "pct": 100
+    }
+   ],
+   "sustainability": {
+    "score": 52,
+    "grade": "C",
+    "factors": [
+     {
+      "label": "Fibre composition",
+      "points": 49,
+      "detail": "100% Merino wool — weighted fibre impact (max 70)."
+     },
+     {
+      "label": "Brand practices",
+      "points": 3,
+      "detail": "Brand-level transparency, labour and supply-chain record."
+     }
+    ],
+    "explanation": "Verified from Bibico's own product page: 100% merino lambswool -Made in the EU. No certifications stated on the page.",
+    "greenwash_flags": [],
+    "certifications": [],
+    "practices": {
+     "natural_dye": false,
+     "undyed": false,
+     "deadstock": false,
+     "pfc_free": false,
+     "repair_program": false,
+     "take_back": false,
+     "zero_waste": false,
+     "made_to_order": false
+    }
+   }
+  },
+  {
+   "id": "live-bibico-layla-split-hem-boxy-wool-jumper-navy",
+   "brand_slug": "bibico",
+   "title": "LAYLA JUMPER",
+   "description": "Boxy, relaxed jumper made from mid-weight pure merino lambswool, spun at a Yorkshire mill. Designed with a simple round neckline, drop shoulders, and ribbed detailing at the cuffs and hem, with small side splits for ease. Soft, breathable and warm, this is a lighter knit that gives warmth without feeling heavy, it works well year round. -100% merino lambswool -Made in the EU",
+   "category": "knitwear",
+   "gender": "women",
+   "price": 119,
+   "currency": "GBP",
+   "retailer": "Bibico",
+   "buy_url": "https://bibico.co.uk/products/layla-split-hem-boxy-wool-jumper-navy",
+   "image_url": "https://cdn.shopify.com/s/files/1/0023/0082/files/wp003navystripe_laylanavy0764.jpg",
+   "color": "Multi",
+   "color_family": "Multi",
+   "sizes": [
+    "SM",
+    "ML"
+   ],
+   "fit": "Regular",
+   "source": "live",
+   "fabric_composition": [
+    {
+     "material": "merino_wool",
+     "label": "merino lambswool -Made in the EU",
+     "pct": 100
+    }
+   ],
+   "sustainability": {
+    "score": 52,
+    "grade": "C",
+    "factors": [
+     {
+      "label": "Fibre composition",
+      "points": 49,
+      "detail": "100% Merino wool — weighted fibre impact (max 70)."
+     },
+     {
+      "label": "Brand practices",
+      "points": 3,
+      "detail": "Brand-level transparency, labour and supply-chain record."
+     }
+    ],
+    "explanation": "Verified from Bibico's own product page: 100% merino lambswool -Made in the EU. No certifications stated on the page.",
+    "greenwash_flags": [],
+    "certifications": [],
+    "practices": {
+     "natural_dye": false,
+     "undyed": false,
+     "deadstock": false,
+     "pfc_free": false,
+     "repair_program": false,
+     "take_back": false,
+     "zero_waste": false,
+     "made_to_order": false
+    }
+   }
+  },
+  {
+   "id": "live-bibico-greta-pink-felted-wool-slippers-1",
+   "brand_slug": "bibico",
+   "title": "Greta Felted Wool Slippers",
+   "description": "colour selected – Soft Pink Description The Greta handmade slip-on mule slippers are individually handcrafted using 100% sheep wool felt. Inside sole padding for extra comfort with a hard-wearing suede sole.Soft, cosy &amp; light.Our best-selling felted wool slippers are the ultimate home accessory and come with a drawstring cotton bag, making them the perfect gift. Upper:100% wool felted by hand Outsole:natural suede leather Azo-free dyes Brush clean Handmade Fair trade Details &amp; Fit Made in Nepal. We recommend you measure the sole of your foot to find the closest size.The CM size is the ",
+   "category": "shirts",
+   "gender": "women",
+   "price": 39,
+   "currency": "GBP",
+   "retailer": "Bibico",
+   "buy_url": "https://bibico.co.uk/products/greta-pink-felted-wool-slippers-1",
+   "image_url": "https://cdn.shopify.com/s/files/1/0023/0082/products/DSCF0735.jpg",
+   "color": "Soft Pink",
+   "color_family": "Black",
+   "sizes": [
+    "XS",
+    "S",
+    "M",
+    "L"
+   ],
+   "fit": "Slim",
+   "source": "live",
+   "fabric_composition": [
+    {
+     "material": "virgin_wool",
+     "label": "sheep wool felt",
+     "pct": 100
+    }
+   ],
+   "sustainability": {
+    "score": 38,
+    "grade": "D",
+    "factors": [
+     {
+      "label": "Fibre composition",
+      "points": 35,
+      "detail": "100% Virgin wool — weighted fibre impact (max 70)."
+     },
+     {
+      "label": "Brand practices",
+      "points": 3,
+      "detail": "Brand-level transparency, labour and supply-chain record."
+     }
+    ],
+    "explanation": "Verified from Bibico's own product page: 100% sheep wool felt. No certifications stated on the page.",
+    "greenwash_flags": [],
+    "certifications": [],
+    "practices": {
+     "natural_dye": false,
+     "undyed": false,
+     "deadstock": false,
+     "pfc_free": false,
+     "repair_program": false,
+     "take_back": false,
+     "zero_waste": false,
+     "made_to_order": false
+    }
+   }
+  },
+  {
+   "id": "live-bibico-matilda-ribbed-jumper-green",
+   "brand_slug": "bibico",
+   "title": "Isla Ribbed Jumper",
+   "description": "colour selected – Mid Green Description This green ribbed fisherman stitch jumper is one of Snow’s favourites. It is chunky and very warm but not heavy to wear. Made in soft 100% merino wool. A relaxed fit cosy jumper. Mid high neck. Dropped shoulders. Straight cut on the bodice. Tapered cuffs. Raw hem. Cosy &amp; Warm 100% non-mulesed merino wool Heavy-weight knit Hand wash in cold water Made in EU Details &amp; Fit Relaxed Fit Length: 65cm/25.6” Model wears size s/m Model details:5ft 9in/175cm tall. Bust 31”/92cm. Hips 40”/102cm. Measurements Body measurements SIZE 8uk 10uk 12uk 14uk 16uk Bu",
+   "category": "knitwear",
+   "gender": "women",
+   "price": 89,
+   "currency": "GBP",
+   "retailer": "Bibico",
+   "buy_url": "https://bibico.co.uk/products/matilda-ribbed-jumper-green",
+   "image_url": "https://cdn.shopify.com/s/files/1/0023/0082/products/wp001denim-kt005green3254.jpg",
+   "color": "Mid Green",
+   "color_family": "Green",
+   "sizes": [
+    "SM",
+    "ML"
+   ],
+   "fit": "Regular",
+   "source": "live",
+   "fabric_composition": [
+    {
+     "material": "merino_wool",
+     "label": "merino wool",
+     "pct": 100
+    }
+   ],
+   "sustainability": {
+    "score": 52,
+    "grade": "C",
+    "factors": [
+     {
+      "label": "Fibre composition",
+      "points": 49,
+      "detail": "100% Merino wool — weighted fibre impact (max 70)."
+     },
+     {
+      "label": "Brand practices",
+      "points": 3,
+      "detail": "Brand-level transparency, labour and supply-chain record."
+     }
+    ],
+    "explanation": "Verified from Bibico's own product page: 100% merino wool. No certifications stated on the page.",
+    "greenwash_flags": [],
+    "certifications": [],
+    "practices": {
+     "natural_dye": false,
+     "undyed": false,
+     "deadstock": false,
+     "pfc_free": false,
+     "repair_program": false,
+     "take_back": false,
+     "zero_waste": false,
+     "made_to_order": false
+    }
+   }
+  },
+  {
+   "id": "live-bibico-matilda-ribbed-jumper-blue",
+   "brand_slug": "bibico",
+   "title": "Isla Ribbed Jumper",
+   "description": "colour selected – Peacock Description This blue ribbed fisherman stitch jumper is one of Snow’s favourites. It is chunky and very warm but not heavy to wear. Made in soft 100% merino wool. A relaxed fit cosy jumper. Mid high neck. Dropped shoulders. Straight cut on the bodice. Tapered cuffs. Raw hem. Cosy &amp; Warm 100% non-mulesed merino wool Heavy-weight knit Hand wash in cold water Made in EU Details &amp; Fit Relaxed Fit Length: 65cm/25.6” Model wears size s/m Model Details:5ft 9in/175cm tall. Bust 31”/92cm. Hips 40”/102cm Measurements Body measurements SIZE 8uk 10uk 12uk 14uk 16uk Bust C",
+   "category": "knitwear",
+   "gender": "women",
+   "price": 89,
+   "currency": "GBP",
+   "retailer": "Bibico",
+   "buy_url": "https://bibico.co.uk/products/matilda-ribbed-jumper-blue",
+   "image_url": "https://cdn.shopify.com/s/files/1/0023/0082/files/DSCF1382.jpg",
+   "color": "Peacock",
+   "color_family": "Multi",
+   "sizes": [
+    "SM",
+    "ML"
+   ],
+   "fit": "Regular",
+   "source": "live",
+   "fabric_composition": [
+    {
+     "material": "merino_wool",
+     "label": "merino wool",
+     "pct": 100
+    }
+   ],
+   "sustainability": {
+    "score": 52,
+    "grade": "C",
+    "factors": [
+     {
+      "label": "Fibre composition",
+      "points": 49,
+      "detail": "100% Merino wool — weighted fibre impact (max 70)."
+     },
+     {
+      "label": "Brand practices",
+      "points": 3,
+      "detail": "Brand-level transparency, labour and supply-chain record."
+     }
+    ],
+    "explanation": "Verified from Bibico's own product page: 100% merino wool. No certifications stated on the page.",
+    "greenwash_flags": [],
+    "certifications": [],
+    "practices": {
+     "natural_dye": false,
+     "undyed": false,
+     "deadstock": false,
+     "pfc_free": false,
+     "repair_program": false,
+     "take_back": false,
+     "zero_waste": false,
+     "made_to_order": false
+    }
+   }
+  },
+  {
+   "id": "live-bibico-relaxed-check-maho-blouse",
+   "brand_slug": "bibico",
+   "title": "Relaxed Maho Blouse",
+   "description": "colour selected – Check Description Relaxed fit blouse in a check made in our gently brushed flannel cotton. Roomy comfortable fit for everyday wear. Soft and cosy for cooler days. Layer with one of our cardigans for extra warmth. Collarless. Short placket finished with deep pleat. Bracelet sleeves. Round hem with side detailing. Small patched pocket at the chest. Relaxed fit Brushed, soft flannel cotton 100% Cotton Fair Trade Details &amp; Fit Machine wash 30°C Made in India Length: 69cm/27.7” Model wears size s/m Model: Height 175cm/5’9. Bust 92cm/31”. Hips 102cm/40” Measurements Body measur",
+   "category": "shirts",
+   "gender": "women",
+   "price": 24,
+   "currency": "GBP",
+   "retailer": "Bibico",
+   "buy_url": "https://bibico.co.uk/products/relaxed-check-maho-blouse",
+   "image_url": "https://cdn.shopify.com/s/files/1/0023/0082/products/wp002grey-wt001check-6.jpg",
+   "color": "Check",
+   "color_family": "Multi",
+   "sizes": [
+    "SM",
+    "ML"
+   ],
+   "fit": "Relaxed",
+   "source": "live",
+   "fabric_composition": [
+    {
+     "material": "conventional_cotton",
+     "label": "Cotton Fair Trade Details &amp",
+     "pct": 100
+    }
+   ],
+   "sustainability": {
+    "score": 28,
+    "grade": "E",
+    "factors": [
+     {
+      "label": "Fibre composition",
+      "points": 24.5,
+      "detail": "100% Conventional cotton — weighted fibre impact (max 70)."
+     },
+     {
+      "label": "Brand practices",
+      "points": 3,
+      "detail": "Brand-level transparency, labour and supply-chain record."
+     }
+    ],
+    "explanation": "Verified from Bibico's own product page: 100% Cotton Fair Trade Details &amp. No certifications stated on the page.",
+    "greenwash_flags": [],
+    "certifications": [],
+    "practices": {
+     "natural_dye": false,
+     "undyed": false,
+     "deadstock": false,
+     "pfc_free": false,
+     "repair_program": false,
+     "take_back": false,
+     "zero_waste": false,
+     "made_to_order": false
+    }
+   }
+  },
+  {
+   "id": "live-bibico-carine-grey-twill-day-trousers",
+   "brand_slug": "bibico",
+   "title": "Carine Day Trousers",
+   "description": "colour selected – Grey Twill Description Classic, style tailored trousers made in 100% cotton dove grey twill. The twill is a hardwearing fabric that gives these trousers a flattering shape. Washed for softness, the Carine Day Trousers will get softer with wear. Deep waistband at the front with elasticated waist at the back for comfort and ease of wear. Two deep pleats at the front. Pockets. Straight leg pull-on trousers Hardwearing cotton twill, gently washed 100% Cotton Fair Trade Made In India Details &amp; Fit Machine wash 30°C Waist: 76cm/29.9”. Outside leg: 106cm/41.7”. Inside leg: 69cm/",
+   "category": "trousers",
+   "gender": "women",
+   "price": 45,
+   "currency": "GBP",
+   "retailer": "Bibico",
+   "buy_url": "https://bibico.co.uk/products/carine-grey-twill-day-trousers",
+   "image_url": "https://cdn.shopify.com/s/files/1/0023/0082/products/wp002grey-kt002amber-2.jpg",
+   "color": "Grey Twill",
+   "color_family": "Grey",
+   "sizes": [
+    "XS",
+    "S",
+    "M",
+    "L"
+   ],
+   "fit": "Regular",
+   "source": "live",
+   "fabric_composition": [
+    {
+     "material": "conventional_cotton",
+     "label": "cotton dove grey twill",
+     "pct": 100
+    }
+   ],
+   "sustainability": {
+    "score": 28,
+    "grade": "E",
+    "factors": [
+     {
+      "label": "Fibre composition",
+      "points": 24.5,
+      "detail": "100% Conventional cotton — weighted fibre impact (max 70)."
+     },
+     {
+      "label": "Brand practices",
+      "points": 3,
+      "detail": "Brand-level transparency, labour and supply-chain record."
+     }
+    ],
+    "explanation": "Verified from Bibico's own product page: 100% cotton dove grey twill. No certifications stated on the page.",
+    "greenwash_flags": [],
+    "certifications": [],
+    "practices": {
+     "natural_dye": false,
+     "undyed": false,
+     "deadstock": false,
+     "pfc_free": false,
+     "repair_program": false,
+     "take_back": false,
+     "zero_waste": false,
+     "made_to_order": false
+    }
+   }
+  },
+  {
+   "id": "live-bibico-tala-denim-midi-dress",
+   "brand_slug": "bibico",
+   "title": "Tala Midi Dress",
+   "description": "colour selected – Denim Description Midi length shirt dress made in our supple mid-weight textured denim. Washed for softness and to accentuate detailing. Button through dress finished with imitation shell buttons. Classic, easy-to-wear style. Shirt collar. Bib panel detail at centre front with small gathers. Full length sleeves with buttoned cuffs. In seam side pockets. Straight cut. Covers the knees. Regular fit Soft and Supple Denim Cotton 100% Cotton Fair Trade Details &amp; Fit Machine wash 30°C Made in India Length: 108cm/42.5” Model wears size 10UK Model: Height 175cm/5’9. Bust 92cm/31”",
+   "category": "dresses",
+   "gender": "women",
+   "price": 59,
+   "currency": "GBP",
+   "retailer": "Bibico",
+   "buy_url": "https://bibico.co.uk/products/tala-denim-midi-dress",
+   "image_url": "https://cdn.shopify.com/s/files/1/0023/0082/products/wd003denim3636.jpg",
+   "color": "Denim",
+   "color_family": "Blue",
+   "sizes": [
+    "XS",
+    "S",
+    "M",
+    "L"
+   ],
+   "fit": "Regular",
+   "source": "live",
+   "fabric_composition": [
+    {
+     "material": "conventional_cotton",
+     "label": "Cotton Fair Trade Details &amp",
+     "pct": 100
+    }
+   ],
+   "sustainability": {
+    "score": 28,
+    "grade": "E",
+    "factors": [
+     {
+      "label": "Fibre composition",
+      "points": 24.5,
+      "detail": "100% Conventional cotton — weighted fibre impact (max 70)."
+     },
+     {
+      "label": "Brand practices",
+      "points": 3,
+      "detail": "Brand-level transparency, labour and supply-chain record."
+     }
+    ],
+    "explanation": "Verified from Bibico's own product page: 100% Cotton Fair Trade Details &amp. No certifications stated on the page.",
+    "greenwash_flags": [],
+    "certifications": [],
+    "practices": {
+     "natural_dye": false,
+     "undyed": false,
+     "deadstock": false,
+     "pfc_free": false,
+     "repair_program": false,
+     "take_back": false,
+     "zero_waste": false,
+     "made_to_order": false
+    }
+   }
+  },
+  {
+   "id": "live-bibico-hazel-green-lightweight-wool-jumper",
+   "brand_slug": "bibico",
+   "title": "Hazel Relaxed Fit Jumper",
+   "description": "colour selected – Forest Green Description The Hazel jumper is made in a soft and light pure merino wool. Non-mulesed forest green yarn. Features a round neck. Drop shoulders and deep ribbed cuffs. Sits above the hips. This season we have included a small collection of fine wool knits as transeasonal pieces that will keep you warm on cooler spring/summer days. Made in EU at a small family-run knitwear factory (read more here ) 100% pure merino wool (read more about our wool here )",
+   "category": "knitwear",
+   "gender": "women",
+   "price": 59,
+   "currency": "GBP",
+   "retailer": "Bibico",
+   "buy_url": "https://bibico.co.uk/products/hazel-green-lightweight-wool-jumper",
+   "image_url": "https://cdn.shopify.com/s/files/1/0023/0082/files/kt001-green-6.jpg",
+   "color": "Multi",
+   "color_family": "Multi",
+   "sizes": [
+    "S",
+    "M",
+    "L"
+   ],
+   "fit": "Relaxed",
+   "source": "live",
+   "fabric_composition": [
+    {
+     "material": "merino_wool",
+     "label": "pure merino wool",
+     "pct": 100
+    }
+   ],
+   "sustainability": {
+    "score": 52,
+    "grade": "C",
+    "factors": [
+     {
+      "label": "Fibre composition",
+      "points": 49,
+      "detail": "100% Merino wool — weighted fibre impact (max 70)."
+     },
+     {
+      "label": "Brand practices",
+      "points": 3,
+      "detail": "Brand-level transparency, labour and supply-chain record."
+     }
+    ],
+    "explanation": "Verified from Bibico's own product page: 100% pure merino wool. No certifications stated on the page.",
+    "greenwash_flags": [],
+    "certifications": [],
+    "practices": {
+     "natural_dye": false,
+     "undyed": false,
+     "deadstock": false,
+     "pfc_free": false,
+     "repair_program": false,
+     "take_back": false,
+     "zero_waste": false,
+     "made_to_order": false
+    }
+   }
+  },
+  {
+   "id": "live-bibico-hazel-blue-lightweight-wool-jumper",
+   "brand_slug": "bibico",
+   "title": "Hazel Relaxed Fit Jumper",
+   "description": "colour selected – Med Blue Description The Hazel jumper is made in a soft and light pure merino wool. Non-mulesed Med blue yarn. Features a round neck. Drop shoulders and deep ribbed cuffs. Sits above the hips. This season we have included a small collection of fine wool knits as transeasonal pieces that will keep you warm on cooler spring/summer days. Made in EU at a small family-run knitwear factory (read more here ) 100% pure merino wool (read more about our wool here )",
+   "category": "knitwear",
+   "gender": "women",
+   "price": 59,
+   "currency": "GBP",
+   "retailer": "Bibico",
+   "buy_url": "https://bibico.co.uk/products/hazel-blue-lightweight-wool-jumper",
+   "image_url": "https://cdn.shopify.com/s/files/1/0023/0082/files/kt001-blue-10.jpg",
+   "color": "Multi",
+   "color_family": "Multi",
+   "sizes": [
+    "S",
+    "M",
+    "L"
+   ],
+   "fit": "Relaxed",
+   "source": "live",
+   "fabric_composition": [
+    {
+     "material": "merino_wool",
+     "label": "pure merino wool",
+     "pct": 100
+    }
+   ],
+   "sustainability": {
+    "score": 52,
+    "grade": "C",
+    "factors": [
+     {
+      "label": "Fibre composition",
+      "points": 49,
+      "detail": "100% Merino wool — weighted fibre impact (max 70)."
+     },
+     {
+      "label": "Brand practices",
+      "points": 3,
+      "detail": "Brand-level transparency, labour and supply-chain record."
+     }
+    ],
+    "explanation": "Verified from Bibico's own product page: 100% pure merino wool. No certifications stated on the page.",
+    "greenwash_flags": [],
+    "certifications": [],
+    "practices": {
+     "natural_dye": false,
+     "undyed": false,
+     "deadstock": false,
+     "pfc_free": false,
+     "repair_program": false,
+     "take_back": false,
+     "zero_waste": false,
+     "made_to_order": false
+    }
+   }
+  },
+  {
+   "id": "live-bibico-lauren-pure-lambswool-rust-colour-jumper",
+   "brand_slug": "bibico",
+   "title": "Lauren Jumper",
+   "description": "colour selected – Tiger Rust Description The Lauren jumper brings a fresh take on natural luxury. Made from rare Super Geelong Merino lambswool, it combines incredible softness with lightweight warmth. This fine-knit jumper isn’t just about feeling good—it’s also about lasting quality. The yarn, spun at a mill in the Scottish Highlands, is as soft as cashmere but has the resilience of Merino, giving you both comfort and durability. Designed with a generous length for added warmth around your waist, the Lauren jumper is a refined knit with effortless style. Its rich autumnal tone makes it a bea",
+   "category": "knitwear",
+   "gender": "women",
+   "price": 69,
+   "currency": "GBP",
+   "retailer": "Bibico",
+   "buy_url": "https://bibico.co.uk/products/lauren-pure-lambswool-rust-colour-jumper",
+   "image_url": "https://cdn.shopify.com/s/files/1/0023/0082/files/kt012tiger-04.jpg",
+   "color": "Multi",
+   "color_family": "Multi",
+   "sizes": [
+    "S",
+    "M",
+    "L"
+   ],
+   "fit": "Regular",
+   "source": "live",
+   "fabric_composition": [
+    {
+     "material": "merino_wool",
+     "label": "pure Super Geelong Merino lambswool",
+     "pct": 50
+    },
+    {
+     "material": "virgin_wool",
+     "label": "wool",
+     "pct": 50
+    }
+   ],
+   "sustainability": {
+    "score": 45,
+    "grade": "D",
+    "factors": [
+     {
+      "label": "Fibre composition",
+      "points": 42,
+      "detail": "50% Merino wool, 50% Virgin wool — weighted fibre impact (max 70)."
+     },
+     {
+      "label": "Brand practices",
+      "points": 3,
+      "detail": "Brand-level transparency, labour and supply-chain record."
+     }
+    ],
+    "explanation": "Verified from Bibico's own product page: 50% pure Super Geelong Merino lambswool, 50% wool. No certifications stated on the page.",
+    "greenwash_flags": [],
+    "certifications": [],
+    "practices": {
+     "natural_dye": false,
+     "undyed": false,
+     "deadstock": false,
+     "pfc_free": false,
+     "repair_program": false,
+     "take_back": false,
+     "zero_waste": false,
+     "made_to_order": false
+    }
+   }
+  },
+  {
+   "id": "live-bibico-mira-grey-blue-cropped-wool-cardigan",
+   "brand_slug": "bibico",
+   "title": "Mira Cropped Wool Cardigan",
+   "description": "This midweight knit strikes the perfect balance for a versatile trans-seasonal piece. Crafted from a lighter yarn, this cropped cardigan can be worn buttoned up or left open for a relaxed look. It features a classic round neck, drop shoulders, and is finished with corozo buttons and two handy front pockets. Made from 100% Merino lambswool, it’s soft, warm, and durable. The yarn, sourced from a Scottish mill with over 200 years of heritage, is spun with an extra twist to boost its strength and reduce pilling. Available in this season’s range of colours, it’s a timeless addition to your wardrobe",
+   "category": "knitwear",
+   "gender": "women",
+   "price": 79,
+   "currency": "GBP",
+   "retailer": "Bibico",
+   "buy_url": "https://bibico.co.uk/products/mira-grey-blue-cropped-wool-cardigan",
+   "image_url": "https://cdn.shopify.com/s/files/1/0023/0082/files/kt009caspiansea-04.jpg",
+   "color": "Multi",
+   "color_family": "Multi",
+   "sizes": [
+    "S",
+    "M",
+    "L"
+   ],
+   "fit": "Regular",
+   "source": "live",
+   "fabric_composition": [
+    {
+     "material": "merino_wool",
+     "label": "Merino lambswool",
+     "pct": 100
+    }
+   ],
+   "sustainability": {
+    "score": 52,
+    "grade": "C",
+    "factors": [
+     {
+      "label": "Fibre composition",
+      "points": 49,
+      "detail": "100% Merino wool — weighted fibre impact (max 70)."
+     },
+     {
+      "label": "Brand practices",
+      "points": 3,
+      "detail": "Brand-level transparency, labour and supply-chain record."
+     }
+    ],
+    "explanation": "Verified from Bibico's own product page: 100% Merino lambswool. No certifications stated on the page.",
+    "greenwash_flags": [],
+    "certifications": [],
+    "practices": {
+     "natural_dye": false,
+     "undyed": false,
+     "deadstock": false,
+     "pfc_free": false,
+     "repair_program": false,
+     "take_back": false,
+     "zero_waste": false,
+     "made_to_order": false
+    }
+   }
+  },
+  {
+   "id": "live-bibico-mira-cropped-navy-wool-cardigan",
+   "brand_slug": "bibico",
+   "title": "Mira Cropped Wool Cardigan",
+   "description": "This midweight knit strikes the perfect balance for a versatile trans-seasonal piece. Crafted from a lighter yarn, this cropped cardigan can be worn buttoned up or left open for a relaxed look. It features a classic round neck, drop shoulders, and is finished with corozo buttons and two handy front pockets. Made from 100% Merino lambswool, it’s soft, warm, and durable. The yarn, sourced from a Scottish mill with over 200 years of heritage, is spun with an extra twist to boost its strength and reduce pilling. Available in this season’s range of colours, it’s a timeless addition to your wardrobe",
+   "category": "knitwear",
+   "gender": "women",
+   "price": 89,
+   "currency": "GBP",
+   "retailer": "Bibico",
+   "buy_url": "https://bibico.co.uk/products/mira-cropped-navy-wool-cardigan",
+   "image_url": "https://cdn.shopify.com/s/files/1/0023/0082/files/kt009rhapsodyB.jpg",
+   "color": "Multi",
+   "color_family": "Multi",
+   "sizes": [
+    "S",
+    "M",
+    "L"
+   ],
+   "fit": "Regular",
+   "source": "live",
+   "fabric_composition": [
+    {
+     "material": "merino_wool",
+     "label": "Merino lambswool",
+     "pct": 100
+    }
+   ],
+   "sustainability": {
+    "score": 52,
+    "grade": "C",
+    "factors": [
+     {
+      "label": "Fibre composition",
+      "points": 49,
+      "detail": "100% Merino wool — weighted fibre impact (max 70)."
+     },
+     {
+      "label": "Brand practices",
+      "points": 3,
+      "detail": "Brand-level transparency, labour and supply-chain record."
+     }
+    ],
+    "explanation": "Verified from Bibico's own product page: 100% Merino lambswool. No certifications stated on the page.",
+    "greenwash_flags": [],
+    "certifications": [],
+    "practices": {
+     "natural_dye": false,
+     "undyed": false,
+     "deadstock": false,
+     "pfc_free": false,
+     "repair_program": false,
+     "take_back": false,
+     "zero_waste": false,
+     "made_to_order": false
+    }
+   }
+  },
+  {
+   "id": "live-bibico-greta-moss-green-felted-wool-slippers",
+   "brand_slug": "bibico",
+   "title": "Greta Felted Wool Slippers",
+   "description": "The Greta handmade slip-on mule slippers are individually handcrafted using 100% sheep wool felt. Inside sole padding for extra comfort with a hard-wearing suede sole. Soft, cosy &amp; light. Our best-selling felted wool slippers are the ultimate home accessory and come with a drawstring cotton bag, making them the perfect gift. Hand Made In Nepal. Fair Trade (learn more about who makes our handknits here ).",
+   "category": "shirts",
+   "gender": "women",
+   "price": 55,
+   "currency": "GBP",
+   "retailer": "Bibico",
+   "buy_url": "https://bibico.co.uk/products/greta-moss-green-felted-wool-slippers",
+   "image_url": "https://cdn.shopify.com/s/files/1/0023/0082/products/DSCF1050.jpg",
+   "color": "Multi",
+   "color_family": "Multi",
+   "sizes": [
+    "XS",
+    "S",
+    "M",
+    "L"
+   ],
+   "fit": "Slim",
+   "source": "live",
+   "fabric_composition": [
+    {
+     "material": "virgin_wool",
+     "label": "sheep wool felt",
+     "pct": 100
+    }
+   ],
+   "sustainability": {
+    "score": 38,
+    "grade": "D",
+    "factors": [
+     {
+      "label": "Fibre composition",
+      "points": 35,
+      "detail": "100% Virgin wool — weighted fibre impact (max 70)."
+     },
+     {
+      "label": "Brand practices",
+      "points": 3,
+      "detail": "Brand-level transparency, labour and supply-chain record."
+     }
+    ],
+    "explanation": "Verified from Bibico's own product page: 100% sheep wool felt. No certifications stated on the page.",
+    "greenwash_flags": [],
+    "certifications": [],
+    "practices": {
+     "natural_dye": false,
+     "undyed": false,
+     "deadstock": false,
+     "pfc_free": false,
+     "repair_program": false,
+     "take_back": false,
+     "zero_waste": false,
+     "made_to_order": false
+    }
+   }
+  },
+  {
+   "id": "live-bibico-greta-slip-on-felted-wool-slippers-dark-grey",
+   "brand_slug": "bibico",
+   "title": "Greta Felted Wool Slippers",
+   "description": "The Greta handmade slip-on mule slippers are individually handcrafted using 100% sheep wool felt. Inside sole padding for extra comfort with a hard-wearing suede sole. Soft, cosy &amp; light. Our best-selling felted wool slippers are the ultimate home accessory and come with a drawstring cotton bag, making them the perfect gift. Hand Made In Nepal. Fair Trade (learn more about who makes our handknits here ).",
+   "category": "shirts",
+   "gender": "women",
+   "price": 55,
+   "currency": "GBP",
+   "retailer": "Bibico",
+   "buy_url": "https://bibico.co.uk/products/greta-slip-on-felted-wool-slippers-dark-grey",
+   "image_url": "https://cdn.shopify.com/s/files/1/0023/0082/files/grey-felted-wool-slippers-by-bibico.jpg",
+   "color": "Multi",
+   "color_family": "Multi",
+   "sizes": [
+    "XS",
+    "S",
+    "M",
+    "L"
+   ],
+   "fit": "Slim",
+   "source": "live",
+   "fabric_composition": [
+    {
+     "material": "virgin_wool",
+     "label": "sheep wool felt",
+     "pct": 100
+    }
+   ],
+   "sustainability": {
+    "score": 38,
+    "grade": "D",
+    "factors": [
+     {
+      "label": "Fibre composition",
+      "points": 35,
+      "detail": "100% Virgin wool — weighted fibre impact (max 70)."
+     },
+     {
+      "label": "Brand practices",
+      "points": 3,
+      "detail": "Brand-level transparency, labour and supply-chain record."
+     }
+    ],
+    "explanation": "Verified from Bibico's own product page: 100% sheep wool felt. No certifications stated on the page.",
+    "greenwash_flags": [],
+    "certifications": [],
+    "practices": {
+     "natural_dye": false,
+     "undyed": false,
+     "deadstock": false,
+     "pfc_free": false,
+     "repair_program": false,
+     "take_back": false,
+     "zero_waste": false,
+     "made_to_order": false
+    }
+   }
+  },
+  {
+   "id": "live-bibico-greta-steel-blue-felted-wool-slippers",
+   "brand_slug": "bibico",
+   "title": "Greta Felted Wool Slippers",
+   "description": "The Greta handmade slip-on mule slippers are individually handcrafted using 100% sheep wool felt. Inside sole padding for extra comfort with a hard-wearing suede sole. Soft, cosy &amp; light. Our best-selling felted wool slippers are the ultimate home accessory and come with a drawstring cotton bag, making them the perfect gift. Hand Made In Nepal. Fair Trade (learn more about who makes our handknits here ).",
+   "category": "shirts",
+   "gender": "women",
+   "price": 55,
+   "currency": "GBP",
+   "retailer": "Bibico",
+   "buy_url": "https://bibico.co.uk/products/greta-steel-blue-felted-wool-slippers",
+   "image_url": "https://cdn.shopify.com/s/files/1/0023/0082/files/DSCF0451.jpg",
+   "color": "Multi",
+   "color_family": "Multi",
+   "sizes": [
+    "XS",
+    "S",
+    "M",
+    "L"
+   ],
+   "fit": "Slim",
+   "source": "live",
+   "fabric_composition": [
+    {
+     "material": "virgin_wool",
+     "label": "sheep wool felt",
+     "pct": 100
+    }
+   ],
+   "sustainability": {
+    "score": 38,
+    "grade": "D",
+    "factors": [
+     {
+      "label": "Fibre composition",
+      "points": 35,
+      "detail": "100% Virgin wool — weighted fibre impact (max 70)."
+     },
+     {
+      "label": "Brand practices",
+      "points": 3,
+      "detail": "Brand-level transparency, labour and supply-chain record."
+     }
+    ],
+    "explanation": "Verified from Bibico's own product page: 100% sheep wool felt. No certifications stated on the page.",
+    "greenwash_flags": [],
+    "certifications": [],
+    "practices": {
+     "natural_dye": false,
+     "undyed": false,
+     "deadstock": false,
+     "pfc_free": false,
+     "repair_program": false,
+     "take_back": false,
+     "zero_waste": false,
+     "made_to_order": false
+    }
+   }
+  },
+  {
+   "id": "live-bibico-greta-felted-wool-slippers-2",
+   "brand_slug": "bibico",
+   "title": "Greta Felted Wool Slippers",
+   "description": "The Greta handmade slip-on mule slippers are individually handcrafted using 100% sheep wool felt. Inside sole padding for extra comfort with a hard-wearing suede sole. Soft, cosy &amp; light. Our best-selling felted wool slippers are the ultimate home accessory and come with a drawstring cotton bag, making them the perfect gift. Hand Made In Nepal. Fair Trade (learn more about who makes our handknits here ).",
+   "category": "shirts",
+   "gender": "women",
+   "price": 55,
+   "currency": "GBP",
+   "retailer": "Bibico",
+   "buy_url": "https://bibico.co.uk/products/greta-felted-wool-slippers-2",
+   "image_url": "https://cdn.shopify.com/s/files/1/0023/0082/products/DSCF0810.jpg",
+   "color": "Multi",
+   "color_family": "Multi",
+   "sizes": [
+    "XS",
+    "S",
+    "M",
+    "L"
+   ],
+   "fit": "Slim",
+   "source": "live",
+   "fabric_composition": [
+    {
+     "material": "virgin_wool",
+     "label": "sheep wool felt",
+     "pct": 100
+    }
+   ],
+   "sustainability": {
+    "score": 38,
+    "grade": "D",
+    "factors": [
+     {
+      "label": "Fibre composition",
+      "points": 35,
+      "detail": "100% Virgin wool — weighted fibre impact (max 70)."
+     },
+     {
+      "label": "Brand practices",
+      "points": 3,
+      "detail": "Brand-level transparency, labour and supply-chain record."
+     }
+    ],
+    "explanation": "Verified from Bibico's own product page: 100% sheep wool felt. No certifications stated on the page.",
+    "greenwash_flags": [],
+    "certifications": [],
+    "practices": {
+     "natural_dye": false,
+     "undyed": false,
+     "deadstock": false,
+     "pfc_free": false,
+     "repair_program": false,
+     "take_back": false,
+     "zero_waste": false,
+     "made_to_order": false
+    }
+   }
+  },
+  {
+   "id": "live-bibico-dark-green-felted-wool-slippers",
+   "brand_slug": "bibico",
+   "title": "Greta Felted Wool Slippers",
+   "description": "The Greta handmade slip-on mule slippers are individually handcrafted using 100% sheep wool felt. Inside sole padding for extra comfort with a hard-wearing suede sole. Soft, cosy &amp; light. Our best-selling felted wool slippers are the ultimate home accessory and come with a drawstring cotton bag, making them the perfect gift. Hand Made In Nepal. Fair Trade (learn more about who makes our handknits here ).",
+   "category": "shirts",
+   "gender": "women",
+   "price": 55,
+   "currency": "GBP",
+   "retailer": "Bibico",
+   "buy_url": "https://bibico.co.uk/products/dark-green-felted-wool-slippers",
+   "image_url": "https://cdn.shopify.com/s/files/1/0023/0082/files/felted-slippers-ethical.jpg",
+   "color": "Multi",
+   "color_family": "Multi",
+   "sizes": [
+    "XS",
+    "S",
+    "M",
+    "L"
+   ],
+   "fit": "Slim",
+   "source": "live",
+   "fabric_composition": [
+    {
+     "material": "virgin_wool",
+     "label": "sheep wool felt",
+     "pct": 100
+    }
+   ],
+   "sustainability": {
+    "score": 38,
+    "grade": "D",
+    "factors": [
+     {
+      "label": "Fibre composition",
+      "points": 35,
+      "detail": "100% Virgin wool — weighted fibre impact (max 70)."
+     },
+     {
+      "label": "Brand practices",
+      "points": 3,
+      "detail": "Brand-level transparency, labour and supply-chain record."
+     }
+    ],
+    "explanation": "Verified from Bibico's own product page: 100% sheep wool felt. No certifications stated on the page.",
+    "greenwash_flags": [],
+    "certifications": [],
+    "practices": {
+     "natural_dye": false,
+     "undyed": false,
+     "deadstock": false,
+     "pfc_free": false,
+     "repair_program": false,
+     "take_back": false,
+     "zero_waste": false,
+     "made_to_order": false
+    }
+   }
+  },
+  {
+   "id": "live-bibico-mary-janes-velvet-shoes-green",
+   "brand_slug": "bibico",
+   "title": "Mary Janes Velvet Shoes",
+   "description": "Description Dove grey velvet Mary Janes with matching piping , and self-adjustable, nickel-free buckle. Rounded toes. The outside of the shoe is 100% organic cotton velvet, and the inside of the shoe is 100% organic cotton canvas. The flat sole is made from recycled gum rubber. Can be worn with socks or bare feet. They are weightless and fit into any luggage. They’re a permanent go-to. 100% Organic Cotton Velvet Recycled Gum Rubber Sole Vegan Details &amp; Fit Made in Spain The fit of these shoes comes small therefore we have altered their European conversion. If still in doubts please get in ",
+   "category": "shirts",
+   "gender": "women",
+   "price": 45,
+   "currency": "GBP",
+   "retailer": "Bibico",
+   "buy_url": "https://bibico.co.uk/products/mary-janes-velvet-shoes-green",
+   "image_url": "https://cdn.shopify.com/s/files/1/0023/0082/files/aw25__wp004_denim_-kt016-scarf_1600.jpg",
+   "color": "Multi",
+   "color_family": "Multi",
+   "sizes": [
+    "XS",
+    "S",
+    "M",
+    "L"
+   ],
+   "fit": "Regular",
+   "source": "live",
+   "fabric_composition": [
+    {
+     "material": "organic_cotton",
+     "label": "organic cotton velvet",
+     "pct": 100
+    }
+   ],
+   "sustainability": {
+    "score": 59,
+    "grade": "C",
+    "factors": [
+     {
+      "label": "Fibre composition",
+      "points": 56,
+      "detail": "100% Organic cotton — weighted fibre impact (max 70)."
+     },
+     {
+      "label": "Brand practices",
+      "points": 3,
+      "detail": "Brand-level transparency, labour and supply-chain record."
+     }
+    ],
+    "explanation": "Verified from Bibico's own product page: 100% organic cotton velvet. No certifications stated on the page.",
+    "greenwash_flags": [],
+    "certifications": [],
+    "practices": {
+     "natural_dye": false,
+     "undyed": false,
+     "deadstock": false,
+     "pfc_free": false,
+     "repair_program": false,
+     "take_back": false,
+     "zero_waste": false,
+     "made_to_order": false
+    }
+   }
+  },
+  {
+   "id": "live-bibico-mary-jones-velvet-shoes-navy",
+   "brand_slug": "bibico",
+   "title": "Mary Janes Velvet Shoes",
+   "description": "Description Navy velvet Mary Janes with matching piping , and self-adjustable, nickel-free buckle. Rounded toes. The outside of the shoe is 100% organic cotton velvet, and the inside of the shoe is 100% organic cotton canvas. The flat sole is made from recycled gum rubber. Can be worn with socks or bare feet. They are weightless and fit into any luggage. They’re a permanent go-to. 100% Organic Cotton Velvet Recycled Gum Rubber Sole Vegan Details &amp; Fit Made in Spain The fit of these shoes comes small therefore we have altered their European conversion. If still in doubts please get in touch",
+   "category": "shirts",
+   "gender": "women",
+   "price": 45,
+   "currency": "GBP",
+   "retailer": "Bibico",
+   "buy_url": "https://bibico.co.uk/products/mary-jones-velvet-shoes-navy",
+   "image_url": "https://cdn.shopify.com/s/files/1/0023/0082/files/mary-janes-navy_1535f97c-5b0b-47de-a731-7e004e3f1584.jpg",
+   "color": "Multi",
+   "color_family": "Multi",
+   "sizes": [
+    "XS",
+    "S",
+    "M",
+    "L"
+   ],
+   "fit": "Regular",
+   "source": "live",
+   "fabric_composition": [
+    {
+     "material": "organic_cotton",
+     "label": "organic cotton velvet",
+     "pct": 100
+    }
+   ],
+   "sustainability": {
+    "score": 59,
+    "grade": "C",
+    "factors": [
+     {
+      "label": "Fibre composition",
+      "points": 56,
+      "detail": "100% Organic cotton — weighted fibre impact (max 70)."
+     },
+     {
+      "label": "Brand practices",
+      "points": 3,
+      "detail": "Brand-level transparency, labour and supply-chain record."
+     }
+    ],
+    "explanation": "Verified from Bibico's own product page: 100% organic cotton velvet. No certifications stated on the page.",
+    "greenwash_flags": [],
+    "certifications": [],
+    "practices": {
+     "natural_dye": false,
+     "undyed": false,
+     "deadstock": false,
+     "pfc_free": false,
+     "repair_program": false,
+     "take_back": false,
+     "zero_waste": false,
+     "made_to_order": false
+    }
+   }
+  },
+  {
+   "id": "live-bibico-mika-utility-shirt-grey-twill",
+   "brand_slug": "bibico",
+   "title": "Mika Utility Shirt",
+   "description": "An updated utility smock with timeless workwear roots. Made from sturdy deep dove grey 100% cotton twill. This pullover shirt features a classic shirt collar, half-button placket, contrasting imitation shell buttons and full-length sleeves with buttoned cuffs. Finished with large practical front patch pockets. A versatile layering piece — effortless, and built to last, a new BIBICO favourite. Made in India at a Fair Trade cooperative (read more here ).",
+   "category": "shirts",
+   "gender": "women",
+   "price": 69,
+   "currency": "GBP",
+   "retailer": "Bibico",
+   "buy_url": "https://bibico.co.uk/products/mika-utility-shirt-grey-twill",
+   "image_url": "https://cdn.shopify.com/s/files/1/0023/0082/files/aw25__wp001_cord_-wt006_twill__0409.jpg",
+   "color": "Multi",
+   "color_family": "Multi",
+   "sizes": [
+    "XS",
+    "S",
+    "M",
+    "L",
+    "XL"
+   ],
+   "fit": "Regular",
+   "source": "live",
+   "fabric_composition": [
+    {
+     "material": "conventional_cotton",
+     "label": "cotton twill",
+     "pct": 100
+    }
+   ],
+   "sustainability": {
+    "score": 28,
+    "grade": "E",
+    "factors": [
+     {
+      "label": "Fibre composition",
+      "points": 24.5,
+      "detail": "100% Conventional cotton — weighted fibre impact (max 70)."
+     },
+     {
+      "label": "Brand practices",
+      "points": 3,
+      "detail": "Brand-level transparency, labour and supply-chain record."
+     }
+    ],
+    "explanation": "Verified from Bibico's own product page: 100% cotton twill. No certifications stated on the page.",
+    "greenwash_flags": [],
+    "certifications": [],
+    "practices": {
+     "natural_dye": false,
+     "undyed": false,
+     "deadstock": false,
+     "pfc_free": false,
+     "repair_program": false,
+     "take_back": false,
+     "zero_waste": false,
+     "made_to_order": false
+    }
+   }
+  },
+  {
+   "id": "live-bibico-eve-knee-length-skirt-print",
+   "brand_slug": "bibico",
+   "title": "Eve Knee Length Skirt",
+   "description": "BIBICO’s classic summer skirt in an exclusive textured cotton print designed by Snow. A tropical print with splashes of turmeric, olive, indigo and orange. Four pleats sewn into the waistband at the front for a flattering shape. Concealed zip at the centre back. Two deep patch side pockets. Falls just at the knee. An easy to wear 100% cotton summer skirt. Also available in organic cotton denim and cotton Rust Stripe. Exclusive print designed by Snow Fair Trade Made in India",
+   "category": "skirts",
+   "gender": "women",
+   "price": 25,
+   "currency": "GBP",
+   "retailer": "Bibico",
+   "buy_url": "https://bibico.co.uk/products/eve-knee-length-skirt-print",
+   "image_url": "https://cdn.shopify.com/s/files/1/0023/0082/products/ws001print507.jpg",
+   "color": "Print",
+   "color_family": "Multi",
+   "sizes": [
+    "8UK",
+    "10UK",
+    "12UK",
+    "14UK",
+    "16UK"
+   ],
+   "fit": "Regular",
+   "source": "live",
+   "fabric_composition": [
+    {
+     "material": "conventional_cotton",
+     "label": "cotton summer skirt",
+     "pct": 100
+    }
+   ],
+   "sustainability": {
+    "score": 28,
+    "grade": "E",
+    "factors": [
+     {
+      "label": "Fibre composition",
+      "points": 24.5,
+      "detail": "100% Conventional cotton — weighted fibre impact (max 70)."
+     },
+     {
+      "label": "Brand practices",
+      "points": 3,
+      "detail": "Brand-level transparency, labour and supply-chain record."
+     }
+    ],
+    "explanation": "Verified from Bibico's own product page: 100% cotton summer skirt. No certifications stated on the page.",
+    "greenwash_flags": [],
+    "certifications": [],
+    "practices": {
+     "natural_dye": false,
+     "undyed": false,
+     "deadstock": false,
+     "pfc_free": false,
+     "repair_program": false,
+     "take_back": false,
+     "zero_waste": false,
+     "made_to_order": false
+    }
+   }
+  },
+  {
+   "id": "live-bibico-eve-knee-length-skirt-1",
+   "brand_slug": "bibico",
+   "title": "Eve Knee Length Skirt",
+   "description": "Description BIBICO’s classic summer skirt in 100% cotton rust pin-stripe. Four pleats sewn into the waistband at the front for a flattering shape. Concealed zip at the centre back. Two deep patch side pockets. Falls just at the knee. An easy to wear cotton summer skirt. Also available in organic cotton denim and cotton textured print. Made in India Fair Trade",
+   "category": "skirts",
+   "gender": "women",
+   "price": 25,
+   "currency": "GBP",
+   "retailer": "Bibico",
+   "buy_url": "https://bibico.co.uk/products/eve-knee-length-skirt-1",
+   "image_url": "https://cdn.shopify.com/s/files/1/0023/0082/products/ws001redstripes618.jpg",
+   "color": "Stripe Rust",
+   "color_family": "Blue",
+   "sizes": [
+    "8UK",
+    "10UK",
+    "12UK",
+    "14UK",
+    "16UK"
+   ],
+   "fit": "Regular",
+   "source": "live",
+   "fabric_composition": [
+    {
+     "material": "conventional_cotton",
+     "label": "cotton rust pin-stripe",
+     "pct": 100
+    }
+   ],
+   "sustainability": {
+    "score": 28,
+    "grade": "E",
+    "factors": [
+     {
+      "label": "Fibre composition",
+      "points": 24.5,
+      "detail": "100% Conventional cotton — weighted fibre impact (max 70)."
+     },
+     {
+      "label": "Brand practices",
+      "points": 3,
+      "detail": "Brand-level transparency, labour and supply-chain record."
+     }
+    ],
+    "explanation": "Verified from Bibico's own product page: 100% cotton rust pin-stripe. No certifications stated on the page.",
+    "greenwash_flags": [],
+    "certifications": [],
+    "practices": {
+     "natural_dye": false,
+     "undyed": false,
+     "deadstock": false,
+     "pfc_free": false,
+     "repair_program": false,
+     "take_back": false,
+     "zero_waste": false,
+     "made_to_order": false
+    }
+   }
+  },
+  {
+   "id": "live-bibico-carrie-wide-leg-culottes-stripe",
+   "brand_slug": "bibico",
+   "title": "Carrie Striped Culottes",
+   "description": "Description A tailored version of our classic culottes. Made in 100% cotton with a fine Indigo pin-stripe. Wide legged with a flattering front buttoned waistband. Elasticated waistband at the back for comfort. Sits just below the waist. Two deep carpenter pockets. Another of Snow’s favourites to start the season. Also available in organic cotton denim. Made in India Fair Trade",
+   "category": "trousers",
+   "gender": "women",
+   "price": 49,
+   "currency": "GBP",
+   "retailer": "Bibico",
+   "buy_url": "https://bibico.co.uk/products/carrie-wide-leg-culottes-stripe",
+   "image_url": "https://cdn.shopify.com/s/files/1/0023/0082/products/wp001bluestripes694.jpg",
+   "color": "Stripe",
+   "color_family": "Blue",
+   "sizes": [
+    "8UK",
+    "10UK",
+    "12UK",
+    "14UK",
+    "16UK"
+   ],
+   "fit": "Regular",
+   "source": "live",
+   "fabric_composition": [
+    {
+     "material": "conventional_cotton",
+     "label": "cotton with a fine Indigo pin-stripe",
+     "pct": 100
+    }
+   ],
+   "sustainability": {
+    "score": 28,
+    "grade": "E",
+    "factors": [
+     {
+      "label": "Fibre composition",
+      "points": 24.5,
+      "detail": "100% Conventional cotton — weighted fibre impact (max 70)."
+     },
+     {
+      "label": "Brand practices",
+      "points": 3,
+      "detail": "Brand-level transparency, labour and supply-chain record."
+     }
+    ],
+    "explanation": "Verified from Bibico's own product page: 100% cotton with a fine Indigo pin-stripe. No certifications stated on the page.",
+    "greenwash_flags": [],
+    "certifications": [],
+    "practices": {
+     "natural_dye": false,
+     "undyed": false,
+     "deadstock": false,
+     "pfc_free": false,
+     "repair_program": false,
+     "take_back": false,
+     "zero_waste": false,
+     "made_to_order": false
+    }
+   }
+  },
+  {
+   "id": "live-bibico-grace-sleeveless-yellow-bodhi-print-dress",
+   "brand_slug": "bibico",
+   "title": "Grace Swing Dress",
+   "description": "This popular style always features in the Bibico spring/summer collection. Sleeveless dress with a full, swingy skirt. This season’s print is, as always, designed by Snow and exclusive to Bibico. A three tone print featuring summery yellow made in soft 100% cotton. The Grace dress is loved for its versatility, wear it dressed up or down. Boat neck. Tailored bodice. Invisible side zip. Self-adjustable fabric belt. Falls at mid-calf.",
+   "category": "dresses",
+   "gender": "women",
+   "price": 69,
+   "currency": "GBP",
+   "retailer": "Bibico",
+   "buy_url": "https://bibico.co.uk/products/grace-sleeveless-yellow-bodhi-print-dress",
+   "image_url": "https://cdn.shopify.com/s/files/1/0023/0082/files/wd003-bodhi-5.jpg",
+   "color": "Multi",
+   "color_family": "Multi",
+   "sizes": [
+    "8UK",
+    "10UK",
+    "12UK",
+    "14UK",
+    "16UK"
+   ],
+   "fit": "Regular",
+   "source": "live",
+   "fabric_composition": [
+    {
+     "material": "conventional_cotton",
+     "label": "cotton",
+     "pct": 100
+    }
+   ],
+   "sustainability": {
+    "score": 28,
+    "grade": "E",
+    "factors": [
+     {
+      "label": "Fibre composition",
+      "points": 24.5,
+      "detail": "100% Conventional cotton — weighted fibre impact (max 70)."
+     },
+     {
+      "label": "Brand practices",
+      "points": 3,
+      "detail": "Brand-level transparency, labour and supply-chain record."
+     }
+    ],
+    "explanation": "Verified from Bibico's own product page: 100% cotton. No certifications stated on the page.",
+    "greenwash_flags": [],
+    "certifications": [],
+    "practices": {
+     "natural_dye": false,
+     "undyed": false,
+     "deadstock": false,
+     "pfc_free": false,
+     "repair_program": false,
+     "take_back": false,
+     "zero_waste": false,
+     "made_to_order": false
+    }
+   }
+  },
+  {
+   "id": "live-bibico-elaine-cotton-striped-day-dress",
+   "brand_slug": "bibico",
+   "title": "Elaine Day Dress",
+   "description": "colour selected – Stripe Description Easy, everyday shape in a two-tone pinstripe cotton. One of Snow’s favourites. Simple, effortless and ageless. Very easy to dress up or down. The pinstripe cotton is hand loomed which means there may be small irregularities in the weave, these add character and uniqueness to the fabric. Comes in a selection of rich cotton fabrics and tones. Open boat neck with back button closure. Sleeveless. Dropped gathered waist. Easy, loose fitting skirt. Two side pockets. Mid-calf length. Made in India at a Fair Trade cooperative (read more here ) 10% Linen 90% Cotton",
+   "category": "dresses",
+   "gender": "women",
+   "price": 59,
+   "currency": "GBP",
+   "retailer": "Bibico",
+   "buy_url": "https://bibico.co.uk/products/elaine-cotton-striped-day-dress",
+   "image_url": "https://cdn.shopify.com/s/files/1/0023/0082/files/wd004stripe-1.jpg",
+   "color": "Multi",
+   "color_family": "Multi",
+   "sizes": [
+    "8UK",
+    "10UK",
+    "12UK",
+    "14UK",
+    "16UK"
+   ],
+   "fit": "Regular",
+   "source": "live",
+   "fabric_composition": [
+    {
+     "material": "linen",
+     "label": "Linen",
+     "pct": 10
+    },
+    {
+     "material": "conventional_cotton",
+     "label": "Cotton",
+     "pct": 90
+    }
+   ],
+   "sustainability": {
+    "score": 31,
+    "grade": "E",
+    "factors": [
+     {
+      "label": "Fibre composition",
+      "points": 28.4,
+      "detail": "90% Conventional cotton, 10% Linen — weighted fibre impact (max 70)."
+     },
+     {
+      "label": "Brand practices",
+      "points": 3,
+      "detail": "Brand-level transparency, labour and supply-chain record."
+     }
+    ],
+    "explanation": "Verified from Bibico's own product page: 10% Linen, 90% Cotton. No certifications stated on the page.",
+    "greenwash_flags": [],
+    "certifications": [],
+    "practices": {
+     "natural_dye": false,
+     "undyed": false,
+     "deadstock": false,
+     "pfc_free": false,
+     "repair_program": false,
+     "take_back": false,
+     "zero_waste": false,
+     "made_to_order": false
+    }
+   }
+  },
+  {
+   "id": "live-bibico-viva-blue-check-day-dress",
+   "brand_slug": "bibico",
+   "title": "Viva Day Dress",
+   "description": "The Viva Day Dress is a new shape for this season: a pull-on dress with an adjustable belt that can be worn in different ways—either loose and relaxed, or cinched at the waist. It has a band collar, full-length raglan sleeves, buttons to the waist, and two practical in-seam side pockets. Made in our unique hand-loomed 100% cotton weave, this lighter-weight blue fabric with a skinny white check is beautiful to wear against the skin. It is the perfect fabric for the warmer months. A breezy dress for sunny days that embraces simplicity. 100% Cotton Made in India at a Fair Trade cooperative (read ",
+   "category": "dresses",
+   "gender": "women",
+   "price": 79,
+   "currency": "GBP",
+   "retailer": "Bibico",
+   "buy_url": "https://bibico.co.uk/products/viva-blue-check-day-dress",
+   "image_url": "https://cdn.shopify.com/s/files/1/0023/0082/files/wd005littlecheck-23.jpg",
+   "color": "Multi",
+   "color_family": "Multi",
+   "sizes": [
+    "8UK",
+    "10UK",
+    "12UK",
+    "14UK",
+    "16UK"
+   ],
+   "fit": "Regular",
+   "source": "live",
+   "fabric_composition": [
+    {
+     "material": "conventional_cotton",
+     "label": "cotton weave",
+     "pct": 100
+    }
+   ],
+   "sustainability": {
+    "score": 28,
+    "grade": "E",
+    "factors": [
+     {
+      "label": "Fibre composition",
+      "points": 24.5,
+      "detail": "100% Conventional cotton — weighted fibre impact (max 70)."
+     },
+     {
+      "label": "Brand practices",
+      "points": 3,
+      "detail": "Brand-level transparency, labour and supply-chain record."
+     }
+    ],
+    "explanation": "Verified from Bibico's own product page: 100% cotton weave. No certifications stated on the page.",
+    "greenwash_flags": [],
+    "certifications": [],
+    "practices": {
+     "natural_dye": false,
+     "undyed": false,
+     "deadstock": false,
+     "pfc_free": false,
+     "repair_program": false,
+     "take_back": false,
+     "zero_waste": false,
+     "made_to_order": false
+    }
+   }
+  },
+  {
+   "id": "live-bibico-elaine-indigo-block-print-day-dress",
+   "brand_slug": "bibico",
+   "title": "Elaine Day Dress",
+   "description": "With its classic silhouette, this sleeveless dress is one of Snow’s favourites. Simple, effortless, and ageless, it is easy to dress up or down. It has an open boat neckline with a small button fastening at the back. The dropped gathered waist and loose-fitting skirt mean it is comfortable and flattering. As is typical for BIBICO, it has two practical side pockets sewn into the seam. Snow designed the indigo block print; it is exclusive to BIBICO. Printed on a textured 100% cotton cloth that complements the print, the fabric has a vintage feel. This summer dress made in a unique, high-quality ",
+   "category": "dresses",
+   "gender": "women",
+   "price": 59,
+   "currency": "GBP",
+   "retailer": "Bibico",
+   "buy_url": "https://bibico.co.uk/products/elaine-indigo-block-print-day-dress",
+   "image_url": "https://cdn.shopify.com/s/files/1/0023/0082/files/wd007print9-5.jpg",
+   "color": "Multi",
+   "color_family": "Multi",
+   "sizes": [
+    "8UK",
+    "10UK",
+    "12UK",
+    "14UK",
+    "16UK"
+   ],
+   "fit": "Regular",
+   "source": "live",
+   "fabric_composition": [
+    {
+     "material": "conventional_cotton",
+     "label": "cotton cloth that complements the print",
+     "pct": 100
+    }
+   ],
+   "sustainability": {
+    "score": 28,
+    "grade": "E",
+    "factors": [
+     {
+      "label": "Fibre composition",
+      "points": 24.5,
+      "detail": "100% Conventional cotton — weighted fibre impact (max 70)."
+     },
+     {
+      "label": "Brand practices",
+      "points": 3,
+      "detail": "Brand-level transparency, labour and supply-chain record."
+     }
+    ],
+    "explanation": "Verified from Bibico's own product page: 100% cotton cloth that complements the print. No certifications stated on the page.",
+    "greenwash_flags": [],
+    "certifications": [],
+    "practices": {
+     "natural_dye": false,
+     "undyed": false,
+     "deadstock": false,
+     "pfc_free": false,
+     "repair_program": false,
+     "take_back": false,
+     "zero_waste": false,
+     "made_to_order": false
+    }
+   }
+  },
+  {
+   "id": "live-bibico-rita-striped-shirt-dress",
+   "brand_slug": "bibico",
+   "title": "Rita Striped Shirt Dress",
+   "description": "Midi length cotton classic shirt dress. Made in a hand loomed cotton fabric featuring a cream background with contrasting mustard and indigo skinny stripes. Relaxed fit button-down dress with a self-adjustable belt. The sleeves can be rolled up and buttoned at the elbow for a different look. Shirt collar. Button through placket with imitation shell buttons. Two concealed side pockets. Mid-calf length. Made in India at a Fair Trade cooperative (read more here ) 10% Linen 90% Cotton",
+   "category": "dresses",
+   "gender": "women",
+   "price": 69,
+   "currency": "GBP",
+   "retailer": "Bibico",
+   "buy_url": "https://bibico.co.uk/products/rita-striped-shirt-dress",
+   "image_url": "https://cdn.shopify.com/s/files/1/0023/0082/files/wd010-stripe-3.jpg",
+   "color": "Multi",
+   "color_family": "Multi",
+   "sizes": [
+    "8UK",
+    "10UK",
+    "12UK",
+    "14UK",
+    "16UK"
+   ],
+   "fit": "Regular",
+   "source": "live",
+   "fabric_composition": [
+    {
+     "material": "linen",
+     "label": "Linen",
+     "pct": 10
+    },
+    {
+     "material": "conventional_cotton",
+     "label": "Cotton",
+     "pct": 90
+    }
+   ],
+   "sustainability": {
+    "score": 31,
+    "grade": "E",
+    "factors": [
+     {
+      "label": "Fibre composition",
+      "points": 28.4,
+      "detail": "90% Conventional cotton, 10% Linen — weighted fibre impact (max 70)."
+     },
+     {
+      "label": "Brand practices",
+      "points": 3,
+      "detail": "Brand-level transparency, labour and supply-chain record."
+     }
+    ],
+    "explanation": "Verified from Bibico's own product page: 10% Linen, 90% Cotton. No certifications stated on the page.",
+    "greenwash_flags": [],
+    "certifications": [],
+    "practices": {
+     "natural_dye": false,
+     "undyed": false,
+     "deadstock": false,
+     "pfc_free": false,
+     "repair_program": false,
+     "take_back": false,
+     "zero_waste": false,
+     "made_to_order": false
+    }
+   }
+  },
+  {
+   "id": "live-bibico-rita-denim-striped-shirt-dress",
+   "brand_slug": "bibico",
+   "title": "Rita Denim Striped Shirt Dress",
+   "description": "Midi length denim pinstripe shirt dress. Relaxed fit button-down dress with a self-adjustable belt. Made in our soft and supple striped denim. This dress feels soft and cool on your skin and drapes beautifully. The sleeves can be rolled up and buttoned at the elbow for a different look. Shirt collar. Button through placket with imitation shell buttons. Two concealed side pockets. Mid-calf length. Made in India at a Fair Trade cooperative (read more here ) 100% Cotton",
+   "category": "dresses",
+   "gender": "women",
+   "price": 69,
+   "currency": "GBP",
+   "retailer": "Bibico",
+   "buy_url": "https://bibico.co.uk/products/rita-denim-striped-shirt-dress",
+   "image_url": "https://cdn.shopify.com/s/files/1/0023/0082/files/wd010-denim-stipe-39.jpg",
+   "color": "Multi",
+   "color_family": "Multi",
+   "sizes": [
+    "8UK",
+    "10UK",
+    "12UK",
+    "14UK",
+    "16UK"
+   ],
+   "fit": "Regular",
+   "source": "live",
+   "fabric_composition": [
+    {
+     "material": "conventional_cotton",
+     "label": "Cotton",
+     "pct": 100
+    }
+   ],
+   "sustainability": {
+    "score": 28,
+    "grade": "E",
+    "factors": [
+     {
+      "label": "Fibre composition",
+      "points": 24.5,
+      "detail": "100% Conventional cotton — weighted fibre impact (max 70)."
+     },
+     {
+      "label": "Brand practices",
+      "points": 3,
+      "detail": "Brand-level transparency, labour and supply-chain record."
+     }
+    ],
+    "explanation": "Verified from Bibico's own product page: 100% Cotton. No certifications stated on the page.",
+    "greenwash_flags": [],
+    "certifications": [],
+    "practices": {
+     "natural_dye": false,
+     "undyed": false,
+     "deadstock": false,
+     "pfc_free": false,
+     "repair_program": false,
+     "take_back": false,
+     "zero_waste": false,
+     "made_to_order": false
+    }
+   }
+  },
+  {
+   "id": "live-bibico-kasbah-blue-ikat-print-cotton-blouse",
+   "brand_slug": "bibico",
+   "title": "Kasbah Blouse",
+   "description": "This is a new style for this season. The blouse features a round neck with adjustable ties, smock detailing, and full-length balloon sleeves. It is a light, breezy, pull-on blouse made in 100% cotton, perfect for hot summer days. The ikat cloth showcases our producers' unique artisanal skills. Ikat fabric is a traditional Indian fabric with a long history; it is thought to be one of the oldest styles of textile decoration. This design has been handwoven, especially for BIBICO in a rich blue. 100% cotton Ikat print, handwoven especially for BIBICO Made in India at a Fair Trade cooperative (read",
+   "category": "shirts",
+   "gender": "women",
+   "price": 45,
+   "currency": "GBP",
+   "retailer": "Bibico",
+   "buy_url": "https://bibico.co.uk/products/kasbah-blue-ikat-print-cotton-blouse",
+   "image_url": "https://cdn.shopify.com/s/files/1/0023/0082/files/wt006ikatwp006denim-1.jpg",
+   "color": "Multi",
+   "color_family": "Multi",
+   "sizes": [
+    "XS",
+    "S",
+    "M",
+    "L",
+    "XL"
+   ],
+   "fit": "Regular",
+   "source": "live",
+   "fabric_composition": [
+    {
+     "material": "conventional_cotton",
+     "label": "cotton",
+     "pct": 100
+    }
+   ],
+   "sustainability": {
+    "score": 28,
+    "grade": "E",
+    "factors": [
+     {
+      "label": "Fibre composition",
+      "points": 24.5,
+      "detail": "100% Conventional cotton — weighted fibre impact (max 70)."
+     },
+     {
+      "label": "Brand practices",
+      "points": 3,
+      "detail": "Brand-level transparency, labour and supply-chain record."
+     }
+    ],
+    "explanation": "Verified from Bibico's own product page: 100% cotton. No certifications stated on the page.",
+    "greenwash_flags": [],
+    "certifications": [],
+    "practices": {
+     "natural_dye": false,
+     "undyed": false,
+     "deadstock": false,
+     "pfc_free": false,
+     "repair_program": false,
+     "take_back": false,
+     "zero_waste": false,
+     "made_to_order": false
+    }
+   }
+  },
+  {
+   "id": "live-bibico-lola-organic-boxy-t-shirt-duck-egg",
+   "brand_slug": "bibico",
+   "title": "Lola Boxy T-Shirt",
+   "description": "A classic BIBICO T-shirt. Boxy cut with a v-neck, this T has been designed with attention to fit and comfort. It has drop shoulders and sleeves that finish above the elbow. Made in 100% organic jersey cotton, it is soft and breathable. This high-quality organic cotton T is made in duck egg blue, a colour that pairs well with our indigo denim. 100% organic cotton Made in India at a Fair Trade cooperative (read more here )",
+   "category": "t-shirts",
+   "gender": "women",
+   "price": 39,
+   "currency": "GBP",
+   "retailer": "Bibico",
+   "buy_url": "https://bibico.co.uk/products/lola-organic-boxy-t-shirt-duck-egg",
+   "image_url": "https://cdn.shopify.com/s/files/1/0023/0082/files/jt004duckegg-1.jpg",
+   "color": "Shirt",
+   "color_family": "Multi",
+   "sizes": [
+    "SM",
+    "ML"
+   ],
+   "fit": "Oversized",
+   "source": "live",
+   "fabric_composition": [
+    {
+     "material": "organic_cotton",
+     "label": "organic jersey cotton",
+     "pct": 100
+    }
+   ],
+   "sustainability": {
+    "score": 59,
+    "grade": "C",
+    "factors": [
+     {
+      "label": "Fibre composition",
+      "points": 56,
+      "detail": "100% Organic cotton — weighted fibre impact (max 70)."
+     },
+     {
+      "label": "Brand practices",
+      "points": 3,
+      "detail": "Brand-level transparency, labour and supply-chain record."
+     }
+    ],
+    "explanation": "Verified from Bibico's own product page: 100% organic jersey cotton. No certifications stated on the page.",
+    "greenwash_flags": [],
+    "certifications": [],
+    "practices": {
+     "natural_dye": false,
+     "undyed": false,
+     "deadstock": false,
+     "pfc_free": false,
+     "repair_program": false,
+     "take_back": false,
+     "zero_waste": false,
+     "made_to_order": false
+    }
+   }
+  },
+  {
+   "id": "live-bibico-aria-blue-wool-tank-top-vest",
+   "brand_slug": "bibico",
+   "title": "Aria Wool Tank Top",
+   "description": "This sleeveless top is made from a very special mid-weight pure merino wool. Known for its softness and natural breathability, it will bring you warmth when it’s needed, but you won’t overheat. Featuring a deep V-neckline, it has a straight cut and sits at the lower waist. It is finished with two practical patch pockets. Thoughtfully designed to be a versatile addition to your wardrobe, this luxurious tank top can be worn as an additional layer over a blouse, dress, or long-sleeved T, or solo when the weather warms up. 100% pure merino wool (read more about our wool here ) Made in EU at a smal",
+   "category": "t-shirts",
+   "gender": "women",
+   "price": 59,
+   "currency": "GBP",
+   "retailer": "Bibico",
+   "buy_url": "https://bibico.co.uk/products/aria-blue-wool-tank-top-vest",
+   "image_url": "https://cdn.shopify.com/s/files/1/0023/0082/files/kt005bluewp004denim-11.jpg",
+   "color": "Multi",
+   "color_family": "Multi",
+   "sizes": [
+    "SM",
+    "ML"
+   ],
+   "fit": "Regular",
+   "source": "live",
+   "fabric_composition": [
+    {
+     "material": "merino_wool",
+     "label": "pure merino wool",
+     "pct": 100
+    }
+   ],
+   "sustainability": {
+    "score": 52,
+    "grade": "C",
+    "factors": [
+     {
+      "label": "Fibre composition",
+      "points": 49,
+      "detail": "100% Merino wool — weighted fibre impact (max 70)."
+     },
+     {
+      "label": "Brand practices",
+      "points": 3,
+      "detail": "Brand-level transparency, labour and supply-chain record."
+     }
+    ],
+    "explanation": "Verified from Bibico's own product page: 100% pure merino wool. No certifications stated on the page.",
+    "greenwash_flags": [],
+    "certifications": [],
+    "practices": {
+     "natural_dye": false,
+     "undyed": false,
+     "deadstock": false,
+     "pfc_free": false,
+     "repair_program": false,
+     "take_back": false,
+     "zero_waste": false,
+     "made_to_order": false
+    }
+   }
+  },
+  {
+   "id": "live-bibico-aria-mint-wool-tank-top-vest",
+   "brand_slug": "bibico",
+   "title": "Aria Wool Tank Top",
+   "description": "This sleeveless top is made from a very special mid-weight pure merino wool. Known for its softness and natural breathability, it will bring you warmth when it’s needed, but you won’t overheat. Featuring a deep V-neckline, it has a straight cut and sits at the lower waist. It is finished with two practical patch pockets. Thoughtfully designed to be a versatile addition to your wardrobe, this luxurious tank top can be worn as an additional layer over a blouse, dress, or long-sleeved T, or solo when the weather warms up. 100% pure merino wool (read more about our wool here ) Made in EU at a smal",
+   "category": "t-shirts",
+   "gender": "women",
+   "price": 55,
+   "currency": "GBP",
+   "retailer": "Bibico",
+   "buy_url": "https://bibico.co.uk/products/aria-mint-wool-tank-top-vest",
+   "image_url": "https://cdn.shopify.com/s/files/1/0023/0082/files/kt005mint-13.jpg",
+   "color": "Multi",
+   "color_family": "Multi",
+   "sizes": [
+    "SM",
+    "ML"
+   ],
+   "fit": "Regular",
+   "source": "live",
+   "fabric_composition": [
+    {
+     "material": "merino_wool",
+     "label": "pure merino wool",
+     "pct": 100
+    }
+   ],
+   "sustainability": {
+    "score": 52,
+    "grade": "C",
+    "factors": [
+     {
+      "label": "Fibre composition",
+      "points": 49,
+      "detail": "100% Merino wool — weighted fibre impact (max 70)."
+     },
+     {
+      "label": "Brand practices",
+      "points": 3,
+      "detail": "Brand-level transparency, labour and supply-chain record."
+     }
+    ],
+    "explanation": "Verified from Bibico's own product page: 100% pure merino wool. No certifications stated on the page.",
+    "greenwash_flags": [],
+    "certifications": [],
+    "practices": {
+     "natural_dye": false,
+     "undyed": false,
+     "deadstock": false,
+     "pfc_free": false,
+     "repair_program": false,
+     "take_back": false,
+     "zero_waste": false,
+     "made_to_order": false
+    }
+   }
+  },
+  {
+   "id": "live-bibico-eva-blue-crew-neck-wool-cardigan",
+   "brand_slug": "bibico",
+   "title": "Eva Crew Neck Wool Cardigan",
+   "description": "A cardigan for all seasons. This classic crew-neck cardigan is made from a beautiful mid-weight pure merino wool that has been hand-spun at a traditional mill in the Scottish Highlands. Known for its incredible softness and natural breathability, this yarn will keep you warm when you need it while remaining breathable enough to keep you comfortable all day long. This fine-knit sits on shoulders and has full-length sleeves with ribbed detailing at the collar, cuffs and hem. It fastens with corozo buttons. A thoughtfully made classic cardigan in a luxurious yarn, it is perfect for layering over ",
+   "category": "knitwear",
+   "gender": "women",
+   "price": 69,
+   "currency": "GBP",
+   "retailer": "Bibico",
+   "buy_url": "https://bibico.co.uk/products/eva-blue-crew-neck-wool-cardigan",
+   "image_url": "https://cdn.shopify.com/s/files/1/0023/0082/files/kt006blue-19.jpg",
+   "color": "Multi",
+   "color_family": "Multi",
+   "sizes": [
+    "S",
+    "M",
+    "L"
+   ],
+   "fit": "Regular",
+   "source": "live",
+   "fabric_composition": [
+    {
+     "material": "merino_wool",
+     "label": "pure merino wool",
+     "pct": 100
+    }
+   ],
+   "sustainability": {
+    "score": 52,
+    "grade": "C",
+    "factors": [
+     {
+      "label": "Fibre composition",
+      "points": 49,
+      "detail": "100% Merino wool — weighted fibre impact (max 70)."
+     },
+     {
+      "label": "Brand practices",
+      "points": 3,
+      "detail": "Brand-level transparency, labour and supply-chain record."
+     }
+    ],
+    "explanation": "Verified from Bibico's own product page: 100% pure merino wool. No certifications stated on the page.",
+    "greenwash_flags": [],
+    "certifications": [],
+    "practices": {
+     "natural_dye": false,
+     "undyed": false,
+     "deadstock": false,
+     "pfc_free": false,
+     "repair_program": false,
+     "take_back": false,
+     "zero_waste": false,
+     "made_to_order": false
+    }
+   }
+  },
+  {
+   "id": "live-bibico-eva-mint-crew-neck-wool-cardigan",
+   "brand_slug": "bibico",
+   "title": "Eva Crew Neck Wool Cardigan",
+   "description": "A cardigan for all seasons. This classic crew-neck cardigan is made from a beautiful mid-weight pure merino wool that has been hand-spun at a traditional mill in the Scottish Highlands. Known for its incredible softness and natural breathability, this yarn will keep you warm when you need it while remaining breathable enough to keep you comfortable all day long. This fine-knit sits on shoulders and has full-length sleeves with ribbed detailing at the collar, cuffs and hem. It fastens with corozo buttons. A thoughtfully made classic cardigan in a luxurious yarn, it is perfect for layering over ",
+   "category": "knitwear",
+   "gender": "women",
+   "price": 69,
+   "currency": "GBP",
+   "retailer": "Bibico",
+   "buy_url": "https://bibico.co.uk/products/eva-mint-crew-neck-wool-cardigan",
+   "image_url": "https://cdn.shopify.com/s/files/1/0023/0082/files/kt006-mint-wt002-dot-wp002-denim-75.jpg",
+   "color": "Multi",
+   "color_family": "Multi",
+   "sizes": [
+    "S",
+    "M",
+    "L"
+   ],
+   "fit": "Regular",
+   "source": "live",
+   "fabric_composition": [
+    {
+     "material": "merino_wool",
+     "label": "pure merino wool",
+     "pct": 100
+    }
+   ],
+   "sustainability": {
+    "score": 52,
+    "grade": "C",
+    "factors": [
+     {
+      "label": "Fibre composition",
+      "points": 49,
+      "detail": "100% Merino wool — weighted fibre impact (max 70)."
+     },
+     {
+      "label": "Brand practices",
+      "points": 3,
+      "detail": "Brand-level transparency, labour and supply-chain record."
+     }
+    ],
+    "explanation": "Verified from Bibico's own product page: 100% pure merino wool. No certifications stated on the page.",
+    "greenwash_flags": [],
+    "certifications": [],
+    "practices": {
+     "natural_dye": false,
+     "undyed": false,
+     "deadstock": false,
+     "pfc_free": false,
+     "repair_program": false,
+     "take_back": false,
+     "zero_waste": false,
+     "made_to_order": false
+    }
+   }
+  },
+  {
+   "id": "live-bibico-eva-navy-crew-neck-wool-cardigan",
+   "brand_slug": "bibico",
+   "title": "Eva Crew Neck Wool Cardigan",
+   "description": "A cardigan for all seasons. This classic crew-neck cardigan is made from a beautiful mid-weight pure merino wool that has been hand-spun at a traditional mill in the Scottish Highlands. Known for its incredible softness and natural breathability, this yarn will keep you warm when you need it while remaining breathable enough to keep you comfortable all day long. This fine-knit sits on shoulders and has full-length sleeves with ribbed detailing at the collar, cuffs and hem. It fastens with corozo buttons. A thoughtfully made classic cardigan in a luxurious yarn, it is perfect for layering over ",
+   "category": "knitwear",
+   "gender": "women",
+   "price": 69,
+   "currency": "GBP",
+   "retailer": "Bibico",
+   "buy_url": "https://bibico.co.uk/products/eva-navy-crew-neck-wool-cardigan",
+   "image_url": "https://cdn.shopify.com/s/files/1/0023/0082/files/wd003-little-check-kt006-navy-7_ba426a2d-4270-4a67-a81e-5c6429ec48a8.jpg",
+   "color": "Multi",
+   "color_family": "Multi",
+   "sizes": [
+    "S",
+    "M",
+    "L"
+   ],
+   "fit": "Regular",
+   "source": "live",
+   "fabric_composition": [
+    {
+     "material": "merino_wool",
+     "label": "pure merino wool",
+     "pct": 100
+    }
+   ],
+   "sustainability": {
+    "score": 52,
+    "grade": "C",
+    "factors": [
+     {
+      "label": "Fibre composition",
+      "points": 49,
+      "detail": "100% Merino wool — weighted fibre impact (max 70)."
+     },
+     {
+      "label": "Brand practices",
+      "points": 3,
+      "detail": "Brand-level transparency, labour and supply-chain record."
+     }
+    ],
+    "explanation": "Verified from Bibico's own product page: 100% pure merino wool. No certifications stated on the page.",
+    "greenwash_flags": [],
+    "certifications": [],
+    "practices": {
+     "natural_dye": false,
+     "undyed": false,
+     "deadstock": false,
+     "pfc_free": false,
+     "repair_program": false,
+     "take_back": false,
+     "zero_waste": false,
+     "made_to_order": false
+    }
+   }
+  },
+  {
+   "id": "live-bibico-jody-organic-blue-jumper",
+   "brand_slug": "bibico",
+   "title": "Jody Relaxed Jumper",
+   "description": "This relaxed-fit organic cotton jumper has a deep V-neckline and wide kimono sleeves. Beautifully soft (it feels silky on the skin) and easy to dress up or down, it is the perfect layering piece. This is a fine knit with a textured stitch, finished with a rolled edge at the hem, cuffs and neckline. It has a boxy fit around the bodice and drop shoulders, giving it a loose, relaxed, flattering fit. Light and breathable, it is made from a soft, 100% organic cotton yarn. It can be worn alone as a top, but it also works well over our dresses and T-shirts for an extra layer in spring. 100% organic c",
+   "category": "knitwear",
+   "gender": "women",
+   "price": 59,
+   "currency": "GBP",
+   "retailer": "Bibico",
+   "buy_url": "https://bibico.co.uk/products/jody-organic-blue-jumper",
+   "image_url": "https://cdn.shopify.com/s/files/1/0023/0082/files/kt004-blue-wp002-denim-2.jpg",
+   "color": "Multi",
+   "color_family": "Multi",
+   "sizes": [
+    "SM",
+    "ML"
+   ],
+   "fit": "Relaxed",
+   "source": "live",
+   "fabric_composition": [
+    {
+     "material": "organic_cotton",
+     "label": "organic cotton yarn",
+     "pct": 100
+    }
+   ],
+   "sustainability": {
+    "score": 59,
+    "grade": "C",
+    "factors": [
+     {
+      "label": "Fibre composition",
+      "points": 56,
+      "detail": "100% Organic cotton — weighted fibre impact (max 70)."
+     },
+     {
+      "label": "Brand practices",
+      "points": 3,
+      "detail": "Brand-level transparency, labour and supply-chain record."
+     }
+    ],
+    "explanation": "Verified from Bibico's own product page: 100% organic cotton yarn. No certifications stated on the page.",
+    "greenwash_flags": [],
+    "certifications": [],
+    "practices": {
+     "natural_dye": false,
+     "undyed": false,
+     "deadstock": false,
+     "pfc_free": false,
+     "repair_program": false,
+     "take_back": false,
+     "zero_waste": false,
+     "made_to_order": false
+    }
+   }
+  },
+  {
+   "id": "live-bibico-jody-organic-cotton-green-jumper",
+   "brand_slug": "bibico",
+   "title": "Jody Relaxed Jumper",
+   "description": "This relaxed-fit organic cotton jumper has a deep V-neckline and wide kimono sleeves. Beautifully soft (it feels silky on the skin) and easy to dress up or down, it is the perfect layering piece. This is a fine knit with a textured stitch, finished with a rolled edge at the hem, cuffs and neckline. It has a boxy fit around the bodice and drop shoulders, giving it a loose, relaxed, flattering fit. Light and breathable, it is made from a soft, 100% organic cotton yarn. It can be worn alone as a top, but it also works well over our dresses and T-shirts for an extra layer in spring. 100% organic c",
+   "category": "knitwear",
+   "gender": "women",
+   "price": 59,
+   "currency": "GBP",
+   "retailer": "Bibico",
+   "buy_url": "https://bibico.co.uk/products/jody-organic-cotton-green-jumper",
+   "image_url": "https://cdn.shopify.com/s/files/1/0023/0082/files/kt004-green-25.jpg",
+   "color": "Multi",
+   "color_family": "Multi",
+   "sizes": [
+    "SM",
+    "ML"
+   ],
+   "fit": "Relaxed",
+   "source": "live",
+   "fabric_composition": [
+    {
+     "material": "organic_cotton",
+     "label": "organic cotton yarn",
+     "pct": 100
+    }
+   ],
+   "sustainability": {
+    "score": 59,
+    "grade": "C",
+    "factors": [
+     {
+      "label": "Fibre composition",
+      "points": 56,
+      "detail": "100% Organic cotton — weighted fibre impact (max 70)."
+     },
+     {
+      "label": "Brand practices",
+      "points": 3,
+      "detail": "Brand-level transparency, labour and supply-chain record."
+     }
+    ],
+    "explanation": "Verified from Bibico's own product page: 100% organic cotton yarn. No certifications stated on the page.",
+    "greenwash_flags": [],
+    "certifications": [],
+    "practices": {
+     "natural_dye": false,
+     "undyed": false,
+     "deadstock": false,
+     "pfc_free": false,
+     "repair_program": false,
+     "take_back": false,
+     "zero_waste": false,
+     "made_to_order": false
+    }
+   }
+  },
+  {
+   "id": "live-bibico-anna-indigo-chevron-culottes",
+   "brand_slug": "bibico",
+   "title": "Anna Culottes",
+   "description": "Cropped cotton culotte-style trousers made in a 100% cotton chevron fabric. This high-quality natural fabric has a subtle chevron weave and a sturdy workwear feel. They will become softer with wear. Easy to wear, comfortable, and flattering, these cropped trousers have a wide waistband that is elasticated at the back for an easy fit. They have a side button opening and two deep side pockets with twin-needle detailing. This versatile style is always popular; choose from this season's colours and fabrics and match them with one of our T-shirts or blouses. 100% cotton Made in India at a Fair Trad",
+   "category": "trousers",
+   "gender": "women",
+   "price": 59,
+   "currency": "GBP",
+   "retailer": "Bibico",
+   "buy_url": "https://bibico.co.uk/products/anna-indigo-chevron-culottes",
+   "image_url": "https://cdn.shopify.com/s/files/1/0023/0082/files/wt006-ikat-wp005-indigo-15.jpg",
+   "color": "Multi",
+   "color_family": "Multi",
+   "sizes": [
+    "8UK",
+    "10UK",
+    "12UK",
+    "14UK",
+    "16UK"
+   ],
+   "fit": "Regular",
+   "source": "live",
+   "fabric_composition": [
+    {
+     "material": "conventional_cotton",
+     "label": "cotton chevron fabric",
+     "pct": 100
+    }
+   ],
+   "sustainability": {
+    "score": 28,
+    "grade": "E",
+    "factors": [
+     {
+      "label": "Fibre composition",
+      "points": 24.5,
+      "detail": "100% Conventional cotton — weighted fibre impact (max 70)."
+     },
+     {
+      "label": "Brand practices",
+      "points": 3,
+      "detail": "Brand-level transparency, labour and supply-chain record."
+     }
+    ],
+    "explanation": "Verified from Bibico's own product page: 100% cotton chevron fabric. No certifications stated on the page.",
+    "greenwash_flags": [],
+    "certifications": [],
+    "practices": {
+     "natural_dye": false,
+     "undyed": false,
+     "deadstock": false,
+     "pfc_free": false,
+     "repair_program": false,
+     "take_back": false,
+     "zero_waste": false,
+     "made_to_order": false
+    }
+   }
+  },
+  {
+   "id": "live-bibico-margate-biege-cotton-twill-trousers",
+   "brand_slug": "bibico",
+   "title": "Margate Trousers",
+   "description": "These are our most tailored trousers, but they remain easy-to-wear and versatile. They have a chino cut with signature BIBICO embellishments, including twin-needle detailing, deep side pockets, and patch pockets at the back. Made in a sand-coloured cotton twill that gives the trousers a work-wear look, they are 100% organic cotton. Pre-washed for softness, they will get softer with time. They have a zip fly closure with a hook-and-bar fastening at the waistband. If you want a more relaxed fit, please look at the size chart and consider going up a size. Also available in supple, textured indigo",
+   "category": "trousers",
+   "gender": "women",
+   "price": 59,
+   "currency": "GBP",
+   "retailer": "Bibico",
+   "buy_url": "https://bibico.co.uk/products/margate-biege-cotton-twill-trousers",
+   "image_url": "https://cdn.shopify.com/s/files/1/0023/0082/files/wt006dobbywp003sand-62.jpg",
+   "color": "Multi",
+   "color_family": "Multi",
+   "sizes": [
+    "8UK",
+    "10UK",
+    "12UK",
+    "14UK",
+    "16UK"
+   ],
+   "fit": "Regular",
+   "source": "live",
+   "fabric_composition": [
+    {
+     "material": "organic_cotton",
+     "label": "organic cotton",
+     "pct": 100
+    }
+   ],
+   "sustainability": {
+    "score": 59,
+    "grade": "C",
+    "factors": [
+     {
+      "label": "Fibre composition",
+      "points": 56,
+      "detail": "100% Organic cotton — weighted fibre impact (max 70)."
+     },
+     {
+      "label": "Brand practices",
+      "points": 3,
+      "detail": "Brand-level transparency, labour and supply-chain record."
+     }
+    ],
+    "explanation": "Verified from Bibico's own product page: 100% organic cotton. No certifications stated on the page.",
+    "greenwash_flags": [],
+    "certifications": [],
+    "practices": {
+     "natural_dye": false,
+     "undyed": false,
+     "deadstock": false,
+     "pfc_free": false,
+     "repair_program": false,
+     "take_back": false,
+     "zero_waste": false,
+     "made_to_order": false
+    }
+   }
+  },
+  {
+   "id": "live-bibico-jane-denim-midi-dress",
+   "brand_slug": "bibico",
+   "title": "Jane Midi Dress",
+   "description": "The Jane Midi dress is a new shape for this season, designed in response to requests for a loose-fitting V-neck dress. This relaxed button-down day dress features bracelet sleeves with a subtle balloon shape, a seam at the waist, and two side pockets. Made in our signature textured, breathable cotton denim. This 100% cotton denim is our most popular fabric. It looks like denim, but its softness and breathability make it more comfortable and wearable. An easy-to-wear day dress that you will wear throughout the year. 100% cotton Made in India at a Fair Trade cooperative (read more here )",
+   "category": "dresses",
+   "gender": "women",
+   "price": 59,
+   "currency": "GBP",
+   "retailer": "Bibico",
+   "buy_url": "https://bibico.co.uk/products/jane-denim-midi-dress",
+   "image_url": "https://cdn.shopify.com/s/files/1/0023/0082/files/wd008denim-33.jpg",
+   "color": "Multi",
+   "color_family": "Multi",
+   "sizes": [
+    "8UK",
+    "10UK",
+    "12UK",
+    "14UK",
+    "16UK"
+   ],
+   "fit": "Regular",
+   "source": "live",
+   "fabric_composition": [
+    {
+     "material": "conventional_cotton",
+     "label": "cotton denim is our most popular fabric",
+     "pct": 100
+    }
+   ],
+   "sustainability": {
+    "score": 28,
+    "grade": "E",
+    "factors": [
+     {
+      "label": "Fibre composition",
+      "points": 24.5,
+      "detail": "100% Conventional cotton — weighted fibre impact (max 70)."
+     },
+     {
+      "label": "Brand practices",
+      "points": 3,
+      "detail": "Brand-level transparency, labour and supply-chain record."
+     }
+    ],
+    "explanation": "Verified from Bibico's own product page: 100% cotton denim is our most popular fabric. No certifications stated on the page.",
+    "greenwash_flags": [],
+    "certifications": [],
+    "practices": {
+     "natural_dye": false,
+     "undyed": false,
+     "deadstock": false,
+     "pfc_free": false,
+     "repair_program": false,
+     "take_back": false,
+     "zero_waste": false,
+     "made_to_order": false
+    }
+   }
+  },
+  {
+   "id": "live-bibico-orla-gingham-checked-day-dress",
+   "brand_slug": "bibico",
+   "title": "Orla Checked Day Dress",
+   "description": "The Orla Day Dress offers relaxed, effortless dressing. Designed for fit and comfort, it features a boat neckline, ¾-length sleeves, and two practical in-seam side pockets. Finished with a small patch pocket on the chest, it fastens with a small button at the back. Made from 100% cotton seersucker, the Orla Day Dress has tiny checks in dove grey and white, creating a classic, timeless look. Its high-quality fabric and simple check pattern make it a favourite for summer. 100% cotton Made in India at a Fair Trade cooperative (read more here )",
+   "category": "dresses",
+   "gender": "women",
+   "price": 59,
+   "currency": "GBP",
+   "retailer": "Bibico",
+   "buy_url": "https://bibico.co.uk/products/orla-gingham-checked-day-dress",
+   "image_url": "https://cdn.shopify.com/s/files/1/0023/0082/files/wd006check-20.jpg",
+   "color": "Multi",
+   "color_family": "Multi",
+   "sizes": [
+    "8UK",
+    "10UK",
+    "12UK",
+    "14UK",
+    "16UK"
+   ],
+   "fit": "Regular",
+   "source": "live",
+   "fabric_composition": [
+    {
+     "material": "conventional_cotton",
+     "label": "cotton seersucker",
+     "pct": 100
+    }
+   ],
+   "sustainability": {
+    "score": 28,
+    "grade": "E",
+    "factors": [
+     {
+      "label": "Fibre composition",
+      "points": 24.5,
+      "detail": "100% Conventional cotton — weighted fibre impact (max 70)."
+     },
+     {
+      "label": "Brand practices",
+      "points": 3,
+      "detail": "Brand-level transparency, labour and supply-chain record."
+     }
+    ],
+    "explanation": "Verified from Bibico's own product page: 100% cotton seersucker. No certifications stated on the page.",
+    "greenwash_flags": [],
+    "certifications": [],
+    "practices": {
+     "natural_dye": false,
+     "undyed": false,
+     "deadstock": false,
+     "pfc_free": false,
+     "repair_program": false,
+     "take_back": false,
+     "zero_waste": false,
+     "made_to_order": false
+    }
+   }
+  },
+  {
+   "id": "live-bibico-tara-denim-textured-shirt-dress",
+   "brand_slug": "bibico",
+   "title": "Tara Shirt Dress",
+   "description": "Crafted from our signature, much loved, textured indigo blue denim, this straight-cut shirt dress is designed for comfort, durability, and effortless style. We are known for the quality of our denimwear, made from 100% cotton, the fabric is soft yet sturdy. The dress features a classic shirt collar, large practical pockets, and imitation shell buttons. Thoughtfully designed for everyday living, it is a versatile wardrobe staple that can be worn throughout the year. True to our love of practical, stylish clothes the Tara Shirt Dress is an investment in timeless, sustainable fashion. 100% Cotton",
+   "category": "dresses",
+   "gender": "women",
+   "price": 69,
+   "currency": "GBP",
+   "retailer": "Bibico",
+   "buy_url": "https://bibico.co.uk/products/tara-denim-textured-shirt-dress",
+   "image_url": "https://cdn.shopify.com/s/files/1/0023/0082/files/wd001denim-1.jpg",
+   "color": "Multi",
+   "color_family": "Multi",
+   "sizes": [
+    "XS",
+    "S",
+    "M",
+    "L",
+    "XL"
+   ],
+   "fit": "Regular",
+   "source": "live",
+   "fabric_composition": [
+    {
+     "material": "conventional_cotton",
+     "label": "cotton",
+     "pct": 100
+    }
+   ],
+   "sustainability": {
+    "score": 28,
+    "grade": "E",
+    "factors": [
+     {
+      "label": "Fibre composition",
+      "points": 24.5,
+      "detail": "100% Conventional cotton — weighted fibre impact (max 70)."
+     },
+     {
+      "label": "Brand practices",
+      "points": 3,
+      "detail": "Brand-level transparency, labour and supply-chain record."
+     }
+    ],
+    "explanation": "Verified from Bibico's own product page: 100% cotton. No certifications stated on the page.",
+    "greenwash_flags": [],
+    "certifications": [],
+    "practices": {
+     "natural_dye": false,
+     "undyed": false,
+     "deadstock": false,
+     "pfc_free": false,
+     "repair_program": false,
+     "take_back": false,
+     "zero_waste": false,
+     "made_to_order": false
+    }
+   }
+  },
+  {
+   "id": "live-bibico-tara-denim-striped-shirt-dress",
+   "brand_slug": "bibico",
+   "title": "Tara Shirt Dress",
+   "description": "Crafted from our always popular soft and supple pin-stripe denim, this straight-cut shirt dress is designed for comfort, durability, and effortless style. Made from 100% cotton, the fabric is soft yet sturdy. The dress features a classic shirt collar, large practical pockets, and imitation shell buttons. Thoughtfully designed for everyday living, it is a versatile wardrobe staple that can be worn throughout the year. True to our love of practical, stylish clothes the Tara Shirt Dress is an investment in timeless, sustainable fashion. 100% Cotton Made in India at a Fair Trade cooperative (read ",
+   "category": "dresses",
+   "gender": "women",
+   "price": 59,
+   "currency": "GBP",
+   "retailer": "Bibico",
+   "buy_url": "https://bibico.co.uk/products/tara-denim-striped-shirt-dress",
+   "image_url": "https://cdn.shopify.com/s/files/1/0023/0082/files/wd001stripes-6.jpg",
+   "color": "Multi",
+   "color_family": "Multi",
+   "sizes": [
+    "XS",
+    "S",
+    "M",
+    "L",
+    "XL"
+   ],
+   "fit": "Regular",
+   "source": "live",
+   "fabric_composition": [
+    {
+     "material": "conventional_cotton",
+     "label": "cotton",
+     "pct": 100
+    }
+   ],
+   "sustainability": {
+    "score": 28,
+    "grade": "E",
+    "factors": [
+     {
+      "label": "Fibre composition",
+      "points": 24.5,
+      "detail": "100% Conventional cotton — weighted fibre impact (max 70)."
+     },
+     {
+      "label": "Brand practices",
+      "points": 3,
+      "detail": "Brand-level transparency, labour and supply-chain record."
+     }
+    ],
+    "explanation": "Verified from Bibico's own product page: 100% cotton. No certifications stated on the page.",
+    "greenwash_flags": [],
+    "certifications": [],
+    "practices": {
+     "natural_dye": false,
+     "undyed": false,
+     "deadstock": false,
+     "pfc_free": false,
+     "repair_program": false,
+     "take_back": false,
+     "zero_waste": false,
+     "made_to_order": false
+    }
+   }
+  },
+  {
+   "id": "live-bibico-jil-printed-wool-scarf-1",
+   "brand_slug": "bibico",
+   "title": "Namaste Printed Wool Scarf",
+   "description": "colour selected – Multi Description Striking digitally printed scarf with a stunning array of colours and patterns throughout, including a fabulous splash of leopard skin.Fine, pure wool scarf with a deliciously soft &amp; luxury feel. 100% wool. Light weight. Dry Clean Only. Measurements: 70x190cm. Fair Trade. Made in India. Hand picked by Snow. Details &amp; Fit Made in India Hand picked by Snow: A selection of products that are chosen for their distinctive quality and craftsmanship. An addition to our collections, and a chance to work with makers &amp; artisans that share similar values to ",
+   "category": "accessories",
+   "gender": "women",
+   "price": 69,
+   "currency": "GBP",
+   "retailer": "Bibico",
+   "buy_url": "https://bibico.co.uk/products/jil-printed-wool-scarf-1",
+   "image_url": "https://cdn.shopify.com/s/files/1/0023/0082/products/laFliquetpurewoolscarf.jpg",
+   "color": "Multi",
+   "color_family": "Multi",
+   "sizes": [
+    "XS",
+    "S",
+    "M",
+    "L"
+   ],
+   "fit": "Regular",
+   "source": "live",
+   "fabric_composition": [
+    {
+     "material": "virgin_wool",
+     "label": "wool",
+     "pct": 100
+    }
+   ],
+   "sustainability": {
+    "score": 38,
+    "grade": "D",
+    "factors": [
+     {
+      "label": "Fibre composition",
+      "points": 35,
+      "detail": "100% Virgin wool — weighted fibre impact (max 70)."
+     },
+     {
+      "label": "Brand practices",
+      "points": 3,
+      "detail": "Brand-level transparency, labour and supply-chain record."
+     }
+    ],
+    "explanation": "Verified from Bibico's own product page: 100% wool. No certifications stated on the page.",
+    "greenwash_flags": [],
+    "certifications": [],
+    "practices": {
+     "natural_dye": false,
+     "undyed": false,
+     "deadstock": false,
+     "pfc_free": false,
+     "repair_program": false,
+     "take_back": false,
+     "zero_waste": false,
+     "made_to_order": false
+    }
+   }
+  },
+  {
+   "id": "live-bibico-brook-green-fair-isle-wool-socks",
+   "brand_slug": "bibico",
+   "title": "Brook Fair Isle Wool Socks",
+   "description": "Knitted from a soft, warm wool blend, these cosy socks feature a unique multicoloured Fair Isle pattern designed by Snow. Finished with gentle ribbed cuffs that stay comfortably in place, they’re perfect for keeping your feet snug on chilly days.Made in the EU. Made in the EU 57% Wool, 36% Polyamide, 4% Others Fibres, 2% Polyester &amp; 1% Elastane Details &amp; Fit Cold Machine Wash Delivery FREE UK Delivery - all standard uk orders over £50 UK Standard - 3-5 days - £3.95 UK Next Day - Order by 12pm - £5.95 Europe – 5-7 days - £7.00 Outside Europe – 7-10 days - from £8.00 Click here for more ",
+   "category": "accessories",
+   "gender": "women",
+   "price": 22,
+   "currency": "GBP",
+   "retailer": "Bibico",
+   "buy_url": "https://bibico.co.uk/products/brook-green-fair-isle-wool-socks",
+   "image_url": "https://cdn.shopify.com/s/files/1/0023/0082/files/aw25__sock_0014.jpg",
+   "color": "Multi",
+   "color_family": "Multi",
+   "sizes": [
+    "5-7UK"
+   ],
+   "fit": "Regular",
+   "source": "live",
+   "fabric_composition": [
+    {
+     "material": "virgin_wool",
+     "label": "Wool",
+     "pct": 59
+    },
+    {
+     "material": "polyamide",
+     "label": "Polyamide",
+     "pct": 38
+    },
+    {
+     "material": "polyester",
+     "label": "Polyester &amp",
+     "pct": 2
+    },
+    {
+     "material": "elastane",
+     "label": "Elastane Details &amp",
+     "pct": 1
+    }
+   ],
+   "sustainability": {
+    "score": 29,
+    "grade": "E",
+    "factors": [
+     {
+      "label": "Fibre composition",
+      "points": 26.4,
+      "detail": "59% Virgin wool, 38% Nylon, 2% Polyester — weighted fibre impact (max 70)."
+     },
+     {
+      "label": "Brand practices",
+      "points": 3,
+      "detail": "Brand-level transparency, labour and supply-chain record."
+     }
+    ],
+    "explanation": "Verified from Bibico's own product page: 59% Wool, 38% Polyamide, 2% Polyester &amp, 1% Elastane Details &amp. No certifications stated on the page.",
+    "greenwash_flags": [],
+    "certifications": [],
+    "practices": {
+     "natural_dye": false,
+     "undyed": false,
+     "deadstock": false,
+     "pfc_free": false,
+     "repair_program": false,
+     "take_back": false,
+     "zero_waste": false,
+     "made_to_order": false
+    }
+   }
+  },
+  {
+   "id": "live-bibico-wool-fair-isle-socks-blue-orange",
+   "brand_slug": "bibico",
+   "title": "Brook Fair Isle Wool Socks",
+   "description": "Knitted from a soft, warm wool blend, these cosy socks feature a unique multicoloured Fair Isle pattern designed by Snow. Finished with gentle ribbed cuffs that stay comfortably in place, they’re perfect for keeping your feet snug on chilly days.Made in the EU. Made in the EU 57% Wool, 36% Polyamide, 4% Others Fibres, 2% Polyester &amp; 1% ElastaneF Details &amp; Fit Cold Machine Wash Delivery FREE UK Delivery - all standard uk orders over £50 UK Standard - 3-5 days - £3.95 UK Next Day - Order by 12pm - £5.95 Europe – 5-7 days - £7.00 Outside Europe – 7-10 days - from £8.00 Click here for more",
+   "category": "accessories",
+   "gender": "women",
+   "price": 22,
+   "currency": "GBP",
+   "retailer": "Bibico",
+   "buy_url": "https://bibico.co.uk/products/wool-fair-isle-socks-blue-orange",
+   "image_url": "https://cdn.shopify.com/s/files/1/0023/0082/files/aw25__sock_0017.jpg",
+   "color": "Multi",
+   "color_family": "Multi",
+   "sizes": [
+    "5-7UK"
+   ],
+   "fit": "Regular",
+   "source": "live",
+   "fabric_composition": [
+    {
+     "material": "virgin_wool",
+     "label": "Wool",
+     "pct": 59
+    },
+    {
+     "material": "polyamide",
+     "label": "Polyamide",
+     "pct": 38
+    },
+    {
+     "material": "polyester",
+     "label": "Polyester &amp",
+     "pct": 2
+    },
+    {
+     "material": "elastane",
+     "label": "ElastaneF Details &amp",
+     "pct": 1
+    }
+   ],
+   "sustainability": {
+    "score": 29,
+    "grade": "E",
+    "factors": [
+     {
+      "label": "Fibre composition",
+      "points": 26.4,
+      "detail": "59% Virgin wool, 38% Nylon, 2% Polyester — weighted fibre impact (max 70)."
+     },
+     {
+      "label": "Brand practices",
+      "points": 3,
+      "detail": "Brand-level transparency, labour and supply-chain record."
+     }
+    ],
+    "explanation": "Verified from Bibico's own product page: 59% Wool, 38% Polyamide, 2% Polyester &amp, 1% ElastaneF Details &amp. No certifications stated on the page.",
+    "greenwash_flags": [],
+    "certifications": [],
+    "practices": {
+     "natural_dye": false,
+     "undyed": false,
+     "deadstock": false,
+     "pfc_free": false,
+     "repair_program": false,
+     "take_back": false,
+     "zero_waste": false,
+     "made_to_order": false
+    }
+   }
+  },
+  {
+   "id": "live-bibico-holly-knitted-wool-mittens-in-navy",
+   "brand_slug": "bibico",
+   "title": "Bloom Mohair Mittens in Navy",
+   "description": "Warm, cosy fingerless gloves with a fair isle pattern. 45% Sheep Wool, 45% Mohair Wool, 10% Nylon. Hand knitted in a womens fair trade coop in Nepal (learn more about who makes our handknits here ).",
+   "category": "accessories",
+   "gender": "women",
+   "price": 25,
+   "currency": "GBP",
+   "retailer": "Bibico",
+   "buy_url": "https://bibico.co.uk/products/holly-knitted-wool-mittens-in-navy",
+   "image_url": "https://cdn.shopify.com/s/files/1/0023/0082/files/PXL_20251110_100208452.jpg",
+   "color": "Multi",
+   "color_family": "Multi",
+   "sizes": [
+    "XS",
+    "S",
+    "M",
+    "L"
+   ],
+   "fit": "Regular",
+   "source": "live",
+   "fabric_composition": [
+    {
+     "material": "virgin_wool",
+     "label": "Sheep Wool",
+     "pct": 90
+    },
+    {
+     "material": "polyamide",
+     "label": "Nylon",
+     "pct": 10
+    }
+   ],
+   "sustainability": {
+    "score": 36,
+    "grade": "D",
+    "factors": [
+     {
+      "label": "Fibre composition",
+      "points": 32.9,
+      "detail": "90% Virgin wool, 10% Nylon — weighted fibre impact (max 70)."
+     },
+     {
+      "label": "Brand practices",
+      "points": 3,
+      "detail": "Brand-level transparency, labour and supply-chain record."
+     }
+    ],
+    "explanation": "Verified from Bibico's own product page: 90% Sheep Wool, 10% Nylon. No certifications stated on the page.",
+    "greenwash_flags": [],
+    "certifications": [],
+    "practices": {
+     "natural_dye": false,
+     "undyed": false,
+     "deadstock": false,
+     "pfc_free": false,
+     "repair_program": false,
+     "take_back": false,
+     "zero_waste": false,
+     "made_to_order": false
+    }
+   }
+  },
+  {
+   "id": "live-bibico-holly-knitted-wool-mittens-in-moorland-green",
+   "brand_slug": "bibico",
+   "title": "Bloom Mohair Mittens in Olive Green",
+   "description": "Warm, cosy fingerless gloves. 45% Sheep Wool, 45% Mohair Wool, 10% Nylon. Hand knitted in a womens fair trade coop in Nepal (learn more about who makes our handknits here ).",
+   "category": "accessories",
+   "gender": "women",
+   "price": 25,
+   "currency": "GBP",
+   "retailer": "Bibico",
+   "buy_url": "https://bibico.co.uk/products/holly-knitted-wool-mittens-in-moorland-green",
+   "image_url": "https://cdn.shopify.com/s/files/1/0023/0082/files/PXL_20251110_100106222.jpg",
+   "color": "Multi",
+   "color_family": "Multi",
+   "sizes": [
+    "XS",
+    "S",
+    "M",
+    "L"
+   ],
+   "fit": "Regular",
+   "source": "live",
+   "fabric_composition": [
+    {
+     "material": "virgin_wool",
+     "label": "Sheep Wool",
+     "pct": 90
+    },
+    {
+     "material": "polyamide",
+     "label": "Nylon",
+     "pct": 10
+    }
+   ],
+   "sustainability": {
+    "score": 36,
+    "grade": "D",
+    "factors": [
+     {
+      "label": "Fibre composition",
+      "points": 32.9,
+      "detail": "90% Virgin wool, 10% Nylon — weighted fibre impact (max 70)."
+     },
+     {
+      "label": "Brand practices",
+      "points": 3,
+      "detail": "Brand-level transparency, labour and supply-chain record."
+     }
+    ],
+    "explanation": "Verified from Bibico's own product page: 90% Sheep Wool, 10% Nylon. No certifications stated on the page.",
+    "greenwash_flags": [],
+    "certifications": [],
+    "practices": {
+     "natural_dye": false,
+     "undyed": false,
+     "deadstock": false,
+     "pfc_free": false,
+     "repair_program": false,
+     "take_back": false,
+     "zero_waste": false,
+     "made_to_order": false
+    }
+   }
+  },
+  {
+   "id": "live-bibico-willow-striped-mittens-in-chartreuse",
+   "brand_slug": "bibico",
+   "title": "Willow Striped Mittens",
+   "description": "Long and cosy fingerless gloves with an contrast stripe. 45% Sheep Wool, 45% Mohair Wool, 10% Nylon. Hand knitted in a womens fair trade coop in Nepal (learn more about who makes our handknits here ).",
+   "category": "accessories",
+   "gender": "women",
+   "price": 25,
+   "currency": "GBP",
+   "retailer": "Bibico",
+   "buy_url": "https://bibico.co.uk/products/willow-striped-mittens-in-chartreuse",
+   "image_url": "https://cdn.shopify.com/s/files/1/0023/0082/files/PXL_20251110_095908720_d2306d6f-5657-4dfe-beca-29c8f382815c.jpg",
+   "color": "Multi",
+   "color_family": "Multi",
+   "sizes": [
+    "XS",
+    "S",
+    "M",
+    "L"
+   ],
+   "fit": "Regular",
+   "source": "live",
+   "fabric_composition": [
+    {
+     "material": "virgin_wool",
+     "label": "Sheep Wool",
+     "pct": 90
+    },
+    {
+     "material": "polyamide",
+     "label": "Nylon",
+     "pct": 10
+    }
+   ],
+   "sustainability": {
+    "score": 36,
+    "grade": "D",
+    "factors": [
+     {
+      "label": "Fibre composition",
+      "points": 32.9,
+      "detail": "90% Virgin wool, 10% Nylon — weighted fibre impact (max 70)."
+     },
+     {
+      "label": "Brand practices",
+      "points": 3,
+      "detail": "Brand-level transparency, labour and supply-chain record."
+     }
+    ],
+    "explanation": "Verified from Bibico's own product page: 90% Sheep Wool, 10% Nylon. No certifications stated on the page.",
+    "greenwash_flags": [],
+    "certifications": [],
+    "practices": {
+     "natural_dye": false,
+     "undyed": false,
+     "deadstock": false,
+     "pfc_free": false,
+     "repair_program": false,
+     "take_back": false,
+     "zero_waste": false,
+     "made_to_order": false
+    }
+   }
+  },
+  {
+   "id": "live-bibico-grace-knitted-mittens-in-chartreuse",
+   "brand_slug": "bibico",
+   "title": "Grace Knitted Mittens in Chartreuse",
+   "description": "Warm, cosy fingerless gloves. 45% Sheep Wool, 45% Mohair Wool, 10% Nylon. Hand knitted in a womens fair trade coop in Nepal (learn more about who makes our handknits here ).",
+   "category": "accessories",
+   "gender": "women",
+   "price": 25,
+   "currency": "GBP",
+   "retailer": "Bibico",
+   "buy_url": "https://bibico.co.uk/products/grace-knitted-mittens-in-chartreuse",
+   "image_url": "https://cdn.shopify.com/s/files/1/0023/0082/files/PXL_20251110_100416244.jpg",
+   "color": "Multi",
+   "color_family": "Multi",
+   "sizes": [
+    "XS",
+    "S",
+    "M",
+    "L"
+   ],
+   "fit": "Regular",
+   "source": "live",
+   "fabric_composition": [
+    {
+     "material": "virgin_wool",
+     "label": "Sheep Wool",
+     "pct": 90
+    },
+    {
+     "material": "polyamide",
+     "label": "Nylon",
+     "pct": 10
+    }
+   ],
+   "sustainability": {
+    "score": 36,
+    "grade": "D",
+    "factors": [
+     {
+      "label": "Fibre composition",
+      "points": 32.9,
+      "detail": "90% Virgin wool, 10% Nylon — weighted fibre impact (max 70)."
+     },
+     {
+      "label": "Brand practices",
+      "points": 3,
+      "detail": "Brand-level transparency, labour and supply-chain record."
+     }
+    ],
+    "explanation": "Verified from Bibico's own product page: 90% Sheep Wool, 10% Nylon. No certifications stated on the page.",
+    "greenwash_flags": [],
+    "certifications": [],
+    "practices": {
+     "natural_dye": false,
+     "undyed": false,
+     "deadstock": false,
+     "pfc_free": false,
+     "repair_program": false,
+     "take_back": false,
+     "zero_waste": false,
+     "made_to_order": false
+    }
+   }
+  },
+  {
+   "id": "live-bibico-ulla-fair-isle-finglerless-knitted-mittens",
+   "brand_slug": "bibico",
+   "title": "Liv Fair Isle Fingerless Mittens in Rust",
+   "description": "Warm, cosy fingerless mittens with a fair isle pattern. 100% Wool. Hand knitted in a womens fair trade coop in Nepal (learn more about who makes our handknits here ).",
+   "category": "accessories",
+   "gender": "women",
+   "price": 25,
+   "currency": "GBP",
+   "retailer": "Bibico",
+   "buy_url": "https://bibico.co.uk/products/ulla-fair-isle-finglerless-knitted-mittens",
+   "image_url": "https://cdn.shopify.com/s/files/1/0023/0082/products/UllaFairIsleFinglerlessKnittedMittens.jpg",
+   "color": "Multi",
+   "color_family": "Multi",
+   "sizes": [
+    "XS",
+    "S",
+    "M",
+    "L"
+   ],
+   "fit": "Regular",
+   "source": "live",
+   "fabric_composition": [
+    {
+     "material": "virgin_wool",
+     "label": "Wool",
+     "pct": 100
+    }
+   ],
+   "sustainability": {
+    "score": 38,
+    "grade": "D",
+    "factors": [
+     {
+      "label": "Fibre composition",
+      "points": 35,
+      "detail": "100% Virgin wool — weighted fibre impact (max 70)."
+     },
+     {
+      "label": "Brand practices",
+      "points": 3,
+      "detail": "Brand-level transparency, labour and supply-chain record."
+     }
+    ],
+    "explanation": "Verified from Bibico's own product page: 100% Wool. No certifications stated on the page.",
+    "greenwash_flags": [],
+    "certifications": [],
+    "practices": {
+     "natural_dye": false,
+     "undyed": false,
+     "deadstock": false,
+     "pfc_free": false,
+     "repair_program": false,
+     "take_back": false,
+     "zero_waste": false,
+     "made_to_order": false
+    }
+   }
+  },
+  {
+   "id": "live-bibico-eire-hand-knitted-full-gloves",
+   "brand_slug": "bibico",
+   "title": "Eire Hand Knitted Full Gloves",
+   "description": "colour selected – Multi Description Warm, cosy full fingered gloves with knitted aran detail at front. Hand knitted in a womens coop in Nepal. Hand knitted. 100% Wool. Details &amp; Fit Fair Trade One size fits all Handwash in cold water Made in Nepal",
+   "category": "accessories",
+   "gender": "women",
+   "price": 28,
+   "currency": "GBP",
+   "retailer": "Bibico",
+   "buy_url": "https://bibico.co.uk/products/eire-hand-knitted-full-gloves",
+   "image_url": "https://cdn.shopify.com/s/files/1/0023/0082/products/DSCF1232.jpg",
+   "color": "Multi",
+   "color_family": "Multi",
+   "sizes": [
+    "XS",
+    "S",
+    "M",
+    "L"
+   ],
+   "fit": "Regular",
+   "source": "live",
+   "fabric_composition": [
+    {
+     "material": "virgin_wool",
+     "label": "Wool",
+     "pct": 100
+    }
+   ],
+   "sustainability": {
+    "score": 38,
+    "grade": "D",
+    "factors": [
+     {
+      "label": "Fibre composition",
+      "points": 35,
+      "detail": "100% Virgin wool — weighted fibre impact (max 70)."
+     },
+     {
+      "label": "Brand practices",
+      "points": 3,
+      "detail": "Brand-level transparency, labour and supply-chain record."
+     }
+    ],
+    "explanation": "Verified from Bibico's own product page: 100% Wool. No certifications stated on the page.",
+    "greenwash_flags": [],
+    "certifications": [],
+    "practices": {
+     "natural_dye": false,
+     "undyed": false,
+     "deadstock": false,
+     "pfc_free": false,
+     "repair_program": false,
+     "take_back": false,
+     "zero_waste": false,
+     "made_to_order": false
+    }
+   }
+  },
+  {
+   "id": "live-bibico-handknitted-wool-mittens",
+   "brand_slug": "bibico",
+   "title": "Wren Striped Fingerless Gloves",
+   "description": "Classic hand knitted fingerless gloves with stripes. 100% Wool. Hand knitted in a womens fair trade coop in Nepal (learn more about who makes our handknits here ).",
+   "category": "accessories",
+   "gender": "women",
+   "price": 25,
+   "currency": "GBP",
+   "retailer": "Bibico",
+   "buy_url": "https://bibico.co.uk/products/handknitted-wool-mittens",
+   "image_url": "https://cdn.shopify.com/s/files/1/0023/0082/products/handknittedgloves.jpg",
+   "color": "Multi",
+   "color_family": "Multi",
+   "sizes": [
+    "XS",
+    "S",
+    "M",
+    "L"
+   ],
+   "fit": "Regular",
+   "source": "live",
+   "fabric_composition": [
+    {
+     "material": "virgin_wool",
+     "label": "Wool",
+     "pct": 100
+    }
+   ],
+   "sustainability": {
+    "score": 38,
+    "grade": "D",
+    "factors": [
+     {
+      "label": "Fibre composition",
+      "points": 35,
+      "detail": "100% Virgin wool — weighted fibre impact (max 70)."
+     },
+     {
+      "label": "Brand practices",
+      "points": 3,
+      "detail": "Brand-level transparency, labour and supply-chain record."
+     }
+    ],
+    "explanation": "Verified from Bibico's own product page: 100% Wool. No certifications stated on the page.",
+    "greenwash_flags": [],
+    "certifications": [],
+    "practices": {
+     "natural_dye": false,
+     "undyed": false,
+     "deadstock": false,
+     "pfc_free": false,
+     "repair_program": false,
+     "take_back": false,
+     "zero_waste": false,
+     "made_to_order": false
+    }
+   }
+  },
+  {
+   "id": "live-bibico-anika-striped-wool-mittens",
+   "brand_slug": "bibico",
+   "title": "Anika Green Striped Mittens",
+   "description": "Long and cosy fingerless gloves with an contrast stripe. Roll edge at cuffs and fingers opening. Hand knitted in a ladies cooperative in Nepal. 25cm long. 100% Wool. Hand knitted in a womens fair trade coop in Nepal (learn more about who makes our handknits here ).",
+   "category": "accessories",
+   "gender": "women",
+   "price": 25,
+   "currency": "GBP",
+   "retailer": "Bibico",
+   "buy_url": "https://bibico.co.uk/products/anika-striped-wool-mittens",
+   "image_url": "https://cdn.shopify.com/s/files/1/0023/0082/products/woolgloves.jpg",
+   "color": "Multi",
+   "color_family": "Multi",
+   "sizes": [
+    "XS",
+    "S",
+    "M",
+    "L"
+   ],
+   "fit": "Regular",
+   "source": "live",
+   "fabric_composition": [
+    {
+     "material": "virgin_wool",
+     "label": "Wool",
+     "pct": 100
+    }
+   ],
+   "sustainability": {
+    "score": 38,
+    "grade": "D",
+    "factors": [
+     {
+      "label": "Fibre composition",
+      "points": 35,
+      "detail": "100% Virgin wool — weighted fibre impact (max 70)."
+     },
+     {
+      "label": "Brand practices",
+      "points": 3,
+      "detail": "Brand-level transparency, labour and supply-chain record."
+     }
+    ],
+    "explanation": "Verified from Bibico's own product page: 100% Wool. No certifications stated on the page.",
+    "greenwash_flags": [],
+    "certifications": [],
+    "practices": {
+     "natural_dye": false,
+     "undyed": false,
+     "deadstock": false,
+     "pfc_free": false,
+     "repair_program": false,
+     "take_back": false,
+     "zero_waste": false,
+     "made_to_order": false
+    }
+   }
+  },
+  {
+   "id": "live-bibico-striped-wool-mittens-1",
+   "brand_slug": "bibico",
+   "title": "Anika Mustard Striped Mittens",
+   "description": "Long and cosy fingerless gloves with an contrast stripe. Roll edge at cuffs and fingers opening. Hand knitted in a ladies cooperative in Nepal. 25cm long. 100% Wool. Hand knitted in a womens fair trade coop in Nepal (learn more about who makes our handknits here ).",
+   "category": "accessories",
+   "gender": "women",
+   "price": 25,
+   "currency": "GBP",
+   "retailer": "Bibico",
+   "buy_url": "https://bibico.co.uk/products/striped-wool-mittens-1",
+   "image_url": "https://cdn.shopify.com/s/files/1/0023/0082/files/DSCF0618.jpg",
+   "color": "Multi",
+   "color_family": "Multi",
+   "sizes": [
+    "XS",
+    "S",
+    "M",
+    "L"
+   ],
+   "fit": "Regular",
+   "source": "live",
+   "fabric_composition": [
+    {
+     "material": "virgin_wool",
+     "label": "Wool",
+     "pct": 100
+    }
+   ],
+   "sustainability": {
+    "score": 38,
+    "grade": "D",
+    "factors": [
+     {
+      "label": "Fibre composition",
+      "points": 35,
+      "detail": "100% Virgin wool — weighted fibre impact (max 70)."
+     },
+     {
+      "label": "Brand practices",
+      "points": 3,
+      "detail": "Brand-level transparency, labour and supply-chain record."
+     }
+    ],
+    "explanation": "Verified from Bibico's own product page: 100% Wool. No certifications stated on the page.",
+    "greenwash_flags": [],
+    "certifications": [],
+    "practices": {
+     "natural_dye": false,
+     "undyed": false,
+     "deadstock": false,
+     "pfc_free": false,
+     "repair_program": false,
+     "take_back": false,
+     "zero_waste": false,
+     "made_to_order": false
+    }
+   }
+  },
+  {
+   "id": "live-bibico-fair-isle-finglerless-wool-gloves",
+   "brand_slug": "bibico",
+   "title": "Erika Mustard Fingerless Gloves",
+   "description": "Warm, cosy fingerless gloves with a fair isle pattern. 100% Wool. Hand knitted in a womens fair trade coop in Nepal (learn more about who makes our handknits here ).",
+   "category": "accessories",
+   "gender": "women",
+   "price": 25,
+   "currency": "GBP",
+   "retailer": "Bibico",
+   "buy_url": "https://bibico.co.uk/products/fair-isle-finglerless-wool-gloves",
+   "image_url": "https://cdn.shopify.com/s/files/1/0023/0082/products/DSCF1121.jpg",
+   "color": "Multi",
+   "color_family": "Multi",
+   "sizes": [
+    "XS",
+    "S",
+    "M",
+    "L"
+   ],
+   "fit": "Regular",
+   "source": "live",
+   "fabric_composition": [
+    {
+     "material": "virgin_wool",
+     "label": "Wool",
+     "pct": 100
+    }
+   ],
+   "sustainability": {
+    "score": 38,
+    "grade": "D",
+    "factors": [
+     {
+      "label": "Fibre composition",
+      "points": 35,
+      "detail": "100% Virgin wool — weighted fibre impact (max 70)."
+     },
+     {
+      "label": "Brand practices",
+      "points": 3,
+      "detail": "Brand-level transparency, labour and supply-chain record."
+     }
+    ],
+    "explanation": "Verified from Bibico's own product page: 100% Wool. No certifications stated on the page.",
+    "greenwash_flags": [],
+    "certifications": [],
+    "practices": {
+     "natural_dye": false,
+     "undyed": false,
+     "deadstock": false,
+     "pfc_free": false,
+     "repair_program": false,
+     "take_back": false,
+     "zero_waste": false,
+     "made_to_order": false
+    }
+   }
+  },
+  {
+   "id": "live-bibico-fair-isle-finglerless-knitted-gloves-1",
+   "brand_slug": "bibico",
+   "title": "Joe Fair Isle Fingerless Gloves",
+   "description": "Warm, cosy fingerless gloves with a fair isle pattern. 100% wool. Hand knitted in a womens fair trade coop in Nepal (learn more about who makes our handknits here ).",
+   "category": "accessories",
+   "gender": "women",
+   "price": 25,
+   "currency": "GBP",
+   "retailer": "Bibico",
+   "buy_url": "https://bibico.co.uk/products/fair-isle-finglerless-knitted-gloves-1",
+   "image_url": "https://cdn.shopify.com/s/files/1/0023/0082/files/DSCF0659.jpg",
+   "color": "Multi",
+   "color_family": "Multi",
+   "sizes": [
+    "XS",
+    "S",
+    "M",
+    "L"
+   ],
+   "fit": "Regular",
+   "source": "live",
+   "fabric_composition": [
+    {
+     "material": "virgin_wool",
+     "label": "wool",
+     "pct": 100
+    }
+   ],
+   "sustainability": {
+    "score": 38,
+    "grade": "D",
+    "factors": [
+     {
+      "label": "Fibre composition",
+      "points": 35,
+      "detail": "100% Virgin wool — weighted fibre impact (max 70)."
+     },
+     {
+      "label": "Brand practices",
+      "points": 3,
+      "detail": "Brand-level transparency, labour and supply-chain record."
+     }
+    ],
+    "explanation": "Verified from Bibico's own product page: 100% wool. No certifications stated on the page.",
+    "greenwash_flags": [],
+    "certifications": [],
+    "practices": {
+     "natural_dye": false,
+     "undyed": false,
+     "deadstock": false,
+     "pfc_free": false,
+     "repair_program": false,
+     "take_back": false,
+     "zero_waste": false,
+     "made_to_order": false
+    }
+   }
+  },
+  {
+   "id": "live-bibico-ulla-fair-isle-finglerless-wool-mittens",
+   "brand_slug": "bibico",
+   "title": "Liv Fair Isle Fingerless Mittens in Teal",
+   "description": "Warm, cosy fingerless mittens with a fair isle pattern. 100% Wool. Hand knitted in a womens fair trade coop in Nepal (learn more about who makes our handknits here ).",
+   "category": "accessories",
+   "gender": "women",
+   "price": 25,
+   "currency": "GBP",
+   "retailer": "Bibico",
+   "buy_url": "https://bibico.co.uk/products/ulla-fair-isle-finglerless-wool-mittens",
+   "image_url": "https://cdn.shopify.com/s/files/1/0023/0082/files/DSCF0635.jpg",
+   "color": "Multi",
+   "color_family": "Multi",
+   "sizes": [
+    "XS",
+    "S",
+    "M",
+    "L"
+   ],
+   "fit": "Regular",
+   "source": "live",
+   "fabric_composition": [
+    {
+     "material": "virgin_wool",
+     "label": "Wool",
+     "pct": 100
+    }
+   ],
+   "sustainability": {
+    "score": 38,
+    "grade": "D",
+    "factors": [
+     {
+      "label": "Fibre composition",
+      "points": 35,
+      "detail": "100% Virgin wool — weighted fibre impact (max 70)."
+     },
+     {
+      "label": "Brand practices",
+      "points": 3,
+      "detail": "Brand-level transparency, labour and supply-chain record."
+     }
+    ],
+    "explanation": "Verified from Bibico's own product page: 100% Wool. No certifications stated on the page.",
+    "greenwash_flags": [],
+    "certifications": [],
+    "practices": {
+     "natural_dye": false,
+     "undyed": false,
+     "deadstock": false,
+     "pfc_free": false,
+     "repair_program": false,
+     "take_back": false,
+     "zero_waste": false,
+     "made_to_order": false
+    }
+   }
+  },
+  {
+   "id": "live-bibico-fair-isle-finglerless-knitted-mittens-mint",
+   "brand_slug": "bibico",
+   "title": "Liv Fair Isle Fingerless Mittens in Mint",
+   "description": "Warm, cosy fingerless mittens with a fair isle pattern. 100% Wool. Hand knitted in a womens fair trade coop in Nepal (learn more about who makes our handknits here ).",
+   "category": "accessories",
+   "gender": "women",
+   "price": 25,
+   "currency": "GBP",
+   "retailer": "Bibico",
+   "buy_url": "https://bibico.co.uk/products/fair-isle-finglerless-knitted-mittens-mint",
+   "image_url": "https://cdn.shopify.com/s/files/1/0023/0082/files/DSCF0600.jpg",
+   "color": "Multi",
+   "color_family": "Multi",
+   "sizes": [
+    "XS",
+    "S",
+    "M",
+    "L"
+   ],
+   "fit": "Regular",
+   "source": "live",
+   "fabric_composition": [
+    {
+     "material": "virgin_wool",
+     "label": "Wool",
+     "pct": 100
+    }
+   ],
+   "sustainability": {
+    "score": 38,
+    "grade": "D",
+    "factors": [
+     {
+      "label": "Fibre composition",
+      "points": 35,
+      "detail": "100% Virgin wool — weighted fibre impact (max 70)."
+     },
+     {
+      "label": "Brand practices",
+      "points": 3,
+      "detail": "Brand-level transparency, labour and supply-chain record."
+     }
+    ],
+    "explanation": "Verified from Bibico's own product page: 100% Wool. No certifications stated on the page.",
+    "greenwash_flags": [],
+    "certifications": [],
+    "practices": {
+     "natural_dye": false,
+     "undyed": false,
+     "deadstock": false,
+     "pfc_free": false,
+     "repair_program": false,
+     "take_back": false,
+     "zero_waste": false,
+     "made_to_order": false
+    }
+   }
+  },
+  {
+   "id": "live-bibico-fair-isle-finglerless-wool-mittens-pink",
+   "brand_slug": "bibico",
+   "title": "Liv Fair Isle Fingerless Mittens in Pink",
+   "description": "Warm, cosy fingerless mittens with a fair isle pattern. 100% Wool. Hand knitted in a womens fair trade coop in Nepal (learn more about who makes our handknits here ).",
+   "category": "accessories",
+   "gender": "women",
+   "price": 25,
+   "currency": "GBP",
+   "retailer": "Bibico",
+   "buy_url": "https://bibico.co.uk/products/fair-isle-finglerless-wool-mittens-pink",
+   "image_url": "https://cdn.shopify.com/s/files/1/0023/0082/products/DSCF1116.jpg",
+   "color": "Multi",
+   "color_family": "Multi",
+   "sizes": [
+    "XS",
+    "S",
+    "M",
+    "L"
+   ],
+   "fit": "Regular",
+   "source": "live",
+   "fabric_composition": [
+    {
+     "material": "virgin_wool",
+     "label": "Wool",
+     "pct": 100
+    }
+   ],
+   "sustainability": {
+    "score": 38,
+    "grade": "D",
+    "factors": [
+     {
+      "label": "Fibre composition",
+      "points": 35,
+      "detail": "100% Virgin wool — weighted fibre impact (max 70)."
+     },
+     {
+      "label": "Brand practices",
+      "points": 3,
+      "detail": "Brand-level transparency, labour and supply-chain record."
+     }
+    ],
+    "explanation": "Verified from Bibico's own product page: 100% Wool. No certifications stated on the page.",
+    "greenwash_flags": [],
+    "certifications": [],
+    "practices": {
+     "natural_dye": false,
+     "undyed": false,
+     "deadstock": false,
+     "pfc_free": false,
+     "repair_program": false,
+     "take_back": false,
+     "zero_waste": false,
+     "made_to_order": false
+    }
+   }
+  },
+  {
+   "id": "live-bibico-lottie-fair-isle-finglerless-mittens",
+   "brand_slug": "bibico",
+   "title": "Lottie Lime Fingerless Mittens",
+   "description": "Warm, cosy fingerless mittens with a fair isle pattern. 100% Wool. Hand knitted in a womens fair trade coop in Nepal (learn more about who makes our handknits here ).",
+   "category": "accessories",
+   "gender": "women",
+   "price": 25,
+   "currency": "GBP",
+   "retailer": "Bibico",
+   "buy_url": "https://bibico.co.uk/products/lottie-fair-isle-finglerless-mittens",
+   "image_url": "https://cdn.shopify.com/s/files/1/0023/0082/products/LottieFairIsleFingerlessMittens.jpg",
+   "color": "Multi",
+   "color_family": "Multi",
+   "sizes": [
+    "XS",
+    "S",
+    "M",
+    "L"
+   ],
+   "fit": "Regular",
+   "source": "live",
+   "fabric_composition": [
+    {
+     "material": "virgin_wool",
+     "label": "Wool",
+     "pct": 100
+    }
+   ],
+   "sustainability": {
+    "score": 38,
+    "grade": "D",
+    "factors": [
+     {
+      "label": "Fibre composition",
+      "points": 35,
+      "detail": "100% Virgin wool — weighted fibre impact (max 70)."
+     },
+     {
+      "label": "Brand practices",
+      "points": 3,
+      "detail": "Brand-level transparency, labour and supply-chain record."
+     }
+    ],
+    "explanation": "Verified from Bibico's own product page: 100% Wool. No certifications stated on the page.",
+    "greenwash_flags": [],
+    "certifications": [],
+    "practices": {
+     "natural_dye": false,
+     "undyed": false,
+     "deadstock": false,
+     "pfc_free": false,
+     "repair_program": false,
+     "take_back": false,
+     "zero_waste": false,
+     "made_to_order": false
+    }
+   }
+  },
+  {
+   "id": "live-bibico-sitges-fine-wool-scarf-copy-2",
+   "brand_slug": "bibico",
+   "title": "Ikat Wool Scarf",
+   "description": "Description Lightweight and luxuriously soft wool scarf featuring traditional Ikat-style patterns patchworked together.It's lovely and long, so you can wear it in lots of different ways; And easy way to add colour and extra cosiness to any look .An unfinished and faded edge gives this scarf a raw feel. 100% wool. Light weight. Dry Clean Only. Measurements: 70x190cm. Fair Trade. Made in India. Hand picked by Snow. Details &amp; Fit Made in India Hand picked by Snow: A selection of products that are chosen for their distinctive quality and craftsmanship. An addition to our collections, and a cha",
+   "category": "accessories",
+   "gender": "women",
+   "price": 69,
+   "currency": "GBP",
+   "retailer": "Bibico",
+   "buy_url": "https://bibico.co.uk/products/sitges-fine-wool-scarf-copy-2",
+   "image_url": "https://cdn.shopify.com/s/files/1/0023/0082/files/aw25__wp004_denim_-kt016-scarf_1642.jpg",
+   "color": "Multi",
+   "color_family": "Multi",
+   "sizes": [
+    "XS",
+    "S",
+    "M",
+    "L"
+   ],
+   "fit": "Regular",
+   "source": "live",
+   "fabric_composition": [
+    {
+     "material": "virgin_wool",
+     "label": "wool",
+     "pct": 100
+    }
+   ],
+   "sustainability": {
+    "score": 38,
+    "grade": "D",
+    "factors": [
+     {
+      "label": "Fibre composition",
+      "points": 35,
+      "detail": "100% Virgin wool — weighted fibre impact (max 70)."
+     },
+     {
+      "label": "Brand practices",
+      "points": 3,
+      "detail": "Brand-level transparency, labour and supply-chain record."
+     }
+    ],
+    "explanation": "Verified from Bibico's own product page: 100% wool. No certifications stated on the page.",
+    "greenwash_flags": [],
+    "certifications": [],
+    "practices": {
+     "natural_dye": false,
+     "undyed": false,
+     "deadstock": false,
+     "pfc_free": false,
+     "repair_program": false,
+     "take_back": false,
+     "zero_waste": false,
+     "made_to_order": false
+    }
+   }
+  },
+  {
+   "id": "live-bibico-sitges-fine-wool-scarf-copy-6",
+   "brand_slug": "bibico",
+   "title": "Indigo Fine Wool Scarf",
+   "description": "Description Lightweight and luxuriously soft wool scarf with a ditsy flower motif.The classic palette of indigo blue and ecru gives this scarf a Japonese feel. It's lovely and long, so you can wear it in lots of different ways; And easy way to add colour and extra cosiness to any look .An unfinished and faded edge gives this scarf a raw feel. 100% wool. Light weight. Dry Clean Only. Measurements: 70x180cm. Fair Trade. Made in India. Hand picked by Snow. Details &amp; Fit Made in India Hand picked by Snow: A selection of products that are chosen for their distinctive quality and craftsmanship. ",
+   "category": "accessories",
+   "gender": "women",
+   "price": 75,
+   "currency": "GBP",
+   "retailer": "Bibico",
+   "buy_url": "https://bibico.co.uk/products/sitges-fine-wool-scarf-copy-6",
+   "image_url": "https://cdn.shopify.com/s/files/1/0023/0082/files/aw25__wp005_cord_-_kt006_caspian_1948.jpg",
+   "color": "Multi",
+   "color_family": "Multi",
+   "sizes": [
+    "XS",
+    "S",
+    "M",
+    "L"
+   ],
+   "fit": "Regular",
+   "source": "live",
+   "fabric_composition": [
+    {
+     "material": "virgin_wool",
+     "label": "wool",
+     "pct": 100
+    }
+   ],
+   "sustainability": {
+    "score": 38,
+    "grade": "D",
+    "factors": [
+     {
+      "label": "Fibre composition",
+      "points": 35,
+      "detail": "100% Virgin wool — weighted fibre impact (max 70)."
+     },
+     {
+      "label": "Brand practices",
+      "points": 3,
+      "detail": "Brand-level transparency, labour and supply-chain record."
+     }
+    ],
+    "explanation": "Verified from Bibico's own product page: 100% wool. No certifications stated on the page.",
+    "greenwash_flags": [],
+    "certifications": [],
+    "practices": {
+     "natural_dye": false,
+     "undyed": false,
+     "deadstock": false,
+     "pfc_free": false,
+     "repair_program": false,
+     "take_back": false,
+     "zero_waste": false,
+     "made_to_order": false
+    }
+   }
+  },
+  {
+   "id": "live-bibico-sitges-fine-wool-scarf-copy-5",
+   "brand_slug": "bibico",
+   "title": "Persian Fine Wool Scarf",
+   "description": "Description Lightweight and luxuriously soft wool square scarf, with a warm coloured abstract print with a faded vintage feel.It's lovely and long, so you can wear it in lots of different ways; And easy way to add colour and extra cosiness to any look .An unfinished and faded edge gives this scarf a raw feel. 70% wool &amp; 30% modal. Light weight. Dry Clean Only. Measurements: 70x70cm. Fair Trade. Made in India. Hand picked by Snow. Details &amp; Fit Made in India Hand picked by Snow: A selection of products that are chosen for their distinctive quality and craftsmanship. An addition to our c",
+   "category": "accessories",
+   "gender": "women",
+   "price": 49,
+   "currency": "GBP",
+   "retailer": "Bibico",
+   "buy_url": "https://bibico.co.uk/products/sitges-fine-wool-scarf-copy-5",
+   "image_url": "https://cdn.shopify.com/s/files/1/0023/0082/files/aw25__wp004_cord___kt011_canapastun__1437.jpg",
+   "color": "Multi",
+   "color_family": "Multi",
+   "sizes": [
+    "XS",
+    "S",
+    "M",
+    "L"
+   ],
+   "fit": "Regular",
+   "source": "live",
+   "fabric_composition": [
+    {
+     "material": "virgin_wool",
+     "label": "wool &amp",
+     "pct": 70
+    },
+    {
+     "material": "modal",
+     "label": "modal",
+     "pct": 30
+    }
+   ],
+   "sustainability": {
+    "score": 43,
+    "grade": "D",
+    "factors": [
+     {
+      "label": "Fibre composition",
+      "points": 40.3,
+      "detail": "70% Virgin wool, 30% Modal — weighted fibre impact (max 70)."
+     },
+     {
+      "label": "Brand practices",
+      "points": 3,
+      "detail": "Brand-level transparency, labour and supply-chain record."
+     }
+    ],
+    "explanation": "Verified from Bibico's own product page: 70% wool &amp, 30% modal. No certifications stated on the page.",
+    "greenwash_flags": [],
+    "certifications": [],
+    "practices": {
+     "natural_dye": false,
+     "undyed": false,
+     "deadstock": false,
+     "pfc_free": false,
+     "repair_program": false,
+     "take_back": false,
+     "zero_waste": false,
+     "made_to_order": false
+    }
+   }
+  },
+  {
+   "id": "live-bibico-sitges-fine-wool-scarf-copy",
+   "brand_slug": "bibico",
+   "title": "Poppy Wool Scarf",
+   "description": "Description Lightweight and luxuriously soft wool scarf with a bold print in rich &amp; deep colours. It's lovely and long, so you can wear it in lots of different ways; And easy way to add colour and extra cosiness to any look .An unfinished and faded edge gives this scarf a raw feel. 100% wool. Light weight. Dry Clean Only. Measurements: 70x190cm. Fair Trade. Made in India. Hand picked by Snow. Details &amp; Fit Made in India Hand picked by Snow: A selection of products that are chosen for their distinctive quality and craftsmanship. An addition to our collections, and a chance to work with ",
+   "category": "accessories",
+   "gender": "women",
+   "price": 69,
+   "currency": "GBP",
+   "retailer": "Bibico",
+   "buy_url": "https://bibico.co.uk/products/sitges-fine-wool-scarf-copy",
+   "image_url": "https://cdn.shopify.com/s/files/1/0023/0082/files/aw25__wp004_cord___kt006_moss___1383.jpg",
+   "color": "Multi",
+   "color_family": "Multi",
+   "sizes": [
+    "XS",
+    "S",
+    "M",
+    "L"
+   ],
+   "fit": "Regular",
+   "source": "live",
+   "fabric_composition": [
+    {
+     "material": "virgin_wool",
+     "label": "wool",
+     "pct": 100
+    }
+   ],
+   "sustainability": {
+    "score": 38,
+    "grade": "D",
+    "factors": [
+     {
+      "label": "Fibre composition",
+      "points": 35,
+      "detail": "100% Virgin wool — weighted fibre impact (max 70)."
+     },
+     {
+      "label": "Brand practices",
+      "points": 3,
+      "detail": "Brand-level transparency, labour and supply-chain record."
+     }
+    ],
+    "explanation": "Verified from Bibico's own product page: 100% wool. No certifications stated on the page.",
+    "greenwash_flags": [],
+    "certifications": [],
+    "practices": {
+     "natural_dye": false,
+     "undyed": false,
+     "deadstock": false,
+     "pfc_free": false,
+     "repair_program": false,
+     "take_back": false,
+     "zero_waste": false,
+     "made_to_order": false
+    }
+   }
+  },
+  {
+   "id": "live-bibico-sitges-fine-wool-scarf-copy-1",
+   "brand_slug": "bibico",
+   "title": "Black Floral Wool Scarf",
+   "description": "Description Lightweight and luxuriously soft wool scarf with mystical black floral print.It's lovely and long, so you can wear it in lots of different ways; And easy way to add colour and extra cosiness to any look .An unfinished and faded edge gives this scarf a raw feel. 100% wool. Light weight. Dry Clean Only. Measurements: 70x190cm. Fair Trade. Made in India. Hand picked by Snow. Details &amp; Fit Made in India Hand picked by Snow: A selection of products that are chosen for their distinctive quality and craftsmanship. An addition to our collections, and a chance to work with makers &amp; ",
+   "category": "accessories",
+   "gender": "women",
+   "price": 69,
+   "currency": "GBP",
+   "retailer": "Bibico",
+   "buy_url": "https://bibico.co.uk/products/sitges-fine-wool-scarf-copy-1",
+   "image_url": "https://cdn.shopify.com/s/files/1/0023/0082/files/aw25__wp004_cord___kt001_grey_1486.jpg",
+   "color": "Multi",
+   "color_family": "Multi",
+   "sizes": [
+    "XS",
+    "S",
+    "M",
+    "L"
+   ],
+   "fit": "Regular",
+   "source": "live",
+   "fabric_composition": [
+    {
+     "material": "virgin_wool",
+     "label": "wool",
+     "pct": 100
+    }
+   ],
+   "sustainability": {
+    "score": 38,
+    "grade": "D",
+    "factors": [
+     {
+      "label": "Fibre composition",
+      "points": 35,
+      "detail": "100% Virgin wool — weighted fibre impact (max 70)."
+     },
+     {
+      "label": "Brand practices",
+      "points": 3,
+      "detail": "Brand-level transparency, labour and supply-chain record."
+     }
+    ],
+    "explanation": "Verified from Bibico's own product page: 100% wool. No certifications stated on the page.",
+    "greenwash_flags": [],
+    "certifications": [],
+    "practices": {
+     "natural_dye": false,
+     "undyed": false,
+     "deadstock": false,
+     "pfc_free": false,
+     "repair_program": false,
+     "take_back": false,
+     "zero_waste": false,
+     "made_to_order": false
+    }
+   }
+  },
+  {
+   "id": "live-bibico-sitges-fine-wool-scarf-copy-4",
+   "brand_slug": "bibico",
+   "title": "Verona Wool Scarf",
+   "description": "Description Lightweight and luxuriously soft wool scarf with a array of vibrant flowers and shapes.It's lovely and long, so you can wear it in lots of different ways; And easy way to add colour and extra cosiness to any look .An unfinished and faded edge gives this scarf a raw feel. 100% wool. Light weight. Dry Clean Only. Measurements: 70x190cm. Fair Trade. Made in India. Hand picked by Snow. Details &amp; Fit Made in India Hand picked by Snow: A selection of products that are chosen for their distinctive quality and craftsmanship. An addition to our collections, and a chance to work with mak",
+   "category": "accessories",
+   "gender": "women",
+   "price": 69,
+   "currency": "GBP",
+   "retailer": "Bibico",
+   "buy_url": "https://bibico.co.uk/products/sitges-fine-wool-scarf-copy-4",
+   "image_url": "https://cdn.shopify.com/s/files/1/0023/0082/files/aw25__wp005_cord_-_kt006_caspian_1959.jpg",
+   "color": "Multi",
+   "color_family": "Multi",
+   "sizes": [
+    "XS",
+    "S",
+    "M",
+    "L"
+   ],
+   "fit": "Regular",
+   "source": "live",
+   "fabric_composition": [
+    {
+     "material": "virgin_wool",
+     "label": "wool",
+     "pct": 100
+    }
+   ],
+   "sustainability": {
+    "score": 38,
+    "grade": "D",
+    "factors": [
+     {
+      "label": "Fibre composition",
+      "points": 35,
+      "detail": "100% Virgin wool — weighted fibre impact (max 70)."
+     },
+     {
+      "label": "Brand practices",
+      "points": 3,
+      "detail": "Brand-level transparency, labour and supply-chain record."
+     }
+    ],
+    "explanation": "Verified from Bibico's own product page: 100% wool. No certifications stated on the page.",
+    "greenwash_flags": [],
+    "certifications": [],
+    "practices": {
+     "natural_dye": false,
+     "undyed": false,
+     "deadstock": false,
+     "pfc_free": false,
+     "repair_program": false,
+     "take_back": false,
+     "zero_waste": false,
+     "made_to_order": false
+    }
+   }
+  },
+  {
+   "id": "live-bibico-sitges-fine-wool-scarf-copy-3",
+   "brand_slug": "bibico",
+   "title": "Festival Colour Melange Wool Scarf",
+   "description": "Description Lightweight and luxuriously soft wool scarf with a multicoloured riot of pink, orange, lilac, greens and blues melange tones.It's lovely and long, so you can wear it in lots of different ways; And easy way to add colour and extra cosiness to any look .An unfinished and faded edge gives this scarf a raw feel. 100% wool. Light weight. Dry Clean Only. Measurements: 70x190cm. Fair Trade. Made in India. Hand picked by Snow. Details &amp; Fit Made in India Hand picked by Snow: A selection of products that are chosen for their distinctive quality and craftsmanship. An addition to our coll",
+   "category": "accessories",
+   "gender": "women",
+   "price": 69,
+   "currency": "GBP",
+   "retailer": "Bibico",
+   "buy_url": "https://bibico.co.uk/products/sitges-fine-wool-scarf-copy-3",
+   "image_url": "https://cdn.shopify.com/s/files/1/0023/0082/files/aw25__wp004_denim_-kt005_green_scarf_1672.jpg",
+   "color": "Multi",
+   "color_family": "Multi",
+   "sizes": [
+    "XS",
+    "S",
+    "M",
+    "L"
+   ],
+   "fit": "Regular",
+   "source": "live",
+   "fabric_composition": [
+    {
+     "material": "virgin_wool",
+     "label": "wool",
+     "pct": 100
+    }
+   ],
+   "sustainability": {
+    "score": 38,
+    "grade": "D",
+    "factors": [
+     {
+      "label": "Fibre composition",
+      "points": 35,
+      "detail": "100% Virgin wool — weighted fibre impact (max 70)."
+     },
+     {
+      "label": "Brand practices",
+      "points": 3,
+      "detail": "Brand-level transparency, labour and supply-chain record."
+     }
+    ],
+    "explanation": "Verified from Bibico's own product page: 100% wool. No certifications stated on the page.",
+    "greenwash_flags": [],
+    "certifications": [],
+    "practices": {
+     "natural_dye": false,
+     "undyed": false,
+     "deadstock": false,
+     "pfc_free": false,
+     "repair_program": false,
+     "take_back": false,
+     "zero_waste": false,
+     "made_to_order": false
+    }
+   }
+  },
+  {
+   "id": "live-bibico-patchwork-fine-wool-scarf",
+   "brand_slug": "bibico",
+   "title": "Patchwork wool scarf",
+   "description": "Lightweight and luxuriously soft wool scarf with an exciting collage of prints layered over one another - bright stripes, plaids and Ikat motifs - in a multicoloured palette.It's lovely and long, so you can wear it in lots of different ways; And easy way to add colour and extra cosiness to any look .An unfinished and faded edge gives this scarf a raw feel. 100% wool. Light weight. Dry Clean Only. Measurements: 100x190cm. Fair Trade. Made in India. Hand picked by Snow. Details &amp; Fit Made in India Hand picked by Snow: A selection of products that are chosen for their distinctive quality and ",
+   "category": "accessories",
+   "gender": "women",
+   "price": 69,
+   "currency": "GBP",
+   "retailer": "Bibico",
+   "buy_url": "https://bibico.co.uk/products/patchwork-fine-wool-scarf",
+   "image_url": "https://cdn.shopify.com/s/files/1/0023/0082/files/jo-edwards-patchwork-e.jpg",
+   "color": "Multi",
+   "color_family": "Multi",
+   "sizes": [
+    "XS",
+    "S",
+    "M",
+    "L"
+   ],
+   "fit": "Regular",
+   "source": "live",
+   "fabric_composition": [
+    {
+     "material": "virgin_wool",
+     "label": "wool",
+     "pct": 100
+    }
+   ],
+   "sustainability": {
+    "score": 38,
+    "grade": "D",
+    "factors": [
+     {
+      "label": "Fibre composition",
+      "points": 35,
+      "detail": "100% Virgin wool — weighted fibre impact (max 70)."
+     },
+     {
+      "label": "Brand practices",
+      "points": 3,
+      "detail": "Brand-level transparency, labour and supply-chain record."
+     }
+    ],
+    "explanation": "Verified from Bibico's own product page: 100% wool. No certifications stated on the page.",
+    "greenwash_flags": [],
+    "certifications": [],
+    "practices": {
+     "natural_dye": false,
+     "undyed": false,
+     "deadstock": false,
+     "pfc_free": false,
+     "repair_program": false,
+     "take_back": false,
+     "zero_waste": false,
+     "made_to_order": false
+    }
+   }
+  },
+  {
+   "id": "live-bibico-sitges-fine-wool-scarf",
+   "brand_slug": "bibico",
+   "title": "Sitges Fine Wool Scarf",
+   "description": "Lightweight and luxuriously soft wool scarf with a paisley print contrasted with a multi-stripe border for a pinch of colour.It's lovely and long, so you can wear it in lots of different ways; And easy way to add colour and extra cosiness to any look .An unfinished and faded edge gives this scarf a raw feel. 100% wool. Light weight. Dry Clean Only. Measurements: 70x190cm. Fair Trade. Made in India. Hand picked by Snow. Details &amp; Fit Made in India Hand picked by Snow: A selection of products that are chosen for their distinctive quality and craftsmanship. An addition to our collections, and",
+   "category": "accessories",
+   "gender": "women",
+   "price": 69,
+   "currency": "GBP",
+   "retailer": "Bibico",
+   "buy_url": "https://bibico.co.uk/products/sitges-fine-wool-scarf",
+   "image_url": "https://cdn.shopify.com/s/files/1/0023/0082/files/jo-edwards-sitges-i.jpg",
+   "color": "Multi",
+   "color_family": "Multi",
+   "sizes": [
+    "XS",
+    "S",
+    "M",
+    "L"
+   ],
+   "fit": "Regular",
+   "source": "live",
+   "fabric_composition": [
+    {
+     "material": "virgin_wool",
+     "label": "wool",
+     "pct": 100
+    }
+   ],
+   "sustainability": {
+    "score": 38,
+    "grade": "D",
+    "factors": [
+     {
+      "label": "Fibre composition",
+      "points": 35,
+      "detail": "100% Virgin wool — weighted fibre impact (max 70)."
+     },
+     {
+      "label": "Brand practices",
+      "points": 3,
+      "detail": "Brand-level transparency, labour and supply-chain record."
+     }
+    ],
+    "explanation": "Verified from Bibico's own product page: 100% wool. No certifications stated on the page.",
+    "greenwash_flags": [],
+    "certifications": [],
+    "practices": {
+     "natural_dye": false,
+     "undyed": false,
+     "deadstock": false,
+     "pfc_free": false,
+     "repair_program": false,
+     "take_back": false,
+     "zero_waste": false,
+     "made_to_order": false
+    }
+   }
+  },
+  {
+   "id": "live-bibico-chic-wool-scarf",
+   "brand_slug": "bibico",
+   "title": "Chic wool scarf",
+   "description": "Lightweight and luxuriously soft wool scarf with a sophisticated watercolor print.It's lovely and long, so you can wear it in lots of different ways; And easy way to add colour and extra coziness to any look .An unfinished and faded edge gives this scarf a raw feel. 100% wool. Light weight. Dry Clean Only. Measurements: 70x180cm. Fair Trade. Made in India. Hand picked by Snow. Details &amp; Fit Made in India Hand picked by Snow: A selection of products that are chosen for their distinctive quality and craftsmanship. An addition to our collections, and a chance to work with makers &amp; artisan",
+   "category": "accessories",
+   "gender": "women",
+   "price": 69,
+   "currency": "GBP",
+   "retailer": "Bibico",
+   "buy_url": "https://bibico.co.uk/products/chic-wool-scarf",
+   "image_url": "https://cdn.shopify.com/s/files/1/0023/0082/files/jo-edwards-chic-b.jpg",
+   "color": "Multi",
+   "color_family": "Multi",
+   "sizes": [
+    "XS",
+    "S",
+    "M",
+    "L"
+   ],
+   "fit": "Regular",
+   "source": "live",
+   "fabric_composition": [
+    {
+     "material": "virgin_wool",
+     "label": "wool",
+     "pct": 100
+    }
+   ],
+   "sustainability": {
+    "score": 38,
+    "grade": "D",
+    "factors": [
+     {
+      "label": "Fibre composition",
+      "points": 35,
+      "detail": "100% Virgin wool — weighted fibre impact (max 70)."
+     },
+     {
+      "label": "Brand practices",
+      "points": 3,
+      "detail": "Brand-level transparency, labour and supply-chain record."
+     }
+    ],
+    "explanation": "Verified from Bibico's own product page: 100% wool. No certifications stated on the page.",
+    "greenwash_flags": [],
+    "certifications": [],
+    "practices": {
+     "natural_dye": false,
+     "undyed": false,
+     "deadstock": false,
+     "pfc_free": false,
+     "repair_program": false,
+     "take_back": false,
+     "zero_waste": false,
+     "made_to_order": false
+    }
+   }
+  },
+  {
+   "id": "live-bibico-fair-isle-wool-socks",
+   "brand_slug": "bibico",
+   "title": "Fair Isle Wool Socks",
+   "description": "Cosy pure wool socks with a contrast fair isle pattern all over. Perfect to use as slipper or boot socks. Hand made. 100% Wool. Details &amp; Fit Fair Trade Handwash in cold water Made in Nepal Delivery FREE UK Delivery - all standard uk orders over £50 UK Standard - 3-5 days - £3.95 UK Next Day - Order by 12pm - £5.95 Europe – 5-7 days - £7.00 Outside Europe – 7-10 days - from £8.00 Click here for more information on UK &amp; International delivery",
+   "category": "accessories",
+   "gender": "women",
+   "price": 32,
+   "currency": "GBP",
+   "retailer": "Bibico",
+   "buy_url": "https://bibico.co.uk/products/fair-isle-wool-socks",
+   "image_url": "https://cdn.shopify.com/s/files/1/0023/0082/products/DSCF1007.jpg",
+   "color": "Multi",
+   "color_family": "Multi",
+   "sizes": [
+    "3-4UK",
+    "5-7UK"
+   ],
+   "fit": "Regular",
+   "source": "live",
+   "fabric_composition": [
+    {
+     "material": "virgin_wool",
+     "label": "Wool",
+     "pct": 100
+    }
+   ],
+   "sustainability": {
+    "score": 38,
+    "grade": "D",
+    "factors": [
+     {
+      "label": "Fibre composition",
+      "points": 35,
+      "detail": "100% Virgin wool — weighted fibre impact (max 70)."
+     },
+     {
+      "label": "Brand practices",
+      "points": 3,
+      "detail": "Brand-level transparency, labour and supply-chain record."
+     }
+    ],
+    "explanation": "Verified from Bibico's own product page: 100% Wool. No certifications stated on the page.",
     "greenwash_flags": [],
     "certifications": [],
     "practices": {
