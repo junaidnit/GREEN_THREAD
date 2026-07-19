@@ -95,6 +95,8 @@ export default function RootLayout({
           <p className="flex flex-wrap items-center justify-center gap-x-4 gap-y-2 px-4">
             <Link href="/methodology" className="underline-offset-2 hover:text-primary hover:underline">How we score</Link>
             <span className="opacity-40">·</span>
+            <Link href="/label-watch" className="underline-offset-2 hover:text-primary hover:underline">Label Watch</Link>
+            <span className="opacity-40">·</span>
             <Link href="/analyze" className="underline-offset-2 hover:text-primary hover:underline">Fabric Check</Link>
             <span className="opacity-40">·</span>
             <Link href="/fabric/linen" className="underline-offset-2 hover:text-primary hover:underline">Fabric guides</Link>
