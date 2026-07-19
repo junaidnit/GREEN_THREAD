@@ -5,6 +5,7 @@ import type { Metadata } from "next";
 import { getCatalog, getProduct } from "@/lib/catalog";
 import { getLiveLookalike, getSameButBetter, getSameLook } from "@/lib/twins";
 import { garmentLabel } from "@/lib/garment";
+import { truthRecordFor } from "@/lib/truth-server";
 import { BuyButton } from "@/components/buy-button";
 import { RESALE_PLATFORMS, resaleTerm } from "@/lib/resale-links";
 import { formatPrice, titleCase } from "@/lib/format";
@@ -86,6 +87,7 @@ export default async function ProductPage({ params }: Props) {
   // THE promise: this exact garment, in a better fabric
   const { matches: betterMatches, reason: noMatchReason } = getSameButBetter(product, all);
   const noun = garmentLabel(product.title, product.category); // "polo", "dress", …
+  const truth = truthRecordFor(product.id);
   const lookalike = getLiveLookalike(product, all);
   const secondhandTerm = resaleTerm(product.brand.name, product.title);
 
@@ -279,6 +281,26 @@ export default async function ProductPage({ params }: Props) {
             )}
             <CompositionBars parts={product.fabric_composition} />
             <p className="mt-3 text-xs text-muted-foreground">Hover any fibre to learn its impact.</p>
+
+            {/* the truth ledger: our independent, timestamped record */}
+            {truth && (
+              <div className="mt-4 border-t border-border pt-3" data-testid="truth-record">
+                <p className="flex items-center gap-1.5 text-xs text-muted-foreground">
+                  <BadgeCheck className="size-3.5 text-grade-a" />
+                  On GreenThread&apos;s independent record since{" "}
+                  <time dateTime={truth.trackedSince} className="font-medium text-foreground">
+                    {new Date(truth.trackedSince).toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric" })}
+                  </time>
+                  {" · "}
+                  {truth.history.length} verified {truth.history.length === 1 ? "reading" : "readings"}
+                </p>
+                {truth.changed && (
+                  <p className="mt-1.5 text-xs font-medium text-grade-d">
+                    ⚠ This item&apos;s composition or score has changed since we first logged it — we keep the full history.
+                  </p>
+                )}
+              </div>
+            )}
           </section>
 
           {/* certifications — hover any badge to learn what it actually verifies */}
