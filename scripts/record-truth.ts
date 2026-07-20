@@ -16,11 +16,8 @@ const read = (f: string): SeedProduct[] =>
     : [];
 
 function main() {
-  const products = [
-    ...read("data/products_live.json"),
-    ...read("data/products_seed.json"),
-    ...read("data/products_generated.json"),
-  ];
+  // real products only — the ledger records what people can actually buy
+  const products = read("data/products_live.json").filter((p) => p.source === "live");
 
   const prev: TruthLedger = existsSync(LEDGER_PATH)
     ? JSON.parse(readFileSync(LEDGER_PATH, "utf8"))

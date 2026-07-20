@@ -49,19 +49,17 @@ async function main() {
   console.log("1/3 Applying schema…");
   await runSql(readFileSync(resolve(process.cwd(), "supabase/migration.sql"), "utf8"));
 
+  // purge any legacy demo/generated rows — the catalog is real products only
+  console.log("    purging non-live (demo/generated) rows…");
+  await runSql("delete from public.products where source is distinct from 'live';");
+
   const brands = JSON.parse(readFileSync(resolve(process.cwd(), "data/raw/brands.json"), "utf8")).brands;
-  const seedProducts: SeedProduct[] = JSON.parse(
-    readFileSync(resolve(process.cwd(), "data/products_seed.json"), "utf8"),
-  ).products;
-  const generatedPath = resolve(process.cwd(), "data/products_generated.json");
-  const generated: SeedProduct[] = existsSync(generatedPath)
-    ? JSON.parse(readFileSync(generatedPath, "utf8")).products
-    : [];
+  // real products only — the demo/generated catalog has been retired
   const livePath = resolve(process.cwd(), "data/products_live.json");
   const live: SeedProduct[] = existsSync(livePath)
     ? JSON.parse(readFileSync(livePath, "utf8")).products
     : [];
-  const products = [...live, ...seedProducts, ...generated];
+  const products = live.filter((p) => p.source === "live");
 
   console.log(`2/3 Seeding ${brands.length} brands…`);
   const brandRows = brands

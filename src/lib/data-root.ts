@@ -17,7 +17,7 @@ export function dataPath(...segments: string[]): string {
   if (_root === null) {
     const candidates = [process.cwd(), process.env.PROJECT_ROOT ?? ""].filter(Boolean);
     _root =
-      candidates.find((c) => existsSync(join(c, "data", "products_seed.json"))) ??
+      candidates.find((c) => existsSync(join(c, "data", "products_live.json"))) ??
       process.cwd();
   }
   return join(_root, ...segments);

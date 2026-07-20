@@ -13,11 +13,12 @@ export const metadata: Metadata = {
 };
 
 export default async function LabelWatchPage() {
-  const flagged = allMisnamed();
   const stats = ledgerStats();
   const products = await getCatalog();
   const brandName = new Map(products.map((p) => [p.brand.slug, p.brand.name]));
   const known = new Set(products.map((p) => p.id));
+  // only surface flags for products currently in the catalog (never a stale item)
+  const flagged = allMisnamed().filter((f) => known.has(f.product_id));
 
   return (
     <div className="mx-auto max-w-4xl px-4 py-12 sm:px-6">

@@ -21,20 +21,34 @@ const LIMIT = (() => {
   return i > -1 ? Number(process.argv[i + 1]) : Infinity;
 })();
 
-const NEIGHBOURS = 16;
-const CACHE_PATH = resolve(process.cwd(), "data/cache/embeddings.json");
+// keep a wide neighbour list so the runtime garment-type gate still has plenty
+// of SAME-garment candidates to rank by visual similarity ("looks like this,
+// in the right category" — Google-image-search style within the type)
+const NEIGHBOURS = 48;
 const OUT_PATH = resolve(process.cwd(), "data/twins.json");
+
+/**
+ * Vision models tried in order — FashionCLIP first (trained specifically on
+ * fashion product imagery, so garment-vs-garment similarity is far sharper
+ * than a generic CLIP), falling back to larger/base CLIP if it can't load.
+ * The cache is keyed per model so switching never mixes incompatible vectors.
+ */
+const MODELS = [
+  "Xenova/fashion-clip",
+  "Xenova/clip-vit-large-patch14",
+  "Xenova/clip-vit-base-patch32",
+];
+const cachePathFor = (model: string) =>
+  resolve(process.cwd(), `data/cache/embeddings-${model.replace(/[^a-z0-9]/gi, "_")}.json`);
 
 function loadProducts(): SeedProduct[] {
   const read = (f: string): SeedProduct[] => {
     const p = resolve(process.cwd(), f);
     return existsSync(p) ? JSON.parse(readFileSync(p, "utf8")).products : [];
   };
-  return [
-    ...read("data/products_live.json"),
-    ...read("data/products_seed.json"),
-    ...read("data/products_generated.json"),
-  ];
+  // real products only — embeds the actual brand photos, so visual similarity
+  // is meaningful (the old concept items had mismatched stock photos)
+  return read("data/products_live.json").filter((p) => p.source === "live");
 }
 
 /** Small thumbnail URL — CLIP sees 224px anyway; keeps downloads tiny. */
@@ -49,19 +63,33 @@ async function main() {
   console.log(`▶ ${products.length} products to embed`);
 
   mkdirSync(resolve(process.cwd(), "data/cache"), { recursive: true });
-  const cache: Record<string, number[]> = existsSync(CACHE_PATH)
-    ? JSON.parse(readFileSync(CACHE_PATH, "utf8"))
-    : {};
 
   const { AutoProcessor, CLIPVisionModelWithProjection, RawImage } = await import(
     "@xenova/transformers"
   );
-  console.log("  loading CLIP (first run downloads the model once)…");
-  const processor = await AutoProcessor.from_pretrained("Xenova/clip-vit-base-patch32");
-  const vision = await CLIPVisionModelWithProjection.from_pretrained(
-    "Xenova/clip-vit-base-patch32",
-    { quantized: true },
-  );
+
+  // load the best model that's actually available
+  let model = "";
+  let processor: Awaited<ReturnType<typeof AutoProcessor.from_pretrained>> | null = null;
+  let vision: Awaited<ReturnType<typeof CLIPVisionModelWithProjection.from_pretrained>> | null = null;
+  for (const candidate of MODELS) {
+    try {
+      console.log(`  loading ${candidate} (first run downloads once)…`);
+      processor = await AutoProcessor.from_pretrained(candidate);
+      vision = await CLIPVisionModelWithProjection.from_pretrained(candidate, { quantized: true });
+      model = candidate;
+      break;
+    } catch (e) {
+      console.log(`   ✗ ${candidate} unavailable: ${e instanceof Error ? e.message.slice(0, 90) : e}`);
+    }
+  }
+  if (!processor || !vision) throw new Error("no vision model could be loaded");
+  console.log(`  ✓ using ${model}`);
+
+  const CACHE_PATH = cachePathFor(model);
+  const cache: Record<string, number[]> = existsSync(CACHE_PATH)
+    ? JSON.parse(readFileSync(CACHE_PATH, "utf8"))
+    : {};
 
   let done = 0;
   let failed = 0;
@@ -87,7 +115,7 @@ async function main() {
     }
   }
   writeFileSync(CACHE_PATH, JSON.stringify(cache));
-  console.log(`✓ embeddings: ${done} ok, ${failed} failed → data/cache/embeddings.json`);
+  console.log(`✓ embeddings: ${done} ok, ${failed} failed (${model}) → ${CACHE_PATH}`);
 
   // stage 2: nearest neighbours (brute force is fine at this scale)
   console.log("▶ computing visual twins…");

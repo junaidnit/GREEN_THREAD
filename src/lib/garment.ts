@@ -31,6 +31,9 @@ export type Gender = "men" | "women" | "unisex";
  * not a shirt, and "denim jacket" is a jacket, not jeans.
  */
 const TYPE_RULES: Array<[RegExp, GarmentType]> = [
+  // homeware first: a "Knitted Cushion Cover" is homeware, not a jumper —
+  // the object noun must beat fabric-process words like "knitted"
+  [/\bcushion\b|\bblanket\b|\bapron\b|\btea ?towel\b|\bnapkin\b|\bplacemat\b/i, "homeware"],
   [/\bpolo\b/i, "polo"],
   [/\bhenley\b/i, "henley"],
   [/\bcamisole\b|\bcami\b|\bbralette\b|\bslip top\b/i, "tank"],
@@ -62,8 +65,6 @@ const TYPE_RULES: Array<[RegExp, GarmentType]> = [
   [/\bbag\b|\btote\b|\bbackpack\b|\bwashbag\b|\bbumbag\b|\bpouch\b/i, "bag"],
   [/\bbriefs?\b|\bboxers?\b|\bknickers\b|\bthong\b|\bbra\b/i, "underwear"],
   [/\bswim|\bbikini\b|\btrunks\b/i, "swimwear"],
-  // non-garment homewares — their own type so the matcher never cross-matches
-  [/\bblanket\b|\bapron\b|\bcushion\b|\bthrow\b|\btowel\b|\bnapkin\b|\btea ?towel\b/i, "homeware"],
 ];
 
 /** Coarse feed categories, for titles that name no garment at all. */

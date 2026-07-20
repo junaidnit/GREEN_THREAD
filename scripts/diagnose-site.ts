@@ -11,10 +11,8 @@ import type { SeedProduct } from "../src/lib/types";
 
 const read = (f: string): SeedProduct[] =>
   existsSync(f) ? JSON.parse(readFileSync(f, "utf8")).products : [];
-const live = read("data/products_live.json");
-const seed = read("data/products_seed.json");
-const gen = read("data/products_generated.json");
-const all = [...live, ...seed, ...gen];
+// real products only — the catalog is live-feed items exclusively
+const all = read("data/products_live.json").filter((p) => p.source === "live");
 
 let hardFails = 0;
 const bad = (label: string, items: string[]) => {
@@ -23,7 +21,7 @@ const bad = (label: string, items: string[]) => {
   for (const s of items.slice(0, 6)) console.log(`    · ${s}`);
 };
 
-console.log(`catalog: ${all.length} (${live.length} live, ${seed.length} seed, ${gen.length} generated)`);
+console.log(`catalog: ${all.length} real products (live feeds only)`);
 
 // 1. duplicate ids
 const ids = new Map<string, number>();
@@ -36,10 +34,10 @@ bad(
   all.filter((p) => !p.image_url || !/^https?:\/\//.test(p.image_url)).map((p) => p.id),
 );
 
-// 3. live buy_url shape
+// 3. buy_url shape — every product is a real listing
 bad(
-  "live items with a non-http buy_url",
-  live.filter((p) => !/^https?:\/\/.+\/products\/.+/.test(p.buy_url)).map((p) => `${p.id} → ${p.buy_url}`),
+  "items with a non-http buy_url",
+  all.filter((p) => !/^https?:\/\/.+\/products\/.+/.test(p.buy_url)).map((p) => `${p.id} → ${p.buy_url}`),
 );
 
 // 4. composition sums to ~100

@@ -175,13 +175,9 @@ describe("newly-classified types match same-type only", () => {
 // Data-driven guard: the invariant the user actually cares about, locked into
 // CI against the REAL catalog (the audit script checks it too, at runtime).
 describe("no-leak invariant across the real catalog", () => {
-  const read = (f: string): MatchItem[] =>
+  const read = (f: string): (MatchItem & { source?: string })[] =>
     existsSync(f) ? JSON.parse(readFileSync(f, "utf8")).products : [];
-  const all = [
-    ...read("data/products_live.json"),
-    ...read("data/products_seed.json"),
-    ...read("data/products_generated.json"),
-  ];
+  const all = read("data/products_live.json").filter((p) => p.source === "live");
 
   it("never recommends a different garment type or gender", () => {
     if (all.length === 0) return; // data not present in this checkout

@@ -159,11 +159,14 @@ export function rankSameLook<T extends MatchItem>(
       const cType = garmentType(c.title, c.category);
       const cGender = genderFor(c.title, cType, c.gender);
       if (cType !== myType || !genderCompatible(myGender, cGender)) return null;
-      let score = 0;
-      if (patternOf(c.title) === myPattern) score += 3;
+      // VISUAL similarity dominates within the garment-type + gender gate —
+      // "looks like this", Google-image-search style. A strong FashionCLIP
+      // match (~0.9) contributes ~9, far outweighing the attribute nudges,
+      // so colour/pattern only break ties between visually-close pieces.
+      let score = (sims?.get(c.id) ?? 0) * 10;
+      if (patternOf(c.title) === myPattern) score += 2;
       if (colourMatch(myColour, colourFamilies(c.title, c.color ?? ""))) score += 2;
-      if (Math.abs(c.price - target.price) <= target.price * 0.4) score += 1;
-      score += (sims?.get(c.id) ?? 0) * 2;
+      if (Math.abs(c.price - target.price) <= target.price * 0.4) score += 0.5;
       return { c, score };
     })
     .filter((x): x is { c: T; score: number } => x !== null)

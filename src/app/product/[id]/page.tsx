@@ -3,7 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { getCatalog, getProduct } from "@/lib/catalog";
-import { getLiveLookalike, getSameButBetter, getSameLook } from "@/lib/twins";
+import { getSameButBetter, getSameLook } from "@/lib/twins";
 import { garmentLabel } from "@/lib/garment";
 import { truthRecordFor } from "@/lib/truth-server";
 import { BuyButton } from "@/components/buy-button";
@@ -88,7 +88,6 @@ export default async function ProductPage({ params }: Props) {
   const { matches: betterMatches, reason: noMatchReason } = getSameButBetter(product, all);
   const noun = garmentLabel(product.title, product.category); // "polo", "dress", …
   const truth = truthRecordFor(product.id);
-  const lookalike = getLiveLookalike(product, all);
   const secondhandTerm = resaleTerm(product.brand.name, product.title);
 
   return (
@@ -183,50 +182,21 @@ export default async function ProductPage({ params }: Props) {
               retailer={product.retailer}
             />
             <div className="flex gap-2">
-              {product.source === "live" ? (
-                // real listing — deep-link straight to the item on the brand's own site
-                <a
-                  href={product.buy_url}
-                  target="_blank"
-                  rel="noopener noreferrer nofollow"
-                  data-testid="view-on-retailer"
-                  className="flex h-11 flex-1 items-center justify-center gap-2 rounded-full border border-border bg-surface text-sm font-medium transition-colors hover:border-primary/40 hover:bg-accent"
-                >
-                  View this exact item at {product.brand.name} <ArrowUpRight className="size-3.5" />
-                </a>
-              ) : lookalike ? (
-                // concept item, but we found the real version — send them to it,
-                // NOT a brand search for an invented title (which returns nothing)
-                <a
-                  href={`/out/${lookalike.product.id}`}
-                  target="_blank"
-                  rel="noopener noreferrer nofollow"
-                  data-testid="view-on-retailer"
-                  className="flex h-11 flex-1 items-center justify-center gap-2 rounded-full border border-grade-a/40 bg-grade-a/5 text-sm font-medium text-grade-a transition-colors hover:bg-grade-a/10"
-                >
-                  Buy the real version at {lookalike.product.brand.name} <ArrowUpRight className="size-3.5" />
-                </a>
-              ) : (
-                // no real match yet — keep them in the funnel on a link that WORKS
-                <Link
-                  href={`/search?category=${product.category}&pure=1`}
-                  data-testid="view-on-retailer"
-                  className="flex h-11 flex-1 items-center justify-center gap-2 rounded-full border border-border bg-surface text-sm font-medium transition-colors hover:border-primary/40 hover:bg-accent"
-                >
-                  Shop plastic-free {noun === "piece" ? "options" : `${noun}s`} <ArrowUpRight className="size-3.5" />
-                </Link>
-              )}
+              {/* every product is a real listing — deep-link to the exact item */}
+              <a
+                href={product.buy_url}
+                target="_blank"
+                rel="noopener noreferrer nofollow"
+                data-testid="view-on-retailer"
+                className="flex h-11 flex-1 items-center justify-center gap-2 rounded-full border border-border bg-surface text-sm font-medium transition-colors hover:border-primary/40 hover:bg-accent"
+              >
+                View this exact item at {product.brand.name} <ArrowUpRight className="size-3.5" />
+              </a>
               <SaveButton productId={product.id} imageUrl={product.image_url} />
             </div>
           </div>
           <p className="mt-2 text-xs text-muted-foreground">
-            {product.source === "live" ? (
-              <>Buy opens this exact product on {product.retailer}&apos;s own site — composition verified from their page.</>
-            ) : lookalike ? (
-              <>Concept item — illustrative. The button opens the closest real, buyable {noun} on {lookalike.product.brand.name}&apos;s own site.</>
-            ) : (
-              <>Concept item — illustrative catalogue entry, to show the journey.</>
-            )}
+            Buy opens this exact product on {product.retailer}&apos;s own site — composition verified from their page.
           </p>
 
           {/* tangible impact + longevity */}
@@ -399,30 +369,6 @@ export default async function ProductPage({ params }: Props) {
         </div>
       </section>
 
-      {/* concept item? show the closest REAL listing — buyable today */}
-      {lookalike && (
-        <section
-          className="mt-12 rounded-xl2 border border-grade-a/30 bg-grade-a/5 p-6"
-          data-testid="live-lookalike"
-        >
-          <div className="flex flex-col gap-6 sm:flex-row sm:items-center">
-            <div className="w-44 shrink-0 sm:w-52">
-              <ProductCard product={lookalike.product} />
-            </div>
-            <div>
-              <p className="eyebrow text-grade-a">The real thing</p>
-              <h2 className="mt-1 font-serif text-2xl font-medium italic tracking-tight sm:text-3xl">
-                This look, live at {lookalike.product.brand.name}
-              </h2>
-              <p className="mt-2 max-w-lg text-sm text-muted-foreground">
-                You&apos;re viewing a concept piece. This is the closest real listing —
-                pulled from {lookalike.product.brand.name}&apos;s own store, composition
-                verified from their page, and one click from checkout.
-              </p>
-            </div>
-          </div>
-        </section>
-      )}
 
       {/* THE promise: this exact garment, in a better fabric */}
       {betterMatches.length > 0 && (

@@ -101,8 +101,8 @@ export function LabelHero({
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img src={CARD_THUMB} alt="" className="h-14 w-11 rounded-lg object-cover" />
             <div className="min-w-0 flex-1">
-              <p className="text-[10px] uppercase tracking-wide text-muted-foreground">Seasalt Cornwall</p>
-              <p className="truncate text-sm font-medium">Breezy Linen Shirt</p>
+              <p className="text-[10px] uppercase tracking-wide text-muted-foreground">Beaumont Organic</p>
+              <p className="truncate text-sm font-medium">Linen Shirt Dress</p>
               <span className="mt-1 inline-block rounded-full bg-grade-a px-2 py-0.5 text-[10px] font-bold text-white">
                 100% natural
               </span>

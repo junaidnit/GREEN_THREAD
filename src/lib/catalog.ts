@@ -14,15 +14,14 @@ import type { Brand, CatalogCard, Product, SeedProduct } from "./types";
  * always runs, even with no network or env configured.
  */
 
+/**
+ * REAL PRODUCTS ONLY. The catalog is exclusively items ingested from brands'
+ * own live feeds — real photos, prices, and buy-links. The old concept/
+ * generated demo items are gone: they carried mismatched stock photos (which
+ * wrecked visual similarity) and invented merchant links (which broke Buy).
+ * Everything here is a product you can actually purchase.
+ */
 function loadLocal(): Product[] {
-  const seed = JSON.parse(
-    readFileSync(dataPath("data", "products_seed.json"), "utf8"),
-  ).products as SeedProduct[];
-  const generatedPath = dataPath("data", "products_generated.json");
-  const generated: SeedProduct[] = existsSync(generatedPath)
-    ? JSON.parse(readFileSync(generatedPath, "utf8")).products
-    : [];
-  // real products ingested from live brand feeds — real URLs, photos, prices
   const livePath = dataPath("data", "products_live.json");
   const live: SeedProduct[] = existsSync(livePath)
     ? JSON.parse(readFileSync(livePath, "utf8")).products
@@ -31,10 +30,9 @@ function loadLocal(): Product[] {
     readFileSync(dataPath("data", "raw", "brands.json"), "utf8"),
   ).brands as Brand[];
   const brandBySlug = new Map(brands.map((b) => [b.slug, b]));
-  return [...live, ...seed, ...generated].map(({ brand_slug, ...rest }) => ({
-    ...rest,
-    brand: brandBySlug.get(brand_slug)!,
-  }));
+  return live
+    .filter((p) => p.source === "live" && brandBySlug.has(p.brand_slug))
+    .map(({ brand_slug, ...rest }) => ({ ...rest, brand: brandBySlug.get(brand_slug)! }));
 }
 
 async function loadSupabase(): Promise<Product[]> {
@@ -47,6 +45,7 @@ async function loadSupabase(): Promise<Product[]> {
     const { data: page, error } = await supabase
       .from("products")
       .select("*, brand:brands(*)")
+      .eq("source", "live") // real products only — never surface legacy demo rows
       .order("id")
       .range(from, from + PAGE - 1);
     if (error) throw error;

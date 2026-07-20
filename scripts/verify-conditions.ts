@@ -5,7 +5,7 @@ import type { SeedProduct } from "../src/lib/types";
 
 const read = (f: string): SeedProduct[] =>
   existsSync(f) ? JSON.parse(readFileSync(f, "utf8")).products : [];
-const all = [...read("data/products_live.json"), ...read("data/products_seed.json"), ...read("data/products_generated.json")];
+const all = read("data/products_live.json").filter((p) => p.source === "live");
 
 const WOOL = new Set(["merino_wool", "lambswool", "recycled_wool", "virgin_wool"]);
 const SYN = new Set(["polyester", "recycled_polyester", "polyamide", "recycled_polyamide", "elastane"]);

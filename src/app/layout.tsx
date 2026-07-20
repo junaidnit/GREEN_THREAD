@@ -105,7 +105,7 @@ export default function RootLayout({
               <kbd className="rounded border border-border bg-surface px-1.5 py-0.5 font-mono text-[10px]">/</kbd> to search
             </span>
             <span className="opacity-40">·</span>
-            <span className="opacity-70">LIVE items from brands&apos; own stores · rest is concept catalogue</span>
+            <span className="opacity-70">every product is real — ingested from brands&apos; own stores</span>
           </p>
         </footer>
         <Concierge />

@@ -76,17 +76,6 @@ export function ProductCard({ product, priority = false }: { product: CatalogCar
           <span className="opacity-70">{s.score}</span>
         </span>
 
-        {/* real listing ingested from the brand's own feed */}
-        {product.source === "live" && (
-          <span
-            data-testid="live-mark"
-            className="absolute bottom-3 right-3 inline-flex items-center gap-1 rounded-full bg-white/85 px-2 py-1 text-[10px] font-semibold text-grade-a backdrop-blur-md"
-            title="Real listing — verified from the brand's own product page"
-          >
-            <span className="size-1.5 rounded-full bg-grade-a" />
-            LIVE
-          </span>
-        )}
 
         {/* mislabelling flag — the platform's transparency promise */}
         {misnamed && (
