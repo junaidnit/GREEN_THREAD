@@ -125,12 +125,6 @@ export function SiteHeader() {
                   <span className="mt-1 block text-rose">Coming soon.</span>
                 </p>
               </MegaItem>
-              <MegaItem label="Home" href="/home">
-                <p className="text-[12px] font-light leading-relaxed text-muted-foreground">
-                  Bedding in linen, hemp &amp; wool — for how you sleep.
-                  <span className="mt-1 block text-rose">Coming soon.</span>
-                </p>
-              </MegaItem>
               <MegaItem label="Materials" href="/fabric/linen">
                 <SubLinks items={FIBRES} base="/fabric/" />
               </MegaItem>
@@ -198,7 +192,7 @@ export function SiteHeader() {
       {mobileOpen && (
         <div className="border-b border-border bg-surface lg:hidden">
           <ul className="mx-auto flex max-w-[1280px] flex-col gap-1 px-5 py-4 text-[15px] font-light">
-            {[["Women", "/search?gender=women"], ["Men", "/search?gender=men"], ["Children", "/children"], ["Home", "/home"], ["Materials", "/fabric/linen"], ["Journal", "/journal"], ["Fabric Check", "/analyze"], ["Install Extension", "/extension"]].map(([label, href]) => (
+            {[["Women", "/search?gender=women"], ["Men", "/search?gender=men"], ["Children", "/children"], ["Materials", "/fabric/linen"], ["Journal", "/journal"], ["Fabric Check", "/analyze"], ["Install Extension", "/extension"]].map(([label, href]) => (
               <li key={href}>
                 <Link href={href} onClick={() => setMobileOpen(false)} className="block py-2 text-foreground">
                   {label}

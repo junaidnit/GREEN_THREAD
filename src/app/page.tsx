@@ -6,6 +6,7 @@ import { MATERIAL_LABELS, MATERIAL_NOTES } from "@/lib/scoring";
 import { MATERIAL_FACTS } from "@/lib/materials";
 import { HeroSearch } from "@/components/hero-search";
 import { FibreWidget, type FibreEntry } from "@/components/fibre-widget";
+import { garmentType, type GarmentType } from "@/lib/garment";
 import type { MaterialId, Product } from "@/lib/types";
 import { ArrowUpRight } from "@/components/icons";
 
@@ -29,6 +30,39 @@ function firstImage(products: Product[], pred: (p: Product) => boolean): string 
 const dominant = (p: Product, m: MaterialId) =>
   [...p.fabric_composition].sort((a, b) => b.pct - a.pct)[0]?.material === m;
 
+/* Picking a photo to represent a FIBRE is not the same as picking a product.
+ * Taking the first match gave us a sandal for recycled cotton and a secondhand
+ * listing for linen. We rank on garmentType rather than the stored category,
+ * because the feed's category is unreliable — a "Macrame Yoga Mat Strap" is
+ * filed under shirts. How much cloth each garment shows, roughly: */
+const SHOWS_CLOTH: Partial<Record<GarmentType, number>> = {
+  dress: 6, jumpsuit: 6, coat: 5, jacket: 5, jumper: 5, cardigan: 5,
+  shirt: 5, blouse: 5, skirt: 4, trousers: 4, dungarees: 4, gilet: 4,
+  sweatshirt: 3, hoodie: 3, tee: 3, polo: 3, henley: 3, tank: 2, jeans: 2,
+};
+const SECONDHAND = /pre-?loved|second-?hand/i;
+const pctOf = (p: Product, m: MaterialId) =>
+  p.fabric_composition.find((f) => f.material === m)?.pct ?? 0;
+
+/**
+ * Best photo to represent `m`: dominated by the fibre, an actual garment
+ * (not homeware or an accessory), new rather than secondhand, and as pure as
+ * possible. Deterministic — ties break on id so the homepage doesn't reshuffle
+ * between builds.
+ */
+function fibreImage(products: Product[], m: MaterialId): string | null {
+  const scored = products
+    .filter((p) => p.image_url && dominant(p, m) && !SECONDHAND.test(p.title))
+    .map((p) => ({ p, cloth: SHOWS_CLOTH[garmentType(p.title)] ?? 0 }))
+    .filter((c) => c.cloth > 0)
+    .map((c) => ({ ...c, score: c.cloth * 100 + pctOf(c.p, m) }))
+    .sort((a, b) => b.score - a.score || a.p.id.localeCompare(b.p.id));
+  return scored[0]?.p.image_url ?? null;
+}
+
+const CHILDRENS = /\b(baby|babies|kids?|child|children|infant|toddler)\b/i;
+const HOMEWARE = /\b(cushion|blanket|bedding|duvet|sheet|pillow|towel|napkin|apron|throw)\b/i;
+
 export default async function Home() {
   const products = await getCatalog();
   const stats = ledgerStats();
@@ -37,16 +71,23 @@ export default async function Home() {
   const womenImg = firstImage(products, (p) => p.gender === "women" && /dress|linen/i.test(p.title)) ?? firstImage(products, (p) => p.gender === "women");
   const menImg = firstImage(products, (p) => p.gender === "men");
 
-  const fibres: FibreEntry[] = FIBRES.filter(([id]) => MATERIAL_FACTS[id]).map(([id, tagline, swatch]) => {
-    const f = MATERIAL_FACTS[id]!;
-    return {
-      id, tagline, swatch,
-      label: MATERIAL_LABELS[id],
-      note: MATERIAL_NOTES[id],
-      stat: f.stat, detail: f.detail, source: f.source,
-      image: firstImage(products, (p) => dominant(p, id)),
-    };
-  });
+  const childrenImg = firstImage(products, (p) => CHILDRENS.test(p.title));
+  const homeImg = firstImage(products, (p) => HOMEWARE.test(p.title) && !CHILDRENS.test(p.title));
+
+  // a fibre with no photo that genuinely shows it is dropped rather than
+  // rendered as an empty tile — we stock no silk, so silk would sit blank
+  const fibres: FibreEntry[] = FIBRES.filter(([id]) => MATERIAL_FACTS[id])
+    .map(([id, tagline, swatch]) => {
+      const f = MATERIAL_FACTS[id]!;
+      return {
+        id, tagline, swatch,
+        label: MATERIAL_LABELS[id],
+        note: MATERIAL_NOTES[id],
+        stat: f.stat, detail: f.detail, source: f.source,
+        image: fibreImage(products, id),
+      };
+    })
+    .filter((f) => f.image);
 
   const fibreCount = new Set(products.flatMap((p) => p.fabric_composition.map((f) => f.material))).size;
   const brandCount = new Set(products.map((p) => p.brand.slug)).size;
@@ -113,8 +154,8 @@ export default async function Home() {
         <div className="grid gap-5 sm:grid-cols-2">
           <CategoryPanel href="/search?gender=women" label="Women" img={womenImg} />
           <CategoryPanel href="/search?gender=men" label="Men" img={menImg} />
-          <CategoryPanel href="/children" label="Children" soon swatch="#c8bcae" note="The little-skin edit" />
-          <CategoryPanel href="/home" label="Home & Bedding" soon swatch="#9a8fa0" note="Linen, hemp & wool for sleep" />
+          <CategoryPanel href="/children" label="Children" img={childrenImg} soon swatch="#c8bcae" note="The little-skin edit" />
+          <CategoryPanel href="/home" label="Home & Bedding" img={homeImg} soon swatch="#9a8fa0" note="Linen, hemp & wool for sleep" />
         </div>
       </section>
 

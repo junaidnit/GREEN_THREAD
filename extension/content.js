@@ -8,20 +8,15 @@
   if (window.__gtInjected) return;
   window.__gtInjected = true;
 
-  const MARK_PATH_A =
-    "M 58 13 C 86 13, 94 44, 74 64 C 68 71, 62 77, 55 85 C 42 100, 30 110, 22 116 C 8 126, 10 138, 26 139 L 76 141";
-  const MARK_PATH_B =
-    "M 58 13 C 30 13, 22 44, 42 64 C 48 70, 53 77, 57 86 C 62 100, 64 112, 65 124 C 66 136, 68 146, 71 158";
+  // The heritage ribbon, from brand-mark.js (generated off the same traced
+  // artwork the website and the toolbar icons use). Aspect ratio is preserved
+  // from the viewBox — never squashed to a square.
+  const MARK = globalThis.FIBRESET_MARK;
 
   function markSvg(color, size) {
-    return `<svg width="${size}" height="${Math.round((size * 168) / 120)}" viewBox="0 0 120 168" fill="none">
-      <defs><mask id="gtm" maskUnits="userSpaceOnUse" x="0" y="0" width="120" height="168">
-        <rect width="120" height="168" fill="white"/>
-        <path d="M 50 73 L 59 92" stroke="black" stroke-width="24"/>
-        <path d="M 63.5 124 L 67.5 148" stroke="black" stroke-width="24"/>
-      </mask></defs>
-      <path mask="url(#gtm)" d="${MARK_PATH_A}" stroke="${color}" stroke-width="17" stroke-linejoin="round"/>
-      <path d="${MARK_PATH_B}" stroke="${color}" stroke-width="17" stroke-linejoin="round"/>
+    const w = Math.round((size * MARK.width) / MARK.height);
+    return `<svg width="${w}" height="${size}" viewBox="${MARK.viewBox}" fill="none">
+      <path d="${MARK.d}" fill="${color}"/>
     </svg>`;
   }
 
@@ -114,7 +109,7 @@
       .pill {
         display: flex; align-items: center; justify-content: center;
         width: 46px; height: 46px; border-radius: 999px;
-        background: #1f5137; box-shadow: 0 4px 18px rgba(0,0,0,.28);
+        background: #141414; box-shadow: 0 4px 18px rgba(0,0,0,.28);
         cursor: pointer; border: none; transition: transform .15s ease;
       }
       .pill:hover { transform: scale(1.06); }
@@ -125,37 +120,37 @@
       .panel {
         position: absolute; bottom: 58px; right: 0;
         width: 330px; max-height: 78vh; overflow-y: auto;
-        background: #faf7f2; color: #1a1a1a; border-radius: 16px;
+        background: #F5F3EF; color: #3A3A55; border-radius: 16px;
         box-shadow: 0 12px 40px rgba(0,0,0,.35); padding: 16px;
         font-size: 13px; line-height: 1.45; display: none;
       }
       .panel.open { display: block; }
       .row { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
       .title { font-weight: 700; font-size: 13.5px; margin: 0 0 2px; }
-      .muted { color: #6b6558; font-size: 11.5px; }
-      .close { cursor: pointer; border: none; background: none; font-size: 16px; color: #6b6558; padding: 0 2px; }
+      .muted { color: #6F6F66; font-size: 11.5px; }
+      .close { cursor: pointer; border: none; background: none; font-size: 16px; color: #6F6F66; padding: 0 2px; }
       .badge { display: inline-flex; align-items: center; gap: 5px; border-radius: 999px; padding: 3px 9px; font-size: 11px; font-weight: 700; }
-      .natural { background: rgba(31,81,55,.12); color: #1f5137; }
+      .natural { background: rgba(95,125,103,.14); color: #4d6654; }
       .plastic { background: rgba(0,0,0,.08); color: #444; }
-      .warn { background: rgba(178,52,40,.12); color: #b23428; }
-      .comp-bar { height: 7px; border-radius: 4px; background: #e7e2d5; overflow: hidden; display: flex; margin: 8px 0 4px; }
+      .warn { background: rgba(157,111,112,.16); color: #8d5c5d; }
+      .comp-bar { height: 7px; border-radius: 4px; background: #E2DED7; overflow: hidden; display: flex; margin: 8px 0 4px; }
       .comp-seg { height: 100%; }
       .comp-list { font-size: 11.5px; color: #4a463d; margin: 0 0 10px; }
-      .section-title { font-size: 10.5px; text-transform: uppercase; letter-spacing: .04em; color: #6b6558; margin: 14px 0 8px; }
+      .section-title { font-size: 10.5px; text-transform: uppercase; letter-spacing: .04em; color: #6F6F66; margin: 14px 0 8px; }
       .rec { display: flex; gap: 8px; align-items: center; padding: 7px 0; border-top: 1px solid #ece7da; text-decoration: none; color: inherit; }
       .rec:first-child { border-top: none; }
-      .rec img { width: 44px; height: 55px; object-fit: cover; border-radius: 6px; background: #ece7da; flex-shrink: 0; }
+      .rec img { width: 44px; height: 55px; object-fit: cover; border-radius: 6px; background: #E2DED7; flex-shrink: 0; }
       .rec-body { flex: 1; min-width: 0; }
       .rec-title { font-size: 12px; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-      .rec-meta { font-size: 11px; color: #6b6558; }
-      .live-tag { font-size: 9px; font-weight: 700; color: #1f5137; }
-      .cta { display: block; text-align: center; margin-top: 12px; padding: 9px; border-radius: 8px; background: #1f5137; color: #f5f2ea !important; font-weight: 700; font-size: 12px; text-decoration: none; }
-      .footer-link { display: block; text-align: center; margin-top: 8px; font-size: 11px; color: #6b6558; text-decoration: none; }
-      .empty { color: #6b6558; font-size: 12px; padding: 6px 0 2px; }
+      .rec-meta { font-size: 11px; color: #6F6F66; }
+      .live-tag { font-size: 9px; font-weight: 700; color: #4B2144; }
+      .cta { display: block; text-align: center; margin-top: 12px; padding: 9px; border-radius: 8px; background: #4B2144; color: #F5F3EF !important; font-weight: 700; font-size: 12px; text-decoration: none; }
+      .footer-link { display: block; text-align: center; margin-top: 8px; font-size: 11px; color: #6F6F66; text-decoration: none; }
+      .empty { color: #6F6F66; font-size: 12px; padding: 6px 0 2px; }
     </style>
     <div style="position:relative;">
       <button class="pill" id="gt-toggle" aria-label="The Fibre Set Fabric Check" title="Check this garment's fibre">
-        ${markSvg("#f5f2ea", 20)}
+        ${markSvg("#F5F3EF", 22)}
       </button>
       <div class="panel" id="gt-panel"></div>
     </div>
@@ -178,19 +173,19 @@
   }
 
   function renderLoading() {
-    toggle.innerHTML = `<div class="spin">${markSvg("#f5f2ea", 20)}</div>`;
+    toggle.innerHTML = `<div class="spin">${markSvg("#F5F3EF", 22)}</div>`;
     panel.innerHTML = `<p class="empty">Reading the label…</p>`;
   }
 
   function renderError(message) {
-    toggle.innerHTML = markSvg("#f5f2ea", 20);
+    toggle.innerHTML = markSvg("#F5F3EF", 22);
     panel.innerHTML = `<div class="row"><p class="title">Fabric Check</p><button class="close" id="gt-close">×</button></div>
       <p class="empty">${message}</p>`;
     shadow.getElementById("gt-close").addEventListener("click", () => setOpen(false));
   }
 
   function renderResult(data, apiBase) {
-    toggle.innerHTML = markSvg("#f5f2ea", 20);
+    toggle.innerHTML = markSvg("#F5F3EF", 22);
 
     if (!data.found) {
       panel.innerHTML = `
@@ -203,7 +198,7 @@
     }
 
     const markTone = data.fibreMark.tone === "natural" ? "natural" : data.fibreMark.tone === "plastic-free" ? "natural" : "plastic";
-    const segColors = { natural: "#1f5137", plastic: "#8a8577" };
+    const segColors = { natural: "#5f7d67", plastic: "#8a8577" };
     const bars = data.composition
       .slice()
       .sort((a, b) => b.pct - a.pct)

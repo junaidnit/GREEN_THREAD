@@ -17,7 +17,9 @@
     "sentinel": "tsx scripts/sentinel.ts && tsx scripts/db-setup.ts && tsx scripts/record-truth.ts",
     "audit:site": "tsx scripts/diagnose-site.ts",
     "truth": "tsx scripts/record-truth.ts",
-    "grow": "tsx scripts/grow.ts"
+    "grow": "tsx scripts/grow.ts",
+    "brand:icons": "node scripts/render-ext-icons.mjs",
+    "pack:extension": "node scripts/render-ext-icons.mjs && node scripts/pack-extension.mjs"
   },
   "dependencies": {
     "@ai-sdk/anthropic": "^4.0.7",
