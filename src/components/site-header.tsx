@@ -7,9 +7,9 @@ import { SavedIndicator } from "@/components/saved";
 import { LogoMark } from "@/components/animated-logo";
 
 /**
- * The Fibre Set header — toa.st-inspired: quiet utility line, a letter-spaced
- * wordmark (placeholder for the heritage logo PNG), category mega-menus, and
- * the three actions that matter — Search, Fabric Check, Install Extension.
+ * The Fibre Set header — toa.st-inspired: quiet utility line, the heritage
+ * ribbon mark beside a letter-spaced wordmark, category mega-menus, and the
+ * three actions that matter — Search, Fabric Check, Install Extension.
  */
 
 const WOMEN_SUBS = ["dresses", "tops", "knitwear", "shirts", "trousers", "jeans", "skirts"];

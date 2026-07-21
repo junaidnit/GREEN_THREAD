@@ -1,11 +1,15 @@
 import { BRAND_LOGO } from "./brand-path";
 
 /**
- * The Fibre Set mark — the business logo, used as an EXACT vector trace
- * of the original artwork (public/brand/logo-original.jpeg → potrace via
+ * The Fibre Set mark — the heritage ribbon logo, and the business's
+ * permanent mark (not a placeholder). Used as an EXACT vector trace of the
+ * original artwork (public/brand/logo-original.jpeg → potrace via
  * scripts/trace-logo.mjs). Zero hand-drawn approximation, zero distortion:
  * the outline, weave gaps and cut ends are the original's, losslessly
  * scalable. Fills with currentColor so it themes automatically.
+ *
+ * Treat the traced path as the source of truth for the brand mark; if the
+ * artwork is ever revised, re-run the trace script rather than editing it.
  */
 export function LogoMark({ size = 28, animate = true }: { size?: number; animate?: boolean }) {
   return (
