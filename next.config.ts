@@ -15,6 +15,20 @@ const nextConfig: NextConfig = {
     // native View Transitions: product card image morphs into the PDP hero
     viewTransition: true,
   },
+  // The brand is now The Fibre Set. greenthread.info is retired but still
+  // registered, so send it — and every old inbound link — to the same path on
+  // the new domain with a permanent (308) redirect. That passes search ranking
+  // across instead of leaving a duplicate copy of the site on the old name.
+  // Kept here rather than in the Vercel dashboard so it lives in version
+  // control; safe to delete once the old domain lapses.
+  async redirects() {
+    return ["greenthread.info", "www.greenthread.info"].map((host) => ({
+      source: "/:path*",
+      has: [{ type: "host" as const, value: host }],
+      destination: "https://thefibreset.com/:path*",
+      permanent: true,
+    }));
+  },
   images: {
     remotePatterns: [
       {
