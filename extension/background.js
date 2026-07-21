@@ -2,7 +2,7 @@
 // content script — avoids being blocked by the host page's CSP connect-src,
 // and gives the request a stable, predictable origin (chrome-extension://…).
 
-const DEFAULT_API_BASE = "https://greenthread.info";
+const DEFAULT_API_BASE = "https://thefibreset.com";
 
 async function getApiBase() {
   const { apiBase } = await chrome.storage.local.get("apiBase");

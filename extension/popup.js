@@ -1,4 +1,4 @@
-const DEFAULT_API_BASE = "https://greenthread.info";
+const DEFAULT_API_BASE = "https://thefibreset.com";
 const input = document.getElementById("base");
 const status = document.getElementById("status");
 
