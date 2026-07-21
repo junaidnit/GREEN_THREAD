@@ -21,11 +21,17 @@ const nextConfig: NextConfig = {
   // across instead of leaving a duplicate copy of the site on the old name.
   // Kept here rather than in the Vercel dashboard so it lives in version
   // control; safe to delete once the old domain lapses.
+  //
+  // /api is EXCLUDED on purpose. A CORS preflight may not follow a redirect —
+  // the browser reports a bare "Failed to fetch" — so redirecting the API
+  // broke every already-installed extension that had the old host saved.
+  // Copies of the extension are already in the wild; keep their endpoint
+  // answering until the domain lapses.
   async redirects() {
     return ["greenthread.info", "www.greenthread.info"].map((host) => ({
-      source: "/:path*",
+      source: "/:path((?!api/).*)",
       has: [{ type: "host" as const, value: host }],
-      destination: "https://thefibreset.com/:path*",
+      destination: "https://thefibreset.com/:path",
       permanent: true,
     }));
   },

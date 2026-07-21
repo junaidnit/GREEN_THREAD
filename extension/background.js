@@ -13,9 +13,31 @@
 
 const DEFAULT_API_BASE = "https://thefibreset.com";
 
+/**
+ * Hosts we have moved off. A SAVED endpoint always beat the default, so
+ * installs from before the rename kept calling greenthread.info — which now
+ * 308-redirects to thefibreset.com. A CORS preflight may not follow a
+ * redirect: the browser treats it as a network error and the panel showed
+ * "Failed to fetch". Migrate the stored value instead of trusting it.
+ */
+const LEGACY_HOSTS = new Set(["greenthread.info", "www.greenthread.info"]);
+
+function isLegacy(base) {
+  try {
+    return LEGACY_HOSTS.has(new URL(base).hostname);
+  } catch {
+    return true; // unparseable is never worth keeping
+  }
+}
+
 async function getApiBase() {
   const { apiBase } = await chrome.storage.local.get("apiBase");
-  return apiBase || DEFAULT_API_BASE;
+  if (!apiBase) return DEFAULT_API_BASE;
+  if (isLegacy(apiBase)) {
+    await chrome.storage.local.set({ apiBase: DEFAULT_API_BASE });
+    return DEFAULT_API_BASE;
+  }
+  return apiBase;
 }
 
 /**
@@ -38,33 +60,58 @@ chrome.action.onClicked.addListener(async (tab) => {
   }
 });
 
-/** First run: land somewhere that explains what to do next. */
 chrome.runtime.onInstalled.addListener(async (details) => {
-  if (details.reason !== "install") return;
+  // heal a stored legacy endpoint on update, before the user hits an error
   const base = await getApiBase();
-  chrome.tabs.create({ url: `${base}/extension/installed` });
+  // first run: land somewhere that explains what to do next
+  if (details.reason === "install") {
+    chrome.tabs.create({ url: `${base}/extension/installed` });
+  }
 });
 
 chrome.runtime.onMessage.addListener((message, _sender, sendResponse) => {
   if (message?.type !== "gt-scan") return false;
 
   (async () => {
-    const base = await getApiBase();
-    try {
-      const res = await fetch(`${base}/api/extension/scan`, {
+    const post = (base) =>
+      fetch(`${base}/api/extension/scan`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(message.payload),
       });
-      const data = await res.json().catch(() => null);
-      if (!res.ok) {
-        sendResponse({ ok: false, error: data?.error || `Server error (${res.status})` });
+
+    let base = await getApiBase();
+    let res;
+    try {
+      res = await post(base);
+    } catch (e) {
+      // A custom endpoint can rot — a dev server that isn't running, or a host
+      // that started redirecting (a CORS preflight may not follow a redirect,
+      // which surfaces only as "Failed to fetch"). Fall back to the real site
+      // once rather than leaving the user stuck on a saved setting.
+      if (base === DEFAULT_API_BASE) {
+        sendResponse({ ok: false, error: `Couldn't reach The Fibre Set (${base}). ${e.message || e}` });
         return;
       }
-      sendResponse({ ok: true, data, apiBase: base });
-    } catch (e) {
-      sendResponse({ ok: false, error: `Couldn't reach The Fibre Set (${base}). ${e.message || e}` });
+      try {
+        res = await post(DEFAULT_API_BASE);
+        await chrome.storage.local.set({ apiBase: DEFAULT_API_BASE });
+        base = DEFAULT_API_BASE;
+      } catch (e2) {
+        sendResponse({
+          ok: false,
+          error: `Couldn't reach The Fibre Set (tried ${base}, then ${DEFAULT_API_BASE}). ${e2.message || e2}`,
+        });
+        return;
+      }
     }
+
+    const data = await res.json().catch(() => null);
+    if (!res.ok) {
+      sendResponse({ ok: false, error: data?.error || `Server error (${res.status})` });
+      return;
+    }
+    sendResponse({ ok: true, data, apiBase: base });
   })();
 
   return true; // keep the message channel open for the async response
