@@ -67,3 +67,20 @@ describe("naturalPct", () => {
     expect(naturalPct(parts(["linen", 50], ["tencel_lyocell", 30], ["polyester", 20]))).toBe(50);
   });
 });
+
+describe("misleadingName — 0% is a parse miss, not a flag", () => {
+  it("does not accuse a brand when the named fibre parsed as 0%", () => {
+    // lined/multi-part garments routinely hide the shell composition in a
+    // separate line; 0% means we failed to read it, not that it isn't there
+    expect(misleadingName("SAVANNAH - Organic Linen Cotton Tie Top", [{ material: "linen", pct: 100 }])).toBeNull();
+  });
+
+  it("still flags a genuine minority-fibre name", () => {
+    expect(
+      misleadingName("Linen-Blend Tee", [
+        { material: "linen", pct: 28 },
+        { material: "polyester", pct: 72 },
+      ]),
+    ).toEqual({ fibre: "linen", actualPct: 28 });
+  });
+});

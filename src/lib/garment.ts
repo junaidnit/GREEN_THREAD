@@ -193,16 +193,43 @@ export function colourWord(...texts: string[]): string | null {
 const WOMENS_TYPES = new Set<GarmentType>(["dress", "skirt", "blouse", "jumpsuit"]);
 
 /**
- * Feeds mislabel gender constantly (42 dresses and skirts arrived tagged
- * "men"). Explicit wording in the title wins; otherwise the garment type
- * decides; otherwise fall back to whatever the feed claimed.
+ * WORD BOUNDARIES ARE LOAD-BEARING. "womenswear" contains "menswear" as a
+ * substring: an unanchored /menswear/ filed 339 women's Komodo pieces as
+ * menswear, because that brand tags nearly everything "womenswear".
  */
-export function genderFor(title: string, type: GarmentType, feedGender?: string): Gender {
-  if (/\bwomen'?s?\b|\bwomenswear\b|\bladies\b/i.test(title)) return "women";
-  if (/\bmen'?s?\b|\bmenswear\b/i.test(title)) return "men";
+const WOMENS_WORDS = /\bwomen'?s?\b|\bwomenswear\b|\bladies\b|\bwomans?\b/i;
+const MENS_WORDS = /\bmen'?s?\b|\bmenswear\b|\bgents\b/i;
+
+/**
+ * Feeds mislabel gender constantly (42 dresses and skirts arrived tagged
+ * "men"). Explicit wording in the title wins; then the garment type; then
+ * feed metadata such as product_type and tags — where a signal for BOTH
+ * genders means the brand tags broadly, so the honest answer is unisex.
+ *
+ * This is the only gender authority. Do not reimplement it at an ingestion
+ * boundary: that is exactly how the men's section filled with dresses.
+ */
+export function genderFor(
+  title: string,
+  type: GarmentType,
+  feedGender?: string,
+  hints = "",
+): Gender {
+  if (WOMENS_WORDS.test(title)) return "women";
+  if (MENS_WORDS.test(title)) return "men";
   if (/\bunisex\b/i.test(title)) return "unisex";
   if (WOMENS_TYPES.has(type)) return "women";
   if (/\bcamisole\b|\bbralette\b|\bknickers\b|\bbra\b/i.test(title)) return "women";
+
+  if (hints) {
+    if (/\bunisex\b/i.test(hints)) return "unisex";
+    const w = WOMENS_WORDS.test(hints);
+    const m = MENS_WORDS.test(hints);
+    if (w && m) return "unisex"; // tagged for both — claim neither
+    if (w) return "women";
+    if (m) return "men";
+  }
+
   return feedGender === "men" || feedGender === "women" ? feedGender : "unisex";
 }
 

@@ -12,6 +12,7 @@ import { writeFileSync, readFileSync } from "node:fs";
 import { resolve } from "node:path";
 import { computeScore, validateCertifications } from "../src/lib/scoring";
 import { mapCategory, parseComposition } from "../src/lib/live-ingest";
+import { garmentType, genderFor } from "../src/lib/garment";
 import type { Practices, SeedProduct } from "../src/lib/types";
 import { colorFamily, fitFor } from "./product-attrs";
 
@@ -22,6 +23,16 @@ export interface LiveSource {
   brandSlug: string;
   name: string;
   base: string;
+  /**
+   * What this brand sells, when its feed says nothing. Beaumont Organic,
+   * Bibico and Lucy & Yak publish ZERO gender signal — no tag, no
+   * product_type, nothing in the title — so per-item inference has nothing to
+   * work with and everything fell through to "unisex", which surfaces
+   * womenswear under the Men filter. That is knowledge about the brand, not
+   * about the garment, so it is declared here. Omit it for feeds that do tag
+   * gender (Thought, Komodo) and each item is judged on its own signal.
+   */
+  defaultGender?: "women" | "men";
 }
 
 /** Sources are data, not code — the Scout agent (scripts/grow.ts) appends here. */
@@ -118,10 +129,15 @@ async function ingestBrand(src: (typeof SOURCES)[number], brandMeta: { certifica
         title: p.title,
         description: text.slice(0, 600),
         category: mapCategory(p.product_type ?? "", p.title),
-        gender: /\bmen'?s?\b|menswear/i.test(`${p.title} ${p.product_type} ${tagStr}`) &&
-          !/\bwomen'?s?\b|womenswear/i.test(`${p.title} ${p.product_type}`)
-          ? "men"
-          : "women",
+        // one gender authority — see genderFor in src/lib/garment.ts.
+        // src.defaultGender is the LAST resort, used only when the title,
+        // the garment type and the feed's own tags all say nothing.
+        gender: genderFor(
+          p.title,
+          garmentType(p.title, p.product_type ?? ""),
+          src.defaultGender,
+          `${p.product_type ?? ""} ${tagStr}`,
+        ),
         price,
         currency: "GBP",
         retailer: src.name,

@@ -98,6 +98,14 @@ export interface MisleadingName {
 /**
  * The "Linen blend (90% polyester)" detector: a product named after a fibre
  * it contains less than half of. The platform's flagship transparency call.
+ *
+ * A reading of exactly 0% is NOT a flag. It means we failed to parse the
+ * named fibre at all — routine on lined or multi-part garments, where the
+ * shell composition sits in a separate line we didn't capture. Publishing
+ * those as "0% cotton" accuses a brand of something we haven't shown, and
+ * it read as a bug on the product card ("⚠ only 0% cotton" on a linen-cotton
+ * top). Label Watch already filtered these; the guard belongs HERE so every
+ * caller — cards, PDP, extension — is safe by default.
  */
 export function misleadingName(
   title: string,
@@ -108,7 +116,7 @@ export function misleadingName(
     const actual = Math.round(
       composition.filter((c) => f.materials.includes(c.material)).reduce((s, c) => s + c.pct, 0),
     );
-    if (actual < 50) return { fibre: f.label, actualPct: actual };
+    if (actual >= 1 && actual < 50) return { fibre: f.label, actualPct: actual };
   }
   return null;
 }

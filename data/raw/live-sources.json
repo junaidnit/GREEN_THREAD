@@ -8,12 +8,14 @@
     {
       "brandSlug": "lucy-and-yak",
       "name": "Lucy & Yak",
-      "base": "https://www.lucyandyak.com"
+      "base": "https://www.lucyandyak.com",
+      "defaultGender": "women"
     },
     {
       "brandSlug": "beaumont-organic",
       "name": "Beaumont Organic",
-      "base": "https://www.beaumontorganic.com"
+      "base": "https://www.beaumontorganic.com",
+      "defaultGender": "women"
     },
     {
       "brandSlug": "komodo",
@@ -23,7 +25,8 @@
     {
       "brandSlug": "bibico",
       "name": "Bibico",
-      "base": "https://bibico.co.uk"
+      "base": "https://bibico.co.uk",
+      "defaultGender": "women"
     }
   ]
 }

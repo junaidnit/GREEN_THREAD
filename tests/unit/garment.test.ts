@@ -129,3 +129,30 @@ describe("genderFor — feeds mislabel constantly", () => {
     expect(genderFor("Organic Cotton Tee", "tee", undefined)).toBe("unisex");
   });
 });
+
+describe("genderFor — feed tag hints", () => {
+  // The bug that filled the men's section with dresses: an unanchored
+  // /menswear/ matches inside "womenswear", and Komodo tags nearly every
+  // women's product "womens womenswear".
+  it("does not read 'womenswear' as menswear", () => {
+    expect(genderFor("EMMIE - Organic Cotton Short", "shorts", undefined, "trousers vegan womens womenswear")).toBe("women");
+    expect(genderFor("MARIE - Rayon Navy Trousers", "trousers", undefined, "Trousers womenswear sale")).toBe("women");
+  });
+
+  it("reads a genuine menswear tag as men", () => {
+    expect(genderFor("LOYLE Organic Cotton Shirt - Olive", "shirt", undefined, "Shirt mens menswear vegan")).toBe("men");
+  });
+
+  it("calls it unisex when a brand tags for both", () => {
+    expect(genderFor("Hemp Tee", "tee", undefined, "mens menswear womens womenswear")).toBe("unisex");
+  });
+
+  it("never lets a tag override a women's garment type", () => {
+    expect(genderFor("PLANET - Rayon Jumpsuit Pink", "jumpsuit", undefined, "mens menswear")).toBe("women");
+    expect(genderFor("Linen Midi Dress", "dress", "men", "mens")).toBe("women");
+  });
+
+  it("still honours explicit title wording over tags", () => {
+    expect(genderFor("Men's Hemp Shirt", "shirt", undefined, "womens womenswear")).toBe("men");
+  });
+});
