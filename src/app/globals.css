@@ -1,38 +1,39 @@
 @import "tailwindcss";
 
-/* ── GreenThread design tokens ─────────────────────────────── */
+/* ── The Fibre Set design tokens ───────────────────────────────
+   Palette is a PLACEHOLDER (from the brand mockup) — final tones to be
+   judged once real editorial imagery is in place. Swap the hex values here
+   and the whole site recolours through the @theme mapping below. Light only.
+   canvas #F5F3EF · navy #3A3A55 · taupe #6F6F66 · slate #5C5C7C ·
+   rose #9D6F70 · mauve #7E5A71 · burgundy #4B2144 · line #E2DED7 */
 :root {
-  --background: oklch(0.977 0.008 85);        /* warm cream */
-  --surface: oklch(1 0 0);                    /* white cards */
-  --surface-2: oklch(0.955 0.01 90);          /* sand wash */
-  --foreground: oklch(0.24 0.02 160);         /* ink (green-black) */
-  --muted-foreground: oklch(0.5 0.02 155);
-  --primary: oklch(0.38 0.075 160);           /* deep forest */
-  --primary-foreground: oklch(0.977 0.008 85);
-  --accent: oklch(0.88 0.04 150);             /* sage */
-  --accent-foreground: oklch(0.3 0.06 160);
-  --border: oklch(0.9 0.012 90);
-  --ring: oklch(0.55 0.09 160);
+  --canvas: #F5F3EF;
+  --navy: #3A3A55;
+  --taupe: #6F6F66;
+  --slate: #5C5C7C;
+  --rose: #9D6F70;
+  --mauve: #7E5A71;
+  --burgundy: #4B2144;
+  --line: #E2DED7;
 
-  --grade-a: oklch(0.62 0.15 155);
-  --grade-b: oklch(0.68 0.14 125);
-  --grade-c: oklch(0.72 0.14 85);
-  --grade-d: oklch(0.65 0.15 55);
-  --grade-e: oklch(0.55 0.19 30);
-}
+  --background: var(--canvas);
+  --surface: #FFFFFF;
+  --surface-2: #EFECE6;                        /* warm sand wash */
+  --foreground: var(--navy);
+  --muted-foreground: var(--taupe);
+  --primary: var(--burgundy);                  /* the one deep CTA colour */
+  --primary-foreground: var(--canvas);
+  --accent: #ECE6E4;                           /* soft warm hover wash */
+  --accent-foreground: var(--burgundy);
+  --border: var(--line);
+  --ring: var(--slate);
 
-.dark {
-  --background: oklch(0.19 0.015 160);
-  --surface: oklch(0.24 0.018 160);
-  --surface-2: oklch(0.28 0.02 160);
-  --foreground: oklch(0.95 0.01 140);
-  --muted-foreground: oklch(0.7 0.02 150);
-  --primary: oklch(0.78 0.1 155);             /* lifted sage-mint */
-  --primary-foreground: oklch(0.2 0.02 160);
-  --accent: oklch(0.34 0.04 158);
-  --accent-foreground: oklch(0.88 0.05 150);
-  --border: oklch(0.32 0.02 160);
-  --ring: oklch(0.7 0.09 155);
+  /* semantic marks, retuned into the palette (used on sub-pages) */
+  --grade-a: #5f7d67;                          /* sage — natural */
+  --grade-b: #7d8760;
+  --grade-c: #9c8a5f;
+  --grade-d: var(--rose);                      /* rose — caution */
+  --grade-e: #7c3f52;
 }
 
 @theme inline {
@@ -53,9 +54,12 @@
   --color-grade-d: var(--grade-d);
   --color-grade-e: var(--grade-e);
 
-  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
-  --font-display: var(--font-space-grotesk), var(--font-inter), sans-serif;
-  --font-serif: var(--font-playfair), Georgia, serif;
+  /* The Fibre Set is single-typeface: Montserrat throughout, light for
+     display. --font-serif is deliberately mapped to Montserrat too, so the
+     old serif-italic headings across the site all become the new brand face. */
+  --font-sans: var(--font-montserrat), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-montserrat), ui-sans-serif, sans-serif;
+  --font-serif: var(--font-montserrat), ui-sans-serif, sans-serif;
 
   --radius-xl2: 1.25rem;
 
@@ -182,13 +186,20 @@ body {
   text-rendering: optimizeLegibility;
 }
 
-/* base layer so font utilities (font-serif etc.) can override per element */
+/* base layer so font utilities (font-serif etc.) can override per element.
+   The Fibre Set look: light-weight display headings, gentle positive
+   tracking — the calm editorial feel of the brand mockup. */
 @layer base {
   h1, h2, h3, .font-display {
     font-family: var(--font-display);
-    letter-spacing: -0.02em;
+    font-weight: 300;
+    letter-spacing: 0.005em;
+    line-height: 1.15;
   }
 }
+
+/* eyebrow accent now leans on the brand rose */
+.eyebrow { color: var(--rose); font-weight: 600; }
 
 /* skeleton shimmer block */
 .skeleton {

@@ -2,7 +2,7 @@ import { oilDerivedPct, naturalPct, misleadingName } from "./materials";
 import type { FabricPart } from "./types";
 
 /**
- * THE TRUTH LEDGER — GreenThread's core defensible asset.
+ * THE TRUTH LEDGER — The Fibre Set's core defensible asset.
  *
  * An append-only, timestamped, versioned record of what each product was
  * ACTUALLY made of, and whether its name misled, every time we observed it.

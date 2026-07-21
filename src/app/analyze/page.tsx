@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 import { AnalyzeClient } from "./analyze-client";
 
 export const metadata: Metadata = {
-  title: "Fabric Check — paste any product link | GreenThread",
+  title: "Fabric Check — paste any product link | The Fibre Set",
   description:
     "Paste a product URL from any clothing site and get its fabric composition, certifications and an honest sustainability read.",
 };

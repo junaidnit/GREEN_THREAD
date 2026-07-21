@@ -19,7 +19,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   if (!CONDITION_SLUGS.includes(slug as ConditionSlug)) return {};
   const rule = CONDITIONS[slug as ConditionSlug];
   return {
-    title: `${rule.name} clothing — every label checked | GreenThread`,
+    title: `${rule.name} clothing — every label checked | The Fibre Set`,
     description: rule.summary,
   };
 }

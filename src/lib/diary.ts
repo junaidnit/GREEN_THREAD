@@ -2,7 +2,7 @@
 
 /**
  * The Fibre Diary — a private, local record of what you bought through
- * GreenThread and what it was made of. Stored in localStorage only; no
+ * The Fibre Set and what it was made of. Stored in localStorage only; no
  * account, no server, no tracking beyond your own browser.
  */
 

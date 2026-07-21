@@ -47,7 +47,7 @@ export interface MisnamedRecord {
 /**
  * The Label Watch list: every product currently on record whose name claims
  * a fibre it mostly is NOT. Most-misleading (most plastic) first. Powers the
- * public greenwashing transparency page — GreenThread's counter-position.
+ * public greenwashing transparency page — The Fibre Set's counter-position.
  */
 export function allMisnamed(): MisnamedRecord[] {
   const ledger = loadLedger();

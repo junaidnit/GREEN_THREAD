@@ -29,11 +29,16 @@ const plasticPct = (p: LiveProduct) =>
   p.fabric_composition.filter((f) => SYNTH.has(f.material)).reduce((s, f) => s + f.pct, 0);
 
 test.describe("home", () => {
-  test("hero, fabric categories and top picks render", async ({ page }) => {
+  test("hero, category panels and fibre widget render", async ({ page }) => {
     await page.goto("/");
-    await expect(page.getByRole("heading", { level: 1 })).toContainText("Wear more");
-    await expect(page.getByTestId("edit-tile-0")).toBeVisible();
-    expect(await page.getByTestId("product-card").count()).toBeGreaterThanOrEqual(4);
+    await expect(page.getByRole("heading", { level: 1 })).toContainText(/skin they sit against/i);
+    // the four category ways-in
+    await expect(page.getByRole("heading", { name: "Women", exact: true })).toBeVisible();
+    await expect(page.getByText("Four ways in")).toBeVisible();
+    // the interactive fibre widget
+    await expect(page.getByText(/what it actually does/i)).toBeVisible();
+    // the prominent extension CTA near the top
+    await expect(page.getByText(/Check any fabric label/i)).toBeVisible();
   });
 
   test("home search navigates to results", async ({ page }) => {
@@ -192,7 +197,7 @@ test.describe("label watch — the public greenwashing record", () => {
     await expect(page.getByRole("heading", { name: /Named natural/ })).toBeVisible();
     await expect(page.getByText(/items on Label Watch/)).toBeVisible();
     // every listed flag names a minority natural fibre in a majority-plastic item
-    const first = page.locator("ul li").first();
+    const first = page.getByTestId("label-watch-list").locator("li").first();
     if (await first.count()) {
       await expect(first).toContainText(/only \d+%/); // minority natural fibre
       await expect(first).toContainText(/plastic/i); // in a majority-plastic item
@@ -313,10 +318,10 @@ test.describe("natural-fibre-first", () => {
     await expect(page.getByTestId("misnamed-warning")).toBeVisible();
   });
 
-  test("hero CTA lands on plastic-free results", async ({ page }) => {
+  test("a homepage category panel lands on filtered results", async ({ page }) => {
     await page.goto("/");
-    await page.getByTestId("hero-pure-cta").click();
-    await page.waitForURL(/pure=1/);
+    await page.getByRole("link", { name: /Women/ }).first().click();
+    await page.waitForURL(/\/search\?gender=women/);
     await expect(page.getByTestId("results-count")).toBeVisible();
   });
 });
@@ -404,16 +409,6 @@ test.describe("concierge", () => {
     await expect(page.getByText("breathable linen top", { exact: false })).toBeVisible();
     await page.getByTestId("concierge-input").fill("test message");
     await expect(page.getByTestId("concierge-input")).toHaveValue("test message");
-  });
-});
-
-test.describe("theme", () => {
-  test("dark mode toggles and persists", async ({ page }) => {
-    await page.goto("/");
-    await page.getByRole("button", { name: "Toggle theme" }).click();
-    await expect(page.locator("html")).toHaveClass(/dark/);
-    await page.reload();
-    await expect(page.locator("html")).toHaveClass(/dark/);
   });
 });
 

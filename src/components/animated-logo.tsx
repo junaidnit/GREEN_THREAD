@@ -1,7 +1,7 @@
 import { BRAND_LOGO } from "./brand-path";
 
 /**
- * The GreenThread mark — the business logo, used as an EXACT vector trace
+ * The Fibre Set mark — the business logo, used as an EXACT vector trace
  * of the original artwork (public/brand/logo-original.jpeg → potrace via
  * scripts/trace-logo.mjs). Zero hand-drawn approximation, zero distortion:
  * the outline, weave gaps and cut ends are the original's, losslessly
@@ -21,13 +21,16 @@ export function LogoMark({ size = 28, animate = true }: { size?: number; animate
   );
 }
 
-/** Full lockup: mark + serif italic wordmark. */
+/** Full lockup: mark + wordmark, matching the header treatment. */
 export function LogoLockup({ size = 28, animate = false }: { size?: number; animate?: boolean }) {
   return (
-    <span className="inline-flex items-center gap-2.5">
+    <span className="inline-flex items-center gap-3">
       <LogoMark size={size} animate={animate} />
-      <span className="font-serif font-semibold italic leading-none tracking-tight" style={{ fontSize: size * 0.82 }}>
-        greenthread
+      <span
+        className="font-display font-semibold uppercase leading-none tracking-[0.2em]"
+        style={{ fontSize: size * 0.5 }}
+      >
+        The&nbsp;Fibre&nbsp;Set
       </span>
     </span>
   );

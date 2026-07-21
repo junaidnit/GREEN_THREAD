@@ -1,8 +1,8 @@
-// GreenThread Fabric Check — content script.
+// The Fibre Set Fabric Check — content script.
 // Injects a small ribbon badge on every page. On click, it scrapes the
 // ALREADY-RENDERED page (title, JSON-LD, visible text) — no server fetch
 // needed, which is what lets this work on sites that block automated
-// reading — and asks the GreenThread API what the garment is made of and
+// reading — and asks the Fibre Set API what the garment is made of and
 // whether a better-fibre alternative exists to buy instead.
 (function () {
   if (window.__gtInjected) return;
@@ -154,7 +154,7 @@
       .empty { color: #6b6558; font-size: 12px; padding: 6px 0 2px; }
     </style>
     <div style="position:relative;">
-      <button class="pill" id="gt-toggle" aria-label="GreenThread Fabric Check" title="Check this garment's fibre">
+      <button class="pill" id="gt-toggle" aria-label="The Fibre Set Fabric Check" title="Check this garment's fibre">
         ${markSvg("#f5f2ea", 20)}
       </button>
       <div class="panel" id="gt-panel"></div>
@@ -253,7 +253,7 @@
             }</p>${recsHtml}`
           : `<p class="empty">No natural-fibre alternative in this category yet.</p>`
       }
-      <a class="cta" href="${apiBase}/search?pure=1" target="_blank" rel="noopener">Shop plastic-free on GreenThread →</a>
+      <a class="cta" href="${apiBase}/search?pure=1" target="_blank" rel="noopener">Shop plastic-free on The Fibre Set →</a>
     `;
     shadow.getElementById("gt-close").addEventListener("click", () => setOpen(false));
   }
@@ -270,7 +270,7 @@
     const payload = scrapePage();
     chrome.runtime.sendMessage({ type: "gt-scan", payload }, (response) => {
       if (chrome.runtime.lastError) {
-        renderError("Couldn't reach the GreenThread extension backend.");
+        renderError("Couldn't reach the Fibre Set extension backend.");
         loaded = false;
         return;
       }

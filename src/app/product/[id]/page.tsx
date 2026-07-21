@@ -49,7 +49,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const product = await getProduct(id);
   if (!product) return {};
   return {
-    title: `${product.title} — ${product.brand.name} | GreenThread`,
+    title: `${product.title} — ${product.brand.name} | The Fibre Set`,
     description: product.sustainability.explanation,
     openGraph: {
       title: `${product.title} — grade ${product.sustainability.grade} (${product.sustainability.score}/100)`,
@@ -257,7 +257,7 @@ export default async function ProductPage({ params }: Props) {
               <div className="mt-4 border-t border-border pt-3" data-testid="truth-record">
                 <p className="flex items-center gap-1.5 text-xs text-muted-foreground">
                   <BadgeCheck className="size-3.5 text-grade-a" />
-                  On GreenThread&apos;s independent record since{" "}
+                  On The Fibre Set&apos;s independent record since{" "}
                   <time dateTime={truth.trackedSince} className="font-medium text-foreground">
                     {new Date(truth.trackedSince).toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric" })}
                   </time>

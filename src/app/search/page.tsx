@@ -5,7 +5,7 @@ import { SearchExperience } from "@/components/search-experience";
 import { ProductCardSkeleton } from "@/components/product-card";
 
 export const metadata: Metadata = {
-  title: "Browse sustainable clothing — GreenThread",
+  title: "Browse sustainable clothing — The Fibre Set",
   description: "Instant search across sustainable fashion. Filter by fabric, certification and sustainability score.",
 };
 

@@ -7,9 +7,9 @@ import { Reveal } from "@/components/kinetic";
 import { AlertTriangle } from "@/components/icons";
 
 export const metadata: Metadata = {
-  title: "Label Watch — named natural, mostly plastic | GreenThread",
+  title: "Label Watch — named natural, mostly plastic | The Fibre Set",
   description:
-    "GreenThread's independent, timestamped record of clothes named after natural fibres that are mostly oil-derived plastic. Every flag is on the record, with the date we first logged it.",
+    "The Fibre Set's independent, timestamped record of clothes named after natural fibres that are mostly oil-derived plastic. Every flag is on the record, with the date we first logged it.",
 };
 
 export default async function LabelWatchPage() {
@@ -43,7 +43,7 @@ export default async function LabelWatchPage() {
         )}
       </Reveal>
 
-      <ul className="mt-8 divide-y divide-border">
+      <ul data-testid="label-watch-list" className="mt-8 divide-y divide-border">
         {flagged.map((f) => {
           const row = (
             <div className="flex items-center justify-between gap-4 py-4">
@@ -86,7 +86,7 @@ export default async function LabelWatchPage() {
 
       <div className="mt-12 rounded-xl2 border border-border bg-surface p-6 text-sm text-muted-foreground">
         <p>
-          <b className="text-foreground">How this works.</b> Every product GreenThread sees is logged
+          <b className="text-foreground">How this works.</b> Every product we see is logged
           with its disclosed fibre composition and the date. When a name claims a fibre the garment is
           mostly not, it lands here — permanently, with its history. From 2028 the EU Digital Product
           Passport will make fibre disclosure mandatory; we&apos;re building the independent record now.

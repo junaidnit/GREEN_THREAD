@@ -6,9 +6,9 @@ import { GradeBadge } from "@/components/grade-badge";
 import { Reveal } from "@/components/kinetic";
 
 export const metadata: Metadata = {
-  title: "Brands, label-checked — GreenThread",
+  title: "Brands, label-checked — The Fibre Set",
   description:
-    "Every brand on GreenThread with its fibre record: average score, plastic-free share, and unverified-claim count.",
+    "Every brand on The Fibre Set with its fibre record: average score, plastic-free share, and unverified-claim count.",
 };
 
 export default async function BrandsPage() {

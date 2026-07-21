@@ -27,7 +27,7 @@ chrome.runtime.onMessage.addListener((message, _sender, sendResponse) => {
       }
       sendResponse({ ok: true, data, apiBase: base });
     } catch (e) {
-      sendResponse({ ok: false, error: `Couldn't reach GreenThread (${base}). ${e.message || e}` });
+      sendResponse({ ok: false, error: `Couldn't reach The Fibre Set (${base}). ${e.message || e}` });
     }
   })();
 

@@ -23,7 +23,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const material = id as MaterialId;
   if (!FABRIC_IDS.includes(material)) return {};
   return {
-    title: `${MATERIAL_LABELS[material]} clothing — impact, facts & products | GreenThread`,
+    title: `${MATERIAL_LABELS[material]} clothing — impact, facts & products | The Fibre Set`,
     description: `${MATERIAL_NOTES[material]} Shop ${MATERIAL_LABELS[material].toLowerCase()} clothing with transparent sustainability scores.`,
   };
 }

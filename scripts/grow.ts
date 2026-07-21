@@ -7,7 +7,7 @@
  *                                                 brand, merge, record truth
  *
  * The Scout probes the brand's public Shopify feed, samples up to 150
- * products, and issues an auditable GO/NO-GO against GreenThread's honesty
+ * products, and issues an auditable GO/NO-GO against The Fibre Set's honesty
  * bar (real catalogue, composition disclosed, majority natural, garments).
  * Deterministic — no LLM calls, no API cost.
  */

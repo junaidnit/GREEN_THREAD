@@ -1,211 +1,220 @@
 import Link from "next/link";
 import Image from "next/image";
-import type { Metadata } from "next";
 import { getCatalog } from "@/lib/catalog";
-import { ProductCard } from "@/components/product-card";
-import { LabelHero } from "@/components/label-hero";
-import { Marquee, Reveal } from "@/components/kinetic";
-import { MATERIAL_LABELS, MATERIAL_SCORES } from "@/lib/scoring";
+import { ledgerStats } from "@/lib/truth-server";
+import { MATERIAL_LABELS, MATERIAL_NOTES } from "@/lib/scoring";
 import { MATERIAL_FACTS } from "@/lib/materials";
-import type { MaterialId } from "@/lib/types";
+import { HeroSearch } from "@/components/hero-search";
+import { FibreWidget, type FibreEntry } from "@/components/fibre-widget";
+import type { MaterialId, Product } from "@/lib/types";
 import { ArrowUpRight } from "@/components/icons";
 
-export const metadata: Metadata = {
-  title: "GreenThread — shop by fabric, not just price",
-};
-
-const MARQUEE_FABRICS: MaterialId[] = [
-  "linen", "hemp", "organic_cotton", "tencel_lyocell", "recycled_cotton",
-  "merino_wool", "cupro", "recycled_polyester", "peace_silk", "modal",
+/* fibres featured in the widget, with a one-line hook + placeholder swatch */
+const FIBRES: Array<[MaterialId, string, string]> = [
+  ["linen", "cool & breathable", "#aeb0a4"],
+  ["organic_cotton", "soft, hypoallergenic", "#c8bcae"],
+  ["merino_wool", "regulates heat", "#a58f9c"],
+  ["peace_silk", "smoothest, low-friction", "#b8a6a7"],
+  ["tencel_lyocell", "cool cellulose", "#b3aeb8"],
+  ["hemp", "strongest natural fibre", "#a6a596"],
+  ["modal", "beechwood-soft", "#bfb3ab"],
+  ["viscose", "fluid & light", "#c2b2a4"],
+  ["lambswool", "warm & lofty", "#b0aca0"],
+  ["recycled_cotton", "low-impact", "#cabfac"],
 ];
+
+function firstImage(products: Product[], pred: (p: Product) => boolean): string | null {
+  return products.find((p) => pred(p) && p.image_url)?.image_url ?? null;
+}
+const dominant = (p: Product, m: MaterialId) =>
+  [...p.fabric_composition].sort((a, b) => b.pct - a.pct)[0]?.material === m;
 
 export default async function Home() {
   const products = await getCatalog();
-  const topPicks = [...products]
-    .sort((a, b) => b.sustainability.score - a.sustainability.score)
-    .slice(0, 9);
-  const brandCount = new Set(products.map((p) => p.brand.slug)).size;
-  const fibreCount = new Set(products.flatMap((p) => p.fabric_composition.map((f) => f.material))).size;
-  const campaign = topPicks[0];
+  const stats = ledgerStats();
 
-  // brand gallery aggregates, best average first
-  const byBrand = new Map<string, { name: string; count: number; sum: number }>();
-  for (const p of products) {
-    const b = byBrand.get(p.brand.slug) ?? { name: p.brand.name, count: 0, sum: 0 };
-    b.count++;
-    b.sum += p.sustainability.score;
-    byBrand.set(p.brand.slug, b);
-  }
-  const brandTiles = [...byBrand.entries()]
-    .map(([slug, b]) => ({ slug, name: b.name, count: b.count, avg: Math.round(b.sum / b.count) }))
-    .sort((a, b) => b.avg - a.avg);
+  const heroImg = firstImage(products, (p) => /dress|linen/i.test(p.title) && p.gender === "women") ?? products[0]?.image_url ?? null;
+  const womenImg = firstImage(products, (p) => p.gender === "women" && /dress|linen/i.test(p.title)) ?? firstImage(products, (p) => p.gender === "women");
+  const menImg = firstImage(products, (p) => p.gender === "men");
+
+  const fibres: FibreEntry[] = FIBRES.filter(([id]) => MATERIAL_FACTS[id]).map(([id, tagline, swatch]) => {
+    const f = MATERIAL_FACTS[id]!;
+    return {
+      id, tagline, swatch,
+      label: MATERIAL_LABELS[id],
+      note: MATERIAL_NOTES[id],
+      stat: f.stat, detail: f.detail, source: f.source,
+      image: firstImage(products, (p) => dominant(p, id)),
+    };
+  });
+
+  const fibreCount = new Set(products.flatMap((p) => p.fabric_composition.map((f) => f.material))).size;
+  const brandCount = new Set(products.map((p) => p.brand.slug)).size;
+
+  const articles = [
+    { eyebrow: "Sensitive skin", title: "The fibres that calm reactive, eczema-prone skin", blurb: "Why smooth, low-friction silk and long-staple organic cotton settle skin that reacts to everything else.", href: "/condition/eczema", img: firstImage(products, (p) => dominant(p, "peace_silk")) ?? womenImg },
+    { eyebrow: "Menopause", title: "Dressing for the 3am flash — fibres that help", blurb: "How merino, linen and TENCEL move with a temperature surge, and the 'cooling' synthetics worth avoiding.", href: "/search?fabric=merino_wool", img: firstImage(products, (p) => dominant(p, "merino_wool")) ?? menImg },
+    { eyebrow: "Breathability", title: "Why linen earns its place against hot skin", blurb: "Hollow flax fibres and an open weave move heat away — the plain case for linen in summer and in bed.", href: "/fabric/linen", img: firstImage(products, (p) => dominant(p, "linen")) ?? heroImg },
+    { eyebrow: "Non-toxic living", title: "What actually sheds onto your skin", blurb: "The plain version of the microplastics question — and the natural fibres that shed nothing at all.", href: "/label-watch", img: firstImage(products, (p) => dominant(p, "organic_cotton")) ?? womenImg },
+  ];
 
   return (
     <div>
-      {/* ── Phia-style label-truth hero ── */}
-      <LabelHero pieces={products.length} brands={brandCount} fibres={fibreCount} />
-
-      {/* ── fibre marquee ── */}
-      <Marquee className="border-y border-border py-3.5">
-        {MARQUEE_FABRICS.map((m) => (
-          <Link key={m} href={`/fabric/${m}`} className="group flex shrink-0 items-center gap-2.5">
-            <span
-              className="size-1.5 rounded-full"
-              style={{ background: MATERIAL_SCORES[m] >= 8 ? "var(--grade-a)" : MATERIAL_SCORES[m] >= 6.5 ? "var(--grade-b)" : "var(--grade-c)" }}
-            />
-            <span className="font-display text-sm font-semibold uppercase tracking-wide group-hover:text-primary">
-              {MATERIAL_LABELS[m]}
-            </span>
-            <span className="text-xs text-muted-foreground">{MATERIAL_FACTS[m]?.stat ?? `${MATERIAL_SCORES[m]}/10`}</span>
-          </Link>
-        ))}
-      </Marquee>
-
-      {/* ── the edits: specific fibres only (Phia editorial-tile pattern) ── */}
-      <section className="mx-auto mt-16 max-w-7xl px-5 sm:px-8">
-        <Reveal>
-          <div className="mb-6 flex items-end justify-between">
-            <div>
-              <p className="eyebrow">The edits</p>
-              <h2 className="mt-1 font-serif text-3xl font-medium italic tracking-tight sm:text-4xl">
-                One fibre at a time
-              </h2>
-            </div>
+      {/* ── HERO ── */}
+      <section className="border-b border-border">
+        <div className="mx-auto grid max-w-[1280px] items-stretch gap-0 md:grid-cols-[1.02fr_.98fr]">
+          <div className="flex flex-col justify-center gap-6 px-6 py-16 sm:px-10 md:py-24">
+            <span className="eyebrow">Natural fibres, chosen well</span>
+            <h1 className="max-w-[15ch] font-display text-[38px] leading-[1.12] text-foreground sm:text-[48px]">
+              Clothes and bedding chosen for the skin they sit against.
+            </h1>
+            <p className="max-w-[46ch] text-[16px] font-light leading-relaxed text-muted-foreground">
+              Not a catalogue of everything — real pieces in natural fibres, with the label read for you.
+              Search a fibre, or paste any product link to check what it&apos;s really made of.
+            </p>
+            <HeroSearch />
           </div>
-        </Reveal>
-        <div className="grid gap-4 sm:grid-cols-3">
+          <div className="relative min-h-[360px] bg-surface-2 md:min-h-full">
+            {heroImg && <Image src={heroImg} alt="Natural-fibre clothing" fill sizes="(max-width:768px) 100vw, 50vw" priority className="object-cover" />}
+          </div>
+        </div>
+      </section>
+
+      {/* ── EXTENSION CTA (prominent, near top) ── */}
+      <section className="bg-foreground text-background">
+        <div className="mx-auto flex max-w-[1280px] flex-col items-center justify-between gap-6 px-6 py-10 sm:px-10 md:flex-row">
+          <div className="text-center md:text-left">
+            <span className="text-[10.5px] font-semibold uppercase tracking-[0.18em] text-rose">The free tool</span>
+            <h2 className="mt-2 font-display text-[26px] text-background">Check any fabric label, on any shop.</h2>
+            <p className="mt-2 max-w-[52ch] text-[14px] font-light leading-relaxed opacity-75">
+              Our browser extension reads the fibre composition on any retailer&apos;s product page — so you can
+              see the plastic hiding in a &ldquo;linen&rdquo; blend before you buy.
+            </p>
+          </div>
+          <div className="flex shrink-0 gap-3">
+            <Link href="/extension" className="rounded-full bg-primary px-6 py-3 text-[11px] font-semibold uppercase tracking-[0.14em] text-primary-foreground transition-opacity hover:opacity-90">
+              Install the extension
+            </Link>
+            <Link href="/analyze" className="rounded-full border border-background/30 px-6 py-3 text-[11px] font-semibold uppercase tracking-[0.14em] transition-colors hover:bg-background/10">
+              Try it here
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* ── CATEGORY PANELS ── */}
+      <section className="mx-auto max-w-[1280px] px-6 py-20 sm:px-10">
+        <div className="mb-10 flex items-end justify-between">
+          <div>
+            <span className="eyebrow">Shop by</span>
+            <h2 className="mt-2 font-display text-[28px] text-foreground">Four ways in</h2>
+          </div>
+        </div>
+        <div className="grid gap-5 sm:grid-cols-2">
+          <CategoryPanel href="/search?gender=women" label="Women" img={womenImg} />
+          <CategoryPanel href="/search?gender=men" label="Men" img={menImg} />
+          <CategoryPanel href="/children" label="Children" soon swatch="#c8bcae" note="The little-skin edit" />
+          <CategoryPanel href="/home" label="Home & Bedding" soon swatch="#9a8fa0" note="Linen, hemp & wool for sleep" />
+        </div>
+      </section>
+
+      {/* ── FIBRE WIDGET ── */}
+      <section className="border-y border-border bg-surface-2">
+        <div className="mx-auto max-w-[1280px] px-6 py-20 sm:px-10">
+          <div className="mb-12 max-w-[52ch]">
+            <span className="eyebrow">The materials</span>
+            <h2 className="mt-2 font-display text-[28px] leading-tight text-foreground">
+              Every fibre, and what it actually does for your skin.
+            </h2>
+            <p className="mt-3 text-[15px] font-light leading-relaxed text-muted-foreground">
+              Choose a fibre to see how it feels, wears and behaves — and where it has a fault, we say so.
+            </p>
+          </div>
+          <FibreWidget fibres={fibres} />
+        </div>
+      </section>
+
+      {/* ── ARTICLES / MAGAZINE CAROUSEL ── */}
+      <section className="mx-auto max-w-[1280px] px-6 py-20 sm:px-10">
+        <div className="mb-8 flex items-end justify-between">
+          <div>
+            <span className="eyebrow">The Journal</span>
+            <h2 className="mt-2 font-display text-[28px] text-foreground">Reading, close to the skin</h2>
+          </div>
+          <Link href="/journal" className="border-b border-slate pb-1 text-[11px] font-semibold uppercase tracking-[0.14em] text-slate hover:text-primary">
+            All articles
+          </Link>
+        </div>
+        <div className="-mx-6 flex snap-x snap-mandatory gap-6 overflow-x-auto px-6 pb-4 sm:-mx-10 sm:px-10 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+          {articles.map((a) => (
+            <Link key={a.href + a.title} href={a.href} className="group w-[300px] shrink-0 snap-start sm:w-[340px]">
+              <div className="relative aspect-[4/3] overflow-hidden bg-surface-2">
+                {a.img && <Image src={a.img} alt="" fill sizes="340px" className="object-cover transition-transform duration-700 group-hover:scale-105" />}
+              </div>
+              <span className="eyebrow mt-4 block">{a.eyebrow}</span>
+              <h3 className="mt-2 font-display text-[19px] leading-snug text-foreground group-hover:text-primary">{a.title}</h3>
+              <p className="mt-2 text-[13px] font-light leading-relaxed text-muted-foreground">{a.blurb}</p>
+              <span className="mt-3 inline-block text-[11px] font-semibold uppercase tracking-[0.13em] text-slate">Read →</span>
+            </Link>
+          ))}
+        </div>
+      </section>
+
+      {/* ── STAT BAND ── */}
+      <section className="border-y border-border bg-foreground text-background">
+        <div className="mx-auto grid max-w-[1280px] grid-cols-2 gap-8 px-6 py-16 sm:px-10 md:grid-cols-4">
           {[
-            { title: "The Linen Edit", href: "/fabric/linen", img: "photo-1602810318383-e386cc2a3ccf", note: "cool, low-water, timeless" },
-            { title: "The Hemp Edit", href: "/fabric/hemp", img: "photo-1591195853828-11db59a44f6b", note: "rain-fed, built for decades" },
-            { title: "The Wool Edit", href: "/fabric/merino_wool", img: "photo-1434389677669-e08b4cac3105", note: "warm, renewable, alive" },
-          ].map((e, i) => (
-            <Reveal key={e.href} delay={i * 0.08}>
-              <Link
-                href={e.href}
-                data-testid={`edit-tile-${i}`}
-                className="group relative block aspect-[3/4] overflow-hidden"
-              >
-                <Image
-                  src={`https://images.unsplash.com/${e.img}?auto=format&fit=crop&w=800&h=1100&q=80`}
-                  alt=""
-                  fill
-                  sizes="(max-width: 640px) 100vw, 33vw"
-                  className="object-cover transition-transform duration-[1100ms] ease-out group-hover:scale-105"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent" />
-                <div className="absolute inset-x-0 bottom-0 p-6 text-white">
-                  <p className="font-serif text-3xl font-medium italic leading-tight">{e.title}</p>
-                  <p className="mt-1 text-xs text-white/75">{e.note}</p>
-                  <p className="mt-3 text-sm font-medium underline decoration-white/50 underline-offset-4 transition-colors group-hover:decoration-white">
-                    Start exploring →
-                  </p>
-                </div>
-              </Link>
-            </Reveal>
+            [String(products.length), "real pieces, label-read"],
+            [String(fibreCount), "natural & plant fibres"],
+            [String(brandCount), "considered brands"],
+            [stats ? String(stats.flagged) : "—", "greenwash flags on record"],
+          ].map(([n, l]) => (
+            <div key={l} className="text-center">
+              <p className="font-display text-[40px] font-light tabular-nums">{n}</p>
+              <p className="mt-1 text-[11.5px] font-light uppercase tracking-[0.1em] opacity-70">{l}</p>
+            </div>
           ))}
         </div>
       </section>
 
-      {/* ── the brand gallery: bright desire (Phia pattern) ── */}
-      <section className="mx-auto mt-16 max-w-7xl px-5 sm:px-8">
-        <Reveal>
-          <div className="mb-6 flex items-end justify-between">
-            <div>
-              <p className="eyebrow">The directory</p>
-              <h2 className="mt-1 font-serif text-3xl font-medium italic tracking-tight sm:text-4xl">
-                Brands, label-checked
-              </h2>
+      {/* ── INSTAGRAM / SOCIAL (stub) ── */}
+      <section className="mx-auto max-w-[1280px] px-6 py-20 text-center sm:px-10">
+        <span className="eyebrow">Follow along</span>
+        <h2 className="mt-2 font-display text-[26px] text-foreground">@thefibreset</h2>
+        <div className="mt-8 grid grid-cols-2 gap-3 sm:grid-cols-4">
+          {[womenImg, menImg, heroImg, fibres[0]?.image].map((img, i) => (
+            <div key={i} className="relative aspect-square overflow-hidden bg-surface-2">
+              {img && <Image src={img} alt="" fill sizes="300px" className="object-cover transition-transform duration-700 hover:scale-105" />}
             </div>
-            <Link href="/brands" className="eyebrow flex items-center gap-1 hover:text-primary">
-              All brands <ArrowUpRight className="size-3.5" />
-            </Link>
-          </div>
-        </Reveal>
-        <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-6">
-          {brandTiles.map((b, i) => (
-            <Reveal key={b.slug} delay={Math.min(i * 0.05, 0.3)}>
-              <Link
-                href={`/brand/${b.slug}`}
-                data-testid={`brand-tile-${b.slug}`}
-                className="hover-lift group block border border-border bg-surface p-5 text-center"
-              >
-                <p className="font-serif text-lg font-medium italic leading-tight group-hover:text-primary">
-                  {b.name}
-                </p>
-                <p className="mt-2 text-[11px] tracking-wide text-muted-foreground">
-                  {b.count} pieces · avg {b.avg}
-                </p>
-              </Link>
-            </Reveal>
           ))}
         </div>
+        <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="mt-8 inline-block border-b border-slate pb-1 text-[11px] font-semibold uppercase tracking-[0.14em] text-slate hover:text-primary">
+          Follow on Instagram →
+        </a>
       </section>
-
-      {/* ── editorial top picks ── */}
-      <section className="mx-auto mt-16 max-w-7xl px-5 sm:px-8">
-        <Reveal>
-          <div className="mb-6 flex items-end justify-between">
-            <div>
-              <p className="eyebrow">The index</p>
-              <h2 className="mt-1 font-serif text-3xl font-medium italic tracking-tight sm:text-4xl">
-                Highest scoring
-              </h2>
-            </div>
-            <Link href="/search?sort=score" className="eyebrow flex items-center gap-1 hover:text-primary">
-              All <ArrowUpRight className="size-3.5" />
-            </Link>
-          </div>
-        </Reveal>
-        <div className="grid grid-cols-2 gap-x-4 gap-y-8 sm:gap-x-6 md:grid-cols-3">
-          {topPicks.map((p, i) => (
-            <Reveal key={p.id} delay={Math.min(i * 0.06, 0.4)}>
-              <ProductCard product={p} priority={i < 3} />
-            </Reveal>
-          ))}
-        </div>
-      </section>
-
-      {/* ── full-bleed campaign moment: the making, on film ── */}
-      {campaign && (
-        <Reveal className="mt-20">
-          <Link href="/search" className="group relative block h-[70vh] overflow-hidden bg-[#0c0f0d]">
-            <video
-              className="absolute inset-0 h-full w-full object-cover opacity-70"
-              autoPlay
-              muted
-              loop
-              playsInline
-              preload="none"
-              poster="https://images.unsplash.com/photo-1445205170230-053b83016050?auto=format&fit=crop&w=1600&h=900&q=70"
-            >
-              <source src="https://videos.pexels.com/video-files/6653414/6653414-sd_960_506_25fps.mp4" type="video/mp4" />
-            </video>
-            <div className="absolute inset-0 bg-black/25" />
-            <div className="absolute inset-0 flex flex-col items-center justify-center text-center text-white">
-              <p className="eyebrow !text-white/80">Every fibre, scored</p>
-              <p className="mt-3 max-w-2xl px-6 font-serif text-4xl font-medium italic leading-tight sm:text-6xl">
-                Beautiful clothes, nothing to hide
-              </p>
-              <span className="mt-6 flex items-center gap-2 rounded-full border border-white/40 px-6 py-2.5 text-sm font-medium backdrop-blur-sm transition-colors group-hover:bg-white group-hover:text-black">
-                Explore the edit <ArrowUpRight className="size-4" />
-              </span>
-            </div>
-          </Link>
-        </Reveal>
-      )}
-
-      {/* ── quiet trust line ── */}
-      <Reveal className="mx-auto my-20 max-w-7xl px-5 sm:px-8">
-        <Link
-          href="/methodology"
-          className="group flex items-center justify-between border-t border-border pt-6"
-        >
-          <p className="font-display text-xl font-bold tracking-tight sm:text-2xl">
-            Every score, itemised. <span className="font-normal text-muted-foreground">No black box.</span>
-          </p>
-          <ArrowUpRight className="size-6 text-muted-foreground transition-transform group-hover:translate-x-1 group-hover:text-primary" />
-        </Link>
-      </Reveal>
     </div>
+  );
+}
+
+function CategoryPanel({
+  href, label, img, soon, swatch, note,
+}: {
+  href: string; label: string; img?: string | null; soon?: boolean; swatch?: string; note?: string;
+}) {
+  return (
+    <Link href={href} className="group relative block aspect-[16/11] overflow-hidden">
+      <div className="absolute inset-0 bg-surface-2" style={swatch ? { background: swatch } : undefined}>
+        {img && <Image src={img} alt={label} fill sizes="(max-width:640px) 100vw, 50vw" className="object-cover transition-transform duration-700 group-hover:scale-[1.04]" />}
+      </div>
+      <div className="absolute inset-0" style={{ background: "linear-gradient(to top, rgba(58,58,85,.6), rgba(58,58,85,0) 55%)" }} />
+      <div className="absolute inset-x-0 bottom-0 flex items-end justify-between p-7 text-background">
+        <div>
+          <span className="text-[10.5px] font-semibold uppercase tracking-[0.16em] opacity-90">{soon ? "Coming soon" : "Shop"}</span>
+          <h3 className="font-display text-[26px] text-background">{label}</h3>
+          {note && <p className="mt-0.5 text-[12px] font-light opacity-85">{note}</p>}
+        </div>
+        <ArrowUpRight className="size-5 opacity-80 transition-transform group-hover:translate-x-1" />
+      </div>
+    </Link>
   );
 }

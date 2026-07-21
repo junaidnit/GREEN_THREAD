@@ -32,7 +32,7 @@ export default async function RetailerCheckout({ params }: { params: Promise<{ i
       <div className="mb-4 rounded-lg border border-grade-c/40 bg-grade-c/10 px-4 py-2.5 text-center text-xs">
         <b>Demo handoff</b> — this simulates landing directly in {product.retailer}&apos;s checkout,
         exactly how the affiliate deeplink will work with live retailer feeds.{" "}
-        <Link href={`/product/${id}`} className="font-medium underline">Back to GreenThread</Link>
+        <Link href={`/product/${id}`} className="font-medium underline">Back to The Fibre Set</Link>
       </div>
 
       <div className="overflow-hidden rounded-xl2 border border-border shadow-xl" data-testid="retailer-checkout">

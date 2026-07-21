@@ -75,7 +75,7 @@ export async function POST(req: Request) {
   const result = streamText({
     model: anthropic("claude-sonnet-5"),
     system:
-      "You are the GreenThread concierge — a sharp, honest sustainable-fashion shopping assistant for our catalog. " +
+      "You are the Fibre Set concierge — a sharp, honest sustainable-fashion shopping assistant for our catalog. " +
       "Use the search_catalog tool to find real products before recommending anything; never invent products. " +
       "The UI renders product cards for whatever your tool calls return, so keep your text short: explain WHY the picks fit " +
       "(fabric properties, certifications, score) in 2-4 sentences, plain language. " +
@@ -88,7 +88,7 @@ export async function POST(req: Request) {
     tools: {
       search_catalog: tool({
         description:
-          "Search the GreenThread catalog. Returns matching products with fabric composition and sustainability data. " +
+          "Search the Fibre Set catalog. Returns matching products with fabric composition and sustainability data. " +
           "Use free-text query for style/garment words, and structured filters for fabric, price and score constraints.",
         inputSchema: z.object({
           query: z.string().describe("Free-text search, e.g. 'linen shirt summer'. Can be empty when only filtering."),

@@ -43,7 +43,7 @@ export function DiaryClient() {
         <div className="mt-12 rounded-xl2 border border-dashed border-border px-6 py-16 text-center">
           <p className="font-serif text-2xl font-medium italic">Nothing recorded yet</p>
           <p className="mx-auto mt-2 max-w-sm text-sm text-muted-foreground">
-            Every time you buy through GreenThread, the fibres you paid for are logged here —
+            Every time you buy through The Fibre Set, the fibres you paid for are logged here —
             privately, on your device — so you can watch your wardrobe go natural.
           </p>
           <Link

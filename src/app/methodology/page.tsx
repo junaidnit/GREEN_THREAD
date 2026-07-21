@@ -18,9 +18,9 @@ import {
 } from "@/components/methodology-visuals";
 
 export const metadata: Metadata = {
-  title: "How we score — GreenThread methodology",
+  title: "How we score — The Fibre Set methodology",
   description:
-    "Every GreenThread sustainability score is computed with a published, deterministic rubric: fibre impact, certifications, brand practices. No black box.",
+    "Every Fibre Set sustainability score is computed with a published, deterministic rubric: fibre impact, certifications, brand practices. No black box.",
 };
 
 export default function MethodologyPage() {

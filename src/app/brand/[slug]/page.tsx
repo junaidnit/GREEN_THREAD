@@ -24,7 +24,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   if (products.length === 0) return {};
   const b = products[0].brand;
   return {
-    title: `${b.name} — sustainability profile & products | GreenThread`,
+    title: `${b.name} — sustainability profile & products | The Fibre Set`,
     description: b.ethics_summary,
   };
 }
@@ -68,7 +68,7 @@ export default async function BrandPage({ params }: Props) {
           </div>
         </div>
         <div className="mt-4 flex flex-wrap gap-x-5 gap-y-1 text-xs text-muted-foreground">
-          <span><b className="text-foreground">{products.length}</b> items on GreenThread</span>
+          <span><b className="text-foreground">{products.length}</b> items on The Fibre Set</span>
           <span><b className="text-foreground">{categories.length}</b> categories</span>
           {flagged > 0 && (
             <span className="text-grade-d"><b>{flagged}</b> items carry unverified eco-claims</span>

@@ -2,7 +2,7 @@
  * SCOUT — the Catalog-Growth crew's first agent, pure decision logic.
  *
  * Given what a probe of a brand's public product feed found, decide whether
- * the brand meets GreenThread's honesty bar and is worth onboarding. The
+ * the brand meets The Fibre Set's honesty bar and is worth onboarding. The
  * verdict is deterministic and explained — a GO/NO-GO with named reasons,
  * so onboarding decisions are auditable, never vibes.
  *

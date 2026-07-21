@@ -13,7 +13,7 @@ export const maxDuration = 60;
  * content script has already scraped the live, rendered DOM in the user's
  * own browser (composition text, JSON-LD, title, price), which sidesteps
  * the bot-blocking that stops server-side fetches on some retailer sites.
- * We just extract, score, and find real GreenThread alternatives.
+ * We just extract, score, and find real Fibre Set alternatives.
  */
 
 const CORS_HEADERS = {
