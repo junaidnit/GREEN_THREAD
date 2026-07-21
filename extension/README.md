@@ -26,9 +26,9 @@ real listing (LIVE items) or a similar concept item's simulated checkout.
 1. Open `chrome://extensions`, enable **Developer mode** (top-right).
 2. **Load unpacked** → select this `extension/` folder.
 3. Click the Fibre Set icon in the toolbar → set **API endpoint** to
-   `http://localhost:3000` (or whatever port your dev server is on) while
-   the production domain isn't reachable yet. Switch back to
-   `https://greenthread.info` once that's live.
+   `http://localhost:3000` (or whatever port your dev server is on) when
+   testing against a dev server. The default is `https://thefibreset.com`,
+   which is the live site.
 4. Visit any real clothing product page, click the green ribbon
    bottom-right, and click again after editing code to reload — remember to
    hit the refresh icon on `chrome://extensions` after changing any file

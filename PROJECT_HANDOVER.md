@@ -146,7 +146,7 @@ greenthread/
 ## 8. Next steps (in order)
 
 1. **Owner: disable Vercel Authentication** — Settings → Deployment Protection → Disabled. *Until then the whole site shows "Login – Vercel" to visitors.*
-2. **Owner: point greenthread.info at Vercel** (Fasthosts DNS): `A @ → 76.76.21.21`, `CNAME www → cname.vercel-dns.com` (or switch nameservers to ns1/ns2.vercel-dns.com). Domain is already attached on Vercel's side.
+2. **Owner: add `www.thefibreset.com` to the Vercel project** — the apex `thefibreset.com` is attached and serving, but the issued certificate covers the apex only, so `www.` currently fails TLS with a browser security warning. DNS is already correct (`A @ → 76.76.21.21`, `CNAME www → cname.vercel-dns.com`); adding the domain in Vercel triggers cert issuance. The old `greenthread.info` is being retired — redirect it before letting it lapse.
 3. **Owner: rotate the Anthropic + Supabase keys** (they were pasted in chat during development) and update `.env.local` + Vercel env.
 4. Build sponsor slots + EU-2028 page, then pursue first real affiliate feed.
 5. Keep repo private until real data replaces illustrative brand scores (legal exposure: invented scores on real brand names — Zara, H&M etc. — demo-labelled but not for public marketing).
