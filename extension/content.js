@@ -257,25 +257,53 @@
     return String(s ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
   }
 
+  /**
+   * A reply is not guaranteed. An MV3 service worker can be recycled while
+   * its fetch is in flight, and then the callback simply never runs — the
+   * panel span "Reading label…" indefinitely with nothing to click. Always
+   * race the request against a deadline so the panel resolves either way.
+   */
+  const SCAN_TIMEOUT_MS = 30000;
+
   /** Open the panel and read the page (once per injection). */
   function openPanel() {
     setOpen(true);
     if (loaded) return;
     loaded = true;
     renderLoading();
+
+    let settled = false;
+    const finish = (fn) => {
+      if (settled) return;
+      settled = true;
+      clearTimeout(timer);
+      fn();
+    };
+
+    const timer = setTimeout(() => {
+      finish(() => {
+        loaded = false; // let the next click try again
+        renderError("That took longer than it should. Click the ribbon to try again.");
+      });
+    }, SCAN_TIMEOUT_MS);
+
     const payload = scrapePage();
     chrome.runtime.sendMessage({ type: "gt-scan", payload }, (response) => {
       if (chrome.runtime.lastError) {
-        renderError("Couldn't reach the Fibre Set extension backend.");
-        loaded = false;
+        finish(() => {
+          loaded = false;
+          renderError("Couldn't reach the Fibre Set extension backend.");
+        });
         return;
       }
       if (!response || !response.ok) {
-        renderError(response?.error || "Something went wrong reading this page.");
-        loaded = false;
+        finish(() => {
+          loaded = false;
+          renderError(response?.error || "Something went wrong reading this page.");
+        });
         return;
       }
-      renderResult(response.data, response.apiBase.replace(/\/$/, ""));
+      finish(() => renderResult(response.data, response.apiBase.replace(/\/$/, "")));
     });
   }
 

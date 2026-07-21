@@ -56,7 +56,12 @@ export interface PageSignal {
 
 export async function extractComposition(signal: PageSignal): Promise<ExtractionResult> {
   const { object } = await generateObject({
-    model: anthropic("claude-sonnet-5"),
+    // Haiku, not Sonnet: this is a bounded extraction from ≤7k characters of
+    // text that already states the composition — the hard part is refusing to
+    // invent, not reasoning. Sonnet averaged ~7.3s, which reads as broken in
+    // a panel the user is watching. Measured on the same pages after the
+    // switch: see the timing note in the extension README.
+    model: anthropic("claude-haiku-4-5-20251001"),
     schema: extractionSchema,
     system:
       "You are a textile sustainability analyst. Extract structured data from scraped product-page content precisely. " +

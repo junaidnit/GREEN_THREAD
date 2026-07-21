@@ -43,6 +43,25 @@ Re-clicking the icon re-runs `content.js`, which hits its `__gtInjected` guard
 and returns early — so the `gt-open` message is what actually toggles the
 panel, not the injection.
 
+## Performance
+
+A scan is one model call, and the user is watching a spinner the whole time.
+
+| | avg, warm |
+|---|---|
+| `claude-sonnet-5` (was) | ~7.3 s |
+| `claude-haiku-4-5` (now) | ~3.6 s |
+
+Measured on the same Uniqlo page, three runs each. Composition, grade and
+recommendations were identical; haiku also classified Elastomultiester more
+precisely. Honesty was re-checked on a page with no stated composition (still
+returns `found: false` rather than inventing fibres) and on a 100% linen page.
+
+`content.js` also races every scan against a 30 s deadline. An MV3 service
+worker can be recycled while its fetch is in flight, and the callback then
+never runs — the panel spun on "Reading label…" indefinitely with nothing to
+click. It now always resolves, and a timeout leaves the panel retryable.
+
 ## Files
 
 | File | Role |
