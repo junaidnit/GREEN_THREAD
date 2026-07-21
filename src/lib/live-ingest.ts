@@ -82,5 +82,10 @@ export function mapCategory(productType: string, title: string): string {
   if (/trouser|\bpant|legging|\bshorts\b|culotte|chino/.test(t)) return "trousers";
   if (/t-?shirt|\btee\b|\btop\b|vest|henley|camisole/.test(t)) return "t-shirts";
   if (/shirt|blouse/.test(t)) return "shirts";
-  return "shirts";
+  // Defaulting to "shirts" was silently wrong: a purse, a necklace, a cutlery
+  // holder and a macrame plant-hanger kit all arrived filed as shirts, which
+  // put them in the shirts facet AND let them pass the matcher's garment gate
+  // as recommended alternatives to a t-shirt. Unclassifiable is its own
+  // answer — say so rather than guessing a garment.
+  return "other";
 }

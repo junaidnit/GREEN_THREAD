@@ -156,3 +156,23 @@ describe("genderFor — feed tag hints", () => {
     expect(genderFor("Men's Hemp Shirt", "shirt", undefined, "womens womenswear")).toBe("men");
   });
 });
+
+describe("garmentType — a tee is not a dress shirt", () => {
+  // "T-Shirt" contains "shirt" behind a word boundary (the hyphen), so an
+  // earlier \bshirt\b rule swallowed every t-shirt and matched them against
+  // formal shirts.
+  it("classifies t-shirts as tees, not shirts", () => {
+    expect(garmentType("Unisex AIRism Cotton Oversized Crew Neck T-Shirt")).toBe("tee");
+    expect(garmentType("Gracie - Cotton T-Shirt in Dazzling Blue")).toBe("tee");
+    expect(garmentType("Organic Cotton Tshirt")).toBe("tee");
+  });
+
+  it("still classifies real shirts as shirts", () => {
+    expect(garmentType("LOYLE Organic Cotton Shirt - Olive")).toBe("shirt");
+    expect(garmentType("JP Shirt Mens - Poppy Red")).toBe("shirt");
+  });
+
+  it("keeps polo ahead of both", () => {
+    expect(garmentType("Organic Cotton Polo Shirt")).toBe("polo");
+  });
+});

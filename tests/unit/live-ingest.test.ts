@@ -82,3 +82,21 @@ describe("mapCategory — Shopify product types to our taxonomy", () => {
     expect(mapCategory("", "Slim Straight Jeans - Dark Indigo")).toBe("jeans");
   });
 });
+
+describe("mapCategory — unclassifiable is not 'shirts'", () => {
+  // The old default returned "shirts" for anything unmatched, so a purse, a
+  // necklace and a plant-hanger kit all became shirts — polluting the shirts
+  // facet and passing the matcher's garment gate as t-shirt alternatives.
+  it("does not guess a garment for non-garments", () => {
+    expect(mapCategory("", "Eve - Purse in Black")).toBe("other");
+    expect(mapCategory("", "CHAANDRA Necklace")).toBe("other");
+    expect(mapCategory("", "DIY Square Knot Macrame Plant Hanger Kit")).toBe("other");
+    expect(mapCategory("Gift Cards", "Gift Cards")).toBe("other");
+  });
+
+  it("still maps real garments", () => {
+    expect(mapCategory("Shirt", "LOYLE Organic Cotton Shirt")).toBe("shirts");
+    expect(mapCategory("", "Linen Midi Dress")).toBe("dresses");
+    expect(mapCategory("", "Organic Cotton T-Shirt")).toBe("t-shirts");
+  });
+});

@@ -55,8 +55,11 @@ const TYPE_RULES: Array<[RegExp, GarmentType]> = [
   [/\bcoat\b|\bparka\b|\bmac\b|\btrench\b/i, "coat"],
   [/\bjacket\b|\bblazer\b|\bbomber\b|\bblouson\b|\banorak\b|\bshacket\b/i, "jacket"],
   [/\bblouse\b/i, "blouse"],
-  [/\bshirt\b(?!s?\s*dress)/i, "shirt"], // after polo/tee so "polo shirt" is caught above
+  // tee BEFORE shirt: the hyphen in "T-Shirt" is a word boundary, so a bare
+  // \bshirt\b matches inside it and filed every t-shirt as a formal shirt —
+  // which is how a Uniqlo tee got recommended against dress shirts.
   [/\bt-?shirt\b|\btee\b|\btop\b/i, "tee"],
+  [/\bshirt\b(?!s?\s*dress)/i, "shirt"], // after polo/tee so "polo shirt" is caught above
   [/\bsocks?\b/i, "socks"],
   [/\bscarf\b|\bsnood\b/i, "scarf"],
   [/\bhat\b|\bbeanie\b|\bcap\b|\bberet\b/i, "hat"],
