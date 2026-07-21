@@ -20,6 +20,7 @@
     "truth": "tsx scripts/record-truth.ts",
     "grow": "tsx scripts/grow.ts",
     "brand:icons": "node scripts/render-ext-icons.mjs",
+    "brand:store": "node scripts/render-store-assets.mjs",
     "pack:extension": "node scripts/render-ext-icons.mjs && node scripts/pack-extension.mjs"
   },
   "dependencies": {

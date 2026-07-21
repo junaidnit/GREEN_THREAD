@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "The Fibre Set — Fabric Check",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "See what any garment is really made of while you shop, and find real natural-fibre alternatives from The Fibre Set.",
   "icons": {
     "16": "icons/icon16.png",
@@ -10,7 +10,7 @@
     "128": "icons/icon128.png"
   },
   "action": {
-    "default_popup": "popup.html",
+    "default_title": "Check this garment's fibre",
     "default_icon": {
       "16": "icons/icon16.png",
       "32": "icons/icon32.png",
@@ -18,16 +18,9 @@
       "128": "icons/icon128.png"
     }
   },
+  "options_page": "options.html",
   "background": {
     "service_worker": "background.js"
   },
-  "content_scripts": [
-    {
-      "matches": ["http://*/*", "https://*/*"],
-      "js": ["brand-mark.js", "content.js"],
-      "run_at": "document_idle"
-    }
-  ],
-  "host_permissions": ["https://*/*", "http://localhost/*"],
-  "permissions": ["storage"]
+  "permissions": ["storage", "activeTab", "scripting"]
 }

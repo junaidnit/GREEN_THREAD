@@ -257,9 +257,10 @@
     return String(s ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
   }
 
-  toggle.addEventListener("click", () => {
-    setOpen(!open);
-    if (loaded || !open) return;
+  /** Open the panel and read the page (once per injection). */
+  function openPanel() {
+    setOpen(true);
+    if (loaded) return;
     loaded = true;
     renderLoading();
     const payload = scrapePage();
@@ -276,5 +277,19 @@
       }
       renderResult(response.data, response.apiBase.replace(/\/$/, ""));
     });
+  }
+
+  toggle.addEventListener("click", () => (open ? setOpen(false) : openPanel()));
+
+  /**
+   * The toolbar icon is the real entry point now — under activeTab this script
+   * is injected on click, so background.js follows the injection with this
+   * message. Re-clicking an already-injected tab re-runs the file, hits the
+   * __gtInjected guard and does nothing, so the message is what toggles.
+   */
+  chrome.runtime.onMessage.addListener((msg) => {
+    if (msg?.type !== "gt-open") return;
+    if (open) setOpen(false);
+    else openPanel();
   });
 })();

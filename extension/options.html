@@ -1,0 +1,37 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>The Fibre Set — settings</title>
+<style>
+  body { font: 14px/1.55 -apple-system, Segoe UI, sans-serif; margin: 0; padding: 40px 24px; background: #F5F3EF; color: #3A3A55; }
+  .wrap { max-width: 460px; margin: 0 auto; }
+  h1 { font-size: 17px; margin: 0 0 6px; letter-spacing: .04em; text-transform: uppercase; }
+  p { margin: 0 0 16px; color: #6F6F66; }
+  label { display: block; font-size: 11px; text-transform: uppercase; letter-spacing: .06em; color: #6F6F66; margin-bottom: 5px; }
+  input { width: 100%; box-sizing: border-box; padding: 9px 10px; border: 1px solid #E2DED7; border-radius: 6px; font-size: 13px; background: #fff; }
+  button { margin-top: 10px; padding: 9px 20px; border: none; border-radius: 999px; background: #4B2144; color: #F5F3EF; font-size: 11px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; cursor: pointer; }
+  button:active { opacity: .85; }
+  #status { margin-top: 10px; font-size: 12px; color: #4B2144; min-height: 16px; }
+  .note { margin-top: 28px; padding-top: 18px; border-top: 1px solid #E2DED7; font-size: 12.5px; color: #6F6F66; }
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <h1>The Fibre Set</h1>
+    <p>Open any product page and click the ribbon icon in your toolbar. We read that page only, and only when you ask.</p>
+
+    <label for="base">API endpoint</label>
+    <input id="base" placeholder="https://thefibreset.com" />
+    <button id="save">Save</button>
+    <div id="status"></div>
+
+    <p class="note">
+      Leave the endpoint as it is unless you're developing against a local server.
+      The extension reads a page only after you click the toolbar icon — it has no
+      access to your browsing otherwise.
+    </p>
+  </div>
+  <script src="options.js"></script>
+</body>
+</html>

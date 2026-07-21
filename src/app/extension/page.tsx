@@ -1,5 +1,6 @@
 import Link from "next/link";
 import type { Metadata } from "next";
+import { InstallExtension } from "@/components/install-extension";
 
 export const metadata: Metadata = {
   title: "The label-check extension — The Fibre Set",
@@ -7,12 +8,10 @@ export const metadata: Metadata = {
     "Install The Fibre Set browser extension to read the fibre composition on any retailer's product page — see the plastic hiding in a 'linen' blend before you buy.",
 };
 
-const ZIP = "/downloads/the-fibre-set-extension.zip";
-
 const INSTALL = [
   ["Download and unzip", "Save the file, then unzip it. You'll get a folder with the extension inside."],
   ["Open your extensions page", "In Chrome or Edge, go to chrome://extensions — then turn on Developer mode, top right."],
-  ["Load unpacked", "Click 'Load unpacked' and pick the folder you unzipped. The ribbon appears on every shop page."],
+  ["Load unpacked", "Click 'Load unpacked' and pick the folder you unzipped, then pin the ribbon to your toolbar."],
 ];
 
 export default function ExtensionPage() {
@@ -28,25 +27,7 @@ export default function ExtensionPage() {
           reads the fibre composition on any retailer&apos;s product page, so the truth is one glance away.
         </p>
 
-        <div className="mt-9 flex flex-wrap items-center justify-center gap-3">
-          <a
-            href={ZIP}
-            download
-            className="rounded-full bg-primary px-7 py-3.5 text-[11px] font-semibold uppercase tracking-[0.14em] text-primary-foreground transition-opacity hover:opacity-90"
-          >
-            Download for Chrome &amp; Edge
-          </a>
-          <Link
-            href="/analyze"
-            className="rounded-full border border-border px-6 py-3.5 text-[11px] font-semibold uppercase tracking-[0.14em] text-foreground transition-colors hover:border-slate"
-          >
-            Or check a link on the web →
-          </Link>
-        </div>
-        <p className="mx-auto mt-4 max-w-[54ch] text-[12px] font-light leading-relaxed text-muted-foreground">
-          Free, and small enough to install in a minute. We&apos;re not in the Chrome Web Store yet, so
-          it&apos;s a manual install — three steps below. Nothing to sign up for.
-        </p>
+        <InstallExtension />
       </div>
 
       {/* install steps */}
@@ -71,9 +52,9 @@ export default function ExtensionPage() {
       {/* what it does */}
       <div className="mt-16 grid gap-8 border-t border-border pt-16 md:grid-cols-3">
         {[
-          ["Shop anywhere", "Zara, ASOS, M&S — any online shop. The extension reads the label for you."],
+          ["Shop anywhere", "Zara, ASOS, M&S — any online shop. Click the ribbon in your toolbar and it reads the label for you."],
           ["See what it's really made of", "Fibre composition, the plastic percentage, and a plain verdict — before you buy."],
-          ["Find the honest version", "Where a garment is mostly plastic, it points you to the same piece in a natural fibre."],
+          ["Nothing runs in the background", "It can only see a page in the moment you click. No access to your browsing, no tracking."],
         ].map(([h, p]) => (
           <div key={h}>
             <h3 className="font-display text-[19px] text-foreground">{h}</h3>
