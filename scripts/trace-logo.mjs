@@ -10,14 +10,14 @@
  *
  * Now it traces the 1609x1474 master at native resolution, with settings that
  * respect the drawing:
- *   alphaMax 0.55  keep corners sharp. The default (1.0) rounds them, which is
- *                  wrong here: the tails are straight bands meeting at points.
- *                  Low enough for corners, high enough that the top loop stays
- *                  a true circle rather than a polygon.
- *   optTolerance   0.1 rather than 0.35, so curves hug the outline instead of
- *                  cutting corners off it.
- *   turdSize 2     the source is clean, so almost nothing should be discarded.
- *                  60 was tuned to delete JPEG speckle that no longer exists.
+ *   alphaMax 0.3, optTolerance 0.2, threshold 140: not guessed — chosen by
+ *   scripts/trace-sweep.mjs, which scores every candidate by rendering it
+ *   back and counting differing pixels. Two findings worth keeping:
+ *     - supersampling LOST (Lanczos ringing shifts the threshold boundary),
+ *       so the trace runs at native resolution;
+ *     - the render+threshold pipeline eats ~half a pixel at the boundary,
+ *       and a source threshold of ~140 (plateau 136-146) compensates.
+ *   turdSize 2: the master is clean; 60 was tuned for JPEG speckle.
  *
  * A trace is still an approximation of a bitmap. The only route to a
  * mathematically identical mark is the designer's original vector file
@@ -35,7 +35,7 @@ const SRC = "public/brand/logo-source.png";
 const { data: png, info } = await sharp(SRC)
   .flatten({ background: "#ffffff" })
   .greyscale()
-  .threshold(128)
+  .threshold(140)
   .png()
   .toBuffer({ resolveWithObject: true });
 
@@ -46,8 +46,8 @@ const svg = await new Promise((resolve, reject) => {
     {
       threshold: 128,
       turdSize: 2,
-      alphaMax: 0.55,
-      optTolerance: 0.1,
+      alphaMax: 0.3,
+      optTolerance: 0.2,
       turnPolicy: potrace.Potrace.TURNPOLICY_MINORITY,
       color: "black",
     },
