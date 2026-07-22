@@ -6,9 +6,10 @@ import { GradeBadge } from "@/components/grade-badge";
 import { Reveal } from "@/components/kinetic";
 
 export const metadata: Metadata = {
-  title: "Brands, label-checked — The Fibre Set",
+  title: "Brands, label-checked",
   description:
     "Every brand on The Fibre Set with its fibre record: average score, plastic-free share, and unverified-claim count.",
+  alternates: { canonical: "/brands" },
 };
 
 export default async function BrandsPage() {
@@ -52,7 +53,7 @@ export default async function BrandsPage() {
                 <GradeBadge grade={gradeFor(b.avg)} score={b.avg} />
               </div>
               <p className="mt-2 line-clamp-2 text-xs leading-relaxed text-muted-foreground">{b.summary}</p>
-              <p className="mt-3 text-[11px] tracking-wide text-muted-foreground">
+              <p className="mt-3 text-[12px] tracking-wide text-muted-foreground">
                 {b.count} pieces
                 {b.flagged > 0 && (
                   <span className="text-grade-d"> · {b.flagged} unverified claims</span>

@@ -78,7 +78,7 @@ export function CinematicHero({
           </span>
         </h1>
 
-        <p className="mt-6 max-w-md text-[15px] leading-relaxed text-white/65">
+        <p className="mt-6 max-w-md text-[16px] leading-relaxed text-white/65">
           Most high-street clothing is oil-derived plastic. We read the labels,
           so you don&apos;t have to.
         </p>

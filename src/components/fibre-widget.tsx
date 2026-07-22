@@ -53,10 +53,10 @@ export function FibreWidget({ fibres }: { fibres: FibreEntry[] }) {
                   />
                 )}
               </div>
-              <p className={`mt-3 text-[12px] font-medium tracking-wide transition-colors ${on ? "text-primary" : "text-foreground"}`}>
+              <p className={`mt-3 text-[14px] font-medium tracking-wide transition-colors ${on ? "text-primary" : "text-foreground"}`}>
                 {f.label}
               </p>
-              <p className="mt-0.5 text-[10.5px] font-light text-muted-foreground">{f.tagline}</p>
+              <p className="mt-0.5 text-[12px] font-light text-muted-foreground">{f.tagline}</p>
             </button>
           );
         })}
@@ -67,18 +67,18 @@ export function FibreWidget({ fibres }: { fibres: FibreEntry[] }) {
           <div>
             <p className="eyebrow">The fibre</p>
             <h3 className="mt-2 font-display text-3xl text-foreground">{sel.label}</h3>
-            <p className="mt-4 text-[15px] font-light leading-relaxed text-muted-foreground">{sel.note}</p>
+            <p className="mt-4 text-[16px] font-light leading-relaxed text-muted-foreground">{sel.note}</p>
             <Link
               href={`/fabric/${sel.id}`}
-              className="mt-6 inline-block border-b border-slate pb-1 text-[11px] font-semibold uppercase tracking-[0.14em] text-slate transition-colors hover:text-primary"
+              className="mt-6 inline-block border-b border-slate pb-1 text-[12px] font-semibold uppercase tracking-[0.14em] text-slate transition-colors hover:text-primary"
             >
               Explore {sel.label.toLowerCase()} →
             </Link>
           </div>
           <div className="flex flex-col justify-center rounded-sm border-l-2 border-primary bg-surface p-7">
             <p className="font-display text-2xl text-primary">{sel.stat}</p>
-            <p className="mt-3 text-[14px] font-light leading-relaxed text-muted-foreground">{sel.detail}</p>
-            <p className="mt-4 text-[11px] font-light italic text-muted-foreground/80">— {sel.source}</p>
+            <p className="mt-3 text-[16px] font-light leading-relaxed text-muted-foreground">{sel.detail}</p>
+            <p className="mt-4 text-[12px] font-light italic text-muted-foreground/80">— {sel.source}</p>
           </div>
         </div>
       )}

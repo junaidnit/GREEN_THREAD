@@ -24,8 +24,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   if (products.length === 0) return {};
   const b = products[0].brand;
   return {
-    title: `${b.name} — sustainability profile & products | The Fibre Set`,
+    title: `${b.name} — sustainability profile & products`,
     description: b.ethics_summary,
+    alternates: { canonical: `/brand/${b.slug}` },
   };
 }
 
@@ -61,7 +62,7 @@ export default async function BrandPage({ params }: Props) {
           </div>
           <div className="flex items-center gap-3 rounded-xl2 bg-surface-2 px-5 py-4">
             <div>
-              <p className="text-[11px] uppercase tracking-wide text-muted-foreground">Catalog average</p>
+              <p className="text-[12px] uppercase tracking-wide text-muted-foreground">Catalog average</p>
               <p className="font-display text-2xl font-bold">{avg}<span className="text-sm font-normal text-muted-foreground">/100</span></p>
             </div>
             <GradeBadge grade={gradeFor(avg)} size="lg" />

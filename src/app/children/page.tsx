@@ -3,8 +3,9 @@ import { ComingSoon } from "@/components/coming-soon";
 import { getCatalog } from "@/lib/catalog";
 
 export const metadata: Metadata = {
-  title: "Children — The Fibre Set",
+  title: "Children",
   description: "The little-skin edit: GOTS organic cotton and muslin for babies and children. Coming soon.",
+  alternates: { canonical: "/children" },
 };
 
 const CHILDRENS = /\b(baby|babies|kids?|child|children|infant|toddler)\b/i;

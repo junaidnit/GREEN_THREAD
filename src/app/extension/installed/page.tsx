@@ -2,7 +2,7 @@ import Link from "next/link";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "You're set — The Fibre Set",
+  title: "You're set",
   description: "Fabric Check is installed. Here's how to use it on your next shop.",
   robots: { index: false },
 };
@@ -16,7 +16,7 @@ export default function InstalledPage() {
   return (
     <div className="mx-auto max-w-[760px] px-6 py-24 text-center sm:px-10">
       <span className="eyebrow">Installed</span>
-      <h1 className="mx-auto mt-3 max-w-[16ch] font-display text-[40px] leading-tight text-foreground sm:text-[48px]">
+      <h1 className="mx-auto mt-3 max-w-[16ch] font-display text-[clamp(2rem,4.6vw,2.5rem)] leading-tight text-foreground sm:text-[clamp(2rem,4.6vw,2.5rem)]">
         You&apos;re set. Here&apos;s the one-minute version.
       </h1>
       <p className="mx-auto mt-5 max-w-[52ch] text-[16px] font-light leading-relaxed text-muted-foreground">
@@ -30,9 +30,9 @@ export default function InstalledPage() {
           ["Click the ribbon", "We read that page and tell you what it's really made of, plus a natural-fibre alternative."],
         ].map(([h, p], i) => (
           <li key={h}>
-            <p className="font-display text-[36px] font-light text-primary/40">{String(i + 1).padStart(2, "0")}</p>
-            <h2 className="mt-1 font-display text-[18px] text-foreground">{h}</h2>
-            <p className="mt-2 text-[13.5px] font-light leading-relaxed text-muted-foreground">{p}</p>
+            <p className="font-display text-[28px] font-light text-primary/40">{String(i + 1).padStart(2, "0")}</p>
+            <h2 className="mt-1 font-display text-[16px] text-foreground">{h}</h2>
+            <p className="mt-2 text-[14px] font-light leading-relaxed text-muted-foreground">{p}</p>
           </li>
         ))}
       </ol>
@@ -40,19 +40,19 @@ export default function InstalledPage() {
       <div className="mt-14 flex flex-wrap items-center justify-center gap-3">
         <Link
           href="/search?gender=women"
-          className="rounded-full bg-primary px-7 py-3.5 text-[11px] font-semibold uppercase tracking-[0.14em] text-primary-foreground transition-opacity hover:opacity-90"
+          className="rounded-full bg-primary px-7 py-3.5 text-[12px] font-semibold uppercase tracking-[0.14em] text-primary-foreground transition-opacity hover:opacity-90"
         >
           Start browsing
         </Link>
         <Link
           href="/analyze"
-          className="rounded-full border border-border px-6 py-3.5 text-[11px] font-semibold uppercase tracking-[0.14em] text-foreground transition-colors hover:border-slate"
+          className="rounded-full border border-border px-6 py-3.5 text-[12px] font-semibold uppercase tracking-[0.14em] text-foreground transition-colors hover:border-slate"
         >
           Or paste a link to try it →
         </Link>
       </div>
 
-      <p className="mx-auto mt-10 max-w-[56ch] text-[12.5px] font-light leading-relaxed text-muted-foreground">
+      <p className="mx-auto mt-10 max-w-[56ch] text-[14px] font-light leading-relaxed text-muted-foreground">
         We only ever see the page you click on.{" "}
         <Link href="/privacy" className="underline underline-offset-2 hover:text-primary">
           Read the privacy policy

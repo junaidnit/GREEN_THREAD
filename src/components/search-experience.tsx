@@ -427,7 +427,7 @@ function FilterSidebar({
           if (materials.length === 0) return null;
           return (
             <div key={group.class} className="mb-3 last:mb-0">
-              <p className="mb-1.5 text-[10px] font-semibold uppercase tracking-wider text-primary">
+              <p className="mb-1.5 text-[12px] font-semibold uppercase tracking-wider text-primary">
                 {group.label} <span className="font-normal normal-case text-muted-foreground">— {group.blurb}</span>
               </p>
               <div className="space-y-1">
@@ -636,7 +636,7 @@ function FabricRow({
           <button
             aria-label={`About ${MATERIAL_LABELS[material]}`}
             onClick={() => setFactOpen((o) => !o)}
-            className={`flex size-5 items-center justify-center rounded-full text-[10px] font-semibold transition-colors ${
+            className={`flex size-5 items-center justify-center rounded-full text-[12px] font-semibold transition-colors ${
               factOpen ? "bg-primary text-primary-foreground" : "bg-surface text-muted-foreground hover:text-primary"
             }`}
           >
@@ -655,8 +655,8 @@ function FabricRow({
           >
             <div className="ml-6 mt-1.5 rounded-lg border-l-2 border-primary bg-surface p-2.5">
               <p className="font-display text-xs font-bold text-primary">{fact.stat}</p>
-              <p className="mt-0.5 text-[11px] leading-relaxed text-muted-foreground">{fact.detail}</p>
-              <p className="mt-1 text-[10px] italic text-muted-foreground">— {fact.source}</p>
+              <p className="mt-0.5 text-[12px] leading-relaxed text-muted-foreground">{fact.detail}</p>
+              <p className="mt-1 text-[12px] italic text-muted-foreground">— {fact.source}</p>
             </div>
           </motion.div>
         )}

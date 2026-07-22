@@ -9,6 +9,9 @@ import { truthRecordFor } from "@/lib/truth-server";
 import { BuyButton } from "@/components/buy-button";
 import { RESALE_PLATFORMS, resaleTerm } from "@/lib/resale-links";
 import { formatPrice, titleCase } from "@/lib/format";
+import { ProductJsonLd } from "@/components/json-ld";
+import { SITE_URL } from "@/lib/site";
+import { MATERIAL_LABELS } from "@/lib/scoring";
 import {
   CERT_INFO,
   estimatedWears,
@@ -49,7 +52,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const product = await getProduct(id);
   if (!product) return {};
   return {
-    title: `${product.title} — ${product.brand.name} | The Fibre Set`,
+    title: `${product.title} — ${product.brand.name}`,
     description: product.sustainability.explanation,
     openGraph: {
       title: `${product.title} — grade ${product.sustainability.grade} (${product.sustainability.score}/100)`,
@@ -92,6 +95,20 @@ export default async function ProductPage({ params }: Props) {
 
   return (
     <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6">
+      <ProductJsonLd
+        id={product.id}
+        name={product.title}
+        brand={product.brand.name}
+        image={product.image_url}
+        price={product.price}
+        currency={product.currency}
+        url={`${SITE_URL}/product/${product.id}`}
+        description={product.description}
+        materials={product.fabric_composition.map((f) => ({
+          label: MATERIAL_LABELS[f.material] ?? f.material,
+          pct: f.pct,
+        }))}
+      />
       <nav className="mb-5 text-xs text-muted-foreground">
         <Link href="/search" className="hover:text-foreground hover:underline">Browse</Link>
         <span className="mx-1.5">/</span>
@@ -121,7 +138,7 @@ export default async function ProductPage({ params }: Props) {
           <div className="absolute left-4 top-4">
             <GradeBadge grade={s.grade} score={s.score} size="lg" />
           </div>
-          <p className="pointer-events-none absolute bottom-3 right-3 rounded-full bg-surface/85 px-2.5 py-1 text-[10px] font-medium text-muted-foreground backdrop-blur">
+          <p className="pointer-events-none absolute bottom-3 right-3 rounded-full bg-surface/85 px-2.5 py-1 text-[12px] font-medium text-muted-foreground backdrop-blur">
             hover to inspect the weave
           </p>
         </div>
@@ -137,7 +154,7 @@ export default async function ProductPage({ params }: Props) {
             {product.source === "live" && (
               <span
                 data-testid="live-badge"
-                className="inline-flex items-center gap-1 rounded-full bg-grade-a/10 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-grade-a"
+                className="inline-flex items-center gap-1 rounded-full bg-grade-a/10 px-2 py-0.5 text-[12px] font-semibold uppercase tracking-wide text-grade-a"
                 title={`Real listing — details verified from ${product.brand.name}'s own product page`}
               >
                 <span className="size-1.5 animate-pulse rounded-full bg-grade-a" />
@@ -207,7 +224,7 @@ export default async function ProductPage({ params }: Props) {
                   <Leaf className="mt-0.5 size-4 shrink-0 text-primary" />
                   <div>
                     <p className="text-sm font-semibold text-accent-foreground">{imp.headline}</p>
-                    <p className="text-[11px] text-muted-foreground">{imp.detail}</p>
+                    <p className="text-[12px] text-muted-foreground">{imp.detail}</p>
                   </div>
                 </div>
               ))}
@@ -292,7 +309,7 @@ export default async function ProductPage({ params }: Props) {
           )}
 
           {product.source === "extracted" && (
-            <p className="mt-3 flex items-center gap-1.5 text-[11px] text-muted-foreground" title="Fabric composition was extracted from the product's own label text by our AI pipeline, then validated against a certification evidence check.">
+            <p className="mt-3 flex items-center gap-1.5 text-[12px] text-muted-foreground" title="Fabric composition was extracted from the product's own label text by our AI pipeline, then validated against a certification evidence check.">
               <Sparkles className="size-3 text-primary" /> Composition read from the label by our
               extraction pipeline
             </p>
@@ -387,7 +404,7 @@ export default async function ProductPage({ params }: Props) {
             {betterMatches.map((m) => (
               <div key={m.item.id}>
                 <ProductCard product={m.item} />
-                <p className="mt-1.5 flex flex-wrap items-center gap-1.5 text-[10px]">
+                <p className="mt-1.5 flex flex-wrap items-center gap-1.5 text-[12px]">
                   <span
                     className={`rounded-full px-1.5 py-0.5 font-semibold ${
                       m.tier === "exact" ? "bg-grade-a/15 text-grade-a" : "bg-surface-2 text-muted-foreground"

@@ -114,7 +114,7 @@ export function AnalyzeClient() {
           {busy ? "Reading…" : "Check it"}
         </button>
       </form>
-      <p className="mt-2 text-center text-[11px] text-muted-foreground">{EXAMPLES.join(" · ")}</p>
+      <p className="mt-2 text-center text-[12px] text-muted-foreground">{EXAMPLES.join(" · ")}</p>
 
       {busy && (
         <div className="mt-8 space-y-3" data-testid="analyze-loading">
@@ -241,7 +241,7 @@ export function AnalyzeClient() {
                     </span>
                   </div>
                 ))}
-                <p className="text-[11px] text-muted-foreground">
+                <p className="text-[12px] text-muted-foreground">
                   Scored on fibres, certifications and stated practices only — we can&apos;t assess
                   an unknown brand&apos;s supply chain from one page.
                 </p>

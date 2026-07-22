@@ -94,7 +94,7 @@ export function Concierge() {
                 </span>
                 <div>
                   <p className="text-sm font-semibold leading-none">Shopping concierge</p>
-                  <p className="mt-0.5 text-[11px] text-muted-foreground">knows every fabric in the catalog</p>
+                  <p className="mt-0.5 text-[12px] text-muted-foreground">knows every fabric in the catalog</p>
                 </div>
               </div>
               <button aria-label="Close concierge" onClick={() => setOpen(false)}>
@@ -225,7 +225,7 @@ function ChatProductCard({ p, onNavigate }: { p: CardProduct; onNavigate: () => 
           <p className="truncate text-xs font-semibold">{p.title}</p>
           <GradeBadge grade={p.grade} score={p.score} />
         </div>
-        <p className="truncate text-[11px] text-muted-foreground">{p.brand} · {p.fabric}</p>
+        <p className="truncate text-[12px] text-muted-foreground">{p.brand} · {p.fabric}</p>
         <p className="mt-0.5 text-xs font-semibold">{formatPrice(p.price, p.currency)}</p>
       </div>
     </Link>

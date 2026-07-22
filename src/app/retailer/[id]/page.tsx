@@ -87,7 +87,7 @@ export default async function RetailerCheckout({ params }: { params: Promise<{ i
           >
             Checkout securely
           </button>
-          <p className="mt-2 text-center text-[11px] text-muted-foreground">
+          <p className="mt-2 text-center text-[12px] text-muted-foreground">
             Payment is disabled in the demo. With live feeds this page is the retailer&apos;s own checkout.
           </p>
         </div>

@@ -9,12 +9,34 @@
 :root {
   --canvas: #F5F3EF;
   --navy: #3A3A55;
-  --taupe: #6F6F66;
+  /* taupe darkened from #6F6F66: the old value measured 4.30:1 on surface-2,
+     under the 4.5 AA floor for body text */
+  --taupe: #68685F;
   --slate: #5C5C7C;
-  --rose: #9D6F70;
+  --rose: #9D6F70;                             /* decorative only — see rose-ink */
+  /* The eyebrow is the most repeated style on the site and the old rose read
+     3.83:1 on canvas — a fail. This darker tone measures 5.08 canvas /
+     4.77 surface-2 / 5.63 white. Use it for any rose that carries TEXT. */
+  --rose-ink: #8A5B5C;
   --mauve: #7E5A71;
   --burgundy: #4B2144;
   --line: #E2DED7;
+
+  /* ── type scale ────────────────────────────────────────────────
+     Six steps, and nothing below 12px. The page previously ran 14 sizes
+     with 53 elements between 9 and 11.5px, which is why it read as
+     cluttered filler regardless of the words. */
+  --text-label: 0.75rem;    /* 12 — eyebrows, badges, meta */
+  --text-small: 0.875rem;   /* 14 — captions, secondary */
+  --text-body: 1rem;        /* 16 — running text */
+  --text-lead: 1.25rem;     /* 20 — sub-headings, leads */
+  --text-title: 1.75rem;    /* 28 — section headings */
+  --text-display: clamp(2rem, 4.6vw, 2.5rem); /* 32–40 — page headings */
+
+  /* ── vertical rhythm ───────────────────────────────────────────
+     Section padding alternated between 0 and 80px with nothing between,
+     so sections either collided or floated. One value, used everywhere. */
+  --section-y: clamp(3.5rem, 7vw, 5.5rem);
 
   --background: var(--canvas);
   --surface: #FFFFFF;
@@ -148,12 +170,14 @@
 .float-card { animation: gt-float 5.5s ease-in-out infinite; }
 .float-card-alt { animation: gt-float 6.5s 1.2s ease-in-out infinite; }
 
-/* editorial fashion caption type */
+/* editorial fashion caption type — 12px floor, AA-safe rose.
+   Declared once; the old duplicate further down fought this rule. */
 .eyebrow {
-  font-size: 0.68rem;
+  font-size: var(--text-label);
   text-transform: uppercase;
-  letter-spacing: 0.22em;
-  color: var(--muted-foreground);
+  letter-spacing: 0.18em;
+  font-weight: 600;
+  color: var(--rose-ink);
 }
 
 /* ambient hero blobs */
@@ -182,8 +206,14 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: var(--font-sans);
+  font-size: var(--text-body);
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
+  /* A 375px viewport rendered 385px of content — the page could be dragged
+     sideways, which is the loudest "unfinished" signal on a phone. `clip`
+     rather than `hidden`: hidden creates a scroll container and silently
+     breaks position:sticky on descendants. */
+  overflow-x: clip;
 }
 
 /* base layer so font utilities (font-serif etc.) can override per element.
@@ -195,11 +225,29 @@ body {
     font-weight: 300;
     letter-spacing: 0.005em;
     line-height: 1.15;
+    text-wrap: balance;
   }
+  /* keep running text near a comfortable measure — one paragraph was
+     measuring 86 characters per line at desktop */
+  p { text-wrap: pretty; }
 }
 
-/* eyebrow accent now leans on the brand rose */
-.eyebrow { color: var(--rose); font-weight: 600; }
+/* Minimum comfortable touch size. 21 controls measured under 44px, one as
+   small as 20×20 — below this, one-handed error rates climb sharply. */
+.tap-target {
+  min-height: 44px;
+  min-width: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* One rhythm for every top-level band, so the page reads as one composition
+   rather than a stack of unrelated blocks. */
+.section-y {
+  padding-top: var(--section-y);
+  padding-bottom: var(--section-y);
+}
 
 /* skeleton shimmer block */
 .skeleton {

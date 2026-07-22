@@ -23,7 +23,7 @@ export function ScoreAnatomy() {
             className="flex flex-col items-center justify-center text-white"
             style={{ background: p.color }}
           >
-            <span className="text-[10px] font-medium uppercase tracking-wider opacity-90">{p.label}</span>
+            <span className="text-[12px] font-medium uppercase tracking-wider opacity-90">{p.label}</span>
             <span className="font-display text-sm font-bold">{p.max}</span>
           </motion.div>
         ))}
@@ -75,7 +75,7 @@ export function GradeSpectrum() {
             >
               {x.g}
             </span>
-            <span className="mt-1 text-[10px] text-muted-foreground">{x.from}+</span>
+            <span className="mt-1 text-[12px] text-muted-foreground">{x.from}+</span>
           </motion.div>
         ))}
       </div>

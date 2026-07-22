@@ -40,7 +40,7 @@ function MegaItem({
     <li className="group relative">
       <Link
         href={href}
-        className="flex items-center py-2 text-[13px] tracking-wide text-foreground/80 transition-colors hover:text-primary"
+        className="flex items-center py-2 text-[14px] tracking-wide text-foreground/80 transition-colors hover:text-primary"
       >
         {label}
         {children && <Caret />}
@@ -63,7 +63,7 @@ function SubLinks({ items, base }: { items: Array<[string, string]>; base: strin
         <li key={slug}>
           <Link
             href={`${base}${slug}`}
-            className="block py-1.5 text-[13px] font-light text-muted-foreground transition-colors hover:text-primary"
+            className="block py-1.5 text-[14px] font-light text-muted-foreground transition-colors hover:text-primary"
           >
             {label}
           </Link>
@@ -94,7 +94,7 @@ export function SiteHeader() {
   return (
     <header className="sticky top-0 z-40 bg-background/95 backdrop-blur-md">
       {/* utility line */}
-      <div className="bg-foreground py-2 text-center text-[10.5px] font-medium uppercase tracking-[0.16em] text-background">
+      <div className="bg-foreground py-2 text-center text-[12px] font-medium uppercase tracking-[0.16em] text-background">
         Natural fibres, chosen for how they feel and wear · Check any label, free
       </div>
 
@@ -105,7 +105,7 @@ export function SiteHeader() {
             <span className="text-[#141414]">
               <LogoMark size={34} animate={false} />
             </span>
-            <span className="font-display text-[17px] font-semibold uppercase tracking-[0.2em]">
+            <span className="font-display text-[16px] font-semibold uppercase tracking-[0.2em]">
               The&nbsp;Fibre&nbsp;Set
             </span>
           </Link>
@@ -120,7 +120,7 @@ export function SiteHeader() {
                 <SubLinks items={MEN_SUBS.map((s) => [s, cap(s)])} base="/search?gender=men&category=" />
               </MegaItem>
               <MegaItem label="Children" href="/children">
-                <p className="text-[12px] font-light leading-relaxed text-muted-foreground">
+                <p className="text-[14px] font-light leading-relaxed text-muted-foreground">
                   Little-skin edit — GOTS organic cotton &amp; muslin.
                   <span className="mt-1 block text-rose">Coming soon.</span>
                 </p>
@@ -137,7 +137,7 @@ export function SiteHeader() {
             <button
               onClick={() => setSearchOpen((v) => !v)}
               aria-label="Search"
-              className="flex h-9 items-center gap-2 rounded-full border border-border bg-surface-2 px-3.5 text-[12px] tracking-wide text-muted-foreground transition-colors hover:border-slate hover:text-foreground"
+              className="tap-target flex h-11 items-center gap-2 rounded-full border border-border bg-surface-2 px-4 text-[14px] tracking-wide text-muted-foreground transition-colors hover:border-slate hover:text-foreground"
             >
               <svg viewBox="0 0 20 20" className="size-4" fill="none" stroke="currentColor" strokeWidth="1.5">
                 <circle cx="9" cy="9" r="6" /><path d="M14 14l4 4" strokeLinecap="round" />
@@ -146,13 +146,13 @@ export function SiteHeader() {
             </button>
             <Link
               href="/analyze"
-              className="hidden h-9 items-center rounded-full border border-border px-4 text-[12px] tracking-wide text-foreground transition-colors hover:border-slate md:flex"
+              className="hidden h-11 items-center rounded-full border border-border px-4 text-[14px] tracking-wide text-foreground transition-colors hover:border-slate md:flex"
             >
               Fabric Check
             </Link>
             <Link
               href="/extension"
-              className="hidden h-9 items-center rounded-full bg-primary px-4 text-[11px] font-semibold uppercase tracking-[0.12em] text-primary-foreground transition-colors hover:opacity-90 sm:flex"
+              className="hidden h-11 items-center rounded-full bg-primary px-5 text-[12px] font-semibold uppercase tracking-[0.12em] text-primary-foreground transition-colors hover:opacity-90 sm:flex"
             >
               Install Extension
             </Link>
@@ -160,7 +160,7 @@ export function SiteHeader() {
             <button
               onClick={() => setMobileOpen((v) => !v)}
               aria-label="Menu"
-              className="lg:hidden"
+              className="tap-target -mr-2 lg:hidden"
             >
               <svg viewBox="0 0 24 24" className="size-5" fill="none" stroke="currentColor" strokeWidth="1.5">
                 <path d="M3 6h18M3 12h18M3 18h18" strokeLinecap="round" />
@@ -179,9 +179,9 @@ export function SiteHeader() {
               value={q}
               onChange={(e) => setQ(e.target.value)}
               placeholder="Search a fibre or garment — or paste a product link to check its label"
-              className="flex-1 border-b border-border bg-transparent py-2 text-[15px] font-light text-foreground outline-none placeholder:text-muted-foreground/70 focus:border-slate"
+              className="flex-1 border-b border-border bg-transparent py-2 text-[16px] font-light text-foreground outline-none placeholder:text-muted-foreground/70 focus:border-slate"
             />
-            <button type="submit" className="rounded-full bg-primary px-5 py-2 text-[11px] font-semibold uppercase tracking-[0.12em] text-primary-foreground">
+            <button type="submit" className="rounded-full bg-primary px-5 py-2 text-[12px] font-semibold uppercase tracking-[0.12em] text-primary-foreground">
               Go
             </button>
           </form>
@@ -191,7 +191,7 @@ export function SiteHeader() {
       {/* mobile menu */}
       {mobileOpen && (
         <div className="border-b border-border bg-surface lg:hidden">
-          <ul className="mx-auto flex max-w-[1280px] flex-col gap-1 px-5 py-4 text-[15px] font-light">
+          <ul className="mx-auto flex max-w-[1280px] flex-col gap-1 px-5 py-4 text-[16px] font-light">
             {[["Women", "/search?gender=women"], ["Men", "/search?gender=men"], ["Children", "/children"], ["Materials", "/fabric/linen"], ["Journal", "/journal"], ["Fabric Check", "/analyze"], ["Install Extension", "/extension"]].map(([label, href]) => (
               <li key={href}>
                 <Link href={href} onClick={() => setMobileOpen(false)} className="block py-2 text-foreground">

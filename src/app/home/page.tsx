@@ -3,8 +3,9 @@ import { ComingSoon } from "@/components/coming-soon";
 import { getCatalog } from "@/lib/catalog";
 
 export const metadata: Metadata = {
-  title: "Home & Bedding — The Fibre Set",
+  title: "Home & Bedding",
   description: "Bedding in linen, hemp and wool — chosen for how you actually sleep. Coming soon.",
+  alternates: { canonical: "/home" },
 };
 
 const HOMEWARE = /\b(cushion|blanket|bedding|duvet|sheet|pillow|towel|napkin|apron|throw)\b/i;

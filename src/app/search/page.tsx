@@ -5,8 +5,10 @@ import { SearchExperience } from "@/components/search-experience";
 import { ProductCardSkeleton } from "@/components/product-card";
 
 export const metadata: Metadata = {
-  title: "Browse sustainable clothing — The Fibre Set",
-  description: "Instant search across sustainable fashion. Filter by fabric, certification and sustainability score.",
+  title: "Browse natural-fibre clothing",
+  description:
+    "Search real clothing by fibre — linen, organic cotton, hemp, wool, TENCEL. Every item's composition is read from the brand's own label before it appears here.",
+  alternates: { canonical: "/search" },
 };
 
 function GridSkeleton() {
@@ -24,8 +26,17 @@ function GridSkeleton() {
 export default async function SearchPage() {
   const products = await getCatalogCards();
   return (
-    <Suspense fallback={<GridSkeleton />}>
-      <SearchExperience products={products} />
-    </Suspense>
+    <>
+      {/* The page had no h1 at all, so it carried no topical anchor for search.
+          Visually hidden rather than shown: the filter UI is the interface
+          here, and adding a visible heading would change Anita's layout. */}
+      <h1 className="sr-only">
+        Browse natural-fibre clothing — {products.length.toLocaleString("en-GB")} pieces with the
+        label already read
+      </h1>
+      <Suspense fallback={<GridSkeleton />}>
+        <SearchExperience products={products} />
+      </Suspense>
+    </>
   );
 }

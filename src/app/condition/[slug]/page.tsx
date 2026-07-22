@@ -19,8 +19,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   if (!CONDITION_SLUGS.includes(slug as ConditionSlug)) return {};
   const rule = CONDITIONS[slug as ConditionSlug];
   return {
-    title: `${rule.name} clothing — every label checked | The Fibre Set`,
+    title: `${rule.name} clothing — every label checked`,
     description: rule.summary,
+    alternates: { canonical: `/condition/${slug}` },
   };
 }
 
@@ -61,7 +62,7 @@ export default async function ConditionPage({ params }: Props) {
               <span
                 key={m}
                 title={entry.reason}
-                className="inline-flex items-center gap-1 rounded-full bg-grade-d/10 px-2.5 py-1 text-[11px] font-medium text-grade-d"
+                className="inline-flex items-center gap-1 rounded-full bg-grade-d/10 px-2.5 py-1 text-[12px] font-medium text-grade-d"
               >
                 <AlertTriangle className="size-3" /> excludes {m.replace(/_/g, " ")}
               </span>
@@ -69,7 +70,7 @@ export default async function ConditionPage({ params }: Props) {
           })}
         </div>
 
-        <p className="mt-5 text-[11px] leading-relaxed text-muted-foreground">
+        <p className="mt-5 text-[12px] leading-relaxed text-muted-foreground">
           <b>Sources: </b>
           {rule.sources.map((s, i) => (
             <span key={s.label}>

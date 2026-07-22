@@ -7,9 +7,10 @@ import { Reveal } from "@/components/kinetic";
 import { AlertTriangle } from "@/components/icons";
 
 export const metadata: Metadata = {
-  title: "Label Watch — named natural, mostly plastic | The Fibre Set",
+  title: "Label Watch — named natural, mostly plastic",
   description:
     "The Fibre Set's independent, timestamped record of clothes named after natural fibres that are mostly oil-derived plastic. Every flag is on the record, with the date we first logged it.",
+  alternates: { canonical: "/label-watch" },
 };
 
 export default async function LabelWatchPage() {
@@ -57,8 +58,8 @@ export default async function LabelWatchPage() {
               </div>
               <div className="shrink-0 text-right">
                 <p className="font-display text-2xl font-bold text-grade-d tabular-nums">{f.plastic_pct}%</p>
-                <p className="text-[11px] uppercase tracking-wide text-muted-foreground">plastic</p>
-                <p className="mt-1 text-[10px] text-muted-foreground">
+                <p className="text-[12px] uppercase tracking-wide text-muted-foreground">plastic</p>
+                <p className="mt-1 text-[12px] text-muted-foreground">
                   logged {new Date(f.trackedSince).toLocaleDateString("en-GB", { day: "numeric", month: "short", year: "numeric" })}
                 </p>
               </div>

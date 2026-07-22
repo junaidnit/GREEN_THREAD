@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
+import type { Metadata } from "next";
 import { getCatalog } from "@/lib/catalog";
 import { ledgerStats } from "@/lib/truth-server";
 import { MATERIAL_LABELS, MATERIAL_NOTES } from "@/lib/scoring";
@@ -9,6 +10,10 @@ import { FibreWidget, type FibreEntry } from "@/components/fibre-widget";
 import { garmentType, type GarmentType } from "@/lib/garment";
 import type { MaterialId, Product } from "@/lib/types";
 import { ArrowUpRight } from "@/components/icons";
+
+export const metadata: Metadata = {
+  alternates: { canonical: "/" },
+};
 
 /* fibres featured in the widget, with a one-line hook + placeholder swatch */
 const FIBRES: Array<[MaterialId, string, string]> = [
@@ -106,12 +111,13 @@ export default async function Home() {
         <div className="mx-auto grid max-w-[1280px] items-stretch gap-0 md:grid-cols-[1.02fr_.98fr]">
           <div className="flex flex-col justify-center gap-6 px-6 py-16 sm:px-10 md:py-24">
             <span className="eyebrow">Natural fibres, chosen well</span>
-            <h1 className="max-w-[15ch] font-display text-[38px] leading-[1.12] text-foreground sm:text-[48px]">
+            <h1 className="max-w-[15ch] font-display text-[clamp(2rem,4.6vw,2.5rem)] leading-[1.12] text-foreground sm:text-[clamp(2rem,4.6vw,2.5rem)]">
               Clothes and bedding chosen for the skin they sit against.
             </h1>
             <p className="max-w-[46ch] text-[16px] font-light leading-relaxed text-muted-foreground">
-              Not a catalogue of everything — real pieces in natural fibres, with the label read for you.
-              Search a fibre, or paste any product link to check what it&apos;s really made of.
+              We&apos;ve read the composition on {products.length.toLocaleString("en-GB")} pieces from {brandCount} brands —
+              every percentage here is the brand&apos;s own disclosure, not our estimate. Search a fibre,
+              or paste a link from any other shop and we&apos;ll read that one too.
             </p>
             <HeroSearch />
           </div>
@@ -125,18 +131,19 @@ export default async function Home() {
       <section className="bg-foreground text-background">
         <div className="mx-auto flex max-w-[1280px] flex-col items-center justify-between gap-6 px-6 py-10 sm:px-10 md:flex-row">
           <div className="text-center md:text-left">
-            <span className="text-[10.5px] font-semibold uppercase tracking-[0.18em] text-rose">The free tool</span>
-            <h2 className="mt-2 font-display text-[26px] text-background">Check any fabric label, on any shop.</h2>
-            <p className="mt-2 max-w-[52ch] text-[14px] font-light leading-relaxed opacity-75">
-              Our browser extension reads the fibre composition on any retailer&apos;s product page — so you can
-              see the plastic hiding in a &ldquo;linen&rdquo; blend before you buy.
+            <span className="text-[12px] font-semibold uppercase tracking-[0.18em] text-rose">The free tool</span>
+            <h2 className="mt-2 font-display text-[28px] text-background">Check any fabric label, on any shop.</h2>
+            <p className="mt-2 max-w-[52ch] text-[16px] font-light leading-relaxed opacity-75">
+              Reads the fibre composition on any retailer&apos;s product page — Zara, ASOS, M&amp;S — so the
+              plastic hiding in a &ldquo;linen&rdquo; blend shows up before you buy. Free, and it can only see a
+              page in the moment you click it.
             </p>
           </div>
           <div className="flex shrink-0 gap-3">
-            <Link href="/extension" className="rounded-full bg-primary px-6 py-3 text-[11px] font-semibold uppercase tracking-[0.14em] text-primary-foreground transition-opacity hover:opacity-90">
+            <Link href="/extension" className="rounded-full bg-primary px-6 py-3 text-[12px] font-semibold uppercase tracking-[0.14em] text-primary-foreground transition-opacity hover:opacity-90">
               Install the extension
             </Link>
-            <Link href="/analyze" className="rounded-full border border-background/30 px-6 py-3 text-[11px] font-semibold uppercase tracking-[0.14em] transition-colors hover:bg-background/10">
+            <Link href="/analyze" className="rounded-full border border-background/30 px-6 py-3 text-[12px] font-semibold uppercase tracking-[0.14em] transition-colors hover:bg-background/10">
               Try it here
             </Link>
           </div>
@@ -144,7 +151,7 @@ export default async function Home() {
       </section>
 
       {/* ── CATEGORY PANELS ── */}
-      <section className="mx-auto max-w-[1280px] px-6 py-20 sm:px-10">
+      <section className="mx-auto max-w-[1280px] px-6 section-y sm:px-10">
         <div className="mb-10 flex items-end justify-between">
           <div>
             <span className="eyebrow">Shop by</span>
@@ -161,14 +168,15 @@ export default async function Home() {
 
       {/* ── FIBRE WIDGET ── */}
       <section className="border-y border-border bg-surface-2">
-        <div className="mx-auto max-w-[1280px] px-6 py-20 sm:px-10">
+        <div className="mx-auto max-w-[1280px] px-6 section-y sm:px-10">
           <div className="mb-12 max-w-[52ch]">
             <span className="eyebrow">The materials</span>
             <h2 className="mt-2 font-display text-[28px] leading-tight text-foreground">
               Every fibre, and what it actually does for your skin.
             </h2>
-            <p className="mt-3 text-[15px] font-light leading-relaxed text-muted-foreground">
-              Choose a fibre to see how it feels, wears and behaves — and where it has a fault, we say so.
+            <p className="mt-3 text-[16px] font-light leading-relaxed text-muted-foreground">
+              How each one feels, wears and behaves against skin — including where it fails. Wool is
+              warm and breathable and still irritates eczema; we say so on the wool page.
             </p>
           </div>
           <FibreWidget fibres={fibres} />
@@ -176,13 +184,13 @@ export default async function Home() {
       </section>
 
       {/* ── ARTICLES / MAGAZINE CAROUSEL ── */}
-      <section className="mx-auto max-w-[1280px] px-6 py-20 sm:px-10">
+      <section className="mx-auto max-w-[1280px] px-6 section-y sm:px-10">
         <div className="mb-8 flex items-end justify-between">
           <div>
             <span className="eyebrow">The Journal</span>
             <h2 className="mt-2 font-display text-[28px] text-foreground">Reading, close to the skin</h2>
           </div>
-          <Link href="/journal" className="border-b border-slate pb-1 text-[11px] font-semibold uppercase tracking-[0.14em] text-slate hover:text-primary">
+          <Link href="/journal" className="border-b border-slate pb-1 text-[12px] font-semibold uppercase tracking-[0.14em] text-slate hover:text-primary">
             All articles
           </Link>
         </div>
@@ -190,12 +198,12 @@ export default async function Home() {
           {articles.map((a) => (
             <Link key={a.href + a.title} href={a.href} className="group w-[300px] shrink-0 snap-start sm:w-[340px]">
               <div className="relative aspect-[4/3] overflow-hidden bg-surface-2">
-                {a.img && <Image src={a.img} alt="" fill sizes="340px" className="object-cover transition-transform duration-700 group-hover:scale-105" />}
+                {a.img && <Image src={a.img} alt={a.title} fill sizes="340px" className="object-cover transition-transform duration-700 group-hover:scale-105" />}
               </div>
               <span className="eyebrow mt-4 block">{a.eyebrow}</span>
-              <h3 className="mt-2 font-display text-[19px] leading-snug text-foreground group-hover:text-primary">{a.title}</h3>
-              <p className="mt-2 text-[13px] font-light leading-relaxed text-muted-foreground">{a.blurb}</p>
-              <span className="mt-3 inline-block text-[11px] font-semibold uppercase tracking-[0.13em] text-slate">Read →</span>
+              <h3 className="mt-2 font-display text-[20px] leading-snug text-foreground group-hover:text-primary">{a.title}</h3>
+              <p className="mt-2 text-[14px] font-light leading-relaxed text-muted-foreground">{a.blurb}</p>
+              <span className="mt-3 inline-block text-[12px] font-semibold uppercase tracking-[0.13em] text-slate">Read →</span>
             </Link>
           ))}
         </div>
@@ -203,33 +211,51 @@ export default async function Home() {
 
       {/* ── STAT BAND ── */}
       <section className="border-y border-border bg-foreground text-background">
-        <div className="mx-auto grid max-w-[1280px] grid-cols-2 gap-8 px-6 py-16 sm:px-10 md:grid-cols-4">
-          {[
-            [String(products.length), "real pieces, label-read"],
-            [String(fibreCount), "natural & plant fibres"],
-            [String(brandCount), "considered brands"],
-            [stats ? String(stats.flagged) : "—", "greenwash flags on record"],
-          ].map(([n, l]) => (
-            <div key={l} className="text-center">
-              <p className="font-display text-[40px] font-light tabular-nums">{n}</p>
-              <p className="mt-1 text-[11.5px] font-light uppercase tracking-[0.1em] opacity-70">{l}</p>
-            </div>
-          ))}
+        <div className="mx-auto max-w-[1280px] px-6 section-y sm:px-10">
+          <div className="grid grid-cols-2 gap-8 md:grid-cols-4">
+            {[
+              [products.length.toLocaleString("en-GB"), "real pieces, label-read"],
+              [String(fibreCount), "natural & plant fibres"],
+              [String(brandCount), "brands read in full"],
+              [stats ? String(stats.flagged) : "—", "greenwash flags on record"],
+            ].map(([n, l]) => (
+              <div key={l} className="text-center">
+                <p className="font-display text-[clamp(2rem,4.6vw,2.5rem)] font-light tabular-nums">{n}</p>
+                <p className="mt-1 text-[12px] font-light uppercase tracking-[0.1em] opacity-70">{l}</p>
+              </div>
+            ))}
+          </div>
+          {/* Dating the claim is what makes it quotable. An undated "we read
+              every label" is marketing; a counted, dated figure is a source. */}
+          {stats && (
+            <p className="mt-8 text-center text-[14px] font-light opacity-75">
+              Counted from our public record on{" "}
+              <time dateTime={new Date().toISOString().slice(0, 10)}>
+                {new Date().toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric" })}
+              </time>
+              , kept since{" "}
+              {new Date(stats.since).toLocaleDateString("en-GB", { month: "long", year: "numeric" })}.{" "}
+              <Link href="/label-watch" className="underline underline-offset-2">
+                See what we flagged
+              </Link>
+              .
+            </p>
+          )}
         </div>
       </section>
 
       {/* ── INSTAGRAM / SOCIAL (stub) ── */}
-      <section className="mx-auto max-w-[1280px] px-6 py-20 text-center sm:px-10">
+      <section className="mx-auto max-w-[1280px] px-6 section-y text-center sm:px-10">
         <span className="eyebrow">Follow along</span>
-        <h2 className="mt-2 font-display text-[26px] text-foreground">@thefibreset</h2>
+        <h2 className="mt-2 font-display text-[28px] text-foreground">@thefibreset</h2>
         <div className="mt-8 grid grid-cols-2 gap-3 sm:grid-cols-4">
           {[womenImg, menImg, heroImg, fibres[0]?.image].map((img, i) => (
             <div key={i} className="relative aspect-square overflow-hidden bg-surface-2">
-              {img && <Image src={img} alt="" fill sizes="300px" className="object-cover transition-transform duration-700 hover:scale-105" />}
+              {img && <Image src={img} alt="A natural-fibre piece from The Fibre Set" fill sizes="300px" className="object-cover transition-transform duration-700 hover:scale-105" />}
             </div>
           ))}
         </div>
-        <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="mt-8 inline-block border-b border-slate pb-1 text-[11px] font-semibold uppercase tracking-[0.14em] text-slate hover:text-primary">
+        <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="mt-8 inline-block border-b border-slate pb-1 text-[12px] font-semibold uppercase tracking-[0.14em] text-slate hover:text-primary">
           Follow on Instagram →
         </a>
       </section>
@@ -250,9 +276,9 @@ function CategoryPanel({
       <div className="absolute inset-0" style={{ background: "linear-gradient(to top, rgba(58,58,85,.6), rgba(58,58,85,0) 55%)" }} />
       <div className="absolute inset-x-0 bottom-0 flex items-end justify-between p-7 text-background">
         <div>
-          <span className="text-[10.5px] font-semibold uppercase tracking-[0.16em] opacity-90">{soon ? "Coming soon" : "Shop"}</span>
-          <h3 className="font-display text-[26px] text-background">{label}</h3>
-          {note && <p className="mt-0.5 text-[12px] font-light opacity-85">{note}</p>}
+          <span className="text-[12px] font-semibold uppercase tracking-[0.16em] opacity-90">{soon ? "Coming soon" : "Shop"}</span>
+          <h3 className="font-display text-[28px] text-background">{label}</h3>
+          {note && <p className="mt-0.5 text-[14px] font-light opacity-85">{note}</p>}
         </div>
         <ArrowUpRight className="size-5 opacity-80 transition-transform group-hover:translate-x-1" />
       </div>

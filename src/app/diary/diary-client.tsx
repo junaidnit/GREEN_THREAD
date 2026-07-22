@@ -123,7 +123,7 @@ export function DiaryClient() {
                 </div>
                 <div className="flex shrink-0 items-baseline gap-3">
                   <span
-                    className={`rounded-full px-2 py-0.5 text-[10px] font-bold text-white ${
+                    className={`rounded-full px-2 py-0.5 text-[12px] font-bold text-white ${
                       e.plastic === 0 ? "bg-grade-a" : "bg-grade-d"
                     }`}
                   >

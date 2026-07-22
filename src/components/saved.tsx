@@ -59,7 +59,7 @@ export function SavedIndicator() {
   }, []);
 
   return (
-    <Link href="/saved" aria-label="Saved items" className="relative ml-1 flex size-9 items-center justify-center rounded-full text-muted-foreground transition-colors hover:bg-accent hover:text-accent-foreground">
+    <Link href="/saved" aria-label="Saved items" className="tap-target relative ml-1 flex rounded-full text-muted-foreground transition-colors hover:bg-accent hover:text-accent-foreground">
       <motion.span
         id="gt-heart"
         key={bump}
@@ -71,7 +71,7 @@ export function SavedIndicator() {
         <Heart className="size-4" filled={count > 0} />
       </motion.span>
       {count > 0 && (
-        <span data-testid="saved-count" className="absolute -right-0.5 -top-0.5 flex size-4 items-center justify-center rounded-full bg-primary text-[9px] font-bold text-primary-foreground">
+        <span data-testid="saved-count" className="absolute -right-0.5 -top-0.5 flex size-4 items-center justify-center rounded-full bg-primary text-[12px] font-bold text-primary-foreground">
           {count}
         </span>
       )}

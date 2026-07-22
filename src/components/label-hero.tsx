@@ -39,7 +39,7 @@ export function LabelHero({
             <br />
             <span className="italic text-primary">natural</span>, every time
           </h1>
-          <p className="mx-auto mt-5 max-w-sm text-[15px] leading-relaxed text-muted-foreground lg:mx-0">
+          <p className="mx-auto mt-5 max-w-sm text-[16px] leading-relaxed text-muted-foreground lg:mx-0">
             Most high-street clothing is oil-derived plastic. We read every label, so you
             don&apos;t have to.
           </p>
@@ -101,9 +101,9 @@ export function LabelHero({
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img src={CARD_THUMB} alt="" className="h-14 w-11 rounded-lg object-cover" />
             <div className="min-w-0 flex-1">
-              <p className="text-[10px] uppercase tracking-wide text-muted-foreground">Beaumont Organic</p>
+              <p className="text-[12px] uppercase tracking-wide text-muted-foreground">Beaumont Organic</p>
               <p className="truncate text-sm font-medium">Linen Shirt Dress</p>
-              <span className="mt-1 inline-block rounded-full bg-grade-a px-2 py-0.5 text-[10px] font-bold text-white">
+              <span className="mt-1 inline-block rounded-full bg-grade-a px-2 py-0.5 text-[12px] font-bold text-white">
                 100% natural
               </span>
             </div>
@@ -116,9 +116,9 @@ export function LabelHero({
             transition={{ delay: 0.9, duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
             className="float-card-alt absolute -right-8 top-12 z-20 w-56 rounded-2xl bg-white p-3 shadow-xl shadow-black/15 dark:bg-[#222824]"
           >
-            <p className="text-[10px] uppercase tracking-wide text-muted-foreground">Label check</p>
+            <p className="text-[12px] uppercase tracking-wide text-muted-foreground">Label check</p>
             <p className="mt-0.5 text-sm font-medium">&ldquo;Linen-blend&rdquo; tee</p>
-            <span className="mt-1 inline-block rounded-full bg-grade-d px-2 py-0.5 text-[10px] font-bold text-white">
+            <span className="mt-1 inline-block rounded-full bg-grade-d px-2 py-0.5 text-[12px] font-bold text-white">
               ⚠ 72% plastic
             </span>
           </motion.div>

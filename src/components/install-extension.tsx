@@ -33,9 +33,9 @@ function detect(): Env {
 }
 
 const PRIMARY =
-  "rounded-full bg-primary px-7 py-3.5 text-[11px] font-semibold uppercase tracking-[0.14em] text-primary-foreground transition-opacity hover:opacity-90";
+  "rounded-full bg-primary px-7 py-3.5 text-[12px] font-semibold uppercase tracking-[0.14em] text-primary-foreground transition-opacity hover:opacity-90";
 const SECONDARY =
-  "rounded-full border border-border px-6 py-3.5 text-[11px] font-semibold uppercase tracking-[0.14em] text-foreground transition-colors hover:border-slate";
+  "rounded-full border border-border px-6 py-3.5 text-[12px] font-semibold uppercase tracking-[0.14em] text-foreground transition-colors hover:border-slate";
 
 export function InstallExtension() {
   // render the neutral state first so the server and client markup agree
@@ -48,7 +48,7 @@ export function InstallExtension() {
         <Link href="/analyze" className={PRIMARY}>
           Check a link instead →
         </Link>
-        <p className="mx-auto mt-4 max-w-[46ch] text-[12px] font-light leading-relaxed text-muted-foreground">
+        <p className="mx-auto mt-4 max-w-[46ch] text-[14px] font-light leading-relaxed text-muted-foreground">
           Browser extensions don&apos;t run on phones — that&apos;s a limit of mobile browsers, not
           of us. Paste a product link into Fabric Check and you&apos;ll get the same reading. Come
           back on a laptop to install it.
@@ -64,7 +64,7 @@ export function InstallExtension() {
         <Link href="/analyze" className={PRIMARY}>
           Check a link instead →
         </Link>
-        <p className="mx-auto mt-4 max-w-[48ch] text-[12px] font-light leading-relaxed text-muted-foreground">
+        <p className="mx-auto mt-4 max-w-[48ch] text-[14px] font-light leading-relaxed text-muted-foreground">
           We don&apos;t have a {name} build yet — the extension is Chrome and Edge for now. Paste a
           product link into Fabric Check for the same reading in the meantime.
         </p>
@@ -88,7 +88,7 @@ export function InstallExtension() {
           Or check a link on the web →
         </Link>
       </div>
-      <p className="mx-auto mt-4 max-w-[54ch] text-[12px] font-light leading-relaxed text-muted-foreground">
+      <p className="mx-auto mt-4 max-w-[54ch] text-[14px] font-light leading-relaxed text-muted-foreground">
         {STORE_URL ? (
           <>Opens the Chrome Web Store. Free, and it asks for no access to your browsing.</>
         ) : (

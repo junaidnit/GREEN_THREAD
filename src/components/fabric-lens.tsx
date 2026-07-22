@@ -60,7 +60,7 @@ export function FabricLens({ imageUrl, children }: { imageUrl: string; children:
               }}
             />
           </div>
-          <p className="pointer-events-none absolute bottom-3 left-1/2 z-10 -translate-x-1/2 rounded-full bg-black/60 px-3 py-1 text-[11px] font-medium text-white backdrop-blur">
+          <p className="pointer-events-none absolute bottom-3 left-1/2 z-10 -translate-x-1/2 rounded-full bg-black/60 px-3 py-1 text-[12px] font-medium text-white backdrop-blur">
             Inspecting the weave · {Math.round(ZOOM * 100)}%
           </p>
         </>

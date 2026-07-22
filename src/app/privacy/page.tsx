@@ -2,9 +2,10 @@ import Link from "next/link";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Privacy — The Fibre Set",
+  title: "Privacy",
   description:
     "What The Fibre Set and its Fabric Check extension collect, what we send to process a label, and what we never do.",
+  alternates: { canonical: "/privacy" },
 };
 
 /**
@@ -21,7 +22,7 @@ function Section({ title, children }: { title: string; children: React.ReactNode
   return (
     <section className="mt-10">
       <h2 className="font-display text-[20px] text-foreground">{title}</h2>
-      <div className="mt-3 space-y-3 text-[15px] font-light leading-relaxed text-muted-foreground">
+      <div className="mt-3 space-y-3 text-[16px] font-light leading-relaxed text-muted-foreground">
         {children}
       </div>
     </section>
@@ -32,10 +33,10 @@ export default function PrivacyPage() {
   return (
     <div className="mx-auto max-w-[760px] px-6 py-20 sm:px-10">
       <span className="eyebrow">Privacy</span>
-      <h1 className="mt-3 font-display text-[38px] leading-tight text-foreground sm:text-[44px]">
+      <h1 className="mt-3 font-display text-[clamp(2rem,4.6vw,2.5rem)] leading-tight text-foreground">
         What we collect, and what we don&apos;t.
       </h1>
-      <p className="mt-4 text-[15px] font-light leading-relaxed text-muted-foreground">
+      <p className="mt-4 text-[16px] font-light leading-relaxed text-muted-foreground">
         Last updated {UPDATED}. This covers both thefibreset.com and the Fabric Check browser
         extension.
       </p>
@@ -132,7 +133,7 @@ export default function PrivacyPage() {
         </p>
       </Section>
 
-      <p className="mt-12 border-t border-border pt-6 text-[13px] font-light text-muted-foreground">
+      <p className="mt-12 border-t border-border pt-6 text-[14px] font-light text-muted-foreground">
         If we change what the extension collects, we will update this page and its date before the
         change ships.
       </p>

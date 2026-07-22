@@ -3,7 +3,7 @@ import { getCatalogCards } from "@/lib/catalog";
 import { SavedList } from "./saved-list";
 
 export const metadata: Metadata = {
-  title: "Your wardrobe — saved items | The Fibre Set",
+  title: "Your wardrobe — saved items",
   robots: { index: false },
 };
 
