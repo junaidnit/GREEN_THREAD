@@ -35,9 +35,21 @@ function loadLocal(): Product[] {
     .map(({ brand_slug, ...rest }) => ({ ...rest, brand: brandBySlug.get(brand_slug)! }));
 }
 
+/**
+ * Supabase gets one bounded chance. Unbounded, a hanging upstream burned the
+ * whole 60s page budget on Vercel before falling back to the local seed that
+ * would have answered instantly — the build failed rather than degraded.
+ */
+const SUPABASE_TIMEOUT_MS = 8000;
+
 async function loadSupabase(): Promise<Product[]> {
   const { url, key } = supabaseConfig()!;
-  const supabase = createClient(url, key);
+  const supabase = createClient(url, key, {
+    global: {
+      fetch: (input, init) =>
+        fetch(input, { ...init, signal: AbortSignal.timeout(SUPABASE_TIMEOUT_MS) }),
+    },
+  });
   // PostgREST caps a single request at 1,000 rows — page through the catalog
   const PAGE = 1000;
   const data: Record<string, unknown>[] = [];
@@ -76,7 +88,7 @@ async function loadSupabase(): Promise<Product[]> {
   }));
 }
 
-export const getCatalog = cache(async (): Promise<Product[]> => {
+async function loadCatalog(): Promise<Product[]> {
   if (supabaseConfig() && process.env.CATALOG_SOURCE !== "local") {
     try {
       const products = await loadSupabase();
@@ -87,6 +99,35 @@ export const getCatalog = cache(async (): Promise<Product[]> => {
     }
   }
   return loadLocal();
+}
+
+/**
+ * PROCESS-level cache, deliberately separate from React's `cache()`.
+ *
+ * `cache()` is scoped to a single request, so during static generation every
+ * page re-attempted Supabase and re-paid its timeout. With Supabase timing out
+ * on Vercel ("upstream request timeout"), that put /brand/[slug] over the 60s
+ * page budget and failed the whole build — and it was why sitemap.xml and
+ * llms.txt timed out too. One attempt per process, memoised as a promise so
+ * concurrent callers share the same in-flight read.
+ *
+ * TTL rather than forever: the catalogue is reseeded independently of deploys,
+ * and a long-lived server should eventually pick that up.
+ */
+const CATALOG_TTL_MS = 10 * 60 * 1000;
+let catalogPromise: Promise<Product[]> | null = null;
+let catalogLoadedAt = 0;
+
+export const getCatalog = cache(async (): Promise<Product[]> => {
+  const fresh = Date.now() - catalogLoadedAt < CATALOG_TTL_MS;
+  if (!catalogPromise || !fresh) {
+    catalogLoadedAt = Date.now();
+    catalogPromise = loadCatalog().catch((e) => {
+      catalogPromise = null; // a failed read must not be cached as the answer
+      throw e;
+    });
+  }
+  return catalogPromise;
 });
 
 /**
