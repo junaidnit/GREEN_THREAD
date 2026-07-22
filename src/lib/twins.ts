@@ -11,8 +11,7 @@ import { rankSameButBetter, rankSameLook, type MatchResult } from "./match";
  *
  * Similarity is a RANKING signal only, never a gate: CLIP scores cluster
  * around ~0.73 for almost any two catalogue photos because it keys on
- * studio style as much as on the garment. What the item actually IS —
- * garment type, gender, colour, pattern — is decided in match.ts.
+ * studio style as much as on the garment. What the item actually IS, * garment type, gender, colour, pattern, is decided in match.ts.
  */
 
 interface TwinEntry {
@@ -44,7 +43,7 @@ export function simsFor(id: string): Map<string, number> {
   return sims;
 }
 
-/** Same garment, same design — the browse rail. Fibre-agnostic. */
+/** Same garment, same design, the browse rail. Fibre-agnostic. */
 export function getSameLook(product: Product, all: Product[], limit = 8): Product[] {
   return rankSameLook(product, all, { limit, sims: simsFor(product.id) });
 }
@@ -59,8 +58,7 @@ export function getSameButBetter(
 }
 
 /**
- * For concept items: the closest REAL listing of the same garment —
- * "here's the version of this you can actually buy today".
+ * For concept items: the closest REAL listing of the same garment, * "here's the version of this you can actually buy today".
  */
 export function getLiveLookalike(
   product: Product,

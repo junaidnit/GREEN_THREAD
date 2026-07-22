@@ -58,11 +58,11 @@ export function CinematicHero({
         </div>
       </div>
 
-      {/* deep editorial scrim — type must float, imagery must whisper */}
+      {/* deep editorial scrim, type must float, imagery must whisper */}
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_60%_55%_at_50%_42%,rgba(12,15,13,0.42)_0%,rgba(12,15,13,0.85)_100%)]" />
       <div className="absolute inset-0 bg-gradient-to-b from-[#0c0f0d]/70 via-transparent to-[#0c0f0d]" />
 
-      {/* corner captions — the two worlds, named quietly */}
+      {/* corner captions, the two worlds, named quietly */}
       <p className="eyebrow absolute bottom-6 left-6 z-10 !text-white/50">Grown &amp; made with care</p>
       <p className="eyebrow absolute bottom-6 right-6 z-10 !text-white/40">The true cost of fast fashion</p>
 
@@ -89,13 +89,13 @@ export function CinematicHero({
           data-testid="hero-check-cta"
           className="mt-9 rounded-full bg-[#f4f1e9] px-8 py-3.5 text-sm font-semibold text-[#141714] shadow-[0_8px_32px_-8px_rgba(244,241,233,0.45)] transition-transform hover:scale-[1.03] active:scale-[0.98]"
         >
-          Check any label — it&apos;s free
+          Check any label, it&apos;s free
         </Link>
 
         {/* social proof at the point of decision */}
         <p className="mt-4 text-xs tracking-wide text-white/50" data-testid="hero-proof">
           <CountUp to={pieces} /> pieces · <CountUp to={brands} /> brands ·{" "}
-          <CountUp to={fibres} /> fibres — every label read
+          <CountUp to={fibres} /> fibres, every label read
         </p>
 
         <div className="mt-10 w-full max-w-md">

@@ -75,14 +75,14 @@ export async function POST(req: Request) {
   const result = streamText({
     model: anthropic("claude-sonnet-5"),
     system:
-      "You are the Fibre Set concierge — a sharp, honest sustainable-fashion shopping assistant for our catalog. " +
+      "You are the Fibre Set concierge, a sharp, honest sustainable-fashion shopping assistant for our catalog. " +
       "Use the search_catalog tool to find real products before recommending anything; never invent products. " +
       "The UI renders product cards for whatever your tool calls return, so keep your text short: explain WHY the picks fit " +
       "(fabric properties, certifications, score) in 2-4 sentences, plain language. " +
       "Be honest about trade-offs (e.g. recycled polyester sheds microfibres; conventional cotton is thirsty). " +
       "If a product has greenwash_flags, mention that some of its claims are unverified. " +
       "If nothing fits, say so and suggest the closest alternative. Prices are in GBP (£); the shopper is in the UK. " +
-      "Write plain conversational text only — no markdown, no asterisks, no bullet lists.",
+      "Write plain conversational text only, no markdown, no asterisks, no bullet lists.",
     messages: modelMessages,
     stopWhen: stepCountIs(4),
     tools: {

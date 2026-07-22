@@ -84,7 +84,7 @@ export default function PrivacyPage() {
       <Section title="What we keep">
         <p>
           <b className="text-foreground">We do not store the page content.</b> It is held in memory
-          long enough to return your answer and is then gone — there is no database record of the
+          long enough to return your answer and is then gone, there is no database record of the
           pages you check.
         </p>
         <p>
@@ -106,7 +106,7 @@ export default function PrivacyPage() {
         <p>
           When you follow a link to a retailer we may earn a commission, which is how the site is
           paid for. The retailer sees an ordinary referral. It never changes what the label check
-          tells you —{" "}
+          tells you, {" "}
           <Link href="/methodology" className="underline underline-offset-2 hover:text-primary">
             our scoring is published
           </Link>{" "}

@@ -5,7 +5,7 @@ import { safeFetchUrl } from "@/lib/url-safety";
 export const maxDuration = 60;
 
 /**
- * Link-paste analyzer — the BuyHatke move, pointed at fabric.
+ * Link-paste analyzer, the BuyHatke move, pointed at fabric.
  * Fetches any product URL, harvests structured metadata (JSON-LD Product,
  * OpenGraph, meta tags) plus visible text, then runs the same Claude
  * extraction agent used by the catalog pipeline and scores it with the
@@ -102,14 +102,14 @@ export async function POST(req: Request) {
     });
     if (!res.ok) {
       return Response.json(
-        { error: `The retailer's site wouldn't share the page (HTTP ${res.status}). Some sites block automated reading — try another link.` },
+        { error: `The retailer's site wouldn't share the page (HTTP ${res.status}). Some sites block automated reading, try another link.` },
         { status: 422 },
       );
     }
     html = (await res.text()).slice(0, 800_000);
   } catch {
     return Response.json(
-      { error: "Couldn't reach that page — it may be blocking automated reading or timed out." },
+      { error: "Couldn't reach that page, it may be blocking automated reading or timed out." },
       { status: 422 },
     );
   }
@@ -126,7 +126,7 @@ export async function POST(req: Request) {
   } catch (e) {
     console.error(`[analyze] extraction failed for ${target.hostname}:`, e);
     return Response.json(
-      { error: "We read the page but couldn't analyse the label just now — please try again." },
+      { error: "We read the page but couldn't analyse the label just now, please try again." },
       { status: 502 },
     );
   }

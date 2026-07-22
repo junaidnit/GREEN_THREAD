@@ -66,10 +66,10 @@ export const MATERIAL_LABELS: Record<MaterialId, string> = {
   other: "Other fibre",
 };
 
-/** Why each fibre scores the way it does — used in fabric explainer UI. */
+/** Why each fibre scores the way it does, used in fabric explainer UI. */
 export const MATERIAL_NOTES: Record<MaterialId, string> = {
   hemp: "Rain-fed, pesticide-free, improves soil; among the lowest-impact fibres.",
-  linen: "From flax — low water, whole plant used, biodegradable.",
+  linen: "From flax, low water, whole plant used, biodegradable.",
   recycled_cotton: "Reuses existing fibre; near-zero new farming impact, but shorter fibres need blending.",
   tencel_lyocell: "Wood-pulp fibre made in a closed loop that recovers ~99% of solvents.",
   recycled_wool: "Reclaimed wool avoids new animal farming and landfill.",
@@ -115,7 +115,7 @@ export const PRACTICE_CAP = 9;
 /**
  * Textual evidence patterns per certification. A cert claimed by the
  * extraction agent only survives validation if the product copy (or the
- * brand's own certification list) actually mentions it — LLM extractors
+ * brand's own certification list) actually mentions it, LLM extractors
  * occasionally hallucinate certifications, and unverified certs must never
  * inflate a score.
  */
@@ -158,13 +158,13 @@ const PRACTICE_POINTS: Array<{
   label: string;
   detail: string;
 }> = [
-  { key: "deadstock", points: 6, label: "Deadstock / rescued fabric", detail: "Uses existing fabric — zero new fibre production for this piece." },
+  { key: "deadstock", points: 6, label: "Deadstock / rescued fabric", detail: "Uses existing fabric, zero new fibre production for this piece." },
   { key: "undyed", points: 3, label: "Undyed", detail: "No dye chemistry or dye wastewater at all." },
   { key: "natural_dye", points: 2, label: "Natural dyes", detail: "Plant/mineral dyes avoid synthetic dye effluent." },
   { key: "repair_program", points: 2, label: "Repair programme", detail: "Brand repairs the garment, extending its life." },
   { key: "take_back", points: 2, label: "Take-back recycling", detail: "Brand takes the garment back for recycling at end of life." },
   { key: "zero_waste", points: 1, label: "Zero-waste cutting", detail: "Pattern layout designed to leave no offcut waste." },
-  { key: "made_to_order", points: 1, label: "Made to order", detail: "Nothing is produced unless sold — no overstock landfill." },
+  { key: "made_to_order", points: 1, label: "Made to order", detail: "Nothing is produced unless sold, no overstock landfill." },
   { key: "pfc_free", points: 1, label: "PFC-free finish", detail: "Water repellency without persistent 'forever chemicals'." },
 ];
 
@@ -177,8 +177,8 @@ export function normalizeComposition(parts: FabricPart[]): FabricPart[] {
 /**
  * Turn a raw extracted composition into one garment's worth of fibre.
  *
- * Labels list multi-part garments per component — "Shell: 100% Cotton,
- * Sleeve Lining: 100% Polyester, Collar: 100% Cotton" — so the parts sum to
+ * Labels list multi-part garments per component, "Shell: 100% Cotton,
+ * Sleeve Lining: 100% Polyester, Collar: 100% Cotton", so the parts sum to
  * n×100. `fibreScore` normalises internally so the score stays right, but
  * `fibreMark`/`oilDerivedPct` read the percentages literally and report
  * nonsense like "200% plastic". Merge duplicate materials, scale a
@@ -210,7 +210,7 @@ export function consolidateComposition(parts: FabricPart[]): FabricPart[] {
 
   const out = [...merged.values()];
   const total = out.reduce((s, p) => s + p.pct, 0);
-  if (total <= 0 || total < 90) return out; // incomplete label — don't invent fibre
+  if (total <= 0 || total < 90) return out; // incomplete label, don't invent fibre
 
   const scaled = out.map((p) => ({ ...p, pct: Math.round((p.pct / total) * 100) }));
   // absorb rounding drift into the dominant fibre so it sums to exactly 100
@@ -263,7 +263,7 @@ export function computeScore(input: ScoreInput): {
   factors.push({
     label: "Fibre composition",
     points: fibre,
-    detail: `${topFibres} — weighted fibre impact (max 70).`,
+    detail: `${topFibres}, weighted fibre impact (max 70).`,
   });
 
   let certTotal = 0;
@@ -280,7 +280,7 @@ export function computeScore(input: ScoreInput): {
     factors.push({
       label: "Certifications",
       points: certTotal,
-      detail: `${recognized.join(", ")}${certTotal === CERT_CAP ? " — capped at 15" : ""}.`,
+      detail: `${recognized.join(", ")}${certTotal === CERT_CAP ? ", capped at 15" : ""}.`,
     });
   }
 

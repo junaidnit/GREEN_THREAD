@@ -3,9 +3,9 @@
 import { useRef, useState } from "react";
 
 /**
- * "Inspect the weave" — a magnifier lens over the hi-res product photo with a
+ * "Inspect the weave", a magnifier lens over the hi-res product photo with a
  * soft specular sheen that follows the cursor, so the fabric reads as tactile.
- * Pure CSS/JS; no WebGL, no fake textures — just the real photo, closer.
+ * Pure CSS/JS; no WebGL, no fake textures, just the real photo, closer.
  */
 export function FabricLens({ imageUrl, children }: { imageUrl: string; children: React.ReactNode }) {
   const wrapRef = useRef<HTMLDivElement>(null);
@@ -52,7 +52,7 @@ export function FabricLens({ imageUrl, children }: { imageUrl: string; children:
               backgroundPosition: `${lens.bx}% ${lens.by}%`,
             }}
           >
-            {/* dynamic sheen — light glides across the weave as you move */}
+            {/* dynamic sheen, light glides across the weave as you move */}
             <div
               className="absolute inset-0 rounded-full"
               style={{

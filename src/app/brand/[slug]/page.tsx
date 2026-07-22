@@ -24,7 +24,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   if (products.length === 0) return {};
   const b = products[0].brand;
   return {
-    title: `${b.name} — sustainability profile & products`,
+    title: `${b.name}: sustainability profile & products`,
     description: b.ethics_summary,
     alternates: { canonical: `/brand/${b.slug}` },
   };

@@ -5,7 +5,7 @@ import Link from "next/link";
 
 /**
  * Chrome removed inline installation in 2018 (fully disabled in Chrome 71),
- * so no site can install an extension in place — the store page is a required
+ * so no site can install an extension in place, the store page is a required
  * stop for everyone. What we CAN avoid is sending people somewhere that
  * cannot work: mobile browsers support no extensions at all, and Safari and
  * Firefox can't use a Chrome build. Those users get an honest alternative
@@ -49,7 +49,7 @@ export function InstallExtension() {
           Check a link instead →
         </Link>
         <p className="mx-auto mt-4 max-w-[46ch] text-[14px] font-light leading-relaxed text-muted-foreground">
-          Browser extensions don&apos;t run on phones — that&apos;s a limit of mobile browsers, not
+          Browser extensions don&apos;t run on phones, that&apos;s a limit of mobile browsers, not
           of us. Paste a product link into Fabric Check and you&apos;ll get the same reading. Come
           back on a laptop to install it.
         </p>
@@ -65,7 +65,7 @@ export function InstallExtension() {
           Check a link instead →
         </Link>
         <p className="mx-auto mt-4 max-w-[48ch] text-[14px] font-light leading-relaxed text-muted-foreground">
-          We don&apos;t have a {name} build yet — the extension is Chrome and Edge for now. Paste a
+          We don&apos;t have a {name} build yet, the extension is Chrome and Edge for now. Paste a
           product link into Fabric Check for the same reading in the meantime.
         </p>
       </div>
@@ -77,7 +77,7 @@ export function InstallExtension() {
       <div className="flex flex-wrap items-center justify-center gap-3">
         {STORE_URL ? (
           <a href={STORE_URL} target="_blank" rel="noopener noreferrer" className={PRIMARY}>
-            Add to Chrome — free
+            Add to Chrome, free
           </a>
         ) : (
           <a href={ZIP} download className={PRIMARY}>
@@ -93,7 +93,7 @@ export function InstallExtension() {
           <>Opens the Chrome Web Store. Free, and it asks for no access to your browsing.</>
         ) : (
           <>
-            Free. We&apos;re not in the Chrome Web Store yet, so this is a manual install — three
+            Free. We&apos;re not in the Chrome Web Store yet, so this is a manual install, three
             steps below, about a minute. Nothing to sign up for.
           </>
         )}

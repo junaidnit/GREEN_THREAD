@@ -52,7 +52,7 @@ export function SavedList({ products }: { products: CatalogCard[] }) {
         <div className="rounded-xl2 border border-dashed border-border py-20 text-center">
           <p className="font-display text-[20px] font-semibold">Nothing saved yet</p>
           <p className="mx-auto mt-1 max-w-sm text-sm text-muted-foreground">
-            Tap <b>Save</b> on any product and it lands here — watch for the little arc into the heart.
+            Tap <b>Save</b> on any product and it lands here, watch for the little arc into the heart.
           </p>
         </div>
       )}

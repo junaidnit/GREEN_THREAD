@@ -2,13 +2,13 @@ import { oilDerivedPct, naturalPct, misleadingName } from "./materials";
 import type { FabricPart } from "./types";
 
 /**
- * THE TRUTH LEDGER — The Fibre Set's core defensible asset.
+ * THE TRUTH LEDGER. The Fibre Set's core defensible asset.
  *
  * An append-only, timestamped, versioned record of what each product was
  * ACTUALLY made of, and whether its name misled, every time we observed it.
  * A week-one competitor has an empty ledger; ours deepens autonomously every
  * time the ingest/sentinel crews run. Over time it becomes the authoritative
- * historical record of who mislabelled what, when — citable, un-fakeable
+ * historical record of who mislabelled what, when, citable, un-fakeable
  * (you can't retroactively claim to have been watching two years ago), and
  * the training corpus for a fibre-specialist model.
  *
@@ -19,17 +19,17 @@ export interface TruthEntry {
   product_id: string;
   brand_slug: string;
   title: string;
-  /** ISO date (day granularity — we record at most one change per day). */
+  /** ISO date (day granularity, we record at most one change per day). */
   observed_at: string;
   composition: FabricPart[];
   plastic_pct: number;
   natural_pct: number;
   score: number;
   grade: string;
-  /** Set when the name claims a fibre the garment is mostly NOT — greenwash. */
+  /** Set when the name claims a fibre the garment is mostly NOT, greenwash. */
   misnamed: { fibre: string; actualPct: number } | null;
   source: string;
-  /** Stable hash of the meaningful fields — a new entry is only appended when this changes. */
+  /** Stable hash of the meaningful fields, a new entry is only appended when this changes. */
   hash: string;
 }
 
@@ -57,7 +57,7 @@ function hashEntry(e: Omit<TruthEntry, "hash" | "observed_at">): string {
     e.grade,
     e.misnamed ? `${e.misnamed.fibre}:${e.misnamed.actualPct}` : "",
   ]);
-  // FNV-1a 32-bit — small, stable, dependency-free
+  // FNV-1a 32-bit, small, stable, dependency-free
   let h = 0x811c9dc5;
   for (let i = 0; i < canonical.length; i++) {
     h ^= canonical.charCodeAt(i);
@@ -102,8 +102,7 @@ export interface LedgerUpdate {
 
 /**
  * Fold today's observations into the ledger. Appends an entry only when a
- * product is new or its meaningful fields changed since we last looked —
- * so the ledger stays a true version history, not a daily dump.
+ * product is new or its meaningful fields changed since we last looked, * so the ledger stays a true version history, not a daily dump.
  */
 export function recordObservations(
   prev: TruthLedger,

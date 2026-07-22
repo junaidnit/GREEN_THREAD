@@ -54,7 +54,7 @@ export function SearchExperience({ products }: { products: CatalogCard[] }) {
   const index = useMemo(() => buildIndex(products), [products]);
 
   // Debounced URL sync (shareable links + back button, no history spam).
-  // Skips when the URL already matches — a redundant replace can race and
+  // Skips when the URL already matches, a redundant replace can race and
   // cancel an in-flight navigation (e.g. clicking through to a product).
   const urlTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
   useEffect(() => {
@@ -88,7 +88,7 @@ export function SearchExperience({ products }: { products: CatalogCard[] }) {
   const [visible, setVisible] = useState(PAGE_SIZE);
   const sentinelRef = useRef<HTMLDivElement>(null);
   const filterKey = filtersToParams(filters).toString();
-  // reset the page window when the filters change — adjusted during render
+  // reset the page window when the filters change, adjusted during render
   // (React's "reset state on key change" pattern), not via setState-in-effect
   const [prevKey, setPrevKey] = useState(filterKey);
   if (filterKey !== prevKey) {
@@ -107,7 +107,7 @@ export function SearchExperience({ products }: { products: CatalogCard[] }) {
     io.observe(el);
     return () => io.disconnect();
   }, [results.length]);
-  /* never show the same photo twice in a row — swap forward when adjacent
+  /* never show the same photo twice in a row, swap forward when adjacent
      cards share an image (demo pools repeat; real feeds won't) */
   const shown = useMemo(() => {
     const list = results.slice(0, visible);
@@ -183,7 +183,7 @@ export function SearchExperience({ products }: { products: CatalogCard[] }) {
                 }
                 set("q", v);
               }}
-              placeholder="Search tops, linen shirts — or paste a product link…"
+              placeholder="Search tops, linen shirts, or paste a product link…"
               className="w-full bg-transparent text-sm outline-none placeholder:text-muted-foreground"
               autoComplete="off"
             />
@@ -198,7 +198,7 @@ export function SearchExperience({ products }: { products: CatalogCard[] }) {
             data-testid="pure-toggle"
             onClick={() => set("noSynthetics", !filters.noSynthetics)}
             aria-pressed={filters.noSynthetics}
-            title="Hide everything containing oil-derived synthetic fibre — including recycled polyester and nylon"
+            title="Hide everything containing oil-derived synthetic fibre, including recycled polyester and nylon"
             className={`flex h-12 shrink-0 items-center gap-2 rounded-full border px-4 text-sm font-semibold transition-all ${
               filters.noSynthetics
                 ? "border-grade-a bg-grade-a text-white shadow-[0_0_16px_-4px_var(--grade-a)]"
@@ -356,9 +356,9 @@ export function SearchExperience({ products }: { products: CatalogCard[] }) {
             </>
           ) : (
             <div className="rounded-xl2 border border-dashed border-border px-4 py-14 text-center" data-testid="empty-state">
-              <p className="font-display text-[20px] font-semibold">Nothing matches — yet</p>
+              <p className="font-display text-[20px] font-semibold">Nothing matches, yet</p>
               <p className="mx-auto mt-1 max-w-sm text-sm text-muted-foreground">
-                Try fewer filters, or ask the concierge for something specific — it knows the whole catalog.
+                Try fewer filters, or ask the concierge for something specific, it knows the whole catalog.
               </p>
               {nearMisses.length > 0 && (
                 <div className="mt-8 text-left">
@@ -411,7 +411,7 @@ function FilterSidebar({
         </button>
       )}
 
-      {/* ── NATURAL FABRIC — the top-most, hero filter ── */}
+      {/* ── NATURAL FABRIC, the top-most, hero filter ── */}
       <section data-testid="fabric-filter" className="border-b border-border pb-5">
         <div className="mb-3 flex items-center gap-2">
           <Leaf className="size-4 text-primary" />
@@ -428,7 +428,7 @@ function FilterSidebar({
           return (
             <div key={group.class} className="mb-3 last:mb-0">
               <p className="mb-1.5 text-[12px] font-semibold uppercase tracking-wider text-primary">
-                {group.label} <span className="font-normal normal-case text-muted-foreground">— {group.blurb}</span>
+                {group.label} <span className="font-normal normal-case text-muted-foreground">, {group.blurb}</span>
               </p>
               <div className="space-y-1">
                 {materials.map((m) => (
@@ -656,7 +656,7 @@ function FabricRow({
             <div className="ml-6 mt-1.5 rounded-lg border-l-2 border-primary bg-surface p-2.5">
               <p className="font-display text-xs font-bold text-primary">{fact.stat}</p>
               <p className="mt-0.5 text-[12px] leading-relaxed text-muted-foreground">{fact.detail}</p>
-              <p className="mt-1 text-[12px] italic text-muted-foreground">— {fact.source}</p>
+              <p className="mt-1 text-[12px] italic text-muted-foreground">, {fact.source}</p>
             </div>
           </motion.div>
         )}
@@ -666,7 +666,7 @@ function FabricRow({
 }
 
 /**
- * Post-search refinement strip — an invitation, never a gate. Results stay
+ * Post-search refinement strip, an invitation, never a gate. Results stay
  * visible underneath; one tap applies a filter and the strip slides away.
  */
 function RefinementBanner({
@@ -693,7 +693,7 @@ function RefinementBanner({
     >
       <div className="flex items-start justify-between gap-3">
         <div>
-          <p className="font-display text-sm font-bold">Lots of great matches — make it yours</p>
+          <p className="font-display text-sm font-bold">Lots of great matches, make it yours</p>
           <p className="mt-0.5 text-xs text-muted-foreground">One tap to narrow down. Or just keep scrolling.</p>
         </div>
         <button aria-label="Dismiss refinements" onClick={onDismiss} className="text-muted-foreground hover:text-foreground">

@@ -4,7 +4,7 @@ import { getCatalog } from "@/lib/catalog";
 
 export const metadata: Metadata = {
   title: "Home & Bedding",
-  description: "Bedding in linen, hemp and wool — chosen for how you actually sleep. Coming soon.",
+  description: "Bedding in linen, hemp and wool, chosen for how you actually sleep. Coming soon.",
   alternates: { canonical: "/home" },
 };
 
@@ -22,7 +22,7 @@ export default async function HomePage() {
     <ComingSoon
       eyebrow="Home & bedding"
       title="Fibres that earn the bed."
-      body="Linen sheets that move heat away all night, wool fill that buffers humidity — bedding chosen for hot sleepers and light ones. Our home edit is on its way."
+      body="Linen sheets that move heat away all night, wool fill that buffers humidity, bedding chosen for hot sleepers and light ones. Our home edit is on its way."
       images={images}
       caption={images.length > 0 ? "Linen and cotton pieces already on our record." : undefined}
     />

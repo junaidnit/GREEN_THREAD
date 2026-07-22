@@ -7,7 +7,7 @@ import { SITE_URL } from "@/lib/site";
  *
  * AI crawlers are deliberately ALLOWED. The whole GEO thesis is that we want
  * to be the source an assistant cites when someone asks whether a garment is
- * really linen — blocking them would be arguing against our own strategy.
+ * really linen, blocking them would be arguing against our own strategy.
  * What we do block is the parameterised search space and the private,
  * device-local pages, which have nothing to index.
  */
@@ -19,7 +19,7 @@ export default function robots(): MetadataRoute.Robots {
         allow: "/",
         disallow: [
           "/api/",
-          "/out/", // affiliate redirects — never a landing page
+          "/out/", // affiliate redirects, never a landing page
           "/retailer/",
           "/saved", // lives in the visitor's own browser storage
           "/diary",

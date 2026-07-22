@@ -2,7 +2,7 @@ import type { FabricPart, MaterialId } from "./types";
 
 /**
  * Parse a real product description for a stated fibre composition.
- * Returns null unless percentages are explicit and sum to ~100 — we only
+ * Returns null unless percentages are explicit and sum to ~100, we only
  * ingest products whose labels actually disclose what they're made of.
  */
 
@@ -50,13 +50,13 @@ export function parseComposition(text: string): FabricPart[] | null {
   }
   let out = [...merged.values()];
   let total = out.reduce((s, p) => s + p.pct, 0);
-  // multi-part garments (shell 100% + lining 100%) — average down to one garment
+  // multi-part garments (shell 100% + lining 100%), average down to one garment
   if (total > 110 && total % 100 === 0) {
     const factor = total / 100;
     out = out.map((p) => ({ ...p, pct: Math.round(p.pct / factor) }));
     total = out.reduce((s, p) => s + p.pct, 0);
   }
-  if (total < 90 || total > 110) return null; // label doesn't add up — don't guess
+  if (total < 90 || total > 110) return null; // label doesn't add up, don't guess
   return out.map((p) => ({ ...p, pct: Math.round((p.pct / total) * 100) }));
 }
 
@@ -64,7 +64,7 @@ export function parseComposition(text: string): FabricPart[] | null {
  * Map a Shopify product_type / title to our category taxonomy.
  *
  * Order matters, and two traps are worth spelling out:
- *  · "short" is an adjective far more often than a garment — "Short Sleeve
+ *  · "short" is an adjective far more often than a garment, "Short Sleeve
  *    Henley Top", "Utility Short Blouson Jacket". Matching bare /short/ filed
  *    tops and jackets as trousers, so only the plural \bshorts\b counts.
  *  · The garment type beats the fabric: a "Denim Jacket" is outerwear, not
@@ -86,6 +86,6 @@ export function mapCategory(productType: string, title: string): string {
   // holder and a macrame plant-hanger kit all arrived filed as shirts, which
   // put them in the shirts facet AND let them pass the matcher's garment gate
   // as recommended alternatives to a t-shirt. Unclassifiable is its own
-  // answer — say so rather than guessing a garment.
+  // answer, say so rather than guessing a garment.
   return "other";
 }

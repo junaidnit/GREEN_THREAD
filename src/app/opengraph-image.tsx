@@ -2,12 +2,12 @@ import { ImageResponse } from "next/og";
 import { BRAND_LOGO } from "@/components/brand-path";
 
 /**
- * Every route previously shipped without og:image, so each share — and each
- * AI-generated preview card — rendered blank. Drawn from the heritage mark
+ * Every route previously shipped without og:image, so each share, and each
+ * AI-generated preview card, rendered blank. Drawn from the heritage mark
  * and the brand palette so a shared link looks like the site it came from.
  */
 export const runtime = "nodejs";
-export const alt = "The Fibre Set — natural fibres, chosen well";
+export const alt = "The Fibre Set, natural fibres, chosen well";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 

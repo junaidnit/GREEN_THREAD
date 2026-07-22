@@ -18,7 +18,7 @@ import {
 } from "@/components/methodology-visuals";
 
 export const metadata: Metadata = {
-  title: "How we score — The Fibre Set methodology",
+  title: "How we score: The Fibre Set methodology",
   description:
     "Every Fibre Set sustainability score is computed with a published, deterministic rubric: fibre impact, certifications, brand practices. No black box.",
   alternates: { canonical: "/methodology" },

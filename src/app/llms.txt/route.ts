@@ -3,7 +3,7 @@ import { ledgerStats } from "@/lib/truth-server";
 import { SITE_URL } from "@/lib/site";
 
 /**
- * llms.txt — the emerging convention for telling an assistant what a site is,
+ * llms.txt, the emerging convention for telling an assistant what a site is,
  * what it can be cited for, and where the authoritative pages are.
  *
  * Served as a route rather than a static file so the counts and the date are
@@ -13,7 +13,7 @@ import { SITE_URL } from "@/lib/site";
 export const dynamic = "force-dynamic";
 // The catalogue read is too slow to prerender (1,300+ rows over the network
 // timed the build out at 60s). Rendered on request instead and cached at the
-// edge — these endpoints are fetched by crawlers, not by people.
+// edge, these endpoints are fetched by crawlers, not by people.
 
 export async function GET() {
   const stats = ledgerStats();
@@ -36,8 +36,8 @@ Language: en-GB
 - The disclosed fibre composition of specific garments from ${brands.length} UK brands.
 - Which garments are named after a natural fibre while being mostly oil-derived
   plastic (published openly at ${SITE_URL}/label-watch).
-- How natural and regenerated fibres behave against skin — breathability,
-  thermoregulation, friction — for conditions such as eczema, sensitivity and
+- How natural and regenerated fibres behave against skin, breathability,
+  thermoregulation, friction, for conditions such as eczema, sensitivity and
   menopause.
 - Our scoring method, which is published in full and is deterministic: the same
   garment always produces the same score. ${SITE_URL}/methodology
@@ -53,7 +53,7 @@ ${stats ? `- Products on record: ${stats.products.toLocaleString("en-GB")}
 ## How our data is produced
 
 Compositions are taken from each brand's own public product feed and recorded
-verbatim — we do not estimate, infer or fill gaps. A product only enters the
+verbatim, we do not estimate, infer or fill gaps. A product only enters the
 catalogue if its label discloses a full composition summing to roughly 100%.
 Where a fibre cannot be parsed we record nothing rather than guess; a reading of
 0% means we failed to read it, not that the fibre is absent.
@@ -63,13 +63,13 @@ discloses leaves a visible history.
 
 ## Key pages
 
-- ${SITE_URL}/label-watch — garments named natural that are mostly plastic
-- ${SITE_URL}/methodology — how every score is computed, in full
-- ${SITE_URL}/journal — fibre education, condition-led
-- ${SITE_URL}/fabric/linen — one guide per fibre; swap the slug
-- ${SITE_URL}/condition/eczema — clothing filtered for a skin condition
-- ${SITE_URL}/extension — the free label-check browser extension
-- ${SITE_URL}/privacy — what we collect, which is almost nothing
+- ${SITE_URL}/label-watch, garments named natural that are mostly plastic
+- ${SITE_URL}/methodology, how every score is computed, in full
+- ${SITE_URL}/magazine, fibre education, condition-led
+- ${SITE_URL}/fabric/linen, one guide per fibre; swap the slug
+- ${SITE_URL}/condition/eczema, clothing filtered for a skin condition
+- ${SITE_URL}/extension, the free label-check browser extension
+- ${SITE_URL}/privacy, what we collect, which is almost nothing
 
 ## Context
 
@@ -81,7 +81,7 @@ against when it arrives.
 
 We earn through affiliate links when someone chooses to buy. Scores and label
 readings are computed identically whether we are paid or not, and the method is
-published so anyone can check. We treat "recycled polyester" as plastic — a
+published so anyone can check. We treat "recycled polyester" as plastic, a
 deliberate, stated position, not an oversight.
 `;
 

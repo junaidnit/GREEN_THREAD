@@ -6,8 +6,8 @@ import { createAnthropic } from "@ai-sdk/anthropic";
  *
  * Why this exists: pasting a secret into a dashboard field (Vercel) or a
  * .env file can carry an invisible BOM. Node exposes it verbatim in
- * process.env, and any code that puts the value in an HTTP header — which
- * the Anthropic and Supabase SDKs both do on every request — then throws
+ * process.env, and any code that puts the value in an HTTP header, which
+ * the Anthropic and Supabase SDKs both do on every request, then throws
  * `Cannot convert argument to a ByteString … value 65279`. That took down
  * the concierge, Fabric Check and the extension endpoint in production.
  * Sanitising at read time makes the whole app immune regardless of how the

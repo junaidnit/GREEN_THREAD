@@ -9,7 +9,7 @@ import type { Practices, ScoreFactor } from "./types";
  * fibre composition + honest sustainability read. Used by both the Fabric
  * Check page (server fetches the URL itself) and the browser extension
  * (the user's own browser has already rendered the page, so it scrapes the
- * DOM directly and skips the fetch — sidesteps sites that 403 server fetches).
+ * DOM directly and skips the fetch, sidesteps sites that 403 server fetches).
  */
 
 const materialEnum = z.enum([
@@ -57,7 +57,7 @@ export interface PageSignal {
 export async function extractComposition(signal: PageSignal): Promise<ExtractionResult> {
   const { object } = await generateObject({
     // Haiku, not Sonnet: this is a bounded extraction from ≤7k characters of
-    // text that already states the composition — the hard part is refusing to
+    // text that already states the composition, the hard part is refusing to
     // invent, not reasoning. Sonnet averaged ~7.3s, which reads as broken in
     // a panel the user is watching. Measured on the same pages after the
     // switch: see the timing note in the extension README.
@@ -66,14 +66,13 @@ export async function extractComposition(signal: PageSignal): Promise<Extraction
     system:
       "You are a textile sustainability analyst. Extract structured data from scraped product-page content precisely. " +
       "Never invent fibres, percentages or certifications not present in the text. If no composition is stated, say so " +
-      "(found_composition=false) — an honest 'not disclosed' matters more than a guess. " +
+      "(found_composition=false), an honest 'not disclosed' matters more than a guess. " +
       "Flag vague eco-claims ('conscious', 'eco-friendly', 'sustainable') that lack certification as greenwash.",
     prompt:
       `Page title: ${signal.title}\nSite: ${signal.siteName}\n\nPage content:\n"""${signal.text.slice(0, 7000)}"""`,
   });
   // Fold multi-part garments ("Shell: 100% Cotton, Lining: 100% Polyester")
-  // into one garment's composition before anything downstream reads it —
-  // otherwise the fibre mark reports totals like "200% plastic".
+  // into one garment's composition before anything downstream reads it, // otherwise the fibre mark reports totals like "200% plastic".
   return { ...object, fabric_composition: consolidateComposition(object.fabric_composition) };
 }
 
@@ -85,6 +84,6 @@ export function scoreExtraction(
     fabric_composition: object.fabric_composition,
     certifications: object.certifications,
     practices: object.practices as Practices,
-    brand_ethics_modifier: 0, // unknown brand — fibre and certs only
+    brand_ethics_modifier: 0, // unknown brand, fibre and certs only
   });
 }

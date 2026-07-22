@@ -15,7 +15,7 @@ const CARD_THUMB =
 /**
  * Phia-video-style hero, natural-fibre edition: warm paper backdrop, a
  * centred studio photo with ghosted serif type behind it, and the floating
- * label-verdict cards — their "price truth" card become our "fibre truth".
+ * label-verdict cards, their "price truth" card become our "fibre truth".
  */
 export function LabelHero({
   pieces,
@@ -49,11 +49,11 @@ export function LabelHero({
               data-testid="hero-check-cta"
               className="rounded-full bg-foreground px-8 py-3.5 text-sm font-semibold text-background shadow-lg transition-transform hover:scale-[1.03] active:scale-[0.98]"
             >
-              Check any label — it&apos;s free
+              Check any label, it&apos;s free
             </Link>
             <p className="text-xs tracking-wide text-muted-foreground" data-testid="hero-proof">
               <CountUp to={pieces} /> pieces · <CountUp to={brands} /> brands ·{" "}
-              <CountUp to={fibres} /> fibres — every label read
+              <CountUp to={fibres} /> fibres, every label read
             </p>
           </div>
         </div>
@@ -90,7 +90,7 @@ export function LabelHero({
             />
           </motion.div>
 
-          {/* the verdict card — Phia's price card, reborn as fibre truth */}
+          {/* the verdict card. Phia's price card, reborn as fibre truth */}
           <motion.div
             initial={{ opacity: 0, y: 16, x: -8 }}
             animate={{ opacity: 1, y: 0, x: 0 }}
@@ -127,7 +127,7 @@ export function LabelHero({
         {/* right: how it works, whisper-quiet */}
         <div className="relative z-20 mx-auto max-w-xs text-center lg:text-left">
           <p className="text-sm leading-relaxed text-muted-foreground">
-            Paste any product link — we pull the label, name the fibres, and flag the
+            Paste any product link, we pull the label, name the fibres, and flag the
             plastic hiding in &ldquo;natural&rdquo; blends.
           </p>
           <div className="mt-6">

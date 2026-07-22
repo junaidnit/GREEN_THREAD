@@ -19,7 +19,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   if (!CONDITION_SLUGS.includes(slug as ConditionSlug)) return {};
   const rule = CONDITIONS[slug as ConditionSlug];
   return {
-    title: `${rule.name} clothing — every label checked`,
+    title: `${rule.name} clothing: every label checked`,
     description: rule.summary,
     alternates: { canonical: `/condition/${slug}` },
   };
@@ -82,7 +82,7 @@ export default async function ConditionPage({ params }: Props) {
         </p>
         <p className="mt-3 max-w-2xl text-xs leading-relaxed text-muted-foreground">
           <b>This is general information, not medical advice.</b> We filter by disclosed fibre
-          composition only — we can&apos;t see dye or finish chemistry, and everyone&apos;s skin is
+          composition only, we can&apos;t see dye or finish chemistry, and everyone&apos;s skin is
           different. If you have a diagnosed condition or allergy, please check with your
           dermatologist or GP, especially before switching fabrics for a first time.
         </p>
@@ -110,7 +110,7 @@ export default async function ConditionPage({ params }: Props) {
           ))}
         </div>
       ) : (
-        <p className="text-muted-foreground">No products currently meet this list — check back soon.</p>
+        <p className="text-muted-foreground">No products currently meet this list, check back soon.</p>
       )}
     </div>
   );

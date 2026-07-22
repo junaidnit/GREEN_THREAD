@@ -101,7 +101,7 @@ export function Marquee({ children, className }: { children: React.ReactNode; cl
   );
 }
 
-/** Two-line clamp with an elegant expand toggle — honesty behind a reveal. */
+/** Two-line clamp with an elegant expand toggle, honesty behind a reveal. */
 export function ExpandableText({ text, className }: { text: string; className?: string }) {
   const [open, setOpen] = useState(false);
   return (

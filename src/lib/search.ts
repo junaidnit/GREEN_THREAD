@@ -6,7 +6,7 @@ import { oilDerivedPct } from "./materials";
 /**
  * Client-side instant search + faceted filtering.
  * The whole enriched catalog is small; indexing it in the browser gives
- * <1ms queries with typo tolerance — the "search feels instant" core.
+ * <1ms queries with typo tolerance, the "search feels instant" core.
  */
 
 /** Shopper-language synonyms per category, so "top" finds tees/shirts/knits. */
@@ -220,8 +220,7 @@ export function facetCounts(products: CatalogCard[], filters: Filters, index: Mi
 }
 
 /**
- * Closest matches for a query that found nothing under active filters —
- * fuzzy ANY-term search, ignoring facets. Powers the helpful empty state.
+ * Closest matches for a query that found nothing under active filters, * fuzzy ANY-term search, ignoring facets. Powers the helpful empty state.
  */
 export function closestMatches<T extends CatalogCard>(
   products: T[],

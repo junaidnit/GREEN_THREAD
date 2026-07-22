@@ -30,7 +30,7 @@ export default async function RetailerCheckout({ params }: { params: Promise<{ i
     <div className="mx-auto max-w-3xl px-4 py-6 sm:px-6">
       {/* demo notice */}
       <div className="mb-4 rounded-lg border border-grade-c/40 bg-grade-c/10 px-4 py-2.5 text-center text-xs">
-        <b>Demo handoff</b> — this simulates landing directly in {product.retailer}&apos;s checkout,
+        <b>Demo handoff</b>, this simulates landing directly in {product.retailer}&apos;s checkout,
         exactly how the affiliate deeplink will work with live retailer feeds.{" "}
         <Link href={`/product/${id}`} className="font-medium underline">Back to The Fibre Set</Link>
       </div>
@@ -45,7 +45,7 @@ export default async function RetailerCheckout({ params }: { params: Promise<{ i
         </div>
 
         <div className="bg-surface p-6">
-          <h1 className="font-display text-[20px] font-bold">Your bag — 1 item</h1>
+          <h1 className="font-display text-[20px] font-bold">Your bag, 1 item</h1>
 
           <div className="mt-4 flex gap-4 rounded-xl border border-border p-4">
             <div className="relative h-28 w-20 shrink-0 overflow-hidden rounded-lg bg-surface-2">
@@ -83,7 +83,7 @@ export default async function RetailerCheckout({ params }: { params: Promise<{ i
             data-testid="retailer-pay-button"
             style={{ background: theme.accent, color: theme.bg === "#ffffff" ? "#ffffff" : theme.fg }}
             className="mt-5 w-full cursor-not-allowed rounded-full py-3.5 font-semibold opacity-95"
-            title="Demo checkout — payment disabled"
+            title="Demo checkout, payment disabled"
           >
             Checkout securely
           </button>

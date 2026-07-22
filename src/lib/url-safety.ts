@@ -1,8 +1,6 @@
 /**
  * SSRF guard for the link analyzer, which fetches a user-supplied URL
- * server-side. Without this, someone could point it at internal services —
- * http://localhost, cloud metadata (169.254.169.254), or private LAN hosts —
- * and use our server as a proxy to reach them. We only allow public http(s).
+ * server-side. Without this, someone could point it at internal services, * http://localhost, cloud metadata (169.254.169.254), or private LAN hosts, * and use our server as a proxy to reach them. We only allow public http(s).
  *
  * Pure + unit-tested. DNS-rebinding is not fully solvable at the URL layer
  * (a public hostname can resolve to a private IP); this blocks the obvious

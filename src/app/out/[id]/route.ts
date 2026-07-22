@@ -4,7 +4,7 @@ import { getProduct } from "@/lib/catalog";
 import { supabaseConfig } from "@/lib/env";
 
 /**
- * Outbound click handler — the affiliate deeplink pattern.
+ * Outbound click handler, the affiliate deeplink pattern.
  * Records the click (stdout for the MVP; analytics/affiliate network later)
  * and sends the shopper straight to the retailer checkout, BuyHatke-style.
  * In production this would 302 to a real affiliate deeplink for the retailer.
@@ -28,7 +28,7 @@ export async function GET(_req: Request, { params }: { params: Promise<{ id: str
       .then(() => {}, () => {});
   }
 
-  // live-ingested products have a REAL product page — send the shopper there.
+  // live-ingested products have a REAL product page, send the shopper there.
   // concept/demo items go to the simulated checkout instead.
   if (product.source === "live" && /^https?:\/\//.test(product.buy_url)) {
     return NextResponse.redirect(product.buy_url);

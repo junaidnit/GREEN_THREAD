@@ -8,8 +8,10 @@ import { MATERIAL_FACTS } from "@/lib/materials";
 import { HeroSearch } from "@/components/hero-search";
 import { FibreWidget, type FibreEntry } from "@/components/fibre-widget";
 import { garmentType, type GarmentType } from "@/lib/garment";
+import { CONDITIONS, CONDITION_SLUGS, isConditionSafe } from "@/lib/conditions";
 import type { MaterialId, Product } from "@/lib/types";
 import { ArrowUpRight } from "@/components/icons";
+import { sized, IMG } from "@/lib/image";
 
 export const metadata: Metadata = {
   alternates: { canonical: "/" },
@@ -38,7 +40,7 @@ const dominant = (p: Product, m: MaterialId) =>
 /* Picking a photo to represent a FIBRE is not the same as picking a product.
  * Taking the first match gave us a sandal for recycled cotton and a secondhand
  * listing for linen. We rank on garmentType rather than the stored category,
- * because the feed's category is unreliable — a "Macrame Yoga Mat Strap" is
+ * because the feed's category is unreliable, a "Macrame Yoga Mat Strap" is
  * filed under shirts. How much cloth each garment shows, roughly: */
 const SHOWS_CLOTH: Partial<Record<GarmentType, number>> = {
   dress: 6, jumpsuit: 6, coat: 5, jacket: 5, jumper: 5, cardigan: 5,
@@ -52,7 +54,7 @@ const pctOf = (p: Product, m: MaterialId) =>
 /**
  * Best photo to represent `m`: dominated by the fibre, an actual garment
  * (not homeware or an accessory), new rather than secondhand, and as pure as
- * possible. Deterministic — ties break on id so the homepage doesn't reshuffle
+ * possible. Deterministic, ties break on id so the homepage doesn't reshuffle
  * between builds.
  */
 function fibreImage(products: Product[], m: MaterialId): string | null {
@@ -80,7 +82,7 @@ export default async function Home() {
   const homeImg = firstImage(products, (p) => HOMEWARE.test(p.title) && !CHILDRENS.test(p.title));
 
   // a fibre with no photo that genuinely shows it is dropped rather than
-  // rendered as an empty tile — we stock no silk, so silk would sit blank
+  // rendered as an empty tile, we stock no silk, so silk would sit blank
   const fibres: FibreEntry[] = FIBRES.filter(([id]) => MATERIAL_FACTS[id])
     .map(([id, tagline, swatch]) => {
       const f = MATERIAL_FACTS[id]!;
@@ -97,11 +99,32 @@ export default async function Home() {
   const fibreCount = new Set(products.flatMap((p) => p.fabric_composition.map((f) => f.material))).size;
   const brandCount = new Set(products.map((p) => p.brand.slug)).size;
 
+  // counted live, so the band can never advertise an edit that matches nothing
+  const conditionEdits = CONDITION_SLUGS.map((slug) => {
+    const rule = CONDITIONS[slug];
+    const excluded = [
+      ...new Set(
+        rule.excludes.map((e) =>
+          (MATERIAL_LABELS[e.material] ?? e.material).replace(/^(Recycled|Virgin)\s+/i, ""),
+        ),
+      ),
+    ];
+    return {
+      slug,
+      name: rule.name,
+      clinicalName: rule.clinicalName,
+      excludes: excluded.slice(0, 3).join(", ").toLowerCase(),
+      count: products.filter((p) => isConditionSafe(p.fabric_composition, slug)).length,
+    };
+  })
+    .filter((c) => c.count > 0)
+    .sort((a, b) => b.count - a.count);
+
   const articles = [
     { eyebrow: "Sensitive skin", title: "The fibres that calm reactive, eczema-prone skin", blurb: "Why smooth, low-friction silk and long-staple organic cotton settle skin that reacts to everything else.", href: "/condition/eczema", img: firstImage(products, (p) => dominant(p, "peace_silk")) ?? womenImg },
-    { eyebrow: "Menopause", title: "Dressing for the 3am flash — fibres that help", blurb: "How merino, linen and TENCEL move with a temperature surge, and the 'cooling' synthetics worth avoiding.", href: "/search?fabric=merino_wool", img: firstImage(products, (p) => dominant(p, "merino_wool")) ?? menImg },
-    { eyebrow: "Breathability", title: "Why linen earns its place against hot skin", blurb: "Hollow flax fibres and an open weave move heat away — the plain case for linen in summer and in bed.", href: "/fabric/linen", img: firstImage(products, (p) => dominant(p, "linen")) ?? heroImg },
-    { eyebrow: "Non-toxic living", title: "What actually sheds onto your skin", blurb: "The plain version of the microplastics question — and the natural fibres that shed nothing at all.", href: "/label-watch", img: firstImage(products, (p) => dominant(p, "organic_cotton")) ?? womenImg },
+    { eyebrow: "Menopause", title: "Dressing for the 3am flash: fibres that help", blurb: "How merino, linen and TENCEL move with a temperature surge, and the 'cooling' synthetics worth avoiding.", href: "/search?fabric=merino_wool", img: firstImage(products, (p) => dominant(p, "merino_wool")) ?? menImg },
+    { eyebrow: "Breathability", title: "Why linen earns its place against hot skin", blurb: "Hollow flax fibres and an open weave move heat away, the plain case for linen in summer and in bed.", href: "/fabric/linen", img: firstImage(products, (p) => dominant(p, "linen")) ?? heroImg },
+    { eyebrow: "Non-toxic living", title: "What actually sheds onto your skin", blurb: "The plain version of the microplastics question, and the natural fibres that shed nothing at all.", href: "/label-watch", img: firstImage(products, (p) => dominant(p, "organic_cotton")) ?? womenImg },
   ];
 
   return (
@@ -115,14 +138,13 @@ export default async function Home() {
               Clothes and bedding chosen for the skin they sit against.
             </h1>
             <p className="max-w-[46ch] text-[16px] font-light leading-relaxed text-muted-foreground">
-              We&apos;ve read the composition on {products.length.toLocaleString("en-GB")} pieces from {brandCount} brands —
-              every percentage here is the brand&apos;s own disclosure, not our estimate. Search a fibre,
+              We&apos;ve read the composition on {products.length.toLocaleString("en-GB")} pieces from {brandCount} brands. Every percentage here is the brand&apos;s own disclosure, not our estimate. Search a fibre,
               or paste a link from any other shop and we&apos;ll read that one too.
             </p>
             <HeroSearch />
           </div>
           <div className="relative min-h-[360px] bg-surface-2 md:min-h-full">
-            {heroImg && <Image src={heroImg} alt="Natural-fibre clothing" fill sizes="(max-width:768px) 100vw, 50vw" priority className="object-cover" />}
+            {heroImg && <Image src={sized(heroImg, IMG.hero)!} alt="Natural-fibre clothing from The Fibre Set" fill sizes="(max-width:768px) 100vw, 50vw" priority quality={90} className="object-cover" />}
           </div>
         </div>
       </section>
@@ -134,7 +156,7 @@ export default async function Home() {
             <span className="text-[12px] font-semibold uppercase tracking-[0.18em] text-rose">The free tool</span>
             <h2 className="mt-2 font-display text-[28px] text-background">Check any fabric label, on any shop.</h2>
             <p className="mt-2 max-w-[52ch] text-[16px] font-light leading-relaxed opacity-75">
-              Reads the fibre composition on any retailer&apos;s product page — Zara, ASOS, M&amp;S — so the
+              Reads the fibre composition on any retailer&apos;s product page. Zara, ASOS, M&amp;S, so the
               plastic hiding in a &ldquo;linen&rdquo; blend shows up before you buy. Free, and it can only see a
               page in the moment you click it.
             </p>
@@ -175,7 +197,7 @@ export default async function Home() {
               Every fibre, and what it actually does for your skin.
             </h2>
             <p className="mt-3 text-[16px] font-light leading-relaxed text-muted-foreground">
-              How each one feels, wears and behaves against skin — including where it fails. Wool is
+              How each one feels, wears and behaves against skin, including where it fails. Wool is
               warm and breathable and still irritates eczema; we say so on the wool page.
             </p>
           </div>
@@ -183,14 +205,64 @@ export default async function Home() {
         </div>
       </section>
 
+      {/* ── DRESSING FOR A CONDITION ──
+          Added at the client's request, alongside the Magazine rather than in
+          place of it. This is the one part of the catalogue people arrive
+          with a real problem to solve, so it gets its own band. */}
+      <section className="border-y border-border bg-surface-2">
+        <div className="mx-auto max-w-[1280px] px-6 section-y sm:px-10">
+          <div className="mb-10 max-w-[54ch]">
+            <span className="eyebrow">Dressing for a condition</span>
+            <h2 className="mt-2 font-display text-[28px] leading-tight text-foreground">
+              When the fibre matters more than the look.
+            </h2>
+            <p className="mt-3 text-[16px] font-light leading-relaxed text-muted-foreground">
+              For reactive skin the label is not a preference, it decides whether a piece is
+              wearable. Each edit filters the whole catalogue by a rule we publish in full.
+            </p>
+          </div>
+          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            {conditionEdits.map((c) => (
+              <Link
+                key={c.slug}
+                href={`/condition/${c.slug}`}
+                className="group flex flex-col justify-between border border-border bg-background p-6 transition-colors hover:border-slate"
+              >
+                <div>
+                  <span className="eyebrow">{c.clinicalName}</span>
+                  <h3 className="mt-2 font-display text-[20px] leading-snug text-foreground group-hover:text-primary">
+                    {c.name}
+                  </h3>
+                  <p className="mt-2 text-[14px] font-light leading-relaxed text-muted-foreground">
+                    Excludes {c.excludes}.
+                  </p>
+                </div>
+                <p className="mt-5 font-display text-[28px] font-light tabular-nums text-foreground">
+                  {c.count.toLocaleString("en-GB")}
+                  <span className="ml-2 text-[12px] uppercase tracking-[0.1em] text-muted-foreground">
+                    pieces pass
+                  </span>
+                </p>
+              </Link>
+            ))}
+          </div>
+          <Link
+            href="/conditions"
+            className="mt-8 inline-block border-b border-slate pb-1 text-[12px] font-semibold uppercase tracking-[0.14em] text-slate transition-colors hover:text-primary"
+          >
+            How each rule works
+          </Link>
+        </div>
+      </section>
+
       {/* ── ARTICLES / MAGAZINE CAROUSEL ── */}
       <section className="mx-auto max-w-[1280px] px-6 section-y sm:px-10">
         <div className="mb-8 flex items-end justify-between">
           <div>
-            <span className="eyebrow">The Journal</span>
+            <span className="eyebrow">The Magazine</span>
             <h2 className="mt-2 font-display text-[28px] text-foreground">Reading, close to the skin</h2>
           </div>
-          <Link href="/journal" className="border-b border-slate pb-1 text-[12px] font-semibold uppercase tracking-[0.14em] text-slate hover:text-primary">
+          <Link href="/magazine" className="border-b border-slate pb-1 text-[12px] font-semibold uppercase tracking-[0.14em] text-slate hover:text-primary">
             All articles
           </Link>
         </div>
@@ -198,7 +270,7 @@ export default async function Home() {
           {articles.map((a) => (
             <Link key={a.href + a.title} href={a.href} className="group w-[300px] shrink-0 snap-start sm:w-[340px]">
               <div className="relative aspect-[4/3] overflow-hidden bg-surface-2">
-                {a.img && <Image src={a.img} alt={a.title} fill sizes="340px" className="object-cover transition-transform duration-700 group-hover:scale-105" />}
+                {a.img && <Image src={sized(a.img, IMG.carousel)!} alt={a.title} fill sizes="340px" quality={88} className="object-cover transition-transform duration-700 group-hover:scale-105" />}
               </div>
               <span className="eyebrow mt-4 block">{a.eyebrow}</span>
               <h3 className="mt-2 font-display text-[20px] leading-snug text-foreground group-hover:text-primary">{a.title}</h3>
@@ -217,7 +289,7 @@ export default async function Home() {
               [products.length.toLocaleString("en-GB"), "real pieces, label-read"],
               [String(fibreCount), "natural & plant fibres"],
               [String(brandCount), "brands read in full"],
-              [stats ? String(stats.flagged) : "—", "greenwash flags on record"],
+              [stats ? String(stats.flagged) : ", ", "greenwash flags on record"],
             ].map(([n, l]) => (
               <div key={l} className="text-center">
                 <p className="font-display text-[clamp(2rem,4.6vw,2.5rem)] font-light tabular-nums">{n}</p>
@@ -251,7 +323,7 @@ export default async function Home() {
         <div className="mt-8 grid grid-cols-2 gap-3 sm:grid-cols-4">
           {[womenImg, menImg, heroImg, fibres[0]?.image].map((img, i) => (
             <div key={i} className="relative aspect-square overflow-hidden bg-surface-2">
-              {img && <Image src={img} alt="A natural-fibre piece from The Fibre Set" fill sizes="300px" className="object-cover transition-transform duration-700 hover:scale-105" />}
+              {img && <Image src={sized(img, IMG.card)!} alt="A natural-fibre piece from The Fibre Set" fill sizes="300px" quality={88} className="object-cover transition-transform duration-700 hover:scale-105" />}
             </div>
           ))}
         </div>
@@ -271,7 +343,7 @@ function CategoryPanel({
   return (
     <Link href={href} className="group relative block aspect-[16/11] overflow-hidden">
       <div className="absolute inset-0 bg-surface-2" style={swatch ? { background: swatch } : undefined}>
-        {img && <Image src={img} alt={label} fill sizes="(max-width:640px) 100vw, 50vw" className="object-cover transition-transform duration-700 group-hover:scale-[1.04]" />}
+        {img && <Image src={sized(img, IMG.panel)!} alt={label} fill sizes="(max-width:640px) 100vw, 50vw" quality={90} className="object-cover transition-transform duration-700 group-hover:scale-[1.04]" />}
       </div>
       <div className="absolute inset-0" style={{ background: "linear-gradient(to top, rgba(58,58,85,.6), rgba(58,58,85,0) 55%)" }} />
       <div className="absolute inset-x-0 bottom-0 flex items-end justify-between p-7 text-background">

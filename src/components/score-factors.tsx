@@ -3,7 +3,7 @@
 import { motion } from "framer-motion";
 import type { ScoreFactor } from "@/lib/types";
 
-/** Max points per factor group — turns numbers into visual fill levels. */
+/** Max points per factor group, turns numbers into visual fill levels. */
 function maxFor(label: string): number {
   if (label === "Fibre composition") return 70;
   if (label === "Certifications") return 15;
@@ -12,8 +12,7 @@ function maxFor(label: string): number {
 }
 
 /**
- * The "why this score" breakdown as animated fill bars instead of text rows —
- * each factor's weight is something you see, not read.
+ * The "why this score" breakdown as animated fill bars instead of text rows, * each factor's weight is something you see, not read.
  */
 export function ScoreFactors({ factors }: { factors: ScoreFactor[] }) {
   return (
@@ -45,7 +44,7 @@ export function ScoreFactors({ factors }: { factors: ScoreFactor[] }) {
                 className="h-full rounded-full bg-primary"
               />
             </div>
-            {/* detail appears on hover — information on demand, not by default */}
+            {/* detail appears on hover, information on demand, not by default */}
             <p className="mt-1.5 hidden text-xs text-muted-foreground group-hover:block">{f.detail}</p>
           </motion.div>
         );

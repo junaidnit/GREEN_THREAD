@@ -5,7 +5,7 @@ import { Moon, Sun } from "@/components/icons";
 
 /**
  * Reads the current theme straight from the <html> class via
- * useSyncExternalStore — the React-blessed way to consume client-only
+ * useSyncExternalStore, the React-blessed way to consume client-only
  * external state. No setState-in-effect, and the server snapshot (light)
  * matches the pre-hydration markup, so there's no hydration flash.
  */

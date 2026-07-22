@@ -107,7 +107,7 @@ export function Concierge() {
               {messages.length === 0 && (
                 <div className="space-y-3">
                   <p className="text-sm text-muted-foreground">
-                    Describe what you&apos;re looking for — I&apos;ll match it against real fabric
+                    Describe what you&apos;re looking for, I&apos;ll match it against real fabric
                     compositions and sustainability scores.
                   </p>
                   <div className="space-y-2">
@@ -170,7 +170,7 @@ export function Concierge() {
 
               {error && (
                 <div className="rounded-lg border border-grade-e/40 bg-grade-e/5 px-3 py-2 text-xs text-grade-e">
-                  The concierge hit a snag — try again in a moment.
+                  The concierge hit a snag, try again in a moment.
                 </div>
               )}
             </div>

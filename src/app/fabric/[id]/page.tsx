@@ -23,7 +23,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const material = id as MaterialId;
   if (!FABRIC_IDS.includes(material)) return {};
   return {
-    title: `${MATERIAL_LABELS[material]} clothing — impact, facts and pieces`,
+    title: `${MATERIAL_LABELS[material]} clothing: impact, facts and pieces`,
     description: `${MATERIAL_NOTES[material]} Shop ${MATERIAL_LABELS[material].toLowerCase()} clothing with transparent sustainability scores.`,
     alternates: { canonical: `/fabric/${material}` },
   };
@@ -56,7 +56,7 @@ export default async function FabricPage({ params }: Props) {
           <div className="mt-4 max-w-md rounded-lg border-l-2 border-primary bg-surface p-4">
             <p className="font-display font-bold text-primary">{fact.stat}</p>
             <p className="mt-1 text-xs leading-relaxed text-muted-foreground">{fact.detail}</p>
-            <p className="mt-1.5 text-[12px] italic text-muted-foreground">— {fact.source}</p>
+            <p className="mt-1.5 text-[12px] italic text-muted-foreground">, {fact.source}</p>
           </div>
         )}
       </div>

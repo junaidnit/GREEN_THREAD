@@ -17,7 +17,7 @@ export interface FibreEntry {
 }
 
 /**
- * Interactive fibre widget — the brief's "most commercially valuable element".
+ * Interactive fibre widget, the brief's "most commercially valuable element".
  * A calm grid of fibres; select one and its characteristics unfold in a
  * detail panel, with a route through to the full fibre guide.
  */
@@ -78,7 +78,7 @@ export function FibreWidget({ fibres }: { fibres: FibreEntry[] }) {
           <div className="flex flex-col justify-center rounded-sm border-l-2 border-primary bg-surface p-7">
             <p className="font-display text-[28px] text-primary">{sel.stat}</p>
             <p className="mt-3 text-[16px] font-light leading-relaxed text-muted-foreground">{sel.detail}</p>
-            <p className="mt-4 text-[12px] font-light italic text-muted-foreground/80">— {sel.source}</p>
+            <p className="mt-4 text-[12px] font-light italic text-muted-foreground/80">, {sel.source}</p>
           </div>
         </div>
       )}

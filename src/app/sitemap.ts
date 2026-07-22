@@ -7,7 +7,7 @@ import type { MaterialId } from "@/lib/types";
 
 /**
  * There were over 1,300 live product pages and no machine-readable index of
- * any of them — search engines were discovering the catalogue only by
+ * any of them, search engines were discovering the catalogue only by
  * crawling internal links, so the deep pages that would rank for long-tail
  * queries ("100% linen dress uk") may never have been found at all.
  *
@@ -18,7 +18,7 @@ import type { MaterialId } from "@/lib/types";
 export const dynamic = "force-dynamic";
 // The catalogue read is too slow to prerender (1,300+ rows over the network
 // timed the build out at 60s). Rendered on request instead and cached at the
-// edge — these endpoints are fetched by crawlers, not by people.
+// edge, these endpoints are fetched by crawlers, not by people.
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const now = new Date();
@@ -28,7 +28,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: url("/"), lastModified: now, changeFrequency: "daily", priority: 1 },
     { url: url("/label-watch"), lastModified: now, changeFrequency: "daily", priority: 0.9 },
     { url: url("/methodology"), lastModified: now, changeFrequency: "monthly", priority: 0.9 },
-    { url: url("/journal"), lastModified: now, changeFrequency: "weekly", priority: 0.8 },
+    { url: url("/magazine"), lastModified: now, changeFrequency: "weekly", priority: 0.8 },
+    { url: url("/conditions"), lastModified: now, changeFrequency: "weekly", priority: 0.9 },
     { url: url("/extension"), lastModified: now, changeFrequency: "monthly", priority: 0.8 },
     { url: url("/brands"), lastModified: now, changeFrequency: "weekly", priority: 0.7 },
     { url: url("/search"), lastModified: now, changeFrequency: "daily", priority: 0.7 },
@@ -69,8 +70,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: 0.7,
     }));
   } catch {
-    // a catalogue read failure must not take the whole sitemap down —
-    // the static routes above are still worth serving
+    // a catalogue read failure must not take the whole sitemap down, // the static routes above are still worth serving
   }
 
   return [...core, ...fabrics, ...conditions, ...brands, ...products];

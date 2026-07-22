@@ -1,8 +1,7 @@
 import { SITE_DESCRIPTION, SITE_NAME, SITE_URL } from "@/lib/site";
 
 /**
- * Structured data. The site published none, which meant no rich results and —
- * more importantly for this business — nothing an answer engine could cite.
+ * Structured data. The site published none, which meant no rich results and, * more importantly for this business, nothing an answer engine could cite.
  *
  * The Dataset block is the one that matters most: the truth ledger is a real
  * primary source (timestamped fibre readings with change history) and this is
@@ -94,7 +93,7 @@ export function SiteJsonLd({ ledger }: { ledger?: { products: number; readings: 
   );
 }
 
-/** Product page markup — enables rich results on 1,300+ pages. */
+/** Product page markup, enables rich results on 1,300+ pages. */
 export function ProductJsonLd({
   id, name, brand, image, price, currency, url, description, materials,
 }: {
@@ -126,7 +125,7 @@ export function ProductJsonLd({
   );
 }
 
-/** Journal + condition pages: an article with a real author and date. */
+/** Magazine + condition pages: an article with a real author and date. */
 export function ArticleJsonLd({
   headline, description, path, image, published,
 }: {

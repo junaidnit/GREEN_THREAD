@@ -1,7 +1,7 @@
 /**
  * Real, working outbound links for the demo brands. We don't have true
  * product deeplinks (demo catalog), so "View on brand site" opens the
- * brand's own site with the garment searched — which genuinely resolves to
+ * brand's own site with the garment searched, which genuinely resolves to
  * their real listings. Unknown brands fall back to a scoped web search.
  */
 
@@ -25,10 +25,10 @@ const BRANDS: Record<string, BrandLink> = {
   cos: { home: "https://www.cos.com/en_gbp/", search: (t) => `https://www.cos.com/en_gbp/search.html?q=${t}` },
 };
 
-/** Strip the "— Colour" suffix and leading fit word for a cleaner query. */
+/** Strip the ", Colour" suffix and leading fit word for a cleaner query. */
 function searchTerm(title: string): string {
   return title
-    .split("—")[0]
+    .split(", ")[0]
     .replace(/^(Slim|Relaxed|Oversized|Wide|Regular)\s+/i, "")
     .trim();
 }

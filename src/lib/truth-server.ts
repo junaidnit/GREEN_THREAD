@@ -47,7 +47,7 @@ export interface MisnamedRecord {
 /**
  * The Label Watch list: every product currently on record whose name claims
  * a fibre it mostly is NOT. Most-misleading (most plastic) first. Powers the
- * public greenwashing transparency page — The Fibre Set's counter-position.
+ * public greenwashing transparency page. The Fibre Set's counter-position.
  */
 export function allMisnamed(): MisnamedRecord[] {
   const ledger = loadLedger();
@@ -59,7 +59,7 @@ export function allMisnamed(): MisnamedRecord[] {
     // a minority (a real "linen blend that's mostly polyester"), and the item
     // is majority plastic. We exclude actualPct === 0, because "named after a
     // fibre that's 0% present" almost always means we parsed only the lining/
-    // padding and missed the shell — a false accusation, not greenwash.
+    // padding and missed the shell, a false accusation, not greenwash.
     if (e.misnamed.actualPct < 1) continue;
     if (e.plastic_pct < 50) continue;
     const prev = byId.get(e.product_id);

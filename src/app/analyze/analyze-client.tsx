@@ -54,7 +54,7 @@ export function AnalyzeClient() {
       if (!res.ok) setError(data.error ?? "Something went wrong.");
       else setResult(data);
     } catch {
-      setError("Something went wrong — try again.");
+      setError("Something went wrong, try again.");
     } finally {
       setBusy(false);
     }
@@ -83,7 +83,7 @@ export function AnalyzeClient() {
           <span className="italic text-primary">We read the label for you.</span>
         </h1>
         <p className="mx-auto mt-3 max-w-md text-sm text-muted-foreground">
-          Shopping somewhere else? Drop the product URL here — we&apos;ll pull what the page
+          Shopping somewhere else? Drop the product URL here, we&apos;ll pull what the page
           discloses, extract the fabric story, and score it with the same transparent rubric.
         </p>
       </div>
@@ -200,7 +200,7 @@ export function AnalyzeClient() {
             ) : (
               <div className="rounded-lg border border-grade-c/40 bg-grade-c/10 p-4 text-sm">
                 <b>This page doesn&apos;t disclose its fabric composition.</b>{" "}
-                That itself is a signal — brands proud of their materials say so. Check the
+                That itself is a signal, brands proud of their materials say so. Check the
                 physical label, or ask the retailer.
               </div>
             )}
@@ -242,7 +242,7 @@ export function AnalyzeClient() {
                   </div>
                 ))}
                 <p className="text-[12px] text-muted-foreground">
-                  Scored on fibres, certifications and stated practices only — we can&apos;t assess
+                  Scored on fibres, certifications and stated practices only, we can&apos;t assess
                   an unknown brand&apos;s supply chain from one page.
                 </p>
               </div>

@@ -9,7 +9,7 @@ export const maxDuration = 60;
 
 /**
  * Browser-extension endpoint: the "similar shirt, better fibre" agent.
- * Unlike /api/analyze, this never fetches a URL itself — the extension's
+ * Unlike /api/analyze, this never fetches a URL itself, the extension's
  * content script has already scraped the live, rendered DOM in the user's
  * own browser (composition text, JSON-LD, title, price), which sidesteps
  * the bot-blocking that stops server-side fetches on some retailer sites.
@@ -40,7 +40,7 @@ export async function POST(req: Request) {
     );
   }
 
-  // hostname is best-effort context for the model — never let a malformed
+  // hostname is best-effort context for the model, never let a malformed
   // url string throw here
   let host = "";
   try { host = new URL(url).hostname; } catch { /* leave blank */ }
@@ -55,7 +55,7 @@ export async function POST(req: Request) {
   } catch (e) {
     console.error("[ext-scan] extraction failed:", e);
     return NextResponse.json(
-      { error: "Couldn't analyse this item just now — try again." },
+      { error: "Couldn't analyse this item just now, try again." },
       { status: 502, headers: CORS_HEADERS },
     );
   }

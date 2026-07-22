@@ -4,7 +4,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 
 /**
- * The homepage's primary action — search a fibre/garment, or paste a product
+ * The homepage's primary action, search a fibre/garment, or paste a product
  * link to check its label. A pasted URL routes to Fabric Check; anything else
  * searches the catalogue.
  */
@@ -39,7 +39,7 @@ export function HeroSearch() {
         </button>
       </div>
       <p className="mt-2 text-[12px] font-light text-muted-foreground">
-        Free to check any label — on our pieces or anywhere else you shop.
+        Free to check any label, on our pieces or anywhere else you shop.
       </p>
     </form>
   );

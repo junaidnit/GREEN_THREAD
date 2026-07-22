@@ -38,7 +38,7 @@ function Heart({ filled, className }: { filled?: boolean; className?: string }) 
   );
 }
 
-/** Header heart with live count — the "wardrobe" the arc animation lands in. */
+/** Header heart with live count, the "wardrobe" the arc animation lands in. */
 export function SavedIndicator() {
   const [count, setCount] = useState(0);
   const [bump, setBump] = useState(0);
@@ -84,7 +84,7 @@ export function SavedIndicator() {
  * arcs from the button into the header heart, which bounces on catch.
  */
 export function SaveButton({ productId, imageUrl }: { productId: string; imageUrl: string }) {
-  // derived from the wardrobe store — no setState-in-effect, and it stays in
+  // derived from the wardrobe store, no setState-in-effect, and it stays in
   // sync if the item is saved/removed elsewhere (e.g. the /saved page)
   const saved = useSyncExternalStore(
     subscribeSaved,
@@ -100,7 +100,7 @@ export function SaveButton({ productId, imageUrl }: { productId: string; imageUr
       setSaved(ids.filter((i) => i !== productId));
       return;
     }
-    // launch the arc before the state lands — the reward IS the moment
+    // launch the arc before the state lands, the reward IS the moment
     const from = btnRef.current?.getBoundingClientRect();
     const to = document.getElementById("gt-heart")?.getBoundingClientRect();
     if (from && to) setFlying({ from, to });

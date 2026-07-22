@@ -2,7 +2,7 @@ import { rankSameButBetter, PRICE_BAND, type Match } from "./match";
 import type { CatalogCard, FabricPart } from "./types";
 
 /**
- * Pure recommendation ranking — no catalog access, no server-only, so it can
+ * Pure recommendation ranking, no catalog access, no server-only, so it can
  * be tested directly against a fixture instead of 2,883 real products.
  * `catalog.ts` supplies the cards.
  *
@@ -11,7 +11,7 @@ import type { CatalogCard, FabricPart } from "./types";
  */
 
 export interface BetterFibreInput {
-  /** The product name as shown on the page — the strongest signal we get. */
+  /** The product name as shown on the page, the strongest signal we get. */
   title: string;
   category: string;
   /** null when the page didn't disclose a price we could parse. */
@@ -57,7 +57,7 @@ export function rankBetterFibre(
     // Nothing at this price. A £20 high-street jacket has no natural-fibre
     // equal at £20 (the cheapest is £35), and an empty panel on exactly the
     // fast-fashion pages that matter most is a worse answer than an honest
-    // "this is what it costs" — the caller flags the jump via withinPrice.
+    // "this is what it costs", the caller flags the jump via withinPrice.
     const cheapest = [...matches].sort((a, b) => a.item.price - b.item.price).slice(0, limit);
     return { items: cheapest.map((m) => m.item), withinPrice: false, matches: cheapest };
   }

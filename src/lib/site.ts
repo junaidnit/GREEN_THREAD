@@ -1,6 +1,6 @@
 /**
  * One place for the site's own identity. Used by metadata, the sitemap,
- * robots, JSON-LD and llms.txt — so a domain move is a one-line change
+ * robots, JSON-LD and llms.txt, so a domain move is a one-line change
  * rather than a hunt (which is exactly what bit the extension after the
  * greenthread.info rename).
  */

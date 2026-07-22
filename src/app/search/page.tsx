@@ -7,7 +7,7 @@ import { ProductCardSkeleton } from "@/components/product-card";
 export const metadata: Metadata = {
   title: "Browse natural-fibre clothing",
   description:
-    "Search real clothing by fibre — linen, organic cotton, hemp, wool, TENCEL. Every item's composition is read from the brand's own label before it appears here.",
+    "Search real clothing by fibre, linen, organic cotton, hemp, wool, TENCEL. Every item's composition is read from the brand's own label before it appears here.",
   alternates: { canonical: "/search" },
 };
 
@@ -31,7 +31,7 @@ export default async function SearchPage() {
           Visually hidden rather than shown: the filter UI is the interface
           here, and adding a visible heading would change Anita's layout. */}
       <h1 className="sr-only">
-        Browse natural-fibre clothing — {products.length.toLocaleString("en-GB")} pieces with the
+        Browse natural-fibre clothing, {products.length.toLocaleString("en-GB")} pieces with the
         label already read
       </h1>
       <Suspense fallback={<GridSkeleton />}>

@@ -1,12 +1,11 @@
 /**
- * Garment attribute engine — the vocabulary the matcher needs to answer
+ * Garment attribute engine, the vocabulary the matcher needs to answer
  * "the SAME item, in a better fabric".
  *
  * The product's category ("t-shirts") is far too coarse for that promise: it
  * lumps a polo, a tee, a tank and a camisole into one bucket, which is how a
  * navy men's polo ended up being offered a pink camisole. Everything here is
- * derived from the title, which is the one field every feed gets right —
- * stored `color`/`gender` fields are frequently wrong (see repair-attrs.ts).
+ * derived from the title, which is the one field every feed gets right, * stored `color`/`gender` fields are frequently wrong (see repair-attrs.ts).
  *
  * Pure functions, no I/O: unit-tested against real catalog titles.
  */
@@ -31,8 +30,7 @@ export type Gender = "men" | "women" | "unisex";
  * not a shirt, and "denim jacket" is a jacket, not jeans.
  */
 const TYPE_RULES: Array<[RegExp, GarmentType]> = [
-  // homeware first: a "Knitted Cushion Cover" is homeware, not a jumper —
-  // the object noun must beat fabric-process words like "knitted"
+  // homeware first: a "Knitted Cushion Cover" is homeware, not a jumper, // the object noun must beat fabric-process words like "knitted"
   [/\bcushion\b|\bblanket\b|\bapron\b|\btea ?towel\b|\bnapkin\b|\bplacemat\b/i, "homeware"],
   [/\bpolo\b/i, "polo"],
   [/\bhenley\b/i, "henley"],
@@ -56,8 +54,7 @@ const TYPE_RULES: Array<[RegExp, GarmentType]> = [
   [/\bjacket\b|\bblazer\b|\bbomber\b|\bblouson\b|\banorak\b|\bshacket\b/i, "jacket"],
   [/\bblouse\b/i, "blouse"],
   // tee BEFORE shirt: the hyphen in "T-Shirt" is a word boundary, so a bare
-  // \bshirt\b matches inside it and filed every t-shirt as a formal shirt —
-  // which is how a Uniqlo tee got recommended against dress shirts.
+  // \bshirt\b matches inside it and filed every t-shirt as a formal shirt, // which is how a Uniqlo tee got recommended against dress shirts.
   [/\bt-?shirt\b|\btee\b|\btop\b/i, "tee"],
   [/\bshirt\b(?!s?\s*dress)/i, "shirt"], // after polo/tee so "polo shirt" is caught above
   [/\bsocks?\b/i, "socks"],
@@ -96,7 +93,7 @@ export function garmentType(title: string, category = ""): GarmentType {
   return CATEGORY_TYPE[category.toLowerCase()] ?? "other";
 }
 
-/** Shopper-facing noun for a type — "the same polo, better fabric". */
+/** Shopper-facing noun for a type, "the same polo, better fabric". */
 const TYPE_LABEL: Record<GarmentType, string> = {
   polo: "polo", tee: "tee", tank: "vest", henley: "henley",
   sweatshirt: "sweatshirt", hoodie: "hoodie", baselayer: "base layer",
@@ -160,7 +157,7 @@ export function colourFamilies(...texts: string[]): Set<string> {
 }
 
 /**
- * The dominant colour family — the one named first ("Navy & White" → Blue),
+ * The dominant colour family, the one named first ("Navy & White" → Blue),
  * for display. Returns null when no colour word is present: the caller
  * decides how to treat a miss rather than being handed a wrong answer.
  */
@@ -206,7 +203,7 @@ const MENS_WORDS = /\bmen'?s?\b|\bmenswear\b|\bgents\b/i;
 /**
  * Feeds mislabel gender constantly (42 dresses and skirts arrived tagged
  * "men"). Explicit wording in the title wins; then the garment type; then
- * feed metadata such as product_type and tags — where a signal for BOTH
+ * feed metadata such as product_type and tags, where a signal for BOTH
  * genders means the brand tags broadly, so the honest answer is unisex.
  *
  * This is the only gender authority. Do not reimplement it at an ingestion
@@ -228,7 +225,7 @@ export function genderFor(
     if (/\bunisex\b/i.test(hints)) return "unisex";
     const w = WOMENS_WORDS.test(hints);
     const m = MENS_WORDS.test(hints);
-    if (w && m) return "unisex"; // tagged for both — claim neither
+    if (w && m) return "unisex"; // tagged for both, claim neither
     if (w) return "women";
     if (m) return "men";
   }

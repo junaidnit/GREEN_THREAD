@@ -98,7 +98,7 @@ export interface Product {
 }
 
 /**
- * Slim projection shipped to the search page — everything cards, search and
+ * Slim projection shipped to the search page, everything cards, search and
  * facets need, nothing more. Product is structurally assignable to this.
  */
 export interface CatalogCard {

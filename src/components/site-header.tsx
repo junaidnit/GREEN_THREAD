@@ -7,9 +7,9 @@ import { SavedIndicator } from "@/components/saved";
 import { LogoMark } from "@/components/animated-logo";
 
 /**
- * The Fibre Set header — toa.st-inspired: quiet utility line, the heritage
+ * The Fibre Set header, toa.st-inspired: quiet utility line, the heritage
  * ribbon mark beside a letter-spaced wordmark, category mega-menus, and the
- * three actions that matter — Search, Fabric Check, Install Extension.
+ * three actions that matter. Search, Fabric Check, Install Extension.
  */
 
 const WOMEN_SUBS = ["dresses", "tops", "knitwear", "shirts", "trousers", "jeans", "skirts"];
@@ -17,6 +17,14 @@ const MEN_SUBS = ["t-shirts", "shirts", "knitwear", "trousers", "jeans", "shorts
 const FIBRES: Array<[string, string]> = [
   ["linen", "Linen"], ["hemp", "Hemp"], ["organic_cotton", "Organic Cotton"],
   ["merino_wool", "Merino Wool"], ["peace_silk", "Silk"], ["tencel_lyocell", "TENCEL Lyocell"],
+];
+/* Kept as plain data rather than imported from the registry: this is a client
+   component, and the registry pulls in the whole rule engine. */
+const CONDITION_LINKS: Array<[string, string]> = [
+  ["eczema", "Eczema-friendly"],
+  ["psoriasis", "Psoriasis-friendly"],
+  ["synthetic-fibre-allergy", "Textile contact allergy"],
+  ["night-sweats", "Night sweats"],
 ];
 
 function Caret() {
@@ -100,8 +108,8 @@ export function SiteHeader() {
 
       <div className="border-b border-border">
         <div className="mx-auto flex h-[70px] max-w-[1280px] items-center justify-between gap-3 px-4 sm:gap-6 sm:px-10">
-          {/* brand lockup — heritage ribbon mark + wordmark */}
-          <Link href="/" aria-label="The Fibre Set — home" className="flex shrink-0 items-center gap-3 text-foreground">
+          {/* brand lockup, heritage ribbon mark + wordmark */}
+          <Link href="/" aria-label="The Fibre Set, home" className="flex shrink-0 items-center gap-3 text-foreground">
             <span className="text-[#141414]">
               <LogoMark size={34} animate={false} />
             </span>
@@ -121,14 +129,17 @@ export function SiteHeader() {
               </MegaItem>
               <MegaItem label="Children" href="/children">
                 <p className="text-[14px] font-light leading-relaxed text-muted-foreground">
-                  Little-skin edit — GOTS organic cotton &amp; muslin.
+                  Little-skin edit, GOTS organic cotton &amp; muslin.
                   <span className="mt-1 block text-rose">Coming soon.</span>
                 </p>
               </MegaItem>
               <MegaItem label="Materials" href="/fabric/linen">
                 <SubLinks items={FIBRES} base="/fabric/" />
               </MegaItem>
-              <MegaItem label="Journal" href="/journal" />
+              <MegaItem label="Conditions" href="/conditions">
+                <SubLinks items={CONDITION_LINKS} base="/condition/" />
+              </MegaItem>
+              <MegaItem label="Magazine" href="/magazine" />
             </ul>
           </nav>
 
@@ -178,7 +189,7 @@ export function SiteHeader() {
               autoFocus
               value={q}
               onChange={(e) => setQ(e.target.value)}
-              placeholder="Search a fibre or garment — or paste a product link to check its label"
+              placeholder="Search a fibre or garment, or paste a product link to check its label"
               className="flex-1 border-b border-border bg-transparent py-2 text-[16px] font-light text-foreground outline-none placeholder:text-muted-foreground/70 focus:border-slate"
             />
             <button type="submit" className="rounded-full bg-primary px-5 py-2 text-[12px] font-semibold uppercase tracking-[0.12em] text-primary-foreground">
@@ -192,7 +203,7 @@ export function SiteHeader() {
       {mobileOpen && (
         <div className="border-b border-border bg-surface lg:hidden">
           <ul className="mx-auto flex max-w-[1280px] flex-col gap-1 px-5 py-4 text-[16px] font-light">
-            {[["Women", "/search?gender=women"], ["Men", "/search?gender=men"], ["Children", "/children"], ["Materials", "/fabric/linen"], ["Journal", "/journal"], ["Fabric Check", "/analyze"], ["Install Extension", "/extension"]].map(([label, href]) => (
+            {[["Women", "/search?gender=women"], ["Men", "/search?gender=men"], ["Children", "/children"], ["Materials", "/fabric/linen"], ["Conditions", "/conditions"], ["Magazine", "/magazine"], ["Fabric Check", "/analyze"], ["Install Extension", "/extension"]].map(([label, href]) => (
               <li key={href}>
                 <Link href={href} onClick={() => setMobileOpen(false)} className="block py-2 text-foreground">
                   {label}

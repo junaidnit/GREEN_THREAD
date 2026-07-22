@@ -5,13 +5,13 @@ import { InstallExtension } from "@/components/install-extension";
 export const metadata: Metadata = {
   title: "The label-check extension",
   description:
-    "Install The Fibre Set browser extension to read the fibre composition on any retailer's product page — see the plastic hiding in a 'linen' blend before you buy.",
+    "Install The Fibre Set browser extension to read the fibre composition on any retailer's product page, see the plastic hiding in a 'linen' blend before you buy.",
   alternates: { canonical: "/extension" },
 };
 
 const INSTALL = [
   ["Download and unzip", "Save the file, then unzip it. You'll get a folder with the extension inside."],
-  ["Open your extensions page", "In Chrome or Edge, go to chrome://extensions — then turn on Developer mode, top right."],
+  ["Open your extensions page", "In Chrome or Edge, go to chrome://extensions, then turn on Developer mode, top right."],
   ["Load unpacked", "Click 'Load unpacked' and pick the folder you unzipped, then pin the ribbon to your toolbar."],
 ];
 
@@ -53,8 +53,8 @@ export default function ExtensionPage() {
       {/* what it does */}
       <div className="mt-16 grid gap-8 border-t border-border pt-16 md:grid-cols-3">
         {[
-          ["Shop anywhere", "Zara, ASOS, M&S — any online shop. Click the ribbon in your toolbar and it reads the label for you."],
-          ["See what it's really made of", "Fibre composition, the plastic percentage, and a plain verdict — before you buy."],
+          ["Shop anywhere", "Zara, ASOS, M&S, any online shop. Click the ribbon in your toolbar and it reads the label for you."],
+          ["See what it's really made of", "Fibre composition, the plastic percentage, and a plain verdict, before you buy."],
           ["Nothing runs in the background", "It can only see a page in the moment you click. No access to your browsing, no tracking."],
         ].map(([h, p]) => (
           <div key={h}>
@@ -65,7 +65,7 @@ export default function ExtensionPage() {
       </div>
 
       <div className="mt-16 rounded-sm border border-border bg-surface-2 p-8 text-center text-[14px] font-light leading-relaxed text-muted-foreground">
-        Free, always. We earn through affiliate links when you choose to buy — never from what the
+        Free, always. We earn through affiliate links when you choose to buy, never from what the
         extension tells you. It reads the label the same whether we&apos;re paid or not.
       </div>
     </div>

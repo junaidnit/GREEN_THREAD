@@ -9,7 +9,7 @@ import { SiteJsonLd } from "@/components/json-ld";
 import { SITE_DESCRIPTION, SITE_NAME, SITE_URL } from "@/lib/site";
 import { ledgerStats } from "@/lib/truth-server";
 
-/* The Fibre Set is single-typeface — Montserrat, light for display. */
+/* The Fibre Set is single-typeface. Montserrat, light for display. */
 const montserrat = Montserrat({
   variable: "--font-montserrat",
   subsets: ["latin"],
@@ -18,24 +18,24 @@ const montserrat = Montserrat({
 
 export const metadata: Metadata = {
   // metadataBase was unset, so every relative image and canonical resolved
-  // against localhost in metadata — and no page carried og:image at all,
+  // against localhost in metadata, and no page carried og:image at all,
   // which made every share and every AI preview a blank card.
   metadataBase: new URL(SITE_URL),
   title: {
-    default: "The Fibre Set — natural fibres, chosen well",
+    default: "The Fibre Set, natural fibres, chosen well",
     template: "%s | The Fibre Set",
   },
   description:
-    "Shop clothing and bedding in natural fibres — cotton, linen, hemp, wool, silk. Check any product's fabric composition, learn what each fibre does for your skin, and buy real pieces from brands we've read the label on.",
+    "Shop clothing and bedding in natural fibres, cotton, linen, hemp, wool, silk. Check any product's fabric composition, learn what each fibre does for your skin, and buy real pieces from brands we've read the label on.",
   // NO alternates here on purpose: metadata inherits, so a canonical in the
-  // root layout would point every page in the site at "/" — worse than having
+  // root layout would point every page in the site at "/", worse than having
   // none at all. Each route declares its own.
   openGraph: {
     type: "website",
     siteName: SITE_NAME,
     locale: "en_GB",
     url: SITE_URL,
-    title: "The Fibre Set — natural fibres, chosen well",
+    title: "The Fibre Set: natural fibres, chosen well",
     description: SITE_DESCRIPTION,
   },
   twitter: { card: "summary_large_image" },

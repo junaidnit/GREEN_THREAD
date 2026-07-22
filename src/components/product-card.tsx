@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { sized, IMG } from "@/lib/image";
 import Link from "next/link";
 import type { CatalogCard } from "@/lib/types";
 import { formatPrice } from "@/lib/format";
@@ -19,7 +20,7 @@ const GRADE_DOT: Record<string, string> = {
 };
 
 /**
- * Editorial product card — the image IS the design. No border, no box.
+ * Editorial product card, the image IS the design. No border, no box.
  * Brand + price sit quietly beneath; the fabric story and a slim CTA reveal
  * on hover. Sustainability shows as a single subtle glass mark, full
  * breakdown one tap away on the product page.
@@ -42,7 +43,7 @@ export function ProductCard({ product, priority = false }: { product: CatalogCar
         style={{ viewTransitionName: `pimg-${product.id.replace(/[^a-zA-Z0-9-]/g, "")}` }}
       >
         <Image
-          src={product.image_url}
+          src={sized(product.image_url, IMG.card)!}
           alt={product.title}
           fill
           sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 33vw"
@@ -77,7 +78,7 @@ export function ProductCard({ product, priority = false }: { product: CatalogCar
         </span>
 
 
-        {/* mislabelling flag — the platform's transparency promise */}
+        {/* mislabelling flag, the platform's transparency promise */}
         {misnamed && (
           <span
             data-testid="misnamed-flag"

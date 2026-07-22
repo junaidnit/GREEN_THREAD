@@ -52,10 +52,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const product = await getProduct(id);
   if (!product) return {};
   return {
-    title: `${product.title} — ${product.brand.name}`,
+    title: `${product.title}: ${product.brand.name}`,
     description: product.sustainability.explanation,
     openGraph: {
-      title: `${product.title} — grade ${product.sustainability.grade} (${product.sustainability.score}/100)`,
+      title: `${product.title}: grade ${product.sustainability.grade} (${product.sustainability.score}/100)`,
       description: product.sustainability.explanation,
       images: [{ url: product.image_url }],
     },
@@ -71,14 +71,14 @@ export default async function ProductPage({ params }: Props) {
   // category context: how this item compares to everything like it
   const all = await getCatalog();
 
-  // same garment type, same design, same wearer — never a fallback to
+  // same garment type, same design, same wearer, never a fallback to
   // "anything in this category", which is how a polo got shown a camisole
   const similar = getSameLook(product, all);
   const peers = all.filter((p) => p.category === product.category);
   const catAvg = Math.round(peers.reduce((sum, p) => sum + p.sustainability.score, 0) / peers.length);
   const delta = s.score - catAvg;
 
-  // "same style, greener" — the best similar item that meaningfully beats this one
+  // "same style, greener", the best similar item that meaningfully beats this one
   const greener = similar.find((p) => p.sustainability.score >= s.score + 10);
 
   const impacts = impactEquivalents(product.category, product.fabric_composition);
@@ -120,7 +120,7 @@ export default async function ProductPage({ params }: Props) {
       </nav>
 
       <div className="grid gap-8 lg:grid-cols-2">
-        {/* image — hover to inspect the weave; morphs in from the grid card */}
+        {/* image, hover to inspect the weave; morphs in from the grid card */}
         <div
           className="relative aspect-[3/4] overflow-hidden rounded-xl2 border border-border bg-surface-2"
           style={{ viewTransitionName: `pimg-${product.id.replace(/[^a-zA-Z0-9-]/g, "")}` }}
@@ -155,7 +155,7 @@ export default async function ProductPage({ params }: Props) {
               <span
                 data-testid="live-badge"
                 className="inline-flex items-center gap-1 rounded-full bg-grade-a/10 px-2 py-0.5 text-[12px] font-semibold uppercase tracking-wide text-grade-a"
-                title={`Real listing — details verified from ${product.brand.name}'s own product page`}
+                title={`Real listing, details verified from ${product.brand.name}'s own product page`}
               >
                 <span className="size-1.5 animate-pulse rounded-full bg-grade-a" />
                 Live listing
@@ -199,7 +199,7 @@ export default async function ProductPage({ params }: Props) {
               retailer={product.retailer}
             />
             <div className="flex gap-2">
-              {/* every product is a real listing — deep-link to the exact item */}
+              {/* every product is a real listing, deep-link to the exact item */}
               <a
                 href={product.buy_url}
                 target="_blank"
@@ -213,7 +213,7 @@ export default async function ProductPage({ params }: Props) {
             </div>
           </div>
           <p className="mt-2 text-xs text-muted-foreground">
-            Buy opens this exact product on {product.retailer}&apos;s own site — composition verified from their page.
+            Buy opens this exact product on {product.retailer}&apos;s own site, composition verified from their page.
           </p>
 
           {/* tangible impact + longevity */}
@@ -230,21 +230,21 @@ export default async function ProductPage({ params }: Props) {
               ))}
               {wears >= 100 && (
                 <p className="px-1 text-xs text-muted-foreground">
-                  Built to last ≈ <b className="text-foreground">{wears} wears</b> — that&apos;s
+                  Built to last ≈ <b className="text-foreground">{wears} wears</b>, that&apos;s
                   about <b className="text-foreground">{formatPrice(Math.max(0.2, product.price / wears), product.currency).replace(/^£/, "£")}</b>{" "}
                   per wear if you keep it in rotation.
                 </p>
               )}
               {sheds && (
                 <p className="px-1 text-xs text-muted-foreground">
-                  ⚠ Mostly synthetic — sheds microfibres in the wash. A filter bag (e.g.
+                  ⚠ Mostly synthetic, sheds microfibres in the wash. A filter bag (e.g.
                   Guppyfriend) catches most of them.
                 </p>
               )}
             </div>
           )}
 
-          {/* fabric composition — the platform's core promise */}
+          {/* fabric composition, the platform's core promise */}
           <section className="mt-8 rounded-xl2 border border-border bg-surface p-5" data-testid="composition-section">
             <div className="mb-4 flex items-center justify-between gap-3">
               <h2 className="font-display text-[20px] font-bold">What it&apos;s made of</h2>
@@ -283,14 +283,14 @@ export default async function ProductPage({ params }: Props) {
                 </p>
                 {truth.changed && (
                   <p className="mt-1.5 text-xs font-medium text-grade-d">
-                    ⚠ This item&apos;s composition or score has changed since we first logged it — we keep the full history.
+                    ⚠ This item&apos;s composition or score has changed since we first logged it, we keep the full history.
                   </p>
                 )}
               </div>
             )}
           </section>
 
-          {/* certifications — hover any badge to learn what it actually verifies */}
+          {/* certifications, hover any badge to learn what it actually verifies */}
           {s.certifications.length > 0 && (
             <div className="mt-4 flex flex-wrap gap-2" data-testid="certifications">
               {[...new Set(s.certifications)].map((c) => (
@@ -337,7 +337,7 @@ export default async function ProductPage({ params }: Props) {
               href="/methodology"
               className="max-w-[180px] text-center text-xs text-muted-foreground underline-offset-2 hover:underline"
             >
-              Scored with a transparent rubric — see how scoring works →
+              Scored with a transparent rubric, see how scoring works →
             </Link>
           </div>
           <div>
@@ -380,7 +380,7 @@ export default async function ProductPage({ params }: Props) {
             </div>
 
             <AskConcierge
-              question={`Tell me more about the ${product.title} by ${product.brand.name} — is it a good sustainable choice, and are there better alternatives?`}
+              question={`Tell me more about the ${product.title} by ${product.brand.name}, is it a good sustainable choice, and are there better alternatives?`}
             />
           </div>
         </div>
@@ -397,7 +397,7 @@ export default async function ProductPage({ params }: Props) {
               : `Closest ${noun} without the plastic`}
           </h2>
           <p className="mb-4 max-w-xl text-sm text-muted-foreground">
-            Same garment, same cut{betterMatches[0].sameColour ? ", same colour" : ""} — we only
+            Same garment, same cut{betterMatches[0].sameColour ? ", same colour" : ""}, we only
             swap the fibre. Nothing here is a different kind of clothing.
           </p>
           <div className="grid grid-cols-2 gap-x-4 gap-y-8 sm:gap-x-6 md:grid-cols-4">
@@ -427,7 +427,7 @@ export default async function ProductPage({ params }: Props) {
         </section>
       )}
 
-      {/* nothing qualified — say so, rather than filling the space with junk */}
+      {/* nothing qualified, say so, rather than filling the space with junk */}
       {betterMatches.length === 0 && noMatchReason === "no-better-fibre-in-this-style" && (
         <section className="mt-12 rounded-xl2 border border-border bg-surface p-6" data-testid="no-better-fibre">
           <p className="eyebrow">The same {noun}, better fabric</p>
@@ -436,7 +436,7 @@ export default async function ProductPage({ params }: Props) {
           </h2>
           <p className="mt-2 max-w-xl text-sm text-muted-foreground">
             We haven&apos;t found a {noun} with less plastic that we&apos;d call the
-            same garment. We&apos;d rather show you nothing than a different item — try the
+            same garment. We&apos;d rather show you nothing than a different item, try the
             secondhand check below, or browse every plastic-free{" "}
             <Link href={`/search?category=${product.category}&pure=1`} className="underline underline-offset-2 hover:text-primary">
               {titleCase(product.category)}
@@ -446,7 +446,7 @@ export default async function ProductPage({ params }: Props) {
         </section>
       )}
 
-      {/* find it secondhand — the resale check */}
+      {/* find it secondhand, the resale check */}
       <section className="mt-12 rounded-xl2 border border-border bg-surface p-6" data-testid="secondhand">
         <p className="eyebrow">Already made</p>
         <h2 className="mt-1 font-serif text-[28px] font-medium italic tracking-tight sm:text-[28px]">

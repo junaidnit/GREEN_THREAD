@@ -1,9 +1,9 @@
 /**
- * SCOUT — the Catalog-Growth crew's first agent, pure decision logic.
+ * SCOUT, the Catalog-Growth crew's first agent, pure decision logic.
  *
  * Given what a probe of a brand's public product feed found, decide whether
  * the brand meets The Fibre Set's honesty bar and is worth onboarding. The
- * verdict is deterministic and explained — a GO/NO-GO with named reasons,
+ * verdict is deterministic and explained, a GO/NO-GO with named reasons,
  * so onboarding decisions are auditable, never vibes.
  *
  * The I/O (actually fetching the feed) lives in scripts/grow.ts; this module
@@ -46,7 +46,7 @@ export function scoutVerdict(stats: ScoutStats): ScoutVerdict {
     return {
       go: false,
       score: 0,
-      reasons: ["No public product feed found (not Shopify, or feed blocked) — needs a custom integration."],
+      reasons: ["No public product feed found (not Shopify, or feed blocked), needs a custom integration."],
       stats,
     };
   }
@@ -73,12 +73,12 @@ export function scoutVerdict(stats: ScoutStats): ScoutVerdict {
   }
   if (stats.garments < t.minGarments) {
     go = false;
-    reasons.push(`Too few garments: ${stats.garments} clothing items (need ≥ ${t.minGarments}) — feed is accessories/homeware-heavy.`);
+    reasons.push(`Too few garments: ${stats.garments} clothing items (need ≥ ${t.minGarments}), feed is accessories/homeware-heavy.`);
   }
 
   if (go) {
     reasons.push(
-      `${stats.disclosed} disclosed items (${Math.round(disclosureRate * 100)}% of sample), ${Math.round(naturalRate * 100)}% majority-natural, ${stats.garments} garments — clears every bar.`,
+      `${stats.disclosed} disclosed items (${Math.round(disclosureRate * 100)}% of sample), ${Math.round(naturalRate * 100)}% majority-natural, ${stats.garments} garments, clears every bar.`,
     );
   }
 

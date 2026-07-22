@@ -20,13 +20,13 @@ export default function InstalledPage() {
         You&apos;re set. Here&apos;s the one-minute version.
       </h1>
       <p className="mx-auto mt-5 max-w-[52ch] text-[16px] font-light leading-relaxed text-muted-foreground">
-        Fabric Check reads a product page only when you ask it to — nothing runs in the background.
+        Fabric Check reads a product page only when you ask it to, nothing runs in the background.
       </p>
 
       <ol className="mx-auto mt-14 grid max-w-[640px] gap-8 text-left sm:grid-cols-3">
         {[
           ["Pin the ribbon", "Click the puzzle-piece icon in your toolbar, then the pin beside The Fibre Set. It stays one click away."],
-          ["Open any product page", "Any shop — Zara, ASOS, M&S. Your usual browsing, nothing new to learn."],
+          ["Open any product page", "Any shop. Zara, ASOS, M&S. Your usual browsing, nothing new to learn."],
           ["Click the ribbon", "We read that page and tell you what it's really made of, plus a natural-fibre alternative."],
         ].map(([h, p], i) => (
           <li key={h}>

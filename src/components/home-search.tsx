@@ -28,7 +28,7 @@ export function HomeSearch() {
         data-testid="home-search-input"
         value={q}
         onChange={(e) => setQ(e.target.value)}
-        placeholder="Try “linen shirt” — or paste any product link…"
+        placeholder="Try “linen shirt”, or paste any product link…"
         className="w-full bg-transparent outline-none placeholder:text-muted-foreground"
         autoComplete="off"
       />

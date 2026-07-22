@@ -1,7 +1,7 @@
 import { BRAND_LOGO } from "./brand-path";
 
 /**
- * The Fibre Set mark — the heritage ribbon logo, and the business's
+ * The Fibre Set mark, the heritage ribbon logo, and the business's
  * permanent mark (not a placeholder). Used as an EXACT vector trace of the
  * original artwork (public/brand/logo-original.jpeg → potrace via
  * scripts/trace-logo.mjs). Zero hand-drawn approximation, zero distortion:

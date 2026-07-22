@@ -2,13 +2,13 @@ import Link from "next/link";
 import { LogoMark } from "@/components/animated-logo";
 
 /**
- * The Fibre Set footer — deep navy, editorial, with the plain affiliate
+ * The Fibre Set footer, deep navy, editorial, with the plain affiliate
  * disclosure the brief calls for. Not preachy, not salesy.
  */
 const COLUMNS: Array<{ head: string; links: Array<[string, string]> }> = [
   {
     head: "Shop",
-    links: [["Women", "/search?gender=women"], ["Men", "/search?gender=men"], ["Children — soon", "/children"], ["Home & Bedding — soon", "/home"]],
+    links: [["Women", "/search?gender=women"], ["Men", "/search?gender=men"], ["Children, soon", "/children"], ["Home & Bedding, soon", "/home"]],
   },
   {
     head: "Fibres",
@@ -16,7 +16,7 @@ const COLUMNS: Array<{ head: string; links: Array<[string, string]> }> = [
   },
   {
     head: "Learn",
-    links: [["The Journal", "/journal"], ["Label Watch", "/label-watch"], ["Fabric Check", "/analyze"], ["For sensitive skin", "/condition/eczema"]],
+    links: [["The Magazine", "/magazine"], ["Dressing for a condition", "/conditions"], ["Label Watch", "/label-watch"], ["Fabric Check", "/analyze"]],
   },
 ];
 
@@ -32,7 +32,7 @@ export function SiteFooter() {
             </span>
             <p className="mt-4 max-w-[34ch] text-[14px] font-light leading-relaxed opacity-70">
               Natural fibres, chosen for the skin they sit against. We read the label so you don&apos;t
-              have to — informative, never preachy.
+              have to, informative, never preachy.
             </p>
           </div>
           {COLUMNS.map((col) => (

@@ -1,9 +1,10 @@
 import Link from "next/link";
+import { sized, IMG } from "@/lib/image";
 import Image from "next/image";
 
 /**
  * On-brand placeholder for categories not yet stocked (Children, Home).
- * Takes real photography where we have it — an empty page reads as broken,
+ * Takes real photography where we have it, an empty page reads as broken,
  * and these categories are the ones people most want to see proof of.
  */
 export function ComingSoon({
@@ -41,8 +42,8 @@ export function ComingSoon({
                 className={`relative aspect-[3/4] overflow-hidden bg-surface-2 ${i === 2 ? "hidden sm:block" : ""}`}
               >
                 <Image
-                  src={src}
-                  alt={`${eyebrow} — natural-fibre pieces already on our record`}
+                  src={sized(src, IMG.card)!}
+                  alt={`${eyebrow}, natural-fibre pieces already on our record`}
                   fill
                   sizes="(max-width:640px) 50vw, 33vw"
                   className="object-cover"

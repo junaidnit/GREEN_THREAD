@@ -39,7 +39,7 @@ export default async function BrandsPage() {
         Brands, label-checked
       </h1>
       <p className="mt-3 max-w-md text-sm text-muted-foreground">
-        Ranked by what their clothes are actually made of — not what the marketing says.
+        Ranked by what their clothes are actually made of, not what the marketing says.
       </p>
 
       <div className="mt-10 grid gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3">

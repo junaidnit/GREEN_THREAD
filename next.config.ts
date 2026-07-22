@@ -28,12 +28,18 @@ const nextConfig: NextConfig = {
   // Copies of the extension are already in the wild; keep their endpoint
   // answering until the domain lapses.
   async redirects() {
-    return ["greenthread.info", "www.greenthread.info"].map((host) => ({
-      source: "/:path((?!api/).*)",
-      has: [{ type: "host" as const, value: host }],
-      destination: "https://thefibreset.com/:path",
-      permanent: true,
-    }));
+    return [
+      // The Journal is now the Magazine. Anything already linking to or
+      // indexing /journal keeps working, and the ranking transfers.
+      { source: "/journal", destination: "/magazine", permanent: true },
+      { source: "/journal/:path*", destination: "/magazine/:path*", permanent: true },
+      ...["greenthread.info", "www.greenthread.info"].map((host) => ({
+        source: "/:path((?!api/).*)",
+        has: [{ type: "host" as const, value: host }],
+        destination: "https://thefibreset.com/:path",
+        permanent: true,
+      })),
+    ];
   },
   images: {
     remotePatterns: [

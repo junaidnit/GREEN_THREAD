@@ -21,7 +21,7 @@ export default async function ChildrenPage() {
     <ComingSoon
       eyebrow="For little skin"
       title="Soft enough for a first layer."
-      body="GOTS organic cotton and muslin — soft, breathable and free of the finishes an immature skin barrier can't tolerate. We're choosing the pieces now."
+      body="GOTS organic cotton and muslin, soft, breathable and free of the finishes an immature skin barrier can't tolerate. We're choosing the pieces now."
       images={images}
       caption={images.length > 0 ? "Organic cotton pieces already on our record." : undefined}
     />

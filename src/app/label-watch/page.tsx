@@ -7,7 +7,7 @@ import { Reveal } from "@/components/kinetic";
 import { AlertTriangle } from "@/components/icons";
 
 export const metadata: Metadata = {
-  title: "Label Watch — named natural, mostly plastic",
+  title: "Label Watch: named natural, mostly plastic",
   description:
     "The Fibre Set's independent, timestamped record of clothes named after natural fibres that are mostly oil-derived plastic. Every flag is on the record, with the date we first logged it.",
   alternates: { canonical: "/label-watch" },
@@ -29,7 +29,7 @@ export default async function LabelWatchPage() {
           Named natural. Mostly plastic.
         </h1>
         <p className="mt-4 max-w-2xl text-muted-foreground">
-          Brands love to name a garment after a natural fibre it barely contains — a
+          Brands love to name a garment after a natural fibre it barely contains, a
           &ldquo;Linen-Blend&rdquo; tee that&apos;s 72% polyester. We read every label and keep an
           independent, timestamped record of the ones that mislead. Nothing here is our opinion:
           it&apos;s the disclosed composition versus the name on the tag.
@@ -53,7 +53,7 @@ export default async function LabelWatchPage() {
                 <p className="mt-0.5 truncate font-medium">{f.title}</p>
                 <p className="mt-1 text-sm text-grade-d">
                   <AlertTriangle className="mr-1 inline size-3.5" />
-                  Named after {f.fibre} — but only <b>{f.actualPct}% {f.fibre}</b>
+                  Named after {f.fibre}, but only <b>{f.actualPct}% {f.fibre}</b>
                 </p>
               </div>
               <div className="shrink-0 text-right">
@@ -81,7 +81,7 @@ export default async function LabelWatchPage() {
 
       {flagged.length === 0 && (
         <p className="mt-10 text-center text-muted-foreground">
-          Nothing on Label Watch yet — the ledger is still warming up.
+          Nothing on Label Watch yet, the ledger is still warming up.
         </p>
       )}
 
@@ -89,7 +89,7 @@ export default async function LabelWatchPage() {
         <p>
           <b className="text-foreground">How this works.</b> Every product we see is logged
           with its disclosed fibre composition and the date. When a name claims a fibre the garment is
-          mostly not, it lands here — permanently, with its history. From 2028 the EU Digital Product
+          mostly not, it lands here, permanently, with its history. From 2028 the EU Digital Product
           Passport will make fibre disclosure mandatory; we&apos;re building the independent record now.
         </p>
         <p className="mt-3">

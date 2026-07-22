@@ -1,5 +1,5 @@
 /**
- * "Find it secondhand" — real, working search deeplinks into the UK's main
+ * "Find it secondhand", real, working search deeplinks into the UK's main
  * resale platforms. Honest approach for a demo: we can't index their stock,
  * but we can land the shopper on a live search for this exact garment.
  */
@@ -35,6 +35,6 @@ export const RESALE_PLATFORMS: ResalePlatform[] = [
 
 /** Compact search term: brand + de-coloured title. */
 export function resaleTerm(brandName: string, title: string): string {
-  const base = title.split("—")[0].replace(/^(Slim|Relaxed|Oversized|Wide|Regular)\s+/i, "").trim();
+  const base = title.split(", ")[0].replace(/^(Slim|Relaxed|Oversized|Wide|Regular)\s+/i, "").trim();
   return encodeURIComponent(`${brandName} ${base}`);
 }

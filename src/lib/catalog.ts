@@ -10,13 +10,13 @@ import type { Brand, CatalogCard, Product, SeedProduct } from "./types";
 /**
  * Server-side catalog loader.
  * Primary source: Supabase (when NEXT_PUBLIC_SUPABASE_URL is configured).
- * Fallback: the checked-in enriched seed file — so the app (and Playwright)
+ * Fallback: the checked-in enriched seed file, so the app (and Playwright)
  * always runs, even with no network or env configured.
  */
 
 /**
  * REAL PRODUCTS ONLY. The catalog is exclusively items ingested from brands'
- * own live feeds — real photos, prices, and buy-links. The old concept/
+ * own live feeds, real photos, prices, and buy-links. The old concept/
  * generated demo items are gone: they carried mismatched stock photos (which
  * wrecked visual similarity) and invented merchant links (which broke Buy).
  * Everything here is a product you can actually purchase.
@@ -38,7 +38,7 @@ function loadLocal(): Product[] {
 /**
  * Supabase gets one bounded chance. Unbounded, a hanging upstream burned the
  * whole 60s page budget on Vercel before falling back to the local seed that
- * would have answered instantly — the build failed rather than degraded.
+ * would have answered instantly, the build failed rather than degraded.
  */
 const SUPABASE_TIMEOUT_MS = 8000;
 
@@ -50,14 +50,14 @@ async function loadSupabase(): Promise<Product[]> {
         fetch(input, { ...init, signal: AbortSignal.timeout(SUPABASE_TIMEOUT_MS) }),
     },
   });
-  // PostgREST caps a single request at 1,000 rows — page through the catalog
+  // PostgREST caps a single request at 1,000 rows, page through the catalog
   const PAGE = 1000;
   const data: Record<string, unknown>[] = [];
   for (let from = 0; ; from += PAGE) {
     const { data: page, error } = await supabase
       .from("products")
       .select("*, brand:brands(*)")
-      .eq("source", "live") // real products only — never surface legacy demo rows
+      .eq("source", "live") // real products only, never surface legacy demo rows
       .order("id")
       .range(from, from + PAGE - 1);
     if (error) throw error;
@@ -93,9 +93,9 @@ async function loadCatalog(): Promise<Product[]> {
     try {
       const products = await loadSupabase();
       if (products.length > 0) return products;
-      console.warn("[catalog] Supabase returned 0 products — using local seed");
+      console.warn("[catalog] Supabase returned 0 products, using local seed");
     } catch (e) {
-      console.warn("[catalog] Supabase unavailable — using local seed:", e);
+      console.warn("[catalog] Supabase unavailable, using local seed:", e);
     }
   }
   return loadLocal();
@@ -107,7 +107,7 @@ async function loadCatalog(): Promise<Product[]> {
  * `cache()` is scoped to a single request, so during static generation every
  * page re-attempted Supabase and re-paid its timeout. With Supabase timing out
  * on Vercel ("upstream request timeout"), that put /brand/[slug] over the 60s
- * page budget and failed the whole build — and it was why sitemap.xml and
+ * page budget and failed the whole build, and it was why sitemap.xml and
  * llms.txt timed out too. One attempt per process, memoised as a promise so
  * concurrent callers share the same in-flight read.
  *
@@ -131,7 +131,7 @@ export const getCatalog = cache(async (): Promise<Product[]> => {
 });
 
 /**
- * Slim projection for the search page — drops descriptions, factor
+ * Slim projection for the search page, drops descriptions, factor
  * breakdowns and buy URLs so shipping ~1,600 products to the client stays
  * a fraction of the full catalog payload.
  */
@@ -176,7 +176,7 @@ export async function getProduct(id: string): Promise<Product | undefined> {
 
 /*
  * Recommendation matching lives in match.ts (pure) and twins.ts (index-aware).
- * There were two matchers here — getBetterFibre and getSimilar — that ranked
+ * There were two matchers here, getBetterFibre and getSimilar, that ranked
  * on `category` alone and, in getSimilar's case, ignored gender entirely
  * while letting a shared fibre outweigh the category. That is how a navy
  * men's polo came to be offered a pink camisole and a women's dress. Do not
@@ -185,7 +185,7 @@ export async function getProduct(id: string): Promise<Product | undefined> {
  */
 
 /**
- * Cross-site "better fibre" match — for products we don't have a Product
+ * Cross-site "better fibre" match, for products we don't have a Product
  * record for (an item on someone else's site, scraped by the browser
  * extension). Ranking lives in recommend.ts so it stays testable; this is
  * just the catalog read.

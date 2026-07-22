@@ -3,14 +3,14 @@ import { oilDerivedPct } from "./materials";
 import type { FabricPart } from "./types";
 
 /**
- * The core promise: the SAME item — same garment type, same design, same
- * colour, wearable by the same person — in a better fabric.
+ * The core promise: the SAME item, same garment type, same design, same
+ * colour, wearable by the same person, in a better fabric.
  *
  * Everything before this ranked on `category` alone, which is why a navy
  * men's polo was offered a pink camisole (both live in the "t-shirts"
  * bucket). Here the identity of the garment is a HARD GATE, not a scoring
  * nudge, and when nothing passes we return nothing with a reason. An empty,
- * honest panel beats a confident irrelevant one — the whole product is a
+ * honest panel beats a confident irrelevant one, the whole product is a
  * trust play.
  *
  * Pure: no catalog access, no I/O. Callers pass candidates in.
@@ -28,7 +28,7 @@ export interface MatchItem {
   fabric_composition: FabricPart[];
 }
 
-/** How close the match is — surfaced to the shopper, never hidden. */
+/** How close the match is, surfaced to the shopper, never hidden. */
 export type MatchTier = "exact" | "same-style";
 
 export interface Match<T extends MatchItem> {
@@ -94,7 +94,7 @@ export function rankSameButBetter<T extends MatchItem>(
     const cGender = genderFor(c.title, cType, c.gender);
     if (!genderCompatible(myGender, cGender)) continue;
 
-    // 3. it must actually be a fibre upgrade — the entire point
+    // 3. it must actually be a fibre upgrade, the entire point
     const cPlastic = oilDerivedPct(c.fabric_composition);
     if (cPlastic >= myPlastic) continue;
 
@@ -137,7 +137,7 @@ export function rankSameButBetter<T extends MatchItem>(
 }
 
 /**
- * "Same look" — the same garment type and design, fibre irrelevant.
+ * "Same look", the same garment type and design, fibre irrelevant.
  * Used for the browse-adjacent rail, where the shopper is exploring rather
  * than upgrading. Still never crosses garment type or gender.
  */
@@ -159,8 +159,7 @@ export function rankSameLook<T extends MatchItem>(
       const cType = garmentType(c.title, c.category);
       const cGender = genderFor(c.title, cType, c.gender);
       if (cType !== myType || !genderCompatible(myGender, cGender)) return null;
-      // VISUAL similarity dominates within the garment-type + gender gate —
-      // "looks like this", Google-image-search style. A strong FashionCLIP
+      // VISUAL similarity dominates within the garment-type + gender gate, // "looks like this", Google-image-search style. A strong FashionCLIP
       // match (~0.9) contributes ~9, far outweighing the attribute nudges,
       // so colour/pattern only break ties between visually-close pieces.
       let score = (sims?.get(c.id) ?? 0) * 10;
