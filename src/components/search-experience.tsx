@@ -121,13 +121,8 @@ export function SearchExperience({ products }: { products: CatalogCard[] }) {
   }, [results, visible]);
   const animate = results.length <= 60; // keep motion silky on small sets, instant on big ones
 
-  const avgScore = useMemo(
-    () =>
-      results.length
-        ? Math.round(results.reduce((s, p) => s + p.sustainability.score, 0) / results.length)
-        : 0,
-    [results],
-  );
+  // (an average score used to be computed here; the ratings it belonged to
+  // are gone, so the computation went with them)
 
   const [copied, setCopied] = useState(false);
   const nearMisses = useMemo(
@@ -281,9 +276,12 @@ export function SearchExperience({ products }: { products: CatalogCard[] }) {
             <p className="text-sm text-muted-foreground" data-testid="results-count">
               <b className="text-foreground">{results.length}</b> {results.length === 1 ? "item" : "items"}
               {filters.q && <> for “{filters.q}”</>}
+              {/* An "avg score" belongs to the ratings we removed. What is
+                  true and worth saying instead: none of this contains
+                  plastic, because nothing that does is sold here. */}
               {results.length > 1 && (
-                <span className="ml-2 hidden text-xs sm:inline" title="Average sustainability score of everything matching your filters">
-                  · avg score <b className="text-foreground">{avgScore}</b>
+                <span className="ml-2 hidden text-xs sm:inline">
+                  · <b className="text-foreground">no plastic</b> in any of them
                 </span>
               )}
             </p>
