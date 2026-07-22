@@ -21,7 +21,8 @@
     "grow": "tsx scripts/grow.ts",
     "brand:icons": "node scripts/render-ext-icons.mjs",
     "brand:store": "node scripts/render-store-assets.mjs",
-    "pack:extension": "node scripts/render-ext-icons.mjs && node scripts/pack-extension.mjs"
+    "pack:extension": "node scripts/render-ext-icons.mjs && node scripts/pack-extension.mjs",
+    "audit:frontend": "node scripts/audit-frontend.mjs"
   },
   "dependencies": {
     "@ai-sdk/anthropic": "^4.0.7",
