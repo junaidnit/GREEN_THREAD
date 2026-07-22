@@ -29,6 +29,14 @@ export function SiteJsonLd({ ledger }: { ledger?: { products: number; readings: 
     logo: `${SITE_URL}/icon.svg`,
     foundingDate: "2026",
     areaServed: "GB",
+    // A named founder is a strong entity signal: it lets an answer engine
+    // connect the brand to a person, and this one to a mohair family that has
+    // been working natural fibres since 1967.
+    founder: {
+      "@type": "Person",
+      name: "Anita Barnard",
+      jobTitle: "Founder",
+    },
     knowsAbout: [
       "natural fibre clothing",
       "fabric composition",

@@ -97,6 +97,30 @@ export default function ContactPage() {
             The Fibre Set is the third thread. Not a mill this time, but the same question the family
             has been answering since 1967: what is this actually made of, and will it wear.
           </p>
+        </div>
+
+        {/* the founder, in the facts she gave us and no further */}
+        <div className="mt-10 border-t border-border pt-8">
+          <span className="eyebrow">The founder</span>
+          <h3 className="mt-3 font-display text-[20px] leading-snug text-foreground">
+            Anita Barnard
+          </h3>
+          <div className="mt-3 space-y-4 text-[16px] font-light leading-relaxed text-muted-foreground">
+            <p>
+              The middle of the three sisters, raised in the family&apos;s natural-fibre business.
+              She spent her career on the other side of the industry, in the part that decides how
+              clothing gets talked about: she built &euro;2.5m of brand-funded content partnerships
+              for adidas and Ralph Lauren, then led Red Bull&apos;s content-partnerships portfolio,
+              worth &euro;12m a year.
+            </p>
+            <p>
+              Which is a useful thing to have done before starting this. Knowing exactly how a
+              garment is made to sound natural is what makes reading the label properly worth doing.
+            </p>
+          </div>
+        </div>
+
+        <div className="mt-8 space-y-4 text-[16px] font-light leading-relaxed text-muted-foreground">
           <p className="text-[14px]">
             Family history as published by{" "}
             <a
