@@ -356,7 +356,7 @@ export function SearchExperience({ products }: { products: CatalogCard[] }) {
             </>
           ) : (
             <div className="rounded-xl2 border border-dashed border-border px-4 py-14 text-center" data-testid="empty-state">
-              <p className="font-display text-lg font-semibold">Nothing matches — yet</p>
+              <p className="font-display text-[20px] font-semibold">Nothing matches — yet</p>
               <p className="mx-auto mt-1 max-w-sm text-sm text-muted-foreground">
                 Try fewer filters, or ask the concierge for something specific — it knows the whole catalog.
               </p>

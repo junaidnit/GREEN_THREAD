@@ -70,7 +70,7 @@ export function CinematicHero({
       <div className="relative z-20 mx-auto flex min-h-[88vh] max-w-4xl flex-col items-center justify-center px-5 py-24 text-center text-white">
         <p className="eyebrow !text-white/60">Natural fibres, decoded</p>
 
-        <h1 className="mt-6 font-serif text-6xl font-medium leading-[1.04] tracking-tight sm:text-8xl">
+        <h1 className="mt-6 font-serif text-[clamp(2rem,4.6vw,2.5rem)] font-medium leading-[1.04] tracking-tight sm:text-8xl">
           Wear more
           <br />
           <span className="italic">

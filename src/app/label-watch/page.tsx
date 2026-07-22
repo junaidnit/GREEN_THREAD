@@ -25,7 +25,7 @@ export default async function LabelWatchPage() {
     <div className="mx-auto max-w-4xl px-4 py-12 sm:px-6">
       <Reveal>
         <p className="eyebrow text-grade-d">Label Watch</p>
-        <h1 className="mt-2 font-serif text-4xl font-medium italic tracking-tight sm:text-5xl">
+        <h1 className="mt-2 font-serif text-[28px] font-medium italic tracking-tight sm:text-[clamp(2rem,4.6vw,2.5rem)]">
           Named natural. Mostly plastic.
         </h1>
         <p className="mt-4 max-w-2xl text-muted-foreground">
@@ -36,9 +36,9 @@ export default async function LabelWatchPage() {
         </p>
         {stats && (
           <div className="mt-6 flex flex-wrap gap-x-8 gap-y-3 border-y border-border py-4 text-sm">
-            <span><b className="text-lg tabular-nums">{flagged.length}</b> <span className="text-muted-foreground">items on Label Watch</span></span>
-            <span><b className="text-lg tabular-nums">{stats.products.toLocaleString()}</b> <span className="text-muted-foreground">products on record</span></span>
-            <span><b className="text-lg tabular-nums">{stats.readings.toLocaleString()}</b> <span className="text-muted-foreground">verified readings</span></span>
+            <span><b className="text-[20px] tabular-nums">{flagged.length}</b> <span className="text-muted-foreground">items on Label Watch</span></span>
+            <span><b className="text-[20px] tabular-nums">{stats.products.toLocaleString()}</b> <span className="text-muted-foreground">products on record</span></span>
+            <span><b className="text-[20px] tabular-nums">{stats.readings.toLocaleString()}</b> <span className="text-muted-foreground">verified readings</span></span>
             <span className="text-muted-foreground">tracking since {new Date(stats.since).toLocaleDateString("en-GB", { month: "long", year: "numeric" })}</span>
           </div>
         )}
@@ -57,7 +57,7 @@ export default async function LabelWatchPage() {
                 </p>
               </div>
               <div className="shrink-0 text-right">
-                <p className="font-display text-2xl font-bold text-grade-d tabular-nums">{f.plastic_pct}%</p>
+                <p className="font-display text-[28px] font-bold text-grade-d tabular-nums">{f.plastic_pct}%</p>
                 <p className="text-[12px] uppercase tracking-wide text-muted-foreground">plastic</p>
                 <p className="mt-1 text-[12px] text-muted-foreground">
                   logged {new Date(f.trackedSince).toLocaleDateString("en-GB", { day: "numeric", month: "short", year: "numeric" })}

@@ -48,7 +48,7 @@ export default async function BrandPage({ params }: Props) {
       <div className="rounded-xl2 border border-border bg-surface p-6 sm:p-8">
         <div className="flex flex-wrap items-start justify-between gap-4">
           <div className="max-w-2xl">
-            <h1 className="font-serif text-4xl font-medium italic tracking-tight">{brand.name}</h1>
+            <h1 className="font-serif text-[28px] font-medium italic tracking-tight">{brand.name}</h1>
             <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{brand.ethics_summary}</p>
             {brand.certifications.length > 0 && (
               <div className="mt-3 flex flex-wrap gap-2">
@@ -63,7 +63,7 @@ export default async function BrandPage({ params }: Props) {
           <div className="flex items-center gap-3 rounded-xl2 bg-surface-2 px-5 py-4">
             <div>
               <p className="text-[12px] uppercase tracking-wide text-muted-foreground">Catalog average</p>
-              <p className="font-display text-2xl font-bold">{avg}<span className="text-sm font-normal text-muted-foreground">/100</span></p>
+              <p className="font-display text-[28px] font-bold">{avg}<span className="text-sm font-normal text-muted-foreground">/100</span></p>
             </div>
             <GradeBadge grade={gradeFor(avg)} size="lg" />
           </div>
@@ -81,7 +81,7 @@ export default async function BrandPage({ params }: Props) {
       </div>
 
       <div className="mb-4 mt-8 flex items-end justify-between">
-        <h2 className="font-display text-xl font-bold">Everything from {brand.name}</h2>
+        <h2 className="font-display text-[20px] font-bold">Everything from {brand.name}</h2>
         <Link href={`/search?brand=${slug}`} className="text-sm font-medium text-primary hover:underline">
           Filter & refine →
         </Link>

@@ -36,7 +36,7 @@ export function PageExtras() {
     <button
       aria-label="Back to top"
       onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-      className="fixed bottom-5 left-5 z-40 flex size-10 items-center justify-center rounded-full border border-border bg-surface/90 text-lg shadow-lg backdrop-blur transition-transform hover:scale-105"
+      className="fixed bottom-5 left-5 z-40 flex size-10 items-center justify-center rounded-full border border-border bg-surface/90 text-[20px] shadow-lg backdrop-blur transition-transform hover:scale-105"
     >
       ↑
     </button>

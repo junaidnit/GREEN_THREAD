@@ -34,7 +34,7 @@ export function LabelHero({
           <div className="mb-5 hidden justify-center lg:flex lg:justify-start">
             <LogoMark size={40} animate />
           </div>
-          <h1 className="font-serif text-5xl font-medium leading-[1.06] tracking-tight sm:text-6xl xl:text-7xl">
+          <h1 className="font-serif text-[clamp(2rem,4.6vw,2.5rem)] font-medium leading-[1.06] tracking-tight sm:text-[clamp(2rem,4.6vw,2.5rem)] xl:text-7xl">
             Wear more
             <br />
             <span className="italic text-primary">natural</span>, every time

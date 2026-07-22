@@ -35,7 +35,7 @@ export default async function BrandsPage() {
   return (
     <div className="mx-auto max-w-7xl px-5 py-12 sm:px-8">
       <p className="eyebrow">The directory</p>
-      <h1 className="mt-2 font-serif text-4xl font-medium italic tracking-tight sm:text-5xl">
+      <h1 className="mt-2 font-serif text-[28px] font-medium italic tracking-tight sm:text-[clamp(2rem,4.6vw,2.5rem)]">
         Brands, label-checked
       </h1>
       <p className="mt-3 max-w-md text-sm text-muted-foreground">
@@ -47,7 +47,7 @@ export default async function BrandsPage() {
           <Reveal key={b.slug} delay={Math.min(i * 0.05, 0.35)}>
             <Link href={`/brand/${b.slug}`} className="group block border-t border-border pt-5">
               <div className="flex items-start justify-between gap-3">
-                <p className="font-serif text-2xl font-medium italic leading-tight group-hover:text-primary">
+                <p className="font-serif text-[28px] font-medium italic leading-tight group-hover:text-primary">
                   {b.name}
                 </p>
                 <GradeBadge grade={gradeFor(b.avg)} score={b.avg} />

@@ -77,7 +77,7 @@ export function AnalyzeClient() {
         <p className="mx-auto mb-3 inline-flex items-center gap-2 rounded-full border border-border bg-surface px-3 py-1 text-xs font-medium text-muted-foreground">
           <Sparkles className="size-3.5 text-primary" /> Fabric Check
         </p>
-        <h1 className="font-serif text-4xl font-medium tracking-tight sm:text-5xl">
+        <h1 className="font-serif text-[28px] font-medium tracking-tight sm:text-[clamp(2rem,4.6vw,2.5rem)]">
           Paste any product link.
           <br />
           <span className="italic text-primary">We read the label for you.</span>
@@ -153,7 +153,7 @@ export function AnalyzeClient() {
             )}
             <div className="min-w-0 flex-1">
               <p className="text-xs uppercase tracking-wide text-muted-foreground">{result.site}</p>
-              <h2 className="mt-0.5 font-display text-lg font-bold leading-snug">{result.title}</h2>
+              <h2 className="mt-0.5 font-display text-[20px] font-bold leading-snug">{result.title}</h2>
               {result.price_text && <p className="mt-1 text-sm font-semibold">{result.price_text}</p>}
             </div>
             {result.score != null && (

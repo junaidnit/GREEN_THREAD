@@ -66,7 +66,7 @@ export function FibreWidget({ fibres }: { fibres: FibreEntry[] }) {
         <div key={sel.id} className="mt-10 grid animate-[fade-up_.4s_ease] gap-8 border-t border-border pt-10 md:grid-cols-[1fr_1.3fr]">
           <div>
             <p className="eyebrow">The fibre</p>
-            <h3 className="mt-2 font-display text-3xl text-foreground">{sel.label}</h3>
+            <h3 className="mt-2 font-display text-[28px] text-foreground">{sel.label}</h3>
             <p className="mt-4 text-[16px] font-light leading-relaxed text-muted-foreground">{sel.note}</p>
             <Link
               href={`/fabric/${sel.id}`}
@@ -76,7 +76,7 @@ export function FibreWidget({ fibres }: { fibres: FibreEntry[] }) {
             </Link>
           </div>
           <div className="flex flex-col justify-center rounded-sm border-l-2 border-primary bg-surface p-7">
-            <p className="font-display text-2xl text-primary">{sel.stat}</p>
+            <p className="font-display text-[28px] text-primary">{sel.stat}</p>
             <p className="mt-3 text-[16px] font-light leading-relaxed text-muted-foreground">{sel.detail}</p>
             <p className="mt-4 text-[12px] font-light italic text-muted-foreground/80">— {sel.source}</p>
           </div>

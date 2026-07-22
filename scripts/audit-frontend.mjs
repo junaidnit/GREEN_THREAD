@@ -33,6 +33,11 @@ const distinct = [...new Set(sizes)].sort((a, b) => a - b);
 check(distinct.length <= 6, "type scale — at most 6 fixed sizes", `${distinct.length} (${distinct.join(", ")})`);
 check(distinct.every((s) => s >= 12), "no type below 12px", `smallest ${Math.min(...distinct)}px`);
 
+// Tailwind's named ramp bypasses the check above and reintroduced 24px and
+// 30px once already — catch it at the source.
+const named = [...all.matchAll(/(?<![\w-])text-(lg|xl|2xl|3xl|4xl|5xl|6xl)(?![\w-])/g)].map((m) => m[1]);
+check(named.length === 0, "no off-scale Tailwind text sizes", `${named.length} (${[...new Set(named)].join(", ")})`);
+
 // alt="" is CORRECT for decorative images — a screen reader should skip a
 // flying animation or a hero thumbnail. Only flag an empty alt that is NOT
 // marked decorative, otherwise the gate pushes you into writing noise.

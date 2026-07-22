@@ -36,7 +36,7 @@ export function ScoreDial({ score, grade }: { score: number; grade: string }) {
         />
       </svg>
       <div className="absolute inset-0 flex flex-col items-center justify-center">
-        <span className="font-display text-4xl font-bold leading-none">{score}</span>
+        <span className="font-display text-[28px] font-bold leading-none">{score}</span>
         <span className="mt-1 text-xs font-medium text-muted-foreground">grade {grade}</span>
       </div>
     </div>

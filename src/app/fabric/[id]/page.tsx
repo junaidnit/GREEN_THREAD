@@ -50,7 +50,7 @@ export default async function FabricPage({ params }: Props) {
           <Leaf className="size-3.5 text-primary" /> {fibreClass === "natural" ? "Natural fibre" : fibreClass === "regenerated" ? "Regenerated fibre" : "Synthetic fibre"}
           <span>· impact score {score}/10</span>
         </p>
-        <h1 className="font-serif text-4xl font-medium italic tracking-tight sm:text-5xl">{MATERIAL_LABELS[material]}</h1>
+        <h1 className="font-serif text-[28px] font-medium italic tracking-tight sm:text-[clamp(2rem,4.6vw,2.5rem)]">{MATERIAL_LABELS[material]}</h1>
         <p className="mt-2 max-w-2xl text-sm leading-relaxed text-muted-foreground">{MATERIAL_NOTES[material]}</p>
         {fact && (
           <div className="mt-4 max-w-md rounded-lg border-l-2 border-primary bg-surface p-4">
@@ -62,7 +62,7 @@ export default async function FabricPage({ params }: Props) {
       </div>
 
       <div className="mb-4 mt-8 flex items-end justify-between">
-        <h2 className="font-display text-xl font-bold">
+        <h2 className="font-display text-[20px] font-bold">
           {products.length} {MATERIAL_LABELS[material].toLowerCase()} pieces
         </h2>
         <Link href={`/search?fabric=${material}`} className="text-sm font-medium text-primary hover:underline">

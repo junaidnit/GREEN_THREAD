@@ -29,7 +29,7 @@ export function SavedList({ products }: { products: CatalogCard[] }) {
     <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6">
       <div className="mb-6 flex flex-wrap items-end justify-between gap-3">
         <div>
-          <h1 className="font-display text-3xl font-bold">Your wardrobe</h1>
+          <h1 className="font-display text-[28px] font-bold">Your wardrobe</h1>
           {saved.length > 0 && (
             <p className="mt-1 text-sm text-muted-foreground">
               {saved.length} saved · {formatPrice(total, "GBP")} total · average score{" "}
@@ -50,7 +50,7 @@ export function SavedList({ products }: { products: CatalogCard[] }) {
         </div>
       ) : (
         <div className="rounded-xl2 border border-dashed border-border py-20 text-center">
-          <p className="font-display text-lg font-semibold">Nothing saved yet</p>
+          <p className="font-display text-[20px] font-semibold">Nothing saved yet</p>
           <p className="mx-auto mt-1 max-w-sm text-sm text-muted-foreground">
             Tap <b>Save</b> on any product and it lands here — watch for the little arc into the heart.
           </p>

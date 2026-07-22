@@ -99,13 +99,13 @@ export function SiteHeader() {
       </div>
 
       <div className="border-b border-border">
-        <div className="mx-auto flex h-[70px] max-w-[1280px] items-center justify-between gap-6 px-5 sm:px-10">
+        <div className="mx-auto flex h-[70px] max-w-[1280px] items-center justify-between gap-3 px-4 sm:gap-6 sm:px-10">
           {/* brand lockup — heritage ribbon mark + wordmark */}
           <Link href="/" aria-label="The Fibre Set — home" className="flex shrink-0 items-center gap-3 text-foreground">
             <span className="text-[#141414]">
               <LogoMark size={34} animate={false} />
             </span>
-            <span className="font-display text-[16px] font-semibold uppercase tracking-[0.2em]">
+            <span className="hidden font-display text-[16px] font-semibold uppercase tracking-[0.2em] sm:inline">
               The&nbsp;Fibre&nbsp;Set
             </span>
           </Link>
@@ -133,7 +133,7 @@ export function SiteHeader() {
           </nav>
 
           {/* actions */}
-          <div className="flex items-center gap-3 sm:gap-4">
+          <div className="flex items-center gap-1 sm:gap-3">
             <button
               onClick={() => setSearchOpen((v) => !v)}
               aria-label="Search"
@@ -160,7 +160,7 @@ export function SiteHeader() {
             <button
               onClick={() => setMobileOpen((v) => !v)}
               aria-label="Menu"
-              className="tap-target -mr-2 lg:hidden"
+              className="tap-target lg:hidden"
             >
               <svg viewBox="0 0 24 24" className="size-5" fill="none" stroke="currentColor" strokeWidth="1.5">
                 <path d="M3 6h18M3 12h18M3 18h18" strokeLinecap="round" />

@@ -32,7 +32,7 @@ export function DiaryClient() {
       <div className="flex items-end justify-between">
         <div>
           <p className="eyebrow">Private · stored only on this device</p>
-          <h1 className="mt-2 font-serif text-4xl font-medium italic tracking-tight sm:text-5xl">
+          <h1 className="mt-2 font-serif text-[28px] font-medium italic tracking-tight sm:text-[clamp(2rem,4.6vw,2.5rem)]">
             Your Fibre Diary
           </h1>
         </div>
@@ -41,7 +41,7 @@ export function DiaryClient() {
 
       {entries.length === 0 ? (
         <div className="mt-12 rounded-xl2 border border-dashed border-border px-6 py-16 text-center">
-          <p className="font-serif text-2xl font-medium italic">Nothing recorded yet</p>
+          <p className="font-serif text-[28px] font-medium italic">Nothing recorded yet</p>
           <p className="mx-auto mt-2 max-w-sm text-sm text-muted-foreground">
             Every time you buy through The Fibre Set, the fibres you paid for are logged here —
             privately, on your device — so you can watch your wardrobe go natural.
@@ -63,7 +63,7 @@ export function DiaryClient() {
               { label: "went to plastic", value: formatPrice(Math.round(plasticSpend), "GBP"), warn: true },
             ].map((s) => (
               <div key={s.label} className="border-t border-border pt-4">
-                <p className={`font-serif text-3xl font-medium ${s.accent ? "text-grade-a" : s.warn ? "text-grade-d" : ""}`}>
+                <p className={`font-serif text-[28px] font-medium ${s.accent ? "text-grade-a" : s.warn ? "text-grade-d" : ""}`}>
                   {s.value}
                 </p>
                 <p className="eyebrow mt-1">{s.label}</p>

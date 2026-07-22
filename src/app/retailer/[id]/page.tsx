@@ -39,13 +39,13 @@ export default async function RetailerCheckout({ params }: { params: Promise<{ i
         {/* retailer chrome */}
         <div style={{ background: theme.bg, color: theme.fg }} className="px-6 py-4">
           <div className="flex items-baseline justify-between">
-            <p className="font-display text-2xl font-black tracking-tight">{product.retailer}</p>
+            <p className="font-display text-[28px] font-black tracking-tight">{product.retailer}</p>
             <p className="text-xs opacity-80">{theme.tagline}</p>
           </div>
         </div>
 
         <div className="bg-surface p-6">
-          <h1 className="font-display text-lg font-bold">Your bag — 1 item</h1>
+          <h1 className="font-display text-[20px] font-bold">Your bag — 1 item</h1>
 
           <div className="mt-4 flex gap-4 rounded-xl border border-border p-4">
             <div className="relative h-28 w-20 shrink-0 overflow-hidden rounded-lg bg-surface-2">

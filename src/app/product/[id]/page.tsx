@@ -162,10 +162,10 @@ export default async function ProductPage({ params }: Props) {
               </span>
             )}
           </div>
-          <h1 className="mt-1 font-serif text-3xl font-medium leading-tight tracking-tight sm:text-4xl">
+          <h1 className="mt-1 font-serif text-[28px] font-medium leading-tight tracking-tight sm:text-[28px]">
             {product.title}
           </h1>
-          <p className="mt-3 font-display text-2xl font-semibold" data-testid="product-price">
+          <p className="mt-3 font-display text-[28px] font-semibold" data-testid="product-price">
             {formatPrice(product.price, product.currency)}
           </p>
 
@@ -247,7 +247,7 @@ export default async function ProductPage({ params }: Props) {
           {/* fabric composition — the platform's core promise */}
           <section className="mt-8 rounded-xl2 border border-border bg-surface p-5" data-testid="composition-section">
             <div className="mb-4 flex items-center justify-between gap-3">
-              <h2 className="font-display text-lg font-bold">What it&apos;s made of</h2>
+              <h2 className="font-display text-[20px] font-bold">What it&apos;s made of</h2>
               <span
                 data-testid="pdp-fibre-mark"
                 className={`rounded-full px-3 py-1 text-xs font-semibold text-white ${
@@ -341,7 +341,7 @@ export default async function ProductPage({ params }: Props) {
             </Link>
           </div>
           <div>
-            <h2 className="font-display text-xl font-bold">Why this score?</h2>
+            <h2 className="font-display text-[20px] font-bold">Why this score?</h2>
             <ExpandableText text={s.explanation} className="mt-2 max-w-2xl" />
 
             {greener && (
@@ -391,7 +391,7 @@ export default async function ProductPage({ params }: Props) {
       {betterMatches.length > 0 && (
         <section className="mt-12" data-testid="better-fibre">
           <p className="eyebrow">The same {noun}, better fabric</p>
-          <h2 className="mb-1 mt-1 font-serif text-2xl font-medium italic tracking-tight sm:text-3xl">
+          <h2 className="mb-1 mt-1 font-serif text-[28px] font-medium italic tracking-tight sm:text-[28px]">
             {betterMatches[0].tier === "exact"
               ? `This ${noun}, without the plastic`
               : `Closest ${noun} without the plastic`}
@@ -431,7 +431,7 @@ export default async function ProductPage({ params }: Props) {
       {betterMatches.length === 0 && noMatchReason === "no-better-fibre-in-this-style" && (
         <section className="mt-12 rounded-xl2 border border-border bg-surface p-6" data-testid="no-better-fibre">
           <p className="eyebrow">The same {noun}, better fabric</p>
-          <h2 className="mt-1 font-serif text-2xl font-medium italic tracking-tight">
+          <h2 className="mt-1 font-serif text-[28px] font-medium italic tracking-tight">
             No better-fibre {noun} yet
           </h2>
           <p className="mt-2 max-w-xl text-sm text-muted-foreground">
@@ -449,7 +449,7 @@ export default async function ProductPage({ params }: Props) {
       {/* find it secondhand — the resale check */}
       <section className="mt-12 rounded-xl2 border border-border bg-surface p-6" data-testid="secondhand">
         <p className="eyebrow">Already made</p>
-        <h2 className="mt-1 font-serif text-2xl font-medium italic tracking-tight sm:text-3xl">
+        <h2 className="mt-1 font-serif text-[28px] font-medium italic tracking-tight sm:text-[28px]">
           Check it secondhand first
         </h2>
         <p className="mt-2 max-w-lg text-sm text-muted-foreground">
@@ -479,7 +479,7 @@ export default async function ProductPage({ params }: Props) {
       {/* similar */}
       {similar.length > 0 && (
         <section className="mt-12">
-          <h2 className="mb-4 font-serif text-2xl font-medium italic tracking-tight">
+          <h2 className="mb-4 font-serif text-[28px] font-medium italic tracking-tight">
             More {noun === "piece" ? "like this" : `${noun}s`}
           </h2>
           <div className="grid grid-cols-2 gap-x-4 gap-y-8 sm:gap-x-6 md:grid-cols-4">

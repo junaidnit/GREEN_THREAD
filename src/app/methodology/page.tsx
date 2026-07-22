@@ -35,7 +35,7 @@ export default function MethodologyPage() {
       <p className="mb-3 inline-flex items-center gap-2 rounded-full border border-border bg-surface px-3 py-1 text-xs font-medium text-muted-foreground">
         <Leaf className="size-3.5 text-primary" /> Methodology
       </p>
-      <h1 className="font-serif text-4xl font-medium tracking-tight sm:text-5xl">
+      <h1 className="font-serif text-[28px] font-medium tracking-tight sm:text-[clamp(2rem,4.6vw,2.5rem)]">
         The anatomy of a <span className="italic text-primary">score</span>
       </h1>
       <p className="mt-3 max-w-md text-muted-foreground">No black box. Watch 100 points come together.</p>
@@ -67,20 +67,20 @@ export default function MethodologyPage() {
 
       {/* grade spectrum */}
       <Reveal className="mt-12">
-        <h2 className="font-display text-xl font-bold">From E to A</h2>
+        <h2 className="font-display text-[20px] font-bold">From E to A</h2>
         <GradeSpectrum />
       </Reveal>
 
       {/* fibre league table */}
       <Reveal className="mt-12">
-        <h2 className="font-display text-xl font-bold">Every fibre, ranked</h2>
+        <h2 className="font-display text-[20px] font-bold">Every fibre, ranked</h2>
         <p className="text-xs text-muted-foreground">Hover a row for the why.</p>
         <FibreRanking materials={materials} labels={MATERIAL_LABELS} notes={MATERIAL_NOTES} />
       </Reveal>
 
       {/* certification points */}
       <Reveal className="mt-12">
-        <h2 className="font-display text-xl font-bold">
+        <h2 className="font-display text-[20px] font-bold">
           Certifications <span className="text-sm font-normal text-muted-foreground">capped at {CERT_CAP}</span>
         </h2>
         <div className="mt-3 flex flex-wrap gap-2">

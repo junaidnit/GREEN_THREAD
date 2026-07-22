@@ -43,7 +43,7 @@ export default async function ConditionPage({ params }: Props) {
         <p className="mb-2 inline-flex items-center gap-2 rounded-full bg-surface px-3 py-1 text-xs font-medium text-muted-foreground">
           <BadgeCheck className="size-3.5 text-primary" /> {rule.clinicalName}
         </p>
-        <h1 className="font-serif text-4xl font-medium italic tracking-tight sm:text-5xl">{rule.name}</h1>
+        <h1 className="font-serif text-[28px] font-medium italic tracking-tight sm:text-[clamp(2rem,4.6vw,2.5rem)]">{rule.name}</h1>
         <p className="mt-2 max-w-2xl text-sm leading-relaxed text-muted-foreground">{rule.summary}</p>
 
         <ul className="mt-5 space-y-2">
@@ -89,7 +89,7 @@ export default async function ConditionPage({ params }: Props) {
       </div>
 
       <div className="mb-4 mt-8 flex items-end justify-between gap-4">
-        <h2 className="font-display text-xl font-bold">{products.length} pieces that qualify</h2>
+        <h2 className="font-display text-[20px] font-bold">{products.length} pieces that qualify</h2>
         <div className="flex flex-wrap gap-1.5">
           {CONDITION_SLUGS.filter((s) => s !== rule.slug).map((s) => (
             <Link
