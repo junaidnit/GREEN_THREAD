@@ -42,6 +42,11 @@ const nextConfig: NextConfig = {
     ];
   },
   images: {
+    // Next 16 only honours a `quality` prop whose value is listed here; any
+    // other value silently falls back to 75. Every quality={88}/{90} on the
+    // site was being ignored until this was added, which I only caught by
+    // reading q= on the deployed page.
+    qualities: [75, 88, 90],
     remotePatterns: [
       {
         protocol: "https",
