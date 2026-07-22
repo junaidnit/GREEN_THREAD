@@ -301,9 +301,9 @@ export default async function Home() {
               [String(brandCount), "brands read in full"],
               [stats ? String(stats.flagged) : ", ", "greenwash flags on record"],
             ].map(([n, l]) => (
-              <div key={l} className="text-center">
-                <p className="font-display text-[clamp(2rem,4.6vw,2.5rem)] font-light tabular-nums">{n}</p>
-                <p className="mt-1 text-[12px] font-light uppercase tracking-[0.1em] opacity-70">{l}</p>
+              <div key={l} className="text-center" role="group" aria-label={`${n} ${l}`}>
+                <p aria-hidden className="font-display text-[clamp(2rem,4.6vw,2.5rem)] font-light tabular-nums">{n}</p>
+                <p aria-hidden className="mt-1 text-[12px] font-light uppercase tracking-[0.1em] opacity-70">{l}</p>
               </div>
             ))}
           </div>
@@ -331,11 +331,15 @@ export default async function Home() {
         <span className="eyebrow">Follow along</span>
         <h2 className="mt-2 font-display text-[28px] text-foreground">@thefibreset</h2>
         <div className="mt-8 grid grid-cols-2 gap-3 sm:grid-cols-4">
-          {[womenImg, menImg, heroImg, fibres[0]?.image].map((img, i) => (
-            <div key={i} className="relative aspect-square overflow-hidden bg-surface-2">
-              {img && <Image src={sized(img, IMG.card)!} alt="A natural-fibre piece from The Fibre Set" fill sizes="300px" quality={88} className="object-cover transition-transform duration-700 hover:scale-105" />}
-            </div>
-          ))}
+          {[womenImg, menImg, heroImg, fibres[0]?.image].map((img, i) => {
+            // four identical alts said nothing; the product's own title does
+            const alt = products.find((p) => p.image_url === img)?.title ?? "";
+            return (
+              <div key={i} className="relative aspect-square overflow-hidden bg-surface-2">
+                {img && <Image src={sized(img, IMG.card)!} alt={alt} fill sizes="300px" quality={88} className="object-cover transition-transform duration-700 hover:scale-105" />}
+              </div>
+            );
+          })}
         </div>
         <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="mt-8 inline-block border-b border-slate pb-1 text-[12px] font-semibold uppercase tracking-[0.14em] text-slate hover:text-primary">
           Follow on Instagram →
@@ -353,9 +357,9 @@ function CategoryPanel({
   return (
     <Link href={href} className="group relative block aspect-[16/11] overflow-hidden">
       <div className="absolute inset-0 bg-surface-2" style={swatch ? { background: swatch } : undefined}>
-        {img && <Image src={sized(img, IMG.panel)!} alt={label} fill sizes="(max-width:640px) 100vw, 50vw" quality={90} className="object-cover transition-transform duration-700 group-hover:scale-[1.04]" />}
+        {img && <Image src={sized(img, IMG.panel)!} alt="" aria-hidden fill sizes="(max-width:640px) 100vw, 50vw" quality={90} className="object-cover transition-transform duration-700 group-hover:scale-[1.04]" />}
       </div>
-      <div className="absolute inset-0" style={{ background: "linear-gradient(to top, rgba(58,58,85,.6), rgba(58,58,85,0) 55%)" }} />
+      <div className="absolute inset-0" style={{ background: "linear-gradient(to top, rgba(58,58,85,.8), rgba(58,58,85,0) 60%)" }} />
       <div className="absolute inset-x-0 bottom-0 flex items-end justify-between p-7 text-background">
         <div>
           <span className="text-[12px] font-semibold uppercase tracking-[0.16em] opacity-90">{soon ? "Coming soon" : "Shop"}</span>

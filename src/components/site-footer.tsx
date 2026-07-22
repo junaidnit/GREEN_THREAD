@@ -37,7 +37,7 @@ export function SiteFooter() {
           </div>
           {COLUMNS.map((col) => (
             <div key={col.head}>
-              <h5 className="mb-4 text-[12px] font-semibold uppercase tracking-[0.16em] opacity-85">{col.head}</h5>
+              <h4 className="mb-4 text-[12px] font-semibold uppercase tracking-[0.16em] opacity-85">{col.head}</h4>
               <ul className="flex flex-col gap-2.5">
                 {col.links.map(([label, href]) => (
                   <li key={href}>

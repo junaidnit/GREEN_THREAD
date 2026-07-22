@@ -141,8 +141,12 @@ export default async function ConditionsPage() {
               </div>
             </dl>
 
+            {/* visually a CTA, but the card above already links here: hide it
+                from the tab order so keyboard users are not asked twice */}
             <Link
               href={`/condition/${e.slug}`}
+              tabIndex={-1}
+              aria-hidden
               className="mt-5 inline-block border-b border-slate pb-1 text-[12px] font-semibold uppercase tracking-[0.14em] text-slate transition-colors hover:text-primary"
             >
               See the edit

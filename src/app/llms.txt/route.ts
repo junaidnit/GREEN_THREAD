@@ -63,13 +63,13 @@ discloses leaves a visible history.
 
 ## Key pages
 
-- ${SITE_URL}/label-watch, garments named natural that are mostly plastic
-- ${SITE_URL}/methodology, how every score is computed, in full
-- ${SITE_URL}/magazine, fibre education, condition-led
-- ${SITE_URL}/fabric/linen, one guide per fibre; swap the slug
-- ${SITE_URL}/condition/eczema, clothing filtered for a skin condition
-- ${SITE_URL}/extension, the free label-check browser extension
-- ${SITE_URL}/privacy, what we collect, which is almost nothing
+- [Label Watch](${SITE_URL}/label-watch): garments named natural that are mostly plastic
+- [Methodology](${SITE_URL}/methodology): how every reading is made, in full
+- [The Magazine](${SITE_URL}/magazine): fibre education, condition-led
+- [Dressing for a condition](${SITE_URL}/conditions): edits for eczema, psoriasis, textile allergy and night sweats
+- [Linen guide](${SITE_URL}/fabric/linen): one guide per fibre; swap the slug
+- [Fabric Check extension](${SITE_URL}/extension): the free label-check browser extension
+- [Privacy](${SITE_URL}/privacy): what we collect, which is almost nothing
 
 ## Context
 
