@@ -48,6 +48,7 @@ export function ProductCard({ product, priority = false }: { product: CatalogCar
           fill
           sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 33vw"
           priority={priority}
+          quality={88}
           placeholder="blur"
           blurDataURL={BLUR}
           className="object-cover transition-transform duration-[900ms] ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.06]"
