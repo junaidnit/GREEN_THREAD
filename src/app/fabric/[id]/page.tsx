@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
-import { getCatalog } from "@/lib/catalog";
+import { getShopCatalog } from "@/lib/catalog";
 import { MATERIAL_LABELS, MATERIAL_NOTES, MATERIAL_SCORES } from "@/lib/scoring";
 import { FIBRE_CLASS, MATERIAL_FACTS } from "@/lib/materials";
 import type { MaterialId } from "@/lib/types";
@@ -34,7 +34,7 @@ export default async function FabricPage({ params }: Props) {
   const material = id as MaterialId;
   if (!FABRIC_IDS.includes(material)) notFound();
 
-  const all = await getCatalog();
+  const all = await getShopCatalog();
   const products = all
     .filter((p) => p.fabric_composition.some((f) => f.material === material && f.pct >= 30))
     .sort((a, b) => b.sustainability.score - a.sustainability.score);

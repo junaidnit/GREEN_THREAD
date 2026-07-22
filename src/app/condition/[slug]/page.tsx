@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
-import { getCatalog } from "@/lib/catalog";
+import { getShopCatalog } from "@/lib/catalog";
 import { CONDITIONS, CONDITION_SLUGS, isConditionSafe, type ConditionSlug } from "@/lib/conditions";
 import { ProductCard } from "@/components/product-card";
 import { AlertTriangle, BadgeCheck } from "@/components/icons";
@@ -30,7 +30,7 @@ export default async function ConditionPage({ params }: Props) {
   if (!CONDITION_SLUGS.includes(slug as ConditionSlug)) notFound();
   const rule = CONDITIONS[slug as ConditionSlug];
 
-  const all = await getCatalog();
+  const all = await getShopCatalog();
   const products = all
     .filter((p) => isConditionSafe(p.fabric_composition, rule.slug))
     .sort((a, b) => b.sustainability.score - a.sustainability.score);

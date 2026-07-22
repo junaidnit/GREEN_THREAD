@@ -1,7 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import type { Metadata } from "next";
-import { getCatalog } from "@/lib/catalog";
+import { getShopCatalog } from "@/lib/catalog";
 import { ledgerStats } from "@/lib/truth-server";
 import { MATERIAL_LABELS, MATERIAL_NOTES } from "@/lib/scoring";
 import { MATERIAL_FACTS } from "@/lib/materials";
@@ -79,7 +79,7 @@ const CHILDRENS = /\b(baby|babies|kids?|child|children|infant|toddler)\b/i;
 const HOMEWARE = /\b(cushion|blanket|bedding|duvet|sheet|pillow|towel|napkin|apron|throw)\b/i;
 
 export default async function Home() {
-  const products = await getCatalog();
+  const products = await getShopCatalog();
   const stats = ledgerStats();
 
   const heroImg = firstImage(products, (p) => /dress|linen/i.test(p.title) && p.gender === "women") ?? products[0]?.image_url ?? null;

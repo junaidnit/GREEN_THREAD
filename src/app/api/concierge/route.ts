@@ -7,7 +7,7 @@ import {
 } from "ai";
 import { z } from "zod";
 import { anthropic, hasAnthropicKey } from "@/lib/env";
-import { getCatalog } from "@/lib/catalog";
+import { getShopCatalog } from "@/lib/catalog";
 import { applyFilters, buildIndex, EMPTY_FILTERS } from "@/lib/search";
 import type { MaterialId, Product } from "@/lib/types";
 
@@ -58,7 +58,7 @@ export async function POST(req: Request) {
 
   let products, index;
   try {
-    products = await getCatalog();
+    products = await getShopCatalog();
     index = buildIndex(products);
   } catch (e) {
     console.error("[concierge] catalog load failed:", e);

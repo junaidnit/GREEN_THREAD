@@ -5,6 +5,7 @@ import { createClient } from "@supabase/supabase-js";
 import { dataPath } from "./data-root";
 import { supabaseConfig } from "./env";
 import { rankBetterFibre, type BetterFibreInput, type BetterFibreResult } from "./recommend";
+import { oilDerivedPct } from "./materials";
 import type { Brand, CatalogCard, Product, SeedProduct } from "./types";
 
 /**
@@ -145,12 +146,32 @@ export const getCatalog = cache(async (): Promise<Product[]> => {
 });
 
 /**
+ * WHAT WE SELL vs WHAT WE HAVE READ. These are deliberately different sets.
+ *
+ * The brand promise is zero plastic, so nothing containing an oil-derived
+ * fibre is shoppable: not "ranked lower", not "shown with a warning" — absent.
+ * A promise with exceptions is not a promise.
+ *
+ * getCatalog() stays the FULL record, because the evidence is the business.
+ * Label Watch has to be able to name a garment sold as linen that is 72%
+ * polyester, and it cannot do that from a catalogue those garments were
+ * deleted from. Product pages stay reachable for the same reason, so a Label
+ * Watch entry links to something.
+ *
+ * Browse, search, recommendations and the homepage all read the shoppable set.
+ */
+export const getShopCatalog = cache(async (): Promise<Product[]> => {
+  const all = await getCatalog();
+  return all.filter((p) => oilDerivedPct(p.fabric_composition) === 0);
+});
+
+/**
  * Slim projection for the search page, drops descriptions, factor
- * breakdowns and buy URLs so shipping ~1,600 products to the client stays
- * a fraction of the full catalog payload.
+ * breakdowns and buy URLs so shipping the catalogue to the client stays
+ * a fraction of the full payload. Shoppable set only.
  */
 export const getCatalogCards = cache(async (): Promise<CatalogCard[]> => {
-  const all = await getCatalog();
+  const all = await getShopCatalog();
   const drop = (p: Product) => {
     const h = p.price_history;
     if (!h || h.length < 2) return {};

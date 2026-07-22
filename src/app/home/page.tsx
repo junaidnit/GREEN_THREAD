@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { ComingSoon } from "@/components/coming-soon";
-import { getCatalog } from "@/lib/catalog";
+import { getShopCatalog } from "@/lib/catalog";
 
 export const metadata: Metadata = {
   title: "Home & Bedding",
@@ -12,7 +12,7 @@ const HOMEWARE = /\b(cushion|blanket|bedding|duvet|sheet|pillow|towel|napkin|apr
 const CHILDRENS = /\b(baby|babies|kids?|child|children|infant|toddler)\b/i;
 
 export default async function HomePage() {
-  const products = await getCatalog();
+  const products = await getShopCatalog();
   const images = products
     .filter((p) => HOMEWARE.test(p.title) && !CHILDRENS.test(p.title) && p.image_url)
     .map((p) => p.image_url!)

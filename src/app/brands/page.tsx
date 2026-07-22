@@ -1,6 +1,6 @@
 import Link from "next/link";
 import type { Metadata } from "next";
-import { getCatalog } from "@/lib/catalog";
+import { getShopCatalog } from "@/lib/catalog";
 import { gradeFor } from "@/lib/scoring";
 import { GradeBadge } from "@/components/grade-badge";
 import { Reveal } from "@/components/kinetic";
@@ -13,7 +13,7 @@ export const metadata: Metadata = {
 };
 
 export default async function BrandsPage() {
-  const products = await getCatalog();
+  const products = await getShopCatalog();
 
   const byBrand = new Map<
     string,

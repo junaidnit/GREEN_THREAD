@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
-import { getCatalog, getProduct } from "@/lib/catalog";
+import { getCatalog, getProduct, getShopCatalog } from "@/lib/catalog";
 import { getSameButBetter, getSameLook } from "@/lib/twins";
 import { garmentLabel } from "@/lib/garment";
 import { truthRecordFor } from "@/lib/truth-server";
@@ -21,15 +21,12 @@ import {
   naturalPct,
   sheddingRisk,
 } from "@/lib/materials";
-import { GradeBadge } from "@/components/grade-badge";
 import { ProductCard } from "@/components/product-card";
-import { CompositionBars } from "@/components/composition-bars";
-import { ScoreDial } from "@/components/score-dial";
+import { FibreProfile } from "@/components/fibre-profile";
 import { AskConcierge } from "@/components/ask-concierge";
 import { FabricLens } from "@/components/fabric-lens";
 import { SaveButton } from "@/components/saved";
 import { spreadByImage } from "@/lib/spread";
-import { ScoreFactors } from "@/components/score-factors";
 import { ExpandableText } from "@/components/kinetic";
 import { AlertTriangle, ArrowUpRight, BadgeCheck, Leaf, Sparkles } from "@/components/icons";
 
@@ -55,7 +52,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     title: `${product.title}: ${product.brand.name}`,
     description: product.sustainability.explanation,
     openGraph: {
-      title: `${product.title}: grade ${product.sustainability.grade} (${product.sustainability.score}/100)`,
+      title: `${product.title}: what it is made of`,
       description: product.sustainability.explanation,
       images: [{ url: product.image_url }],
     },
@@ -68,8 +65,10 @@ export default async function ProductPage({ params }: Props) {
   if (!product) notFound();
   const s = product.sustainability;
 
-  // category context: how this item compares to everything like it
-  const all = await getCatalog();
+  // Everything we RECOMMEND comes from the shoppable set, so a page for a
+  // plastic garment (reachable from Label Watch) can still point at natural
+  // alternatives without ever suggesting another plastic one.
+  const all = await getShopCatalog();
 
   // same garment type, same design, same wearer, never a fallback to
   // "anything in this category", which is how a polo got shown a camisole
@@ -135,9 +134,6 @@ export default async function ProductPage({ params }: Props) {
               className="object-cover"
             />
           </FabricLens>
-          <div className="absolute left-4 top-4">
-            <GradeBadge grade={s.grade} score={s.score} size="lg" />
-          </div>
           <p className="pointer-events-none absolute bottom-3 right-3 rounded-full bg-surface/85 px-2.5 py-1 text-[12px] font-medium text-muted-foreground backdrop-blur">
             hover to inspect the weave
           </p>
@@ -266,8 +262,7 @@ export default async function ProductPage({ params }: Props) {
                 only <b>{misnamed.actualPct}% {misnamed.fibre}</b>.
               </div>
             )}
-            <CompositionBars parts={product.fabric_composition} />
-            <p className="mt-3 text-xs text-muted-foreground">Hover any fibre to learn its impact.</p>
+            <FibreProfile parts={product.fabric_composition} />
 
             {/* the truth ledger: our independent, timestamped record */}
             {truth && (
@@ -317,31 +312,28 @@ export default async function ProductPage({ params }: Props) {
         </div>
       </div>
 
-      {/* sustainability panel */}
+      {/* What it is made of.
+          This replaced a 0-100 score and an A-E grade. We are not an
+          accredited ratings body, and a letter grade borrows an authority we
+          have not earned: it compresses a judgement we invented into something
+          that looks certified. The composition is not a judgement, it is what
+          the brand discloses, drawn in proportion. */}
       <section className="mt-10 rounded-xl2 border border-border bg-surface p-6 sm:p-8" data-testid="sustainability-panel">
-        <div className="grid gap-8 lg:grid-cols-[auto_1fr]">
-          <div className="flex flex-col items-center gap-3">
-            <ScoreDial score={s.score} grade={s.grade} />
-            {peers.length > 3 && (
-              <p
-                className={`rounded-full px-3 py-1 text-xs font-semibold ${
-                  delta >= 0 ? "bg-grade-a/10 text-grade-a" : "bg-grade-d/10 text-grade-d"
-                }`}
-                data-testid="category-delta"
-              >
-                {delta >= 0 ? `${delta} pts above` : `${Math.abs(delta)} pts below`} the average{" "}
-                {{ dresses: "dress", accessories: "accessory", hoodies: "hoodie", jeans: "pair of jeans", trousers: "pair of trousers" }[product.category] ?? product.category.replace(/s$/, "")}
-              </p>
-            )}
+        <div className="grid gap-8 lg:grid-cols-[minmax(0,22rem)_1fr]">
+          <div>
+            <h2 className="font-display text-[20px] font-bold">What it is made of</h2>
+            <div className="mt-4">
+              <FibreProfile parts={product.fabric_composition} />
+            </div>
             <Link
               href="/methodology"
-              className="max-w-[180px] text-center text-xs text-muted-foreground underline-offset-2 hover:underline"
+              className="mt-5 inline-block text-xs text-muted-foreground underline-offset-2 hover:underline"
             >
-              Scored with a transparent rubric, see how scoring works →
+              How we read a label →
             </Link>
           </div>
           <div>
-            <h2 className="font-display text-[20px] font-bold">Why this score?</h2>
+            <h2 className="font-display text-[20px] font-bold">What that means to wear</h2>
             <ExpandableText text={s.explanation} className="mt-2 max-w-2xl" />
 
             {greener && (
@@ -351,15 +343,12 @@ export default async function ProductPage({ params }: Props) {
                 className="mt-4 flex items-center justify-between gap-3 rounded-lg border border-grade-a/40 bg-grade-a/5 px-4 py-3 transition-colors hover:bg-grade-a/10"
               >
                 <span className="text-sm">
-                  <b className="text-grade-a">Same style, greener:</b> {greener.title} scores{" "}
-                  <b>{greener.sustainability.score}</b> ({greener.sustainability.score - s.score >= 0 ? "+" : ""}
-                  {greener.sustainability.score - s.score} pts) at {formatPrice(greener.price, greener.currency)}
+                  <b className="text-grade-a">The same style, in a better fibre:</b> {greener.title} at{" "}
+                  {formatPrice(greener.price, greener.currency)}
                 </span>
                 <ArrowUpRight className="size-4 shrink-0 text-grade-a" />
               </Link>
             )}
-
-            <ScoreFactors factors={s.factors} />
 
             {s.greenwash_flags.length > 0 && (
               <div className="mt-5 rounded-lg border border-grade-d/40 bg-grade-d/5 p-4" data-testid="greenwash-flags">

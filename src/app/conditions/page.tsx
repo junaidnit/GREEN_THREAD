@@ -1,7 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import type { Metadata } from "next";
-import { getCatalog } from "@/lib/catalog";
+import { getShopCatalog } from "@/lib/catalog";
 import { CONDITIONS, CONDITION_SLUGS, isConditionSafe, type ConditionSlug } from "@/lib/conditions";
 import { MATERIAL_LABELS } from "@/lib/scoring";
 import { garmentType, type GarmentType } from "@/lib/garment";
@@ -58,7 +58,7 @@ function excludedLabels(slug: ConditionSlug): string[] {
 }
 
 export default async function ConditionsPage() {
-  const products = await getCatalog();
+  const products = await getShopCatalog();
 
   const entries = CONDITION_SLUGS.map((slug) => {
     const rule = CONDITIONS[slug];

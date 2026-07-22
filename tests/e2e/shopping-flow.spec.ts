@@ -167,18 +167,23 @@ test.describe("the shopper journey: search a top, narrow it down", () => {
 });
 
 test.describe("product page & buy flow", () => {
-  test("full sustainability story renders with sizes and £", async ({ page }) => {
+  test("the product page shows composition, not a rating", async ({ page }) => {
     await page.goto("/search?fabric=linen");
     await expect(page.getByTestId("results-count")).toBeVisible();
     await page.getByTestId("product-card").first().click();
     await expect(page).toHaveURL(/\/product\//, { timeout: 30_000 });
 
     await expect(page.getByTestId("sustainability-panel")).toBeVisible();
-    await expect(page.getByTestId("composition-bars")).toBeVisible();
-    await expect(page.getByTestId("score-dial")).toBeVisible();
     await expect(page.getByTestId("product-sizes")).toBeVisible();
     await expect(page.getByTestId("product-price")).toContainText("£");
-    expect(await page.getByTestId("score-factors").locator("> div").count()).toBeGreaterThanOrEqual(2);
+
+    // The 0-100 score and the A-E grade are gone on purpose: we are not an
+    // accredited ratings body, and a letter grade borrows an authority we
+    // have not earned. What replaced them is the disclosed composition drawn
+    // in proportion, which is a fact rather than a judgement.
+    await expect(page.getByTestId("fibre-profile").first()).toBeVisible();
+    await expect(page.getByTestId("score-dial")).toHaveCount(0);
+    await expect(page.getByTestId("score-factors")).toHaveCount(0);
   });
 
   test("buy button deep-links to the real merchant via /out", async ({ page }) => {
@@ -252,7 +257,6 @@ test.describe("fixes & subtle features", () => {
     await expect(page.getByTestId("view-on-retailer")).toBeVisible();
     await expect(page.getByTestId("view-on-retailer")).toHaveAttribute("target", "_blank");
     await expect(page.getByTestId("impact-equivalents")).toBeVisible();
-    await expect(page.getByTestId("category-delta")).toBeVisible();
     await page.getByTestId("ask-concierge").click();
     await expect(page.getByTestId("concierge-panel")).toBeVisible();
   });
@@ -291,17 +295,15 @@ test.describe("fixes & subtle features", () => {
 });
 
 test.describe("natural-fibre-first", () => {
-  test("'No synthetics' master toggle purges all plastic", async ({ page }) => {
+  test("the shop contains no plastic at all", async ({ page }) => {
+    // THE BRAND PROMISE, as a gate. A plastic garment is not ranked lower or
+    // shown with a warning, it is absent: a promise with exceptions is not a
+    // promise. This used to assert that a toggle REDUCED the count; there is
+    // now nothing for it to remove, which is the point.
     await page.goto("/search");
-    const totalOf = async () =>
-      Number((await page.getByTestId("results-count").innerText()).match(/([\d,]+)/)![1].replace(/,/g, ""));
-    const initial = await totalOf();
-    await page.getByTestId("pure-toggle").click();
-    await expect.poll(async () => page.url()).toContain("pure=1");
-    await expect.poll(totalOf).toBeLessThan(initial);
-    // every visible fibre mark must be natural or plastic-free
     const marks = await page.getByTestId("fibre-mark").allInnerTexts();
-    for (const m of marks.slice(0, 12)) {
+    expect(marks.length).toBeGreaterThan(0);
+    for (const m of marks) {
       expect(m).toMatch(/100% natural|Plastic-free/i);
     }
   });

@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
-import { getCatalog } from "@/lib/catalog";
+import { getShopCatalog } from "@/lib/catalog";
 import { ProductCard } from "@/components/product-card";
 import { GradeBadge } from "@/components/grade-badge";
 import { BadgeCheck, Leaf } from "@/components/icons";
@@ -14,13 +14,13 @@ interface Props {
 }
 
 export async function generateStaticParams() {
-  const products = await getCatalog();
+  const products = await getShopCatalog();
   return [...new Set(products.map((p) => p.brand.slug))].map((slug) => ({ slug }));
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
-  const products = (await getCatalog()).filter((p) => p.brand.slug === slug);
+  const products = (await getShopCatalog()).filter((p) => p.brand.slug === slug);
   if (products.length === 0) return {};
   const b = products[0].brand;
   return {
@@ -32,7 +32,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function BrandPage({ params }: Props) {
   const { slug } = await params;
-  const all = await getCatalog();
+  const all = await getShopCatalog();
   const products = all
     .filter((p) => p.brand.slug === slug)
     .sort((a, b) => b.sustainability.score - a.sustainability.score);
