@@ -33,8 +33,11 @@ const distinct = [...new Set(sizes)].sort((a, b) => a - b);
 check(distinct.length <= 6, "type scale — at most 6 fixed sizes", `${distinct.length} (${distinct.join(", ")})`);
 check(distinct.every((s) => s >= 12), "no type below 12px", `smallest ${Math.min(...distinct)}px`);
 
-const emptyAlt = (all.match(/alt=""/g) || []).length;
-check(emptyAlt === 0, "no empty alt on content images", `${emptyAlt} found`);
+// alt="" is CORRECT for decorative images — a screen reader should skip a
+// flying animation or a hero thumbnail. Only flag an empty alt that is NOT
+// marked decorative, otherwise the gate pushes you into writing noise.
+const undecorated = [...all.matchAll(/alt=""(?![^>]*aria-hidden)/g)].length;
+check(undecorated === 0, "no empty alt on content images", `${undecorated} unmarked`);
 
 check(/overflow-x:\s*clip/.test(readFileSync(join(SRC, "app/globals.css"), "utf8")),
   "mobile overflow contained");
@@ -55,7 +58,10 @@ for (const path of ROUTES) {
   if (!/property="og:image"/.test(html)) missingOg++;
   if (!/rel="canonical"/.test(html)) missingCanonical++;
   if (!/<h1/.test(html)) missingH1++;
-  const t = (html.match(/<title>([^<]*)<\/title>/) || [])[1] || "";
+  // decode entities before measuring — "&amp;" is one character to a reader,
+  // five in the source, and counting the raw form reports false failures
+  const t = ((html.match(/<title>([^<]*)<\/title>/) || [])[1] || "")
+    .replace(/&amp;/g, "&").replace(/&#x27;|&#39;/g, "'").replace(/&quot;/g, '"');
   if (t.length > 60) longTitles++;
 }
 check(missingOg === 0, "every route has og:image", `${missingOg} missing`);

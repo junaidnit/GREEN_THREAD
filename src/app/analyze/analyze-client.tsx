@@ -147,7 +147,7 @@ export function AnalyzeClient() {
               // eslint-disable-next-line @next/next/no-img-element
               <img
                 src={result.image}
-                alt=""
+                alt={result.title || "The product you asked us to check"}
                 className="size-20 shrink-0 rounded-lg border border-border object-cover"
               />
             )}

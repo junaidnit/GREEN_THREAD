@@ -99,7 +99,7 @@ export function LabelHero({
             data-testid="hero-verdict-card"
           >
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src={CARD_THUMB} alt="" className="h-14 w-11 rounded-lg object-cover" />
+            <img src={CARD_THUMB} alt="" aria-hidden className="h-14 w-11 rounded-lg object-cover" />
             <div className="min-w-0 flex-1">
               <p className="text-[12px] uppercase tracking-wide text-muted-foreground">Beaumont Organic</p>
               <p className="truncate text-sm font-medium">Linen Shirt Dress</p>
