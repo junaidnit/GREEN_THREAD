@@ -172,9 +172,30 @@
     return { GBP: "£", USD: "$", EUR: "€" }[code] || "";
   }
 
+  /**
+   * A warm request answers in about three seconds, but the first one after a
+   * quiet spell wakes the server and can take twenty. Silence for twenty
+   * seconds reads as broken, so say what is happening instead of leaving the
+   * spinner to imply a hang.
+   */
+  let loadingTimers = [];
   function renderLoading() {
     toggle.innerHTML = `<div class="spin">${markSvg("#F5F3EF", 22)}</div>`;
-    panel.innerHTML = `<p class="empty">Reading the label…</p>`;
+    panel.innerHTML = `<p class="empty" id="gt-loading">Reading the label…</p>`;
+    loadingTimers.forEach(clearTimeout);
+    const say = (ms, text) =>
+      setTimeout(() => {
+        const el = shadow.getElementById("gt-loading");
+        if (el) el.textContent = text;
+      }, ms);
+    loadingTimers = [
+      say(6000, "Still reading. First check after a while takes longer…"),
+      say(15000, "Waking the server up. This only happens on the first check."),
+    ];
+  }
+  function stopLoadingMessages() {
+    loadingTimers.forEach(clearTimeout);
+    loadingTimers = [];
   }
 
   function renderError(message) {
@@ -260,10 +281,14 @@
   /**
    * A reply is not guaranteed. An MV3 service worker can be recycled while
    * its fetch is in flight, and then the callback simply never runs — the
-   * panel span "Reading label…" indefinitely with nothing to click. Always
+   * panel spin "Reading label…" indefinitely with nothing to click. Always
    * race the request against a deadline so the panel resolves either way.
+   *
+   * 55s, not 30s: a cold start really does take ~22s and the route allows 60,
+   * so a 30s deadline was failing requests that were about to succeed. The
+   * loading copy explains the wait rather than hiding it.
    */
-  const SCAN_TIMEOUT_MS = 30000;
+  const SCAN_TIMEOUT_MS = 55000;
 
   /** Open the panel and read the page (once per injection). */
   function openPanel() {
@@ -277,6 +302,7 @@
       if (settled) return;
       settled = true;
       clearTimeout(timer);
+      stopLoadingMessages();
       fn();
     };
 
