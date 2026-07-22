@@ -26,9 +26,28 @@ export async function OPTIONS() {
   return new NextResponse(null, { status: 204, headers: CORS_HEADERS });
 }
 
+/**
+ * Where the time goes, reported on the response itself.
+ *
+ * A cold start here was taking tens of seconds and every diagnosis was
+ * guesswork. Server-Timing makes the breakdown readable from any client, so
+ * the next time this is slow it takes one request to find out why rather
+ * than a deploy-and-guess cycle.
+ */
+const MODULE_READY = Date.now();
+
 export async function POST(req: Request) {
+  const t0 = Date.now();
+  const marks: string[] = [`boot;dur=${t0 - MODULE_READY}`];
+  const note = (name: string, from: number) => marks.push(`${name};dur=${Date.now() - from}`);
+  const timed = (extra: Record<string, string> = {}) => ({
+    ...CORS_HEADERS,
+    ...extra,
+    "Server-Timing": marks.join(", "),
+  });
+
   if (!hasAnthropicKey()) {
-    return NextResponse.json({ error: "Not configured." }, { status: 503, headers: CORS_HEADERS });
+    return NextResponse.json({ error: "Not configured." }, { status: 503, headers: timed() });
   }
 
   const body = await req.json().catch(() => null);
@@ -46,6 +65,7 @@ export async function POST(req: Request) {
   try { host = new URL(url).hostname; } catch { /* leave blank */ }
 
   let object: Awaited<ReturnType<typeof extractComposition>>;
+  const tModel = Date.now();
   try {
     object = await extractComposition({
       title: typeof title === "string" && title ? title : "Untitled product",
@@ -56,9 +76,10 @@ export async function POST(req: Request) {
     console.error("[ext-scan] extraction failed:", e);
     return NextResponse.json(
       { error: "Couldn't analyse this item just now, try again." },
-      { status: 502, headers: CORS_HEADERS },
+      { status: 502, headers: timed() },
     );
   }
+  note("model", tModel);
   const scored = scoreExtraction(object);
 
   if (!scored) {
@@ -68,7 +89,7 @@ export async function POST(req: Request) {
         title: object.product_name || title || "This item",
         explanation: object.explanation,
       },
-      { headers: CORS_HEADERS },
+      { headers: timed() },
     );
   }
 
@@ -78,12 +99,16 @@ export async function POST(req: Request) {
   const priceNum = Number((object.price_text.match(/[\d.,]+/)?.[0] ?? "").replace(/,/g, ""));
   const price = Number.isFinite(priceNum) && priceNum > 0 ? priceNum : null;
 
+  const tMatch = Date.now();
   const { items: recommendations, withinPrice } = await getBetterFibreMatch({
     title: object.product_name || title || "",
     category,
     price,
     fabricComposition: object.fabric_composition,
   });
+
+  note("catalog+match", tMatch);
+  note("total", t0);
 
   console.log(
     `[ext-scan] ${new URL(url).hostname} score=${scored.score} recs=${recommendations.length} withinPrice=${withinPrice}`,
@@ -116,6 +141,6 @@ export async function POST(req: Request) {
         grade: c.sustainability.grade,
       })),
     },
-    { headers: CORS_HEADERS },
+    { headers: timed() },
   );
 }
