@@ -100,6 +100,15 @@ Then certify all three:
 https://thefibreset.com/privacy
 ```
 
+**Support URL** (Store listing tab)
+```
+https://thefibreset.com/support
+```
+
+> These are the real paths. thefibreset.com is Next.js on Vercel, NOT Shopify,
+> so Shopify-shaped guesses like `/pages/privacy-policy` and `/pages/support`
+> return 404 and would be rejected. There is no `/pages/` prefix on this site.
+
 ## 5. Graphics
 
 | Asset | Size | Status |

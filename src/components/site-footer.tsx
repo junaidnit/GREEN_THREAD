@@ -16,7 +16,7 @@ const COLUMNS: Array<{ head: string; links: Array<[string, string]> }> = [
   },
   {
     head: "Learn",
-    links: [["The Magazine", "/magazine"], ["Dressing for a condition", "/conditions"], ["Label Watch", "/label-watch"], ["Fabric Check", "/analyze"]],
+    links: [["The Magazine", "/magazine"], ["Dressing for a condition", "/conditions"], ["Label Watch", "/label-watch"], ["Support", "/support"]],
   },
 ];
 
