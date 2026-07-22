@@ -6,6 +6,7 @@ import { CONDITIONS, CONDITION_SLUGS, isConditionSafe, type ConditionSlug } from
 import { MATERIAL_LABELS } from "@/lib/scoring";
 import { garmentType, type GarmentType } from "@/lib/garment";
 import type { Product } from "@/lib/types";
+import { sized, IMG } from "@/lib/image";
 
 export const metadata: Metadata = {
   title: "Dressing for a skin condition",
@@ -31,15 +32,29 @@ function pickImage(products: Product[]): string | null {
   return best?.p.image_url ?? null;
 }
 
-/** The fibres a rule bars, deduplicated into readable labels. */
+/**
+ * The fibres a rule bars, as a reader would name them.
+ *
+ * Deduplicating the raw labels is not enough: "Recycled polyester" and
+ * "Polyester" both reduce to a "polyester" that differs only by case, so a
+ * naive Set produced "Polyester, polyester, Nylon, nylon". A shopper thinks in
+ * families, not in our material ids, so collapse to the family.
+ */
+const FAMILY: Array<[RegExp, string]> = [
+  [/wool/i, "wool"],
+  [/polyester/i, "polyester"],
+  [/polyamide|nylon/i, "nylon"],
+  [/elastane|spandex/i, "elastane"],
+];
+
 function excludedLabels(slug: ConditionSlug): string[] {
-  const seen = new Set<string>();
+  const out: string[] = [];
   for (const e of CONDITIONS[slug].excludes) {
     const label = MATERIAL_LABELS[e.material] ?? e.material;
-    // collapse "Recycled polyester"/"Polyester" into one readable idea
-    seen.add(label.replace(/^Recycled\s+/i, "").replace(/^Virgin\s+/i, ""));
+    const family = FAMILY.find(([re]) => re.test(label))?.[1] ?? label.toLowerCase();
+    if (!out.includes(family)) out.push(family);
   }
-  return [...seen];
+  return out;
 }
 
 export default async function ConditionsPage() {
@@ -87,7 +102,7 @@ export default async function ConditionsPage() {
               <div className="relative aspect-[5/3] overflow-hidden bg-surface-2">
                 {e.image && (
                   <Image
-                    src={e.image}
+                    src={sized(e.image, IMG.panel)!}
                     alt={`${e.rule.name} clothing from The Fibre Set`}
                     fill
                     sizes="(max-width:768px) 100vw, 50vw"

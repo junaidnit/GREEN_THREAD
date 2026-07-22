@@ -67,6 +67,14 @@ function fibreImage(products: Product[], m: MaterialId): string | null {
   return scored[0]?.p.image_url ?? null;
 }
 
+/** How a shopper names an excluded fibre, rather than our material ids. */
+const FIBRE_FAMILY: Array<[RegExp, string]> = [
+  [/wool/i, "wool"],
+  [/polyester/i, "polyester"],
+  [/polyamide|nylon/i, "nylon"],
+  [/elastane|spandex/i, "elastane"],
+];
+
 const CHILDRENS = /\b(baby|babies|kids?|child|children|infant|toddler)\b/i;
 const HOMEWARE = /\b(cushion|blanket|bedding|duvet|sheet|pillow|towel|napkin|apron|throw)\b/i;
 
@@ -102,18 +110,20 @@ export default async function Home() {
   // counted live, so the band can never advertise an edit that matches nothing
   const conditionEdits = CONDITION_SLUGS.map((slug) => {
     const rule = CONDITIONS[slug];
-    const excluded = [
-      ...new Set(
-        rule.excludes.map((e) =>
-          (MATERIAL_LABELS[e.material] ?? e.material).replace(/^(Recycled|Virgin)\s+/i, ""),
-        ),
-      ),
-    ];
+    // Families, not material ids. "Recycled polyester" and "Polyester" differ
+    // only by case once the prefix is stripped, so a plain Set rendered
+    // "Polyester, polyester, Nylon, nylon" on the page.
+    const excluded: string[] = [];
+    for (const e of rule.excludes) {
+      const label = MATERIAL_LABELS[e.material] ?? e.material;
+      const fam = FIBRE_FAMILY.find(([re]) => re.test(label))?.[1] ?? label.toLowerCase();
+      if (!excluded.includes(fam)) excluded.push(fam);
+    }
     return {
       slug,
       name: rule.name,
       clinicalName: rule.clinicalName,
-      excludes: excluded.slice(0, 3).join(", ").toLowerCase(),
+      excludes: excluded.join(", "),
       count: products.filter((p) => isConditionSafe(p.fabric_composition, slug)).length,
     };
   })
