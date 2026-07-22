@@ -15,7 +15,7 @@ export const metadata: Metadata = {
  * the composition, nothing is written to a database, and the server logs only
  * the hostname plus the result. If any of that changes, change this page.
  */
-const CONTACT = "privacy@thefibreset.com";
+const CONTACT = "Anita@thefibreset.com";
 const UPDATED = "21 July 2026";
 
 function Section({ title, children }: { title: string; children: React.ReactNode }) {

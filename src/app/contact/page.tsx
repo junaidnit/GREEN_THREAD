@@ -9,15 +9,17 @@ export const metadata: Metadata = {
 };
 
 /**
- * PLACEHOLDERS, replace before this is promoted anywhere.
- *
  * Everything on this page about the family comes from the two sites Anita
  * supplied (barnardmohair.com/about-us and sundaychild.co.za/pages/about) and
- * is attributed to them. Nothing about Anita herself is stated beyond what she
- * wrote, because inventing a biography for a real person is not ours to do.
- * Her own words, and a working address, need to come from her.
+ * is attributed to them in the copy, so a reader can check it rather than take
+ * our word for it.
+ *
+ * STILL MISSING: anything in Anita's own voice. Nothing about her is stated
+ * beyond what she wrote about her sisters, because writing a biography for a
+ * real person and publishing it is not ours to do. If she sends a paragraph,
+ * it belongs directly under the family history.
  */
-const EMAIL = "hello@thefibreset.com";
+const EMAIL = "Anita@thefibreset.com";
 
 export default function ContactPage() {
   return (

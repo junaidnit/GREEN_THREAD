@@ -14,7 +14,7 @@ export const metadata: Metadata = {
  * inventing a generic FAQ: the slow first scan, the stale saved endpoint, and
  * why the panel cannot appear by itself.
  */
-const CONTACT = "support@thefibreset.com";
+const CONTACT = "Anita@thefibreset.com";
 
 function QA({ q, children }: { q: string; children: React.ReactNode }) {
   return (

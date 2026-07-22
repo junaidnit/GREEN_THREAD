@@ -150,7 +150,7 @@ extensions fine, so it isn't a launch blocker.
 
 ## Before you submit — checklist
 
-- [ ] `privacy@thefibreset.com` actually receives mail (it's published in the policy)
+- [ ] `Anita@thefibreset.com` actually receives mail (it is published in the policy, the support page and the contact page)
 - [ ] Publisher display name set to "The Fibre Set"
 - [ ] `npm run pack:extension` run after any code change
 - [ ] Screenshots captured from a real page
