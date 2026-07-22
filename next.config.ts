@@ -8,8 +8,25 @@ const nextConfig: NextConfig = {
   },
   // bundle the catalog + twin index into serverless functions: these are read
   // with dynamically-joined paths the file tracer can't follow
+  /**
+   * Scoped per route, not "everything everywhere".
+   *
+   * `./data/*.json` bundled all 7.8 MB into EVERY serverless function,
+   * including the 4.7 MB visual-twins index that only the product page reads.
+   * The extension's scan endpoint was carrying it too, and a cold start took
+   * 42 seconds, past the panel's timeout, so the first scan after an idle
+   * period always failed with "that took longer than it should".
+   *
+   * Only the four files actually read at runtime are traced, and the big one
+   * only where it's used.
+   */
   outputFileTracingIncludes: {
-    "/**": ["./data/*.json", "./data/raw/*.json"],
+    "/**": [
+      "./data/products_live.json",
+      "./data/truth-ledger.json",
+      "./data/raw/brands.json",
+    ],
+    "/product/[id]": ["./data/twins.json"],
   },
   experimental: {
     // native View Transitions: product card image morphs into the PDP hero

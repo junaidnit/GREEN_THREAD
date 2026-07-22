@@ -40,7 +40,18 @@ function loadLocal(): Product[] {
  * whole 60s page budget on Vercel before falling back to the local seed that
  * would have answered instantly, the build failed rather than degraded.
  */
-const SUPABASE_TIMEOUT_MS = 8000;
+const SUPABASE_TIMEOUT_MS = 3000;
+
+/**
+ * Once Supabase has failed in this process, stop paying for it.
+ *
+ * Every cold serverless instance was waiting out the full timeout before
+ * falling back to a local seed that answers instantly, and the local seed is
+ * the same data. On a cold start that wait lands directly in the user's face,
+ * so a failure is remembered and retried only occasionally.
+ */
+const SUPABASE_RETRY_AFTER_MS = 5 * 60 * 1000;
+let supabaseFailedAt = 0;
 
 async function loadSupabase(): Promise<Product[]> {
   const { url, key } = supabaseConfig()!;
@@ -89,13 +100,16 @@ async function loadSupabase(): Promise<Product[]> {
 }
 
 async function loadCatalog(): Promise<Product[]> {
-  if (supabaseConfig() && process.env.CATALOG_SOURCE !== "local") {
+  const recentlyFailed = Date.now() - supabaseFailedAt < SUPABASE_RETRY_AFTER_MS;
+  if (supabaseConfig() && process.env.CATALOG_SOURCE !== "local" && !recentlyFailed) {
     try {
       const products = await loadSupabase();
       if (products.length > 0) return products;
       console.warn("[catalog] Supabase returned 0 products, using local seed");
+      supabaseFailedAt = Date.now();
     } catch (e) {
       console.warn("[catalog] Supabase unavailable, using local seed:", e);
+      supabaseFailedAt = Date.now();
     }
   }
   return loadLocal();
