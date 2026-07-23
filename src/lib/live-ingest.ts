@@ -30,15 +30,46 @@ const FIBRE_MAP: Array<{ re: RegExp; material: (ctx: string) => MaterialId }> = 
 
 export function parseComposition(text: string): FabricPart[] | null {
   const parts: FabricPart[] = [];
-  // "95% Organic Cotton", "5 % elastane", "70% TENCEL™ Lyocell"
-  const re = /(\d{1,3})\s*%\s*([A-Za-z®™&\- ]{3,40}?)(?=[,.;()<]|\s{2,}|\s\d|$)/g;
-  for (const m of text.matchAll(re)) {
-    const pct = Number(m[1]);
-    const label = m[2].trim().replace(/\s+/g, " ");
+
+  /**
+   * Anchor on the PERCENTAGE, then look for a known fibre in the words that
+   * follow — rather than trying to capture the fibre name as a tidy phrase.
+   *
+   * The old regex demanded a clean delimiter after the name ([,.;()<], a
+   * double space, or end of string) and capped it at 40 characters. Real
+   * product copy does neither: "100% Cotton V neck Topstitching detail" runs
+   * the composition straight into the feature list, and Celtic & Co separate
+   * with "•". Both were silently REJECTED, which is why a wool-and-linen
+   * brand looked like it disclosed almost nothing (12 of 150) and why good
+   * items were dropped from brands already in the catalogue.
+   *
+   * Matching against the fibre vocabulary instead is both looser about
+   * punctuation and stricter about meaning: "50% off" finds no fibre in its
+   * window and is ignored, exactly as before.
+   */
+  const pctRe = /(\d{1,3})\s*%/g;
+  const hits = [...text.matchAll(pctRe)];
+  for (let i = 0; i < hits.length; i++) {
+    const pct = Number(hits[i][1]);
     if (pct <= 0 || pct > 100) continue;
-    const hit = FIBRE_MAP.find((f) => f.re.test(label));
-    if (!hit) continue;
-    parts.push({ material: hit.material(label), label, pct });
+    const from = (hits[i].index ?? 0) + hits[i][0].length;
+    // stop at the next percentage so "70% Cotton, 30% Linen" can't read
+    // "Linen" as the fibre for the 70% part
+    const nextAt = i + 1 < hits.length ? (hits[i + 1].index ?? text.length) : text.length;
+    const window = text.slice(from, Math.min(nextAt, from + 60));
+
+    // the EARLIEST fibre mentioned wins, which also settles specificity for
+    // free: in "Organic Cotton", /organic\s+cotton/ starts before /cotton/
+    let best: { at: number; label: string; material: MaterialId } | null = null;
+    for (const f of FIBRE_MAP) {
+      const m = window.match(f.re);
+      if (m?.index == null) continue;
+      if (best === null || m.index < best.at) {
+        best = { at: m.index, label: m[0].trim(), material: f.material(window) };
+      }
+    }
+    if (!best) continue;
+    parts.push({ material: best.material, label: best.label, pct });
   }
   if (parts.length === 0) return null;
   // merge duplicate materials (multi-part garments)

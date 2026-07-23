@@ -29,6 +29,41 @@ describe("parseComposition — real label text from brand feeds", () => {
     expect(parseComposition("Now 30% off everything")).toBeNull();
   });
 
+  /**
+   * Real copy runs the composition straight into the feature list and uses
+   * bullets as separators. The old regex demanded a clean delimiter after the
+   * fibre name and capped it at 40 characters, so it silently REJECTED all of
+   * these — which made Celtic & Co, a wool-and-linen brand, look like it
+   * disclosed 12 of 150 items (it discloses 116) and quietly dropped good
+   * products from brands already in the catalogue.
+   */
+  describe("compositions embedded in real product copy", () => {
+    it("reads a composition that runs into the feature list", () => {
+      const parts = parseComposition(
+        "blends comfort with enduring quality. 100% Cotton Collared Relaxed fit Exclusive brand yarn",
+      );
+      expect(parts).toEqual([expect.objectContaining({ material: "conventional_cotton", pct: 100 })]);
+    });
+
+    it("handles bullet separators", () => {
+      const parts = parseComposition("CS-Code: 9131 • 70% Cotton, 30% Euroflax Linen • Boat Neck • Relaxed Fit");
+      expect(parts?.find((p) => p.material === "conventional_cotton")?.pct).toBe(70);
+      expect(parts?.find((p) => p.material === "linen")?.pct).toBe(30);
+    });
+
+    it("does not let a later fibre bleed into an earlier percentage", () => {
+      // "70% Cotton, 30% Linen" must not read Linen as the 70% part
+      const parts = parseComposition("70% Cotton, 30% Linen");
+      expect(parts?.find((p) => p.material === "conventional_cotton")?.pct).toBe(70);
+    });
+
+    it("still ignores sale percentages with no fibre after them", () => {
+      expect(parseComposition("Save 50% off everything this weekend")).toBeNull();
+      expect(parseComposition("Rated 100% by our customers")).toBeNull();
+      expect(parseComposition("Only 40% of our range is on sale")).toBeNull();
+    });
+  });
+
   it("averages multi-part garments (shell + lining both 100%)", () => {
     const parts = parseComposition("Shell: 100% recycled polyester. Lining: 100% organic cotton.");
     const total = parts!.reduce((s, p) => s + p.pct, 0);
