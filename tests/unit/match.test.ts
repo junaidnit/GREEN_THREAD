@@ -131,6 +131,67 @@ describe("rankSameButBetter — ranking", () => {
   });
 });
 
+/**
+ * The user's actual complaint: "if I'm looking at a pink check t-shirt, the
+ * recommendation should look like a pink check t-shirt." It couldn't, because
+ * colour and pattern were read from the TITLE — and a title like "Utility
+ * Short Blouson Jacket" names neither. The colour lives in the photo, so the
+ * photo is now read and its answer passed in here.
+ */
+describe("image-derived colour and pattern", () => {
+  // a title naming neither colour nor pattern: the hard, common case
+  const UNNAMED = item({
+    id: "scanned",
+    title: "Relaxed Fit Tee",
+    price: 12,
+    fabric_composition: HALF,
+  });
+
+  const CANDIDATES = [
+    item({ id: "pink-check", title: "Gingham Check Tee in Rose Pink", price: 30 }),
+    item({ id: "navy-plain", title: "Everyday Tee — Navy", price: 30 }),
+    item({ id: "green-stripe", title: "Breton Stripe Tee — Green", price: 30 }),
+  ];
+
+  it("matches on what the PHOTO shows when the title names nothing", () => {
+    const { matches } = rankSameButBetter(UNNAMED, CANDIDATES, {
+      imageColourFamilies: ["Pink & Purple"],
+      imagePattern: "check",
+    });
+    expect(matches[0].item.id).toBe("pink-check");
+    expect(matches[0].tier).toBe("exact");
+    expect(matches[0].sameColour).toBe(true);
+    expect(matches[0].samePattern).toBe(true);
+  });
+
+  it("without the image it cannot tell them apart (the old behaviour)", () => {
+    const { matches } = rankSameButBetter(UNNAMED, CANDIDATES);
+    expect(matches.every((m) => m.tier === "same-style")).toBe(true);
+    expect(matches.every((m) => m.sameColour === false)).toBe(true);
+  });
+
+  it("ranks a different colour below, and flags it rather than hiding it", () => {
+    const { matches } = rankSameButBetter(UNNAMED, CANDIDATES, {
+      imageColourFamilies: ["Pink & Purple"],
+      imagePattern: "check",
+    });
+    const navy = matches.find((m) => m.item.id === "navy-plain")!;
+    expect(navy.sameColour).toBe(false);
+    expect(matches.indexOf(navy)).toBeGreaterThan(0);
+  });
+
+  it("falls back to the title when the image could not be read", () => {
+    const titled = item({
+      id: "scanned2",
+      title: "Gingham Check Tee in Rose Pink",
+      price: 12,
+      fabric_composition: HALF,
+    });
+    const { matches } = rankSameButBetter(titled, CANDIDATES, { imageColourFamilies: [] });
+    expect(matches[0].item.id).toBe("pink-check");
+  });
+});
+
 describe("rankSameLook", () => {
   it("stays within the garment type and gender", () => {
     const out = rankSameLook(NAVY_POLY_POLO, [

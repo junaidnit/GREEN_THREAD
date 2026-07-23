@@ -144,6 +144,17 @@ const COLOUR_RULES: Array<[RegExp, string]> = [
 ];
 
 /**
+ * The closed set of colour families. Exported so callers that ask a model for
+ * a colour can constrain it to this vocabulary instead of hoping a free-text
+ * answer happens to contain a word COLOUR_RULES knows: a vision read of
+ * "peach" mapped to nothing at all and silently lost the colour match.
+ */
+export const COLOUR_FAMILIES = [
+  "Multi", "Black", "White & Cream", "Grey", "Blue",
+  "Green", "Brown & Tan", "Pink & Purple", "Red & Orange", "Yellow",
+] as const;
+
+/**
  * Every colour family named in the text. Garment names are routinely
  * two-toned ("Navy & White Check"), so a single label can't represent them:
  * picking one made "Navy & White" and "White & Blue" look like different

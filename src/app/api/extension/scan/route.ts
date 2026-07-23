@@ -69,7 +69,7 @@ export async function POST(req: Request) {
   // The image read runs alongside the composition read, not after it, so
   // looking at the photo costs no extra wall-clock time. A failed/absent image
   // just yields null attributes and matching falls back to the title.
-  let visual: VisualAttributes = { colour: null, pattern: "plain" };
+  let visual: VisualAttributes = { colour: null, families: [], pattern: "plain" };
   const tModel = Date.now();
   try {
     [object, visual] = await Promise.all([
@@ -114,7 +114,7 @@ export async function POST(req: Request) {
     price,
     fabricComposition: object.fabric_composition,
     // what the garment ACTUALLY looks like, read from its photo
-    imageColour: visual.colour,
+    imageColourFamilies: visual.families,
     imagePattern: visual.pattern,
   });
 

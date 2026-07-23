@@ -31,9 +31,11 @@ async function main() {
 
   for (const c of cases) {
     const attrs = await visualAttributes(c.url);
-    const fams = [...colourFamilies(attrs.colour ?? "")];
+    const legacy = [...colourFamilies(attrs.colour ?? "")];
     console.log(`\n${c.what}`);
-    console.log(`   colour: ${attrs.colour ?? "(none)"}  →  family: ${fams.join(", ") || "(unmapped)"}`);
+    console.log(`   colour: ${attrs.colour ?? "(none)"}`);
+    console.log(`   families (constrained): ${attrs.families.join(", ") || "(NONE)"}`);
+    console.log(`   was, via free-text regex: ${legacy.join(", ") || "(unmapped)"}`);
     console.log(`   pattern: ${attrs.pattern}`);
   }
 }

@@ -72,12 +72,12 @@ export function rankSameButBetter<T extends MatchItem>(
   opts: {
     limit?: number;
     sims?: Map<string, number>;
-    /** Colour/pattern read from the product IMAGE, override the title. */
-    imageColour?: string | null;
+    /** Colour families read from the product IMAGE, override the title. */
+    imageColourFamilies?: string[];
     imagePattern?: import("./garment").Pattern;
   } = {},
 ): MatchResult<T> {
-  const { limit = 4, sims, imageColour, imagePattern } = opts;
+  const { limit = 4, sims, imageColourFamilies, imagePattern } = opts;
 
   const myPlastic = oilDerivedPct(target.fabric_composition);
   if (myPlastic === 0) return { matches: [], reason: "already-plastic-free" };
@@ -89,7 +89,7 @@ export function rankSameButBetter<T extends MatchItem>(
   // to ignore colour entirely. Fall back to the title when the image was
   // unreadable, i.e. never worse than before.
   const titleColour = colourFamilies(target.title, target.color ?? "");
-  const imageColourSet = imageColour ? colourFamilies(imageColour) : new Set<string>();
+  const imageColourSet = new Set(imageColourFamilies ?? []);
   const myColour = imageColourSet.size > 0 ? imageColourSet : titleColour;
   const myPattern = imagePattern ?? patternOf(target.title);
 

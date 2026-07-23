@@ -18,8 +18,8 @@ export interface BetterFibreInput {
   /** null when the page didn't disclose a price we could parse. */
   price: number | null;
   fabricComposition: FabricPart[];
-  /** Colour read from the product IMAGE ("olive"), overrides the title. */
-  imageColour?: string | null;
+  /** Colour families read from the product IMAGE, override the title. */
+  imageColourFamilies?: string[];
   /** Pattern read from the product IMAGE, overrides the title. */
   imagePattern?: Pattern;
 }
@@ -47,7 +47,7 @@ export function rankBetterFibre(
       fabric_composition: input.fabricComposition,
     },
     cards,
-    { limit: 24, imageColour: input.imageColour, imagePattern: input.imagePattern },
+    { limit: 24, imageColourFamilies: input.imageColourFamilies, imagePattern: input.imagePattern },
   );
 
   if (matches.length === 0) return { items: [], withinPrice: true, matches: [] };

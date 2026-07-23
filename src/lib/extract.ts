@@ -2,7 +2,7 @@ import { generateObject } from "ai";
 import { z } from "zod";
 import { anthropic } from "./env";
 import { computeScore, consolidateComposition } from "./scoring";
-import type { Pattern } from "./garment";
+import { COLOUR_FAMILIES, type Pattern } from "./garment";
 import type { Practices, ScoreFactor } from "./types";
 
 /**
@@ -94,11 +94,18 @@ export async function extractComposition(signal: PageSignal): Promise<Extraction
  */
 const visualSchema = z.object({
   colour: z.string().describe("The garment's main colour(s) in plain words, e.g. 'olive green', 'pink and white', 'navy'. The fabric colour, ignore the model, background or props."),
+  colour_families: z
+    .array(z.enum(COLOUR_FAMILIES))
+    .min(1)
+    .describe("The same colour(s) mapped to this fixed list. Two-tone garments list both (a pink-and-white check is ['Pink & Purple','White & Cream']). Use 'Multi' only for genuinely multicoloured prints."),
   pattern: z.enum(["check", "stripe", "floral", "spot", "print", "plain"]).describe("The garment's surface pattern. 'check' includes gingham/plaid/tartan; 'print' is any other graphic/all-over print; 'plain' is a solid colour with no pattern."),
 });
 
 export interface VisualAttributes {
+  /** Free-text colour, for display ("olive green"). */
   colour: string | null;
+  /** Colour mapped to the matcher's own vocabulary — never unmapped. */
+  families: string[];
   pattern: Pattern;
 }
 
@@ -120,9 +127,13 @@ export async function visualAttributes(imageUrl: string): Promise<VisualAttribut
         },
       ],
     });
-    return { colour: object.colour || null, pattern: object.pattern };
+    return {
+      colour: object.colour || null,
+      families: object.colour_families ?? [],
+      pattern: object.pattern,
+    };
   } catch {
-    return { colour: null, pattern: "plain" };
+    return { colour: null, families: [], pattern: "plain" };
   }
 }
 
