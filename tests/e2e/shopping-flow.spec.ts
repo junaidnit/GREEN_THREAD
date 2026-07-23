@@ -148,9 +148,8 @@ test.describe("the shopper journey: search a top, narrow it down", () => {
     for (let i = 0; i < 14; i++) await slider.press("ArrowRight");
     await expect(page.getByText("Minimum: 70/100")).toBeVisible();
     await expect.poll(() => totalResults(page)).toBeLessThan(initial);
-    const badgeText = await page.getByTestId("grade-badge").first().innerText();
-    const score = Number(badgeText.replace(/[^0-9]/g, ""));
-    expect(score).toBeGreaterThanOrEqual(70);
+    // (the per-card grade badge was removed with the ratings; the count drop
+    // is the proof the filter applied)
   });
 
   test("fabric fact card opens with research citation", async ({ page }) => {
@@ -178,10 +177,9 @@ test.describe("product page & buy flow", () => {
     await expect(page.getByTestId("product-price")).toContainText("£");
 
     // The 0-100 score and the A-E grade are gone on purpose: we are not an
-    // accredited ratings body, and a letter grade borrows an authority we
-    // have not earned. What replaced them is the disclosed composition drawn
-    // in proportion, which is a fact rather than a judgement.
-    await expect(page.getByTestId("fibre-profile").first()).toBeVisible();
+    // accredited ratings body. What replaced them is the composition drawn as
+    // woven thread — a fact about the cloth, not a judgement.
+    await expect(page.getByTestId("fibre-weave").first()).toBeVisible();
     await expect(page.getByTestId("score-dial")).toHaveCount(0);
     await expect(page.getByTestId("score-factors")).toHaveCount(0);
   });
@@ -239,7 +237,8 @@ test.describe("fixes & subtle features", () => {
   test("brand page shows profile and products", async ({ page }) => {
     await page.goto("/brand/komodo");
     await expect(page.getByRole("heading", { name: "Komodo", exact: true })).toBeVisible();
-    await expect(page.getByTestId("grade-badge").first()).toBeVisible();
+    // cards carry the woven-fibre strip now, not a grade badge
+    await expect(page.getByTestId("fibre-weave").first()).toBeVisible();
     expect(await page.getByTestId("product-card").count()).toBeGreaterThan(8);
   });
 

@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { FibreWeave } from "@/components/fibre-weave";
 import { sized, IMG } from "@/lib/image";
 import Link from "next/link";
 import type { CatalogCard } from "@/lib/types";
@@ -10,14 +11,6 @@ const BLUR =
   Buffer.from(
     `<svg xmlns="http://www.w3.org/2000/svg" width="9" height="12"><rect width="9" height="12" fill="#e8e4da"/></svg>`,
   ).toString("base64");
-
-const GRADE_DOT: Record<string, string> = {
-  A: "var(--grade-a)",
-  B: "var(--grade-b)",
-  C: "var(--grade-c)",
-  D: "var(--grade-d)",
-  E: "var(--grade-e)",
-};
 
 /**
  * Editorial product card, the image IS the design. No border, no box.
@@ -67,17 +60,12 @@ export function ProductCard({ product, priority = false }: { product: CatalogCar
           {mark.label}
         </span>
 
-        {/* secondary: sustainability grade */}
-        <span
-          data-testid="grade-badge"
-          className="absolute right-3 top-3 flex items-center gap-1.5 rounded-full bg-black/30 px-2 py-1 text-[12px] font-medium text-white backdrop-blur-md"
-          title={`Sustainability ${s.score}/100`}
-        >
-          <span className="size-1.5 rounded-full" style={{ background: GRADE_DOT[s.grade] }} />
-          {s.grade}
-          <span className="opacity-70">{s.score}</span>
-        </span>
-
+        {/* The sustainability grade badge is gone: we are not a ratings body.
+            In its place, a slim woven-thread strip along the foot of the image
+            — the composition, drawn as fibre. A quiet brand signature. */}
+        <div className="pointer-events-none absolute inset-x-0 bottom-0">
+          <FibreWeave parts={product.fabric_composition} height={7} strands={16} radius={0} className="w-full" />
+        </div>
 
         {/* mislabelling flag, the platform's transparency promise */}
         {misnamed && (

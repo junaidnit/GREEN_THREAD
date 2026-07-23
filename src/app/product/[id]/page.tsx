@@ -19,7 +19,7 @@ import {
   naturalPct,
 } from "@/lib/materials";
 import { ProductCard } from "@/components/product-card";
-import { FibreProfile } from "@/components/fibre-profile";
+import { FibreWeave } from "@/components/fibre-weave";
 import { AskConcierge } from "@/components/ask-concierge";
 import { FabricLens } from "@/components/fabric-lens";
 import { SaveButton } from "@/components/saved";
@@ -70,9 +70,6 @@ export default async function ProductPage({ params }: Props) {
   // same garment type, same design, same wearer, never a fallback to
   // "anything in this category", which is how a polo got shown a camisole
   const similar = getSameLook(product, all);
-  const peers = all.filter((p) => p.category === product.category);
-  const catAvg = Math.round(peers.reduce((sum, p) => sum + p.sustainability.score, 0) / peers.length);
-  const delta = s.score - catAvg;
 
   // "same style, greener", the best similar item that meaningfully beats this one
   const greener = similar.find((p) => p.sustainability.score >= s.score + 10);
@@ -243,7 +240,27 @@ export default async function ProductPage({ params }: Props) {
                 only <b>{misnamed.actualPct}% {misnamed.fibre}</b>.
               </div>
             )}
-            <FibreProfile parts={product.fabric_composition} />
+            {/* the fibre, made visible. Woven thread in proportion — this is
+                what replaced the rating: a fact about the cloth, drawn as the
+                thing this brand is about. */}
+            <div>
+              <FibreWeave parts={product.fabric_composition} height={60} className="w-full max-w-[440px]" />
+              <ul className="mt-3 flex flex-wrap gap-x-5 gap-y-1">
+                {[...product.fabric_composition]
+                  .sort((a, b) => b.pct - a.pct)
+                  .map((f) => (
+                    <li key={f.material} className="text-[13px] text-foreground">
+                      <b className="tabular-nums">{f.pct}%</b>{" "}
+                      <span className="text-muted-foreground">{f.label}</span>
+                    </li>
+                  ))}
+              </ul>
+              {mark.plastic > 0 && (
+                <p className="mt-1.5 text-[12px] font-semibold text-grade-e">
+                  {mark.plastic}% of this garment is oil-derived plastic
+                </p>
+              )}
+            </div>
 
             {/* the truth ledger: our independent, timestamped record */}
             {truth && (
@@ -300,20 +317,7 @@ export default async function ProductPage({ params }: Props) {
           that looks certified. The composition is not a judgement, it is what
           the brand discloses, drawn in proportion. */}
       <section className="mt-10 rounded-xl2 border border-border bg-surface p-6 sm:p-8" data-testid="sustainability-panel">
-        <div className="grid gap-8 lg:grid-cols-[minmax(0,22rem)_1fr]">
-          <div>
-            <h2 className="font-display text-[20px] font-bold">What it is made of</h2>
-            <div className="mt-4">
-              <FibreProfile parts={product.fabric_composition} />
-            </div>
-            <Link
-              href="/methodology"
-              className="mt-5 inline-block text-xs text-muted-foreground underline-offset-2 hover:underline"
-            >
-              How we read a label →
-            </Link>
-          </div>
-          <div>
+        <div>
             <h2 className="font-display text-[20px] font-bold">What that means to wear</h2>
             <ExpandableText text={s.explanation} className="mt-2 max-w-2xl" />
 
@@ -352,7 +356,6 @@ export default async function ProductPage({ params }: Props) {
             <AskConcierge
               question={`Tell me more about the ${product.title} by ${product.brand.name}, is it a good sustainable choice, and are there better alternatives?`}
             />
-          </div>
         </div>
       </section>
 
