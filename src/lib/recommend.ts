@@ -63,8 +63,22 @@ export function rankBetterFibre(
     // equal at £20 (the cheapest is £35), and an empty panel on exactly the
     // fast-fashion pages that matter most is a worse answer than an honest
     // "this is what it costs", the caller flags the jump via withinPrice.
-    const cheapest = [...matches].sort((a, b) => a.item.price - b.item.price).slice(0, limit);
-    return { items: cheapest.map((m) => m.item), withinPrice: false, matches: cheapest };
+    //
+    // Sorting this fallback by PRICE ALONE threw away the look-alike ranking
+    // entirely: an olive jacket was answered with a Batik print, a black
+    // print and a pink check, purely because they were the cheapest naturals
+    // in the category. Since almost every high-street item lands here, that
+    // one line was most of "the recommendations look nothing like it".
+    // Resemblance leads; price only breaks ties between equally-close pieces.
+    const closestFirst = [...matches].sort(
+      (a, b) =>
+        (a.tier === "exact" ? 0 : 1) - (b.tier === "exact" ? 0 : 1) ||
+        Number(b.sameColour) - Number(a.sameColour) ||
+        Number(b.samePattern) - Number(a.samePattern) ||
+        a.item.price - b.item.price,
+    );
+    const top = closestFirst.slice(0, limit);
+    return { items: top.map((m) => m.item), withinPrice: false, matches: top };
   }
 
   const top = matches.slice(0, limit);

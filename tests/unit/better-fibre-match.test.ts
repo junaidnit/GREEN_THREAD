@@ -63,6 +63,39 @@ describe("rankBetterFibre", () => {
     expect(items[0].id).toBe("cheap-natural-jacket"); // cheapest way in, not the £120 one
   });
 
+  it("keeps the look-alike ranking when nothing is in the price band", () => {
+    // The real failure: an olive jacket was answered with a Batik print, a
+    // black print and a pink check, because the out-of-band fallback sorted
+    // by PRICE ALONE. Almost every high-street item lands out-of-band, so
+    // that one sort was most of "the recommendations look nothing like it".
+    const cards = [
+      card({ id: "cheap-wrong-colour", price: 36, source: "live", title: "Printed Jacket in Pink" }),
+      card({ id: "dearer-right-colour", price: 70, source: "live", title: "Wool Jacket - Khaki" }),
+    ];
+    const { items, withinPrice } = rankBetterFibre(cards, {
+      ...HIGH_STREET_JACKET,
+      price: 20, // nothing within ±25%
+      imageColourFamilies: ["Green"],
+      imagePattern: "plain",
+    });
+    expect(withinPrice).toBe(false);
+    expect(items[0].id).toBe("dearer-right-colour"); // resemblance beats cheapness
+  });
+
+  it("still prefers the cheaper piece when both match equally well", () => {
+    const cards = [
+      card({ id: "dear-khaki", price: 90, source: "live", title: "Wool Jacket - Khaki" }),
+      card({ id: "cheap-khaki", price: 40, source: "live", title: "Cotton Jacket - Khaki" }),
+    ];
+    const { items } = rankBetterFibre(cards, {
+      ...HIGH_STREET_JACKET,
+      price: 20,
+      imageColourFamilies: ["Green"],
+      imagePattern: "plain",
+    });
+    expect(items[0].id).toBe("cheap-khaki");
+  });
+
   it("never recommends something with equal or more plastic", () => {
     const { items } = rankBetterFibre(CARDS, HIGH_STREET_JACKET);
     expect(items.map((i) => i.id)).not.toContain("plastic-jacket");
