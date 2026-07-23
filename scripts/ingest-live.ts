@@ -11,7 +11,7 @@
 import { writeFileSync, readFileSync } from "node:fs";
 import { resolve } from "node:path";
 import { computeScore, validateCertifications } from "../src/lib/scoring";
-import { mapCategory, parseComposition } from "../src/lib/live-ingest";
+import { mapCategory, normalizeSize, parseComposition } from "../src/lib/live-ingest";
 import { garmentType, genderFor } from "../src/lib/garment";
 import type { Practices, SeedProduct } from "../src/lib/types";
 import { colorFamily, fitFor } from "./product-attrs";
@@ -77,7 +77,13 @@ interface ShopifyProduct {
   product_type: string;
   tags: string[] | string;
   images: Array<{ src: string }>;
-  variants: Array<{ price: string; option1?: string | null }>;
+  variants: Array<{
+    price: string;
+    available?: boolean;
+    option1?: string | null;
+    option2?: string | null;
+    option3?: string | null;
+  }>;
   options?: Array<{ name: string; values: string[] }>;
 }
 
@@ -105,6 +111,33 @@ async function ingestBrand(src: (typeof SOURCES)[number], brandMeta: { certifica
       const price = Math.round(parseFloat(p.variants[0].price));
       if (!Number.isFinite(price) || price < 5) continue;
 
+      // STOCK SYNC. The feed reports availability per variant. If nothing is
+      // in stock the whole product is dropped, so we never show a customer a
+      // sold-out garment, and only the sizes that can actually be bought are
+      // carried through. A variant with no `available` field (rare) is treated
+      // as in stock rather than silently hidden.
+      const inStock = p.variants.filter((v) => v.available !== false);
+      if (inStock.length === 0) continue; // fully sold out — skip
+
+      // which option position is the size? (option1/2/3 ↔ options[0/1/2])
+      const sizeIdx = p.options?.findIndex((o) => /size/i.test(o.name)) ?? -1;
+      const sizeOf = (v: (typeof p.variants)[number]) =>
+        sizeIdx === 0 ? v.option1 : sizeIdx === 1 ? v.option2 : sizeIdx === 2 ? v.option3 : null;
+      // normalise FIRST (so "SIZE 1 / UK 8 / EUR 36" yields "UK 8"), then drop
+      // anything still too long to be a real size after tidying
+      const availableSizes =
+        sizeIdx >= 0
+          ? [
+              ...new Set(
+                inStock
+                  .map(sizeOf)
+                  .filter((s): s is string => !!s)
+                  .map(normalizeSize)
+                  .filter((s) => s.length <= 8),
+              ),
+            ]
+          : [];
+
       const certs = validateCertifications(
         ["GOTS", "USDA Organic", "GRS", "Bluesign", "RWS", "European Flax", "OCS", "B Corp", "Fair Wear Foundation", "OEKO-TEX Standard 100", "SA8000", "FSC", "BCI", "1% for the Planet"],
         text,
@@ -119,7 +152,6 @@ async function ingestBrand(src: (typeof SOURCES)[number], brandMeta: { certifica
       });
 
       const tagStr = Array.isArray(p.tags) ? p.tags.join(" ") : String(p.tags ?? "");
-      const sizeOpt = p.options?.find((o) => /size/i.test(o.name))?.values?.filter((v) => v.length <= 5) ?? [];
       const colourOpt = p.options?.find((o) => /colou?r/i.test(o.name))?.values?.[0];
       const colour = colourOpt ?? (p.title.includes("-") ? p.title.split("-").pop()!.trim() : "Multi");
 
@@ -145,7 +177,9 @@ async function ingestBrand(src: (typeof SOURCES)[number], brandMeta: { certifica
         image_url: p.images[0].src.split("?")[0],
         color: colour,
         color_family: colorFamily(colour),
-        sizes: sizeOpt.length ? sizeOpt : ["XS", "S", "M", "L"],
+        // only the sizes a customer can actually buy; a one-size/no-size
+        // product carries an empty list rather than an invented S/M/L
+        sizes: availableSizes,
         fit: fitFor(p.title),
         source: "live",
         fabric_composition: composition,

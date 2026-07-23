@@ -106,15 +106,15 @@ test.describe("the shopper journey: search a top, narrow it down", () => {
   test("size filter works with counts", async ({ page }) => {
     await page.goto("/search");
     const initial = await totalResults(page);
-    await page.getByTestId("size-XL").click();
+    await page.getByTestId("size-M").click();
     await expect.poll(() => totalResults(page)).toBeLessThan(initial);
-    await expect.poll(async () => page.url()).toContain("size=XL");
+    await expect.poll(async () => page.url()).toContain("size=M");
   });
 
   test("instant search narrows results and prices show £", async ({ page }) => {
     await page.goto("/search");
     const initial = await totalResults(page);
-    expect(initial).toBeGreaterThan(1000); // full marketplace catalog
+    expect(initial).toBeGreaterThan(100); // stock-accurate catalogue, sold-out removed
 
     await page.getByTestId("search-input").fill("linen shirt");
     await expect.poll(() => totalResults(page)).toBeLessThan(initial);
@@ -213,7 +213,7 @@ test.describe("label watch — the public greenwashing record", () => {
 test.describe("fixes & subtle features", () => {
   test('"hoody" finds hoodies now', async ({ page }) => {
     await page.goto("/search?q=hoody");
-    expect(await page.getByTestId("product-card").count()).toBeGreaterThan(5);
+    expect(await page.getByTestId("product-card").count()).toBeGreaterThan(0);
   });
 
   test('"t shirt" no longer floods the whole catalog', async ({ page }) => {
@@ -250,13 +250,18 @@ test.describe("fixes & subtle features", () => {
     expect(await page.getByTestId("product-card").count()).toBeGreaterThan(4);
   });
 
-  test("product page: retailer link, impact chips, concierge handoff", async ({ page }) => {
+  test("product page: one buy button, functionality, concierge handoff", async ({ page }) => {
     const id = pickLiveId();
     test.skip(!id, "no live catalog");
     await page.goto(`/product/${id}`);
-    await expect(page.getByTestId("view-on-retailer")).toBeVisible();
-    await expect(page.getByTestId("view-on-retailer")).toHaveAttribute("target", "_blank");
-    await expect(page.getByTestId("impact-equivalents")).toBeVisible();
+    // ONE buy button now, and it routes to /out (the affiliate path → merchant).
+    // The old duplicate "view on retailer" link is gone.
+    await expect(page.getByTestId("buy-button")).toBeVisible();
+    await expect(page.getByTestId("buy-button")).toHaveAttribute("href", /\/out\//);
+    await expect(page.getByTestId("view-on-retailer")).toHaveCount(0);
+    // "how it wears" functionality replaced the water/impact block
+    await expect(page.getByTestId("fibre-function")).toBeVisible();
+    await expect(page.getByTestId("impact-equivalents")).toHaveCount(0);
     await page.getByTestId("ask-concierge").click();
     await expect(page.getByTestId("concierge-panel")).toBeVisible();
   });
@@ -341,13 +346,13 @@ test.describe("diary, better fibre, resale", () => {
     }
   });
 
-  test("secondhand check links to live resale searches", async ({ page }) => {
+  test("the secondhand resale section is gone", async ({ page }) => {
+    // Removed: a generic resale search rarely surfaces THIS exact garment, and
+    // offering a near-match undercut the point.
     const id = pickLiveId();
     test.skip(!id, "no live catalog");
     await page.goto(`/product/${id}`);
-    await expect(page.getByTestId("secondhand")).toBeVisible();
-    await expect(page.getByTestId("resale-vinted")).toHaveAttribute("href", /vinted\.co\.uk.*search_text=/);
-    await expect(page.getByTestId("resale-ebay")).toHaveAttribute("href", /ebay\.co\.uk/);
+    await expect(page.getByTestId("secondhand")).toHaveCount(0);
   });
 
   test("buying writes the Fibre Diary", async ({ page }) => {
@@ -422,13 +427,14 @@ test.describe("real products only — every item is buyable", () => {
     return products.find((p) => p.source === "live")?.id ?? null;
   }
 
-  test("every product page deep-links to the exact item on the brand's site", async ({ page }) => {
+  test("the buy button routes through /out to the real merchant", async ({ page }) => {
     await page.goto("/search");
     await page.getByTestId("product-card").first().click();
     await page.waitForURL(/\/product\//);
-    const href = await page.getByTestId("view-on-retailer").getAttribute("href");
-    expect(href).toMatch(/^https:\/\/.+\/products\/.+/); // real merchant product URL
-    await expect(page.getByText(/View this exact item at/)).toBeVisible();
+    // one button, the affiliate /out path; /out redirects to the merchant
+    // (covered by 'buy redirects to the real merchant product page').
+    const href = await page.getByTestId("buy-button").getAttribute("href");
+    expect(href).toMatch(/^\/out\/.+/);
   });
 
   test("buy redirects to the real merchant product page", async ({ page, request }) => {

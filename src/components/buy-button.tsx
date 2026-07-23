@@ -29,7 +29,7 @@ export function BuyButton({
       href={`/out/${id}`}
       data-testid="buy-button"
       onClick={() => recordPurchase({ id, title, brand, price, plastic, natural })}
-      className="flex h-13 w-full items-center justify-center gap-2 rounded-full bg-primary py-3.5 font-semibold text-primary-foreground transition-transform hover:scale-[1.01] active:scale-[0.99]"
+      className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-primary text-[15px] font-semibold uppercase tracking-[0.06em] text-primary-foreground shadow-sm transition-transform hover:scale-[1.01] active:scale-[0.99]"
     >
       Buy at {retailer} <ArrowUpRight className="size-4" />
     </a>

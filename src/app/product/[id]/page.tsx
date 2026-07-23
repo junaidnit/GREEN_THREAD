@@ -7,19 +7,16 @@ import { getSameButBetter, getSameLook } from "@/lib/twins";
 import { garmentLabel } from "@/lib/garment";
 import { truthRecordFor } from "@/lib/truth-server";
 import { BuyButton } from "@/components/buy-button";
-import { RESALE_PLATFORMS, resaleTerm } from "@/lib/resale-links";
 import { formatPrice, titleCase } from "@/lib/format";
 import { ProductJsonLd } from "@/components/json-ld";
 import { SITE_URL } from "@/lib/site";
 import { MATERIAL_LABELS } from "@/lib/scoring";
 import {
   CERT_INFO,
-  estimatedWears,
   fibreMark,
-  impactEquivalents,
+  fibreFunction,
   misleadingName,
   naturalPct,
-  sheddingRisk,
 } from "@/lib/materials";
 import { ProductCard } from "@/components/product-card";
 import { FibreProfile } from "@/components/fibre-profile";
@@ -28,7 +25,7 @@ import { FabricLens } from "@/components/fabric-lens";
 import { SaveButton } from "@/components/saved";
 import { spreadByImage } from "@/lib/spread";
 import { ExpandableText } from "@/components/kinetic";
-import { AlertTriangle, ArrowUpRight, BadgeCheck, Leaf, Sparkles } from "@/components/icons";
+import { AlertTriangle, ArrowUpRight, BadgeCheck, Sparkles } from "@/components/icons";
 
 interface Props {
   params: Promise<{ id: string }>;
@@ -80,9 +77,7 @@ export default async function ProductPage({ params }: Props) {
   // "same style, greener", the best similar item that meaningfully beats this one
   const greener = similar.find((p) => p.sustainability.score >= s.score + 10);
 
-  const impacts = impactEquivalents(product.category, product.fabric_composition);
-  const wears = estimatedWears(product.fabric_composition);
-  const sheds = sheddingRisk(product.fabric_composition);
+  const functions = fibreFunction(product.fabric_composition);
   const mark = fibreMark(product.fabric_composition);
   const misnamed = misleadingName(product.title, product.fabric_composition);
   const natural = naturalPct(product.fabric_composition);
@@ -90,7 +85,6 @@ export default async function ProductPage({ params }: Props) {
   const { matches: betterMatches, reason: noMatchReason } = getSameButBetter(product, all);
   const noun = garmentLabel(product.title, product.category); // "polo", "dress", …
   const truth = truthRecordFor(product.id);
-  const secondhandTerm = resaleTerm(product.brand.name, product.title);
 
   return (
     <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6">
@@ -184,59 +178,46 @@ export default async function ProductPage({ params }: Props) {
             </div>
           )}
 
-          <div className="mt-5 flex flex-col gap-2 sm:max-w-sm">
-            <BuyButton
-              id={product.id}
-              title={product.title}
-              brand={product.brand.name}
-              price={product.price}
-              plastic={mark.plastic}
-              natural={natural}
-              retailer={product.retailer}
-            />
-            <div className="flex gap-2">
-              {/* every product is a real listing, deep-link to the exact item */}
-              <a
-                href={product.buy_url}
-                target="_blank"
-                rel="noopener noreferrer nofollow"
-                data-testid="view-on-retailer"
-                className="flex h-11 flex-1 items-center justify-center gap-2 rounded-full border border-border bg-surface text-sm font-medium transition-colors hover:border-primary/40 hover:bg-accent"
-              >
-                View this exact item at {product.brand.name} <ArrowUpRight className="size-3.5" />
-              </a>
-              <SaveButton productId={product.id} imageUrl={product.image_url} />
+          {/* ONE buy button. There used to be two doing the same job (a Buy
+              and a "view this exact item"); the affiliate path is /out, which
+              lands on the merchant's own product page, so that is the one we
+              keep. Save sits beside it — it is a wardrobe action, not a buy. */}
+          <div className="mt-5 flex items-stretch gap-2 sm:max-w-sm">
+            <div className="flex-1">
+              <BuyButton
+                id={product.id}
+                title={product.title}
+                brand={product.brand.name}
+                price={product.price}
+                plastic={mark.plastic}
+                natural={natural}
+                retailer={product.retailer}
+              />
             </div>
+            <SaveButton productId={product.id} imageUrl={product.image_url} />
           </div>
           <p className="mt-2 text-xs text-muted-foreground">
-            Buy opens this exact product on {product.retailer}&apos;s own site, composition verified from their page.
+            Opens this exact product on {product.brand.name}&apos;s own site.
           </p>
 
-          {/* tangible impact + longevity */}
-          {(impacts.length > 0 || wears >= 100 || sheds) && (
-            <div className="mt-5 space-y-2" data-testid="impact-equivalents">
-              {impacts.map((imp, i) => (
-                <div key={i} className="flex items-start gap-2.5 rounded-lg bg-accent/40 px-3.5 py-2.5">
-                  <Leaf className="mt-0.5 size-4 shrink-0 text-primary" />
-                  <div>
-                    <p className="text-sm font-semibold text-accent-foreground">{imp.headline}</p>
-                    <p className="text-[12px] text-muted-foreground">{imp.detail}</p>
-                  </div>
-                </div>
-              ))}
-              {wears >= 100 && (
-                <p className="px-1 text-xs text-muted-foreground">
-                  Built to last ≈ <b className="text-foreground">{wears} wears</b>, that&apos;s
-                  about <b className="text-foreground">{formatPrice(Math.max(0.2, product.price / wears), product.currency).replace(/^£/, "£")}</b>{" "}
-                  per wear if you keep it in rotation.
-                </p>
-              )}
-              {sheds && (
-                <p className="px-1 text-xs text-muted-foreground">
-                  ⚠ Mostly synthetic, sheds microfibres in the wash. A filter bag (e.g.
-                  Guppyfriend) catches most of them.
-                </p>
-              )}
+          {/* How it wears. Replaces the old water-saved / eco-impact block:
+              the value to a shopper is how the fabric feels and performs, not
+              a sustainability lecture. Traits come from the dominant fibre. */}
+          {functions.length > 0 && (
+            <div className="mt-6" data-testid="fibre-function">
+              <p className="text-xs font-semibold uppercase tracking-[0.14em] text-muted-foreground">
+                How it wears
+              </p>
+              <ul className="mt-3 flex flex-wrap gap-2">
+                {functions.map((fn) => (
+                  <li
+                    key={fn}
+                    className="rounded-full border border-border bg-surface px-3 py-1.5 text-[13px] text-foreground"
+                  >
+                    {fn}
+                  </li>
+                ))}
+              </ul>
             </div>
           )}
 
@@ -425,45 +406,19 @@ export default async function ProductPage({ params }: Props) {
           </h2>
           <p className="mt-2 max-w-xl text-sm text-muted-foreground">
             We haven&apos;t found a {noun} with less plastic that we&apos;d call the
-            same garment. We&apos;d rather show you nothing than a different item, try the
-            secondhand check below, or browse every plastic-free{" "}
+            same garment. We&apos;d rather show you nothing than a different item. Browse every{" "}
             <Link href={`/search?category=${product.category}&pure=1`} className="underline underline-offset-2 hover:text-primary">
-              {titleCase(product.category)}
-            </Link>
-            .
+              natural {titleCase(product.category)}
+            </Link>{" "}
+            instead.
           </p>
         </section>
       )}
 
-      {/* find it secondhand, the resale check */}
-      <section className="mt-12 rounded-xl2 border border-border bg-surface p-6" data-testid="secondhand">
-        <p className="eyebrow">Already made</p>
-        <h2 className="mt-1 font-serif text-[28px] font-medium italic tracking-tight sm:text-[28px]">
-          Check it secondhand first
-        </h2>
-        <p className="mt-2 max-w-lg text-sm text-muted-foreground">
-          The lowest-impact garment is one that already exists. Search this piece across the
-          resale platforms before buying new.
-        </p>
-        <div className="mt-5 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
-          {RESALE_PLATFORMS.map((r) => (
-            <a
-              key={r.name}
-              href={r.search(secondhandTerm)}
-              target="_blank"
-              rel="noopener noreferrer nofollow"
-              data-testid={`resale-${r.name.split(" ")[0].toLowerCase()}`}
-              className="group rounded-xl border border-border bg-background p-4 transition-colors hover:border-primary/40"
-            >
-              <p className="flex items-center justify-between font-medium">
-                {r.name}
-                <ArrowUpRight className="size-4 text-muted-foreground transition-transform group-hover:translate-x-0.5 group-hover:text-primary" />
-              </p>
-              <p className="mt-1 text-xs text-muted-foreground">{r.tagline}</p>
-            </a>
-          ))}
-        </div>
-      </section>
+      {/* The secondhand resale search was removed: a generic search across
+          resale sites rarely surfaces THIS exact garment, and offering a
+          near-match undercuts the point. If an exact-match resale feed ever
+          exists, it belongs here. */}
 
       {/* similar */}
       {similar.length > 0 && (

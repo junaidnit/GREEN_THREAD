@@ -221,6 +221,38 @@ export function sheddingRisk(composition: Array<{ material: MaterialId; pct: num
   return syntheticPct >= 40;
 }
 
+/**
+ * How a fibre PERFORMS against skin, in plain functional terms. This is what
+ * a shopper actually wants to know, and it replaces the water/eco stats: the
+ * point is the value and feel of the garment, not an environmental lecture.
+ * These are established textile properties, not marketing claims.
+ */
+export const FIBRE_FUNCTION: Partial<Record<MaterialId, string[]>> = {
+  linen: ["Cool and breathable", "Moves heat away", "Softens with every wash", "Quick to dry"],
+  hemp: ["Strong and hard-wearing", "Breathable", "Naturally antibacterial", "Gets softer over time"],
+  organic_cotton: ["Soft against skin", "Breathable", "Hypoallergenic", "Easy to wash"],
+  conventional_cotton: ["Soft against skin", "Breathable", "Easy to wash"],
+  recycled_cotton: ["Soft", "Breathable", "Lower-impact than new cotton"],
+  bci_cotton: ["Soft against skin", "Breathable", "Easy to wash"],
+  tencel_lyocell: ["Cool and smooth", "Moisture-wicking", "Drapes beautifully", "Gentle on sensitive skin"],
+  modal: ["Silky-soft", "Breathable", "Holds colour well", "Resists shrinking"],
+  viscose: ["Fluid drape", "Light and cool", "Takes colour vividly"],
+  cupro: ["Silk-like feel", "Breathable", "Smooth against skin"],
+  merino_wool: ["Regulates temperature", "Wicks moisture", "Naturally odour-resistant", "Warm without weight"],
+  lambswool: ["Warm and lofty", "Naturally insulating", "Springy, holds shape"],
+  virgin_wool: ["Warm", "Naturally insulating", "Water-resistant"],
+  recycled_wool: ["Warm", "Insulating", "Lower-impact than new wool"],
+  peace_silk: ["Smooth and cool", "Naturally temperature-regulating", "Low-friction on skin", "Lightweight"],
+};
+
+/** The functional traits for a garment, from its dominant fibre. */
+export function fibreFunction(
+  composition: Array<{ material: MaterialId; pct: number }>,
+): string[] {
+  const dominant = [...composition].sort((a, b) => b.pct - a.pct)[0];
+  return dominant ? FIBRE_FUNCTION[dominant.material] ?? [] : [];
+}
+
 export const MATERIAL_FACTS: Partial<Record<MaterialId, MaterialFact>> = {
   linen: {
     stat: "≈ 6.4× less water than cotton",

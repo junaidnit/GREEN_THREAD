@@ -89,3 +89,29 @@ export function mapCategory(productType: string, title: string): string {
   // answer, say so rather than guessing a garment.
   return "other";
 }
+
+/**
+ * Tidy a raw feed size label into a consistent one. Brands spell the same
+ * size a dozen ways ("Small", "S", "SIZE 1 / UK 8 / EUR 36"); left raw, the
+ * size facet fragments into 38 near-duplicates. Letter sizes normalise to
+ * XS/S/M/L/XL/XXL; UK numeric sizes collapse to "UK 8"; anything else is
+ * returned trimmed rather than dropped.
+ */
+export function normalizeSize(raw: string): string {
+  const s = raw.trim();
+  const uk = s.match(/\bUK\s?(\d{1,2})\b/i) ?? s.match(/^(\d{1,2})$/);
+  if (uk) return `UK ${uk[1]}`;
+  const letter = s.toLowerCase().replace(/[\s.-]/g, "");
+  const map: Record<string, string> = {
+    xxs: "XXS", extraextrasmall: "XXS",
+    xs: "XS", extrasmall: "XS", xsmall: "XS",
+    s: "S", small: "S",
+    m: "M", medium: "M", med: "M",
+    l: "L", large: "L",
+    xl: "XL", extralarge: "XL", xlarge: "XL",
+    xxl: "XXL", extraextralarge: "XXL", "2xl": "XXL",
+    xxxl: "XXXL", "3xl": "XXXL",
+    onesize: "One size", os: "One size",
+  };
+  return map[letter] ?? s;
+}

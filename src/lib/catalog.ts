@@ -162,7 +162,17 @@ export const getCatalog = cache(async (): Promise<Product[]> => {
  */
 export const getShopCatalog = cache(async (): Promise<Product[]> => {
   const all = await getCatalog();
-  return all.filter((p) => oilDerivedPct(p.fabric_composition) === 0);
+  const shop = all.filter((p) => oilDerivedPct(p.fabric_composition) === 0);
+
+  // Natural first, by preference. Nothing synthetic is here at all; among what
+  // remains, a single pure natural fibre (100% linen) leads, then two-fibre
+  // natural blends, and so on. A stable id tiebreak keeps ordering deterministic
+  // between builds. This is the default order every shopping surface inherits.
+  return shop.sort((a, b) => {
+    const purity = (p: Product) =>
+      p.fabric_composition.length === 1 ? 0 : p.fabric_composition.length; // fewer fibres = purer
+    return purity(a) - purity(b) || a.id.localeCompare(b.id);
+  });
 });
 
 /**
