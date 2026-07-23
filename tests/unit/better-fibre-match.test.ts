@@ -48,11 +48,32 @@ const HIGH_STREET_JACKET = {
 };
 
 describe("rankBetterFibre", () => {
-  it("prefers a natural option inside the price band", () => {
+  it("ranks the in-band option first when looks are equal", () => {
+    // Price is no longer a hard filter — that exclusion is what hid the one
+    // real look-alike ("Lumi ... Rose Check", £35) from a £14.99 check top.
+    // It still decides the order whenever resemblance ties.
     const { items, withinPrice } = rankBetterFibre(CARDS, { ...HIGH_STREET_JACKET, price: 40 });
     expect(withinPrice).toBe(true);
-    expect(items.map((i) => i.id)).toContain("cheap-natural-jacket"); // £35, within ±35% of £40
-    expect(items.map((i) => i.id)).not.toContain("pricey-natural-jacket");
+    expect(items[0].id).toBe("cheap-natural-jacket"); // £35, nearest to £40
+    // the £120 one may still appear, but never ahead of it
+    const ids = items.map((i) => i.id);
+    if (ids.includes("pricey-natural-jacket")) {
+      expect(ids.indexOf("pricey-natural-jacket")).toBeGreaterThan(0);
+    }
+  });
+
+  it("drops absurdly-priced matches: a £15 tee is not answered with a £220 coat", () => {
+    const cards = [
+      card({ id: "wild", price: 220, source: "live", title: "Cotton Jacket - Khaki" }),
+      card({ id: "sane", price: 40, source: "live", title: "Printed Jacket - Pink" }),
+    ];
+    const { items } = rankBetterFibre(cards, {
+      ...HIGH_STREET_JACKET,
+      price: 15,
+      imageColourFamilies: ["Green"],
+    });
+    // "wild" is the better colour match but 14× the price — excluded
+    expect(items.map((i) => i.id)).not.toContain("wild");
   });
 
   it("still recommends when nothing matches the price, flagging the jump", () => {

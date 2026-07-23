@@ -1,4 +1,5 @@
 import { rankSameButBetter, PRICE_BAND, type Match } from "./match";
+
 import type { Pattern } from "./garment";
 import type { CatalogCard, FabricPart } from "./types";
 
@@ -52,35 +53,45 @@ export function rankBetterFibre(
 
   if (matches.length === 0) return { items: [], withinPrice: true, matches: [] };
 
-  if (input.price != null) {
-    const price = input.price;
-    const inBand = matches.filter((m) => Math.abs(m.item.price - price) <= price * PRICE_BAND);
-    if (inBand.length > 0) {
-      const top = inBand.slice(0, limit);
-      return { items: top.map((m) => m.item), withinPrice: true, matches: top };
-    }
-    // Nothing at this price. A £20 high-street jacket has no natural-fibre
-    // equal at £20 (the cheapest is £35), and an empty panel on exactly the
-    // fast-fashion pages that matter most is a worse answer than an honest
-    // "this is what it costs", the caller flags the jump via withinPrice.
-    //
-    // Sorting this fallback by PRICE ALONE threw away the look-alike ranking
-    // entirely: an olive jacket was answered with a Batik print, a black
-    // print and a pink check, purely because they were the cheapest naturals
-    // in the category. Since almost every high-street item lands here, that
-    // one line was most of "the recommendations look nothing like it".
-    // Resemblance leads; price only breaks ties between equally-close pieces.
-    const closestFirst = [...matches].sort(
-      (a, b) =>
-        (a.tier === "exact" ? 0 : 1) - (b.tier === "exact" ? 0 : 1) ||
-        Number(b.sameColour) - Number(a.sameColour) ||
-        Number(b.samePattern) - Number(a.samePattern) ||
-        a.item.price - b.item.price,
-    );
-    const top = closestFirst.slice(0, limit);
-    return { items: top.map((m) => m.item), withinPrice: false, matches: top };
-  }
+  const price = input.price;
 
-  const top = matches.slice(0, limit);
-  return { items: top.map((m) => m.item), withinPrice: true, matches: top };
+  /**
+   * RESEMBLANCE FIRST, PRICE SECOND — in that order, deliberately.
+   *
+   * This used to return ONLY items inside the ±25% price band whenever any
+   * existed, which let price silently override what the thing looks like.
+   * Scanning a £14.99 pink check top returned black-and-white STRIPE tees,
+   * while "Lumi — Cotton Cropped Woven Top in Maroon Deco Rose Check" — the
+   * actual look-alike — sat unshown at £35, outside the band. For a product
+   * whose promise is "the same garment in a better fabric", a closer match
+   * two tiers up in price is a better answer than a cheap piece that looks
+   * nothing like it. Price still ranks equally-close pieces, so the
+   * affordable one wins whenever the look is a tie.
+   */
+  const inBand = (m: Match<CatalogCard>) =>
+    price != null && Math.abs(m.item.price - price) <= price * PRICE_BAND;
+
+  // Resemblance outranks price, but not without limit: answering a £15 tee
+  // with a £220 coat is useless however well it matches. Anything beyond 4×
+  // is dropped, unless that would leave nothing to show at all.
+  const affordable = price == null ? matches : matches.filter((m) => m.item.price <= price * 4);
+  const pool = affordable.length > 0 ? affordable : matches;
+
+  const ranked = [...pool].sort(
+    (a, b) =>
+      (a.tier === "exact" ? 0 : 1) - (b.tier === "exact" ? 0 : 1) ||
+      Number(b.sameColour) - Number(a.sameColour) ||
+      Number(b.samePattern) - Number(a.samePattern) ||
+      Number(inBand(b)) - Number(inBand(a)) ||
+      a.item.price - b.item.price,
+  );
+
+  const top = ranked.slice(0, limit);
+  // the heading tells the truth about the BEST pick: if the closest thing we
+  // have costs meaningfully more, say so rather than implying a like-for-like
+  return {
+    items: top.map((m) => m.item),
+    withinPrice: price == null || inBand(top[0]),
+    matches: top,
+  };
 }
