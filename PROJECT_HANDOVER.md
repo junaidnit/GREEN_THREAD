@@ -1,6 +1,12 @@
 # GreenThread — Project Handover
 
-*Last updated: 12 July 2026 · Repo: https://github.com/junaidnit/GREEN_THREAD · Production: https://greenthread-junaidnits-projects.vercel.app (behind Vercel auth — see Blockers)*
+> ⚠ **Read `START-HERE.md` first.** It is the current, authoritative onboarding
+> doc. This file is kept for its architecture and decision **history**, but
+> details below predate later changes — the project is now **The Fibre Set** at
+> **thefibreset.com**, the site is **public** (no longer behind Vercel auth),
+> and the catalogue is larger. Trust `START-HERE.md` where they disagree.
+
+*Originally written: 12 July 2026 · Repo: https://github.com/junaidnit/GREEN_THREAD*
 
 ---
 
