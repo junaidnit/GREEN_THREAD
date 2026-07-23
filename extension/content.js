@@ -53,6 +53,38 @@
       .trim();
   }
 
+  /**
+   * The garment's own photo — the single most useful signal for "find me one
+   * that looks like this". Matching used to run on title words alone, so a
+   * jacket whose title never says "olive" could not be matched on colour at
+   * all. Preference order: og:image (what the page itself calls its hero),
+   * then JSON-LD Product.image, then the largest image actually rendered.
+   */
+  function productImage(jsonLdImage) {
+    const abs = (u) => {
+      try {
+        return new URL(u, location.href).href;
+      } catch {
+        return null;
+      }
+    };
+    const og =
+      document.querySelector('meta[property="og:image"]')?.content ||
+      document.querySelector('meta[name="og:image"]')?.content;
+    if (og) return abs(og);
+    if (jsonLdImage) return abs(jsonLdImage);
+
+    let best = null;
+    for (const img of document.images) {
+      const area = img.naturalWidth * img.naturalHeight;
+      // skip icons, sprites, tracking pixels and wide banners
+      if (img.naturalWidth < 200 || img.naturalHeight < 200) continue;
+      if (img.naturalWidth > img.naturalHeight * 2) continue;
+      if (!best || area > best.area) best = { area, src: img.currentSrc || img.src };
+    }
+    return best ? abs(best.src) : null;
+  }
+
   function scrapePage() {
     const meta = (prop) =>
       document.querySelector(`meta[property="${prop}"]`)?.content ||
@@ -60,6 +92,7 @@
       "";
 
     let jsonLd = "";
+    let jsonLdImage = null;
     for (const el of document.querySelectorAll('script[type="application/ld+json"]')) {
       try {
         const parsed = JSON.parse(el.textContent);
@@ -68,6 +101,10 @@
           const t = node && node["@type"];
           if (t === "Product" || (Array.isArray(t) && t.includes("Product"))) {
             jsonLd += ` PRODUCT-DATA: ${JSON.stringify(node).slice(0, 3000)}`;
+            if (!jsonLdImage && node.image) {
+              jsonLdImage = Array.isArray(node.image) ? node.image[0] : node.image;
+              if (jsonLdImage && typeof jsonLdImage === "object") jsonLdImage = jsonLdImage.url ?? null;
+            }
           }
         }
       } catch {
@@ -93,6 +130,7 @@
       title: meta("og:title") || document.title || "",
       siteName: meta("og:site_name") || location.hostname,
       text: `${meta("og:description")} ${jsonLd} ${window_}`.trim(),
+      imageUrl: productImage(jsonLdImage),
     };
   }
 
@@ -144,6 +182,10 @@
       .rec-title { font-size: 12px; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
       .rec-meta { font-size: 11px; color: #6F6F66; }
       .live-tag { font-size: 9px; font-weight: 700; color: #4B2144; }
+      .looks { font-size: 11px; color: #6F6F66; margin: -2px 0 8px; }
+      .close { font-size: 10px; font-weight: 600; color: #4d6654; }
+      .close-exact { color: #2f5d3a; }
+      .close-loose { color: #8d5c5d; font-weight: 500; }
       .cta { display: block; text-align: center; margin-top: 12px; padding: 9px; border-radius: 8px; background: #4B2144; color: #F5F3EF !important; font-weight: 700; font-size: 12px; text-decoration: none; }
       .footer-link { display: block; text-align: center; margin-top: 8px; font-size: 11px; color: #6F6F66; text-decoration: none; }
       .empty { color: #6F6F66; font-size: 12px; padding: 6px 0 2px; }
@@ -238,6 +280,16 @@
       ? `<span class="badge warn">⚠ only ${data.misnamed.actualPct}% ${escapeHtml(data.misnamed.fibre)}</span>`
       : "";
 
+    // How close each pick really is, stated rather than implied. The panel
+    // used to headline "Same look" for everything, including items in a
+    // different colour, which is exactly what made it feel broken.
+    const closeness = (r) => {
+      if (r.tier === "exact") return '<span class="close close-exact">closest match</span>';
+      if (r.sameColour) return '<span class="close">same colour</span>';
+      if (r.samePattern) return '<span class="close">same pattern</span>';
+      return '<span class="close close-loose">different colour</span>';
+    };
+
     const recsHtml = (data.recommendations || [])
       .map(
         (r) => `
@@ -246,10 +298,20 @@
           <div class="rec-body">
             <div class="rec-title">${escapeHtml(r.title)}</div>
             <div class="rec-meta">${escapeHtml(r.brand)} · ${currencySymbol(r.currency)}${r.price} · ${r.grade} ${r.score}${r.source === "live" ? ' · <span class="live-tag">● LIVE</span>' : ""}</div>
+            <div class="rec-meta">${closeness(r)}</div>
           </div>
         </a>`,
       )
       .join("");
+
+    // say what we think it looks like, so a wrong read is visible and fixable
+    const looks = data.looksLike?.colour
+      ? `<p class="looks">Matching: ${escapeHtml(data.looksLike.colour)}${
+          data.looksLike.pattern && data.looksLike.pattern !== "plain"
+            ? ` · ${escapeHtml(data.looksLike.pattern)}`
+            : ""
+        }</p>`
+      : "";
 
     panel.innerHTML = `
       <div class="row"><p class="title">${escapeHtml(data.title)}</p><button class="close" id="gt-close">×</button></div>
@@ -266,7 +328,7 @@
               data.recommendationsWithinPrice
                 ? "Same look, better fibre"
                 : "Nothing natural at this price — closest is"
-            }</p>${recsHtml}`
+            }</p>${looks}${recsHtml}`
           : `<p class="empty">No natural-fibre alternative in this category yet.</p>`
       }
       <a class="cta" href="${apiBase}/search?pure=1" target="_blank" rel="noopener">Shop plastic-free on The Fibre Set →</a>

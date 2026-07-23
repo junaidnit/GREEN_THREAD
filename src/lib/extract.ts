@@ -2,6 +2,7 @@ import { generateObject } from "ai";
 import { z } from "zod";
 import { anthropic } from "./env";
 import { computeScore, consolidateComposition } from "./scoring";
+import type { Pattern } from "./garment";
 import type { Practices, ScoreFactor } from "./types";
 
 /**
@@ -74,6 +75,55 @@ export async function extractComposition(signal: PageSignal): Promise<Extraction
   // Fold multi-part garments ("Shell: 100% Cotton, Lining: 100% Polyester")
   // into one garment's composition before anything downstream reads it, // otherwise the fibre mark reports totals like "200% plastic".
   return { ...object, fabric_composition: consolidateComposition(object.fabric_composition) };
+}
+
+/**
+ * Read the garment's real colour and pattern FROM THE IMAGE.
+ *
+ * The whole reason "recommend a look-alike" kept failing: the matcher took
+ * colour and pattern from the product TITLE ("Utility Short Blouson Jacket"
+ * names neither), so it could only match on garment type and price and the
+ * pictures looked nothing alike. The colour is in the photo, not the words —
+ * so we look at the photo. Runs in parallel with the text extraction (see the
+ * scan route), so it adds no latency to the critical composition read.
+ *
+ * `colour` is a free phrase ("olive", "pink and white") mapped to the same
+ * family vocabulary as the catalogue via colourFamilies(); `pattern` uses the
+ * matcher's own enum. Returns null on any failure — matching then falls back
+ * to the title, i.e. exactly today's behaviour, never worse.
+ */
+const visualSchema = z.object({
+  colour: z.string().describe("The garment's main colour(s) in plain words, e.g. 'olive green', 'pink and white', 'navy'. The fabric colour, ignore the model, background or props."),
+  pattern: z.enum(["check", "stripe", "floral", "spot", "print", "plain"]).describe("The garment's surface pattern. 'check' includes gingham/plaid/tartan; 'print' is any other graphic/all-over print; 'plain' is a solid colour with no pattern."),
+});
+
+export interface VisualAttributes {
+  colour: string | null;
+  pattern: Pattern;
+}
+
+export async function visualAttributes(imageUrl: string): Promise<VisualAttributes> {
+  try {
+    const { object } = await generateObject({
+      model: anthropic("claude-haiku-4-5-20251001"),
+      schema: visualSchema,
+      messages: [
+        {
+          role: "user",
+          content: [
+            {
+              type: "text",
+              text: "Describe only this GARMENT's colour and surface pattern for a shopping look-alike match. Judge the clothing itself, not the model, background, hanger or styling.",
+            },
+            { type: "image", image: new URL(imageUrl) },
+          ],
+        },
+      ],
+    });
+    return { colour: object.colour || null, pattern: object.pattern };
+  } catch {
+    return { colour: null, pattern: "plain" };
+  }
 }
 
 export function scoreExtraction(

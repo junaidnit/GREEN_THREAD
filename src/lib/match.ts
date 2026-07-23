@@ -69,17 +69,29 @@ function sizeOverlap(a: string[] | undefined, b: string[] | undefined): number {
 export function rankSameButBetter<T extends MatchItem>(
   target: MatchItem,
   candidates: T[],
-  opts: { limit?: number; sims?: Map<string, number> } = {},
+  opts: {
+    limit?: number;
+    sims?: Map<string, number>;
+    /** Colour/pattern read from the product IMAGE, override the title. */
+    imageColour?: string | null;
+    imagePattern?: import("./garment").Pattern;
+  } = {},
 ): MatchResult<T> {
-  const { limit = 4, sims } = opts;
+  const { limit = 4, sims, imageColour, imagePattern } = opts;
 
   const myPlastic = oilDerivedPct(target.fabric_composition);
   if (myPlastic === 0) return { matches: [], reason: "already-plastic-free" };
 
   const myType = garmentType(target.title, target.category);
   const myGender = genderFor(target.title, myType, target.gender);
-  const myPattern = patternOf(target.title);
-  const myColour = colourFamilies(target.title, target.color ?? "");
+  // Image-derived colour/pattern win when present: the title often names
+  // neither (a jacket's colour lives in the photo), which is why matches used
+  // to ignore colour entirely. Fall back to the title when the image was
+  // unreadable, i.e. never worse than before.
+  const titleColour = colourFamilies(target.title, target.color ?? "");
+  const imageColourSet = imageColour ? colourFamilies(imageColour) : new Set<string>();
+  const myColour = imageColourSet.size > 0 ? imageColourSet : titleColour;
+  const myPattern = imagePattern ?? patternOf(target.title);
 
   const scored: Match<T>[] = [];
   for (const c of candidates) {

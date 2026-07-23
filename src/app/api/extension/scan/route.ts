@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { extractComposition, scoreExtraction } from "@/lib/extract";
+import { extractComposition, scoreExtraction, visualAttributes, type VisualAttributes } from "@/lib/extract";
 import { hasAnthropicKey } from "@/lib/env";
 import { getBetterFibreMatch } from "@/lib/catalog";
 import { mapCategory } from "@/lib/live-ingest";
@@ -51,13 +51,14 @@ export async function POST(req: Request) {
   }
 
   const body = await req.json().catch(() => null);
-  const { url, title, siteName, text } = body ?? {};
+  const { url, title, siteName, text, imageUrl } = body ?? {};
   if (typeof url !== "string" || typeof text !== "string" || text.trim().length < 20) {
     return NextResponse.json(
       { error: "Not enough page content to check." },
       { status: 400, headers: CORS_HEADERS },
     );
   }
+  const validImage = typeof imageUrl === "string" && /^https?:\/\//.test(imageUrl) ? imageUrl : null;
 
   // hostname is best-effort context for the model, never let a malformed
   // url string throw here
@@ -65,13 +66,20 @@ export async function POST(req: Request) {
   try { host = new URL(url).hostname; } catch { /* leave blank */ }
 
   let object: Awaited<ReturnType<typeof extractComposition>>;
+  // The image read runs alongside the composition read, not after it, so
+  // looking at the photo costs no extra wall-clock time. A failed/absent image
+  // just yields null attributes and matching falls back to the title.
+  let visual: VisualAttributes = { colour: null, pattern: "plain" };
   const tModel = Date.now();
   try {
-    object = await extractComposition({
-      title: typeof title === "string" && title ? title : "Untitled product",
-      siteName: typeof siteName === "string" && siteName ? siteName : host,
-      text,
-    });
+    [object, visual] = await Promise.all([
+      extractComposition({
+        title: typeof title === "string" && title ? title : "Untitled product",
+        siteName: typeof siteName === "string" && siteName ? siteName : host,
+        text,
+      }),
+      validImage ? visualAttributes(validImage) : Promise.resolve(visual),
+    ]);
   } catch (e) {
     console.error("[ext-scan] extraction failed:", e);
     return NextResponse.json(
@@ -100,11 +108,14 @@ export async function POST(req: Request) {
   const price = Number.isFinite(priceNum) && priceNum > 0 ? priceNum : null;
 
   const tMatch = Date.now();
-  const { items: recommendations, withinPrice } = await getBetterFibreMatch({
+  const { items: recommendations, withinPrice, matches } = await getBetterFibreMatch({
     title: object.product_name || title || "",
     category,
     price,
     fabricComposition: object.fabric_composition,
+    // what the garment ACTUALLY looks like, read from its photo
+    imageColour: visual.colour,
+    imagePattern: visual.pattern,
   });
 
   note("catalog+match", tMatch);
@@ -128,7 +139,9 @@ export async function POST(req: Request) {
       explanation: object.explanation,
       /** false = no natural-fibre option at this price; these cost more */
       recommendationsWithinPrice: withinPrice,
-      recommendations: recommendations.map((c) => ({
+      /** what the photo shows, so the panel can say WHY these were picked */
+      looksLike: { colour: visual.colour, pattern: visual.pattern },
+      recommendations: recommendations.map((c, i) => ({
         id: c.id,
         title: c.title,
         brand: c.brand.name,
@@ -139,6 +152,10 @@ export async function POST(req: Request) {
         source: c.source,
         score: c.sustainability.score,
         grade: c.sustainability.grade,
+        // how close this really is — never implied, always stated
+        sameColour: matches[i]?.sameColour ?? false,
+        samePattern: matches[i]?.samePattern ?? false,
+        tier: matches[i]?.tier ?? "same-style",
       })),
     },
     { headers: timed() },
