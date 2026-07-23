@@ -1,6 +1,14 @@
 {
   "brands": [
     {
+      "slug": "celtic-and-co",
+      "name": "Celtic & Co",
+      "website": "https://celticandco.com",
+      "ethics_summary": "Onboarded by the Scout agent from celticandco.com's own product feed — every listed item discloses its full fibre composition. Brand ethics profile pending manual review.",
+      "certifications": [],
+      "ethics_modifier": 3
+    },
+    {
       "slug": "bibico",
       "name": "Bibico",
       "website": "https://bibico.co.uk",

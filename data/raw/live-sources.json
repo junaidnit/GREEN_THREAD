@@ -27,6 +27,11 @@
       "name": "Bibico",
       "base": "https://bibico.co.uk",
       "defaultGender": "women"
+    },
+    {
+      "brandSlug": "celtic-and-co",
+      "name": "Celtic & Co",
+      "base": "https://celticandco.com"
     }
   ]
 }
