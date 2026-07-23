@@ -64,7 +64,7 @@ export function ProductCard({ product, priority = false }: { product: CatalogCar
             In its place, a slim woven-thread strip along the foot of the image
             — the composition, drawn as fibre. A quiet brand signature. */}
         <div className="pointer-events-none absolute inset-x-0 bottom-0">
-          <FibreWeave parts={product.fabric_composition} height={7} strands={16} radius={0} className="w-full" />
+          <FibreWeave parts={product.fabric_composition} size={26} />
         </div>
 
         {/* mislabelling flag, the platform's transparency promise */}

@@ -75,6 +75,18 @@ export default async function ProductPage({ params }: Props) {
   const greener = similar.find((p) => p.sustainability.score >= s.score + 10);
 
   const functions = fibreFunction(product.fabric_composition);
+  // the crisp paragraph: composition, then how that behaves, in plain prose
+  const compositionText = [...product.fabric_composition]
+    .sort((a, b) => b.pct - a.pct)
+    .map((f) => `${f.pct}% ${f.label.toLowerCase()}`)
+    .join(", ");
+  const functionSentence = (() => {
+    const f = functions.map((x) => x.toLowerCase());
+    if (f.length === 0) return "";
+    const joined =
+      f.length === 1 ? f[0] : `${f.slice(0, -1).join(", ")} and ${f[f.length - 1]}`;
+    return `${joined.charAt(0).toUpperCase()}${joined.slice(1)}.`;
+  })();
   const mark = fibreMark(product.fabric_composition);
   const misnamed = misleadingName(product.title, product.fabric_composition);
   const natural = naturalPct(product.fabric_composition);
@@ -197,26 +209,26 @@ export default async function ProductPage({ params }: Props) {
             Opens this exact product on {product.brand.name}&apos;s own site.
           </p>
 
-          {/* How it wears. Replaces the old water-saved / eco-impact block:
-              the value to a shopper is how the fabric feels and performs, not
-              a sustainability lecture. Traits come from the dominant fibre. */}
-          {functions.length > 0 && (
-            <div className="mt-6" data-testid="fibre-function">
-              <p className="text-xs font-semibold uppercase tracking-[0.14em] text-muted-foreground">
-                How it wears
-              </p>
-              <ul className="mt-3 flex flex-wrap gap-2">
-                {functions.map((fn) => (
-                  <li
-                    key={fn}
-                    className="rounded-full border border-border bg-surface px-3 py-1.5 text-[13px] text-foreground"
-                  >
-                    {fn}
-                  </li>
-                ))}
-              </ul>
+          {/* THE BRAND'S OWN DESCRIPTION, directly under the buy button. It was
+              only ever in the page metadata, never shown, which is the first
+              thing a shopper looks for. */}
+          {product.description && (
+            <div className="mt-6" data-testid="product-description">
+              <ExpandableText
+                text={product.description}
+                className="text-[15px] font-light leading-relaxed text-muted-foreground"
+              />
             </div>
           )}
+
+          {/* One crisp paragraph carrying the details that matter, instead of a
+              row of chips: what it is made of, how that behaves against skin,
+              and how it fits. */}
+          <p className="mt-4 text-[15px] leading-relaxed text-foreground" data-testid="fibre-function">
+            <span className="font-semibold">{compositionText}.</span>{" "}
+            {functionSentence}
+            {product.fit ? ` ${product.fit} fit.` : ""}
+          </p>
 
           {/* fabric composition, the platform's core promise */}
           <section className="mt-8 rounded-xl2 border border-border bg-surface p-5" data-testid="composition-section">
@@ -244,7 +256,7 @@ export default async function ProductPage({ params }: Props) {
                 what replaced the rating: a fact about the cloth, drawn as the
                 thing this brand is about. */}
             <div>
-              <FibreWeave parts={product.fabric_composition} height={60} className="w-full max-w-[440px]" />
+              <FibreWeave parts={product.fabric_composition} size={64} />
               <ul className="mt-3 flex flex-wrap gap-x-5 gap-y-1">
                 {[...product.fabric_composition]
                   .sort((a, b) => b.pct - a.pct)
