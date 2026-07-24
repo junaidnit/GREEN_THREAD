@@ -11,7 +11,7 @@
 import { writeFileSync, readFileSync } from "node:fs";
 import { resolve } from "node:path";
 import { computeScore, validateCertifications } from "../src/lib/scoring";
-import { mapCategory, normalizeSize, parseComposition } from "../src/lib/live-ingest";
+import { formatDescription, mapCategory, normalizeSize, parseComposition } from "../src/lib/live-ingest";
 import { garmentType, genderFor } from "../src/lib/garment";
 import type { Practices, SeedProduct } from "../src/lib/types";
 import { colorFamily, fitFor } from "./product-attrs";
@@ -159,7 +159,7 @@ async function ingestBrand(src: (typeof SOURCES)[number], brandMeta: { certifica
         id: `live-${src.brandSlug}-${p.handle}`.slice(0, 80),
         brand_slug: src.brandSlug,
         title: p.title,
-        description: text.slice(0, 600),
+        description: formatDescription(p.body_html ?? ""),
         category: mapCategory(p.product_type ?? "", p.title),
         // one gender authority — see genderFor in src/lib/garment.ts.
         // src.defaultGender is the LAST resort, used only when the title,
@@ -175,6 +175,8 @@ async function ingestBrand(src: (typeof SOURCES)[number], brandMeta: { certifica
         retailer: src.name,
         buy_url: `${src.base}/products/${p.handle}`,
         image_url: p.images[0].src.split("?")[0],
+        // up to six merchant photos for the product gallery
+        images: [...new Set(p.images.slice(0, 6).map((im) => im.src.split("?")[0]))],
         color: colour,
         color_family: colorFamily(colour),
         // only the sizes a customer can actually buy; a one-size/no-size

@@ -28,6 +28,59 @@ const FIBRE_MAP: Array<{ re: RegExp; material: (ctx: string) => MaterialId }> = 
   { re: /bamboo|viscose|rayon|ecovero/i, material: () => "viscose" },
 ];
 
+/**
+ * Turn a Shopify body_html into readable, multi-line plain text — decoded and
+ * with the merchant's own structure (paragraphs, bullet lists, the
+ * THINGS TO KNOW / SIZE & FIT / SUSTAINABILITY headings) preserved as line
+ * breaks. The old ingest flattened everything to one run and truncated at 600
+ * chars, which is why product pages showed a cut-off blob. Rendered with
+ * `whitespace-pre-line`, this reads like the merchant's own description.
+ */
+export function formatDescription(html: string, cap = 4000): string {
+  if (!html) return "";
+  let s = html
+    .replace(/<\s*li[^>]*>/gi, "\n• ")
+    .replace(/<\s*(br|\/p|\/div|\/li|\/h[1-6]|\/tr|\/ul|\/ol)\s*[^>]*>/gi, "\n")
+    .replace(/<\s*(p|div|h[1-6]|tr|ul|ol)[^>]*>/gi, "\n")
+    .replace(/<[^>]+>/g, " ");
+  s = s
+    .replace(/&nbsp;|&#160;|&#xa0;/gi, " ")
+    .replace(/&amp;/gi, "&")
+    .replace(/&lt;/gi, "<")
+    .replace(/&gt;/gi, ">")
+    .replace(/&quot;|&#34;/gi, '"')
+    .replace(/&#39;|&apos;|&rsquo;|&lsquo;/gi, "'")
+    .replace(/&mdash;|&#8212;/gi, "—")
+    .replace(/&ndash;|&#8211;/gi, "–")
+    .replace(/&hellip;/gi, "…")
+    // mojibake artifacts from mis-decoded non-breaking spaces
+    .replace(/Â | |Â/g, " ");
+  s = demojibake(s);
+  s = s
+    .replace(/[ \t]+/g, " ")
+    .replace(/ *\n */g, "\n")
+    .replace(/\n{3,}/g, "\n\n")
+    .trim();
+  return s.length > cap ? s.slice(0, cap).replace(/\s+\S*$/, "") + "…" : s;
+}
+
+/**
+ * Repair mojibake some feeds ship — UTF-8 punctuation / non-breaking spaces
+ * decoded as Latin-1 at the merchant's end, arriving as "¬†" (U+00AC U+2020),
+ * "Â ", "â€™", etc. Idempotent: a no-op on clean text.
+ */
+export function demojibake(s: string): string {
+  return s
+    .replace(/¬†/g, " ") // "¬†" -> nbsp
+    .replace(/Â /g, " ") // "Â " -> nbsp
+    .replace(/â€™/g, "'") // "â€™" -> '
+    .replace(/â€“/g, "–") // "â€“" -> en dash
+    .replace(/â€”/g, "—") // em dash
+    .replace(/â€œ/g, '"') // "â€œ" -> open quote
+    .replace(/â€/g, '"') // close quote
+    .replace(/ /g, " "); // real nbsp -> space
+}
+
 export function parseComposition(text: string): FabricPart[] | null {
   const parts: FabricPart[] = [];
 

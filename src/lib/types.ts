@@ -82,6 +82,8 @@ export interface Product {
   retailer: string;
   buy_url: string;
   image_url: string;
+  /** Additional merchant photos (gallery), first is usually image_url. */
+  images?: string[];
   color: string;
   /** Normalized colour family for filtering, e.g. "Blue", "White & Cream". */
   color_family: string;

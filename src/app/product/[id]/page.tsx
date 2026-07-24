@@ -1,4 +1,3 @@
-import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
@@ -21,7 +20,8 @@ import {
 import { ProductCard } from "@/components/product-card";
 import { FibreWeave } from "@/components/fibre-weave";
 import { AskConcierge } from "@/components/ask-concierge";
-import { FabricLens } from "@/components/fabric-lens";
+import { ProductGallery } from "@/components/product-gallery";
+import { ProductDescription } from "@/components/product-description";
 import { SaveButton } from "@/components/saved";
 import { spreadByImage } from "@/lib/spread";
 import { ExpandableText } from "@/components/kinetic";
@@ -126,25 +126,12 @@ export default async function ProductPage({ params }: Props) {
       </nav>
 
       <div className="grid gap-8 lg:grid-cols-2">
-        {/* image, hover to inspect the weave; morphs in from the grid card */}
-        <div
-          className="relative aspect-[3/4] overflow-hidden rounded-xl2 border border-border bg-surface-2"
-          style={{ viewTransitionName: `pimg-${product.id.replace(/[^a-zA-Z0-9-]/g, "")}` }}
-        >
-          <FabricLens imageUrl={product.image_url}>
-            <Image
-              src={product.image_url}
-              alt={product.title}
-              fill
-              priority
-              sizes="(max-width: 1024px) 100vw, 50vw"
-              className="object-cover"
-            />
-          </FabricLens>
-          <p className="pointer-events-none absolute bottom-3 right-3 rounded-full bg-surface/85 px-2.5 py-1 text-[12px] font-medium text-muted-foreground backdrop-blur">
-            hover to inspect the weave
-          </p>
-        </div>
+        {/* gallery: main image + the merchant's other photos; morphs in from the card */}
+        <ProductGallery
+          images={product.images && product.images.length > 0 ? product.images : [product.image_url]}
+          title={product.title}
+          viewTransitionName={`pimg-${product.id.replace(/[^a-zA-Z0-9-]/g, "")}`}
+        />
 
         {/* info */}
         <div>
@@ -221,10 +208,7 @@ export default async function ProductPage({ params }: Props) {
               <p className="mb-2 text-[11px] font-semibold uppercase tracking-[0.16em] text-mauve">
                 The full description
               </p>
-              <ExpandableText
-                text={product.description}
-                className="text-[15px] font-light leading-relaxed text-muted-foreground"
-              />
+              <ProductDescription text={product.description} />
             </div>
           )}
 
@@ -241,14 +225,18 @@ export default async function ProductPage({ params }: Props) {
           <section className="mt-8 rounded-xl2 border border-border bg-surface p-5" data-testid="composition-section">
             <div className="mb-4 flex items-center justify-between gap-3">
               <h2 className="font-display text-[20px] font-bold">What it&apos;s made of</h2>
-              <span
-                data-testid="pdp-fibre-mark"
-                className={`rounded-full px-3 py-1 text-xs font-semibold text-white ${
-                  mark.tone === "natural" ? "bg-grade-a" : mark.tone === "plastic-free" ? "bg-grade-b" : "bg-grade-d"
-                }`}
-              >
-                {mark.tone === "plastic" ? `${natural}% natural · ${mark.plastic}% plastic` : mark.label}
-              </span>
+              {/* No "100% natural" stamp — natural is the default on this
+                  platform. Only flag the exceptions (plastic-free / plastic). */}
+              {mark.tone !== "natural" && (
+                <span
+                  data-testid="pdp-fibre-mark"
+                  className={`rounded-full px-3 py-1 text-xs font-semibold text-white ${
+                    mark.tone === "plastic-free" ? "bg-grade-b" : "bg-grade-d"
+                  }`}
+                >
+                  {mark.tone === "plastic" ? `${natural}% natural · ${mark.plastic}% plastic` : mark.label}
+                </span>
+              )}
             </div>
             {misnamed && (
               <div
