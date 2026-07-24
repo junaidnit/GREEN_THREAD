@@ -168,6 +168,47 @@ export const CONDITIONS: Record<ConditionSlug, ConditionRule> = {
 export const CONDITION_SLUGS = Object.keys(CONDITIONS) as ConditionSlug[];
 
 /**
+ * Map a free-text search query to a skin condition, so a search like
+ * "shirt for dermatitis" can be scoped to the SAFE set instead of offering
+ * the shopper a wool filter they don't know is harmful. Deliberately
+ * protective: a bare "dermatitis" resolves to the eczema rule (wool excluded),
+ * because the danger is selling wool to someone who doesn't know to avoid it.
+ * The more specific synthetic-allergy phrasing is matched first, since that
+ * condition genuinely tolerates wool.
+ */
+const CONDITION_QUERY_MAP: Array<{ re: RegExp; slug: ConditionSlug }> = [
+  { re: /\bsynthetic[- ](fibre|fiber)?[- ]?allerg/i, slug: "synthetic-fibre-allergy" },
+  { re: /\bpsoriasis\b/i, slug: "psoriasis" },
+  { re: /\b(night[- ]?sweats?|menopause|menopausal|hot sleepers?)\b/i, slug: "night-sweats" },
+  { re: /\beczema\b|\batopic\b|\bsensitive skin\b|\bdermatitis\b/i, slug: "eczema" },
+];
+
+/** The condition a search query is really about, or null. */
+export function detectCondition(q: string): ConditionSlug | null {
+  for (const c of CONDITION_QUERY_MAP) if (c.re.test(q)) return c.slug;
+  return null;
+}
+
+/**
+ * Strip the condition words (and connective filler) from a query so the text
+ * search matches the GARMENT — "shirt for dermatitis" → "shirt" — while the
+ * condition itself is applied as a hard, non-negotiable fabric exclusion.
+ */
+export function conditionSearchTerm(q: string): string {
+  return q
+    .replace(
+      /\b(eczema|atopic|psoriasis|dermatitis|menopause|menopausal|hot sleepers?|night[- ]?sweats?|sensitive skin|synthetic[- ](fibre|fiber)?[- ]?allerg\w*)\b/gi,
+      " ",
+    )
+    .replace(
+      /\b(for|with|without|safe|friendly|a|an|the|of|person|people|someone|who|has|have|having|suffering|sufferer|prone|to|my|i|am)\b/gi,
+      " ",
+    )
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
+/**
  * Does this product's disclosed composition satisfy the condition's rule?
  * Conservative by construction: a product is safe only if EVERY disclosed
  * fibre is in the allow-set for that condition. Any excluded fibre at any

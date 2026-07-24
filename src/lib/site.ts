@@ -11,7 +11,7 @@ export const SITE_NAME = "The Fibre Set";
 export const SITE_TAGLINE = "Natural fibres, chosen well";
 
 export const SITE_DESCRIPTION =
-  "We read the fibre composition on real clothing and publish what it actually is. " +
+  "Natural fibres, chosen for you. We read the label — only the natural fibres get through. " +
   "Independent, timestamped, and free to check on any shop.";
 
 /** Kept in step with the truth ledger so claims on the page carry a date. */

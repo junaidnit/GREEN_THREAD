@@ -47,18 +47,24 @@ export function ProductCard({ product, priority = false }: { product: CatalogCar
           className="object-cover transition-transform duration-[900ms] ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.06]"
         />
 
-        {/* THE mark: what it's actually made of */}
-        <span
-          data-testid="fibre-mark"
-          className={`absolute left-3 top-3 rounded-full px-2.5 py-1 text-[12px] font-semibold backdrop-blur-md ${MARK_TONE[mark.tone]}`}
-          title={
-            mark.plastic > 0
-              ? `${mark.plastic}% oil-derived synthetic fibre`
-              : "No oil-derived synthetic fibres"
-          }
-        >
-          {mark.label}
-        </span>
+        {/* THE mark, only where it says something. On a natural-fibre-only
+            platform a "100% natural" stamp on every garment is noise, so the
+            natural badge is dropped: no badge IS the natural signal. The mark
+            now appears only for the exceptions worth flagging — regenerated
+            (plastic-free) and anything with oil-derived plastic in it. */}
+        {mark.tone !== "natural" && (
+          <span
+            data-testid="fibre-mark"
+            className={`absolute left-3 top-3 rounded-full px-2.5 py-1 text-[12px] font-semibold backdrop-blur-md ${MARK_TONE[mark.tone]}`}
+            title={
+              mark.plastic > 0
+                ? `${mark.plastic}% oil-derived synthetic fibre`
+                : "No oil-derived synthetic fibres"
+            }
+          >
+            {mark.label}
+          </span>
+        )}
 
         {/* The sustainability grade badge is gone: we are not a ratings body.
             In its place, a slim woven-thread strip along the foot of the image

@@ -25,6 +25,8 @@ import { FabricLens } from "@/components/fabric-lens";
 import { SaveButton } from "@/components/saved";
 import { spreadByImage } from "@/lib/spread";
 import { ExpandableText } from "@/components/kinetic";
+import { Reviews } from "@/components/reviews";
+import { demoReviews } from "@/lib/demo-reviews";
 import { AlertTriangle, ArrowUpRight, BadgeCheck, Sparkles } from "@/components/icons";
 
 interface Props {
@@ -75,6 +77,8 @@ export default async function ProductPage({ params }: Props) {
   const greener = similar.find((p) => p.sustainability.score >= s.score + 10);
 
   const functions = fibreFunction(product.fabric_composition);
+  const dominantLabel =
+    [...product.fabric_composition].sort((a, b) => b.pct - a.pct)[0]?.label ?? "natural fibre";
   // the crisp paragraph: composition, then how that behaves, in plain prose
   const compositionText = [...product.fabric_composition]
     .sort((a, b) => b.pct - a.pct)
@@ -214,6 +218,9 @@ export default async function ProductPage({ params }: Props) {
               thing a shopper looks for. */}
           {product.description && (
             <div className="mt-6" data-testid="product-description">
+              <p className="mb-2 text-[11px] font-semibold uppercase tracking-[0.16em] text-mauve">
+                The full description
+              </p>
               <ExpandableText
                 text={product.description}
                 className="text-[15px] font-light leading-relaxed text-muted-foreground"
@@ -295,6 +302,31 @@ export default async function ProductPage({ params }: Props) {
             )}
           </section>
 
+          {/* WHY IT FEELS GOOD TO WEAR — the salesman's part, in plain benefits
+              drawn from the fibre's real behaviour against skin. Sits after the
+              composition (what it is) to answer "what's that like to wear?". */}
+          {functions.length > 0 && (
+            <section
+              className="mt-6 rounded-xl2 border border-mauve/25 bg-gradient-to-br from-surface to-accent/40 p-6"
+              data-testid="fabric-benefits"
+            >
+              <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-mauve">
+                Why you&apos;ll love wearing it
+              </p>
+              <h2 className="mt-2 font-display text-[20px] font-bold">
+                How {dominantLabel.toLowerCase()} feels to wear
+              </h2>
+              <ul className="mt-4 grid gap-x-6 gap-y-3 sm:grid-cols-2">
+                {functions.map((f) => (
+                  <li key={f} className="flex items-start gap-2.5 text-[14px] leading-snug text-foreground">
+                    <BadgeCheck className="mt-0.5 size-4 shrink-0 text-primary" />
+                    {f}
+                  </li>
+                ))}
+              </ul>
+            </section>
+          )}
+
           {/* certifications, hover any badge to learn what it actually verifies */}
           {s.certifications.length > 0 && (
             <div className="mt-4 flex flex-wrap gap-2" data-testid="certifications">
@@ -370,6 +402,9 @@ export default async function ProductPage({ params }: Props) {
             />
         </div>
       </section>
+
+      {/* customer reviews (sample content for the preview build) */}
+      <Reviews summary={demoReviews(product.id)} />
 
 
       {/* THE promise: this exact garment, in a better fabric */}

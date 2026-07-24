@@ -7,19 +7,19 @@ import Link from "next/link";
 export interface FibreEntry {
   id: string;
   label: string;
+  /** benefit one-liner, e.g. "cool & breathable" */
   tagline: string;
-  note: string;
-  stat: string;
-  detail: string;
-  source: string;
+  /** how it feels and performs against skin — the buyer-facing benefits */
+  benefits: string[];
   image: string | null;
   swatch: string;
 }
 
 /**
- * Interactive fibre widget, the brief's "most commercially valuable element".
- * A calm grid of fibres; select one and its characteristics unfold in a
- * detail panel, with a route through to the full fibre guide.
+ * Interactive fibre widget. Pick a fibre and it steps into a spotlight — the
+ * selected tile lifts and brightens while the rest recede — and its detail
+ * opens right beneath, led by how the fibre FEELS and WEARS (not water or
+ * carbon: this section is about the benefit to the person wearing it).
  */
 export function FibreWidget({ fibres }: { fibres: FibreEntry[] }) {
   const [active, setActive] = useState(fibres[0]?.id ?? "");
@@ -35,11 +35,13 @@ export function FibreWidget({ fibres }: { fibres: FibreEntry[] }) {
               key={f.id}
               onClick={() => setActive(f.id)}
               aria-pressed={on}
-              className="group text-center"
+              className="group text-center outline-none"
             >
               <div
-                className={`relative mx-auto aspect-square w-full overflow-hidden rounded-full border transition-all ${
-                  on ? "border-primary ring-2 ring-primary/25" : "border-border"
+                className={`relative mx-auto aspect-square w-full overflow-hidden rounded-full border transition-all duration-500 ${
+                  on
+                    ? "scale-105 border-primary shadow-[0_16px_40px_-16px_rgba(75,33,68,.55)] ring-2 ring-primary/30"
+                    : "border-border opacity-70 group-hover:opacity-100"
                 }`}
                 style={{ background: f.swatch }}
               >
@@ -49,7 +51,7 @@ export function FibreWidget({ fibres }: { fibres: FibreEntry[] }) {
                     alt={f.label}
                     fill
                     sizes="120px"
-                    className={`object-cover transition-opacity ${on ? "opacity-100" : "opacity-85 group-hover:opacity-100"}`}
+                    className={`object-cover transition-transform duration-700 ${on ? "scale-100" : "scale-100 group-hover:scale-105"}`}
                   />
                 )}
               </div>
@@ -63,22 +65,51 @@ export function FibreWidget({ fibres }: { fibres: FibreEntry[] }) {
       </div>
 
       {sel && (
-        <div key={sel.id} className="mt-10 grid animate-[fade-up_.4s_ease] gap-8 border-t border-border pt-10 md:grid-cols-[1fr_1.3fr]">
-          <div>
+        <div
+          key={sel.id}
+          className="mt-10 grid animate-[fade-up_.4s_ease] gap-8 border-t border-border pt-10 md:grid-cols-[.85fr_1.15fr]"
+        >
+          {/* the spotlight: the selected fibre, shown large */}
+          <div className="relative aspect-[4/3] overflow-hidden rounded-sm bg-surface-2 md:aspect-auto md:min-h-[280px]">
+            {sel.image && (
+              <Image
+                src={sel.image}
+                alt={sel.label}
+                fill
+                sizes="(max-width: 768px) 100vw, 40vw"
+                className="object-cover"
+              />
+            )}
+            <span className="absolute bottom-3 left-3 rounded-full bg-background/85 px-3 py-1 text-[12px] font-semibold uppercase tracking-[0.14em] text-foreground backdrop-blur">
+              {sel.label}
+            </span>
+          </div>
+
+          <div className="flex flex-col justify-center">
             <p className="eyebrow">The fibre</p>
             <h3 className="mt-2 font-display text-[28px] text-foreground">{sel.label}</h3>
-            <p className="mt-4 text-[16px] font-light leading-relaxed text-muted-foreground">{sel.note}</p>
+            <p className="mt-1 text-[15px] font-light text-mauve">{sel.tagline}</p>
+
+            {/* what it does for you, as scannable chips */}
+            {sel.benefits.length > 0 && (
+              <ul className="mt-5 flex flex-wrap gap-2">
+                {sel.benefits.map((b) => (
+                  <li
+                    key={b}
+                    className="rounded-full border border-border bg-surface px-3.5 py-1.5 text-[13px] font-medium text-foreground"
+                  >
+                    {b}
+                  </li>
+                ))}
+              </ul>
+            )}
+
             <Link
               href={`/fabric/${sel.id}`}
-              className="mt-6 inline-block border-b border-slate pb-1 text-[12px] font-semibold uppercase tracking-[0.14em] text-slate transition-colors hover:text-primary"
+              className="mt-7 inline-block border-b border-slate pb-1 text-[12px] font-semibold uppercase tracking-[0.14em] text-slate transition-colors hover:text-primary"
             >
-              Explore {sel.label.toLowerCase()} →
+              Explore {sel.label.toLowerCase()} &rarr;
             </Link>
-          </div>
-          <div className="flex flex-col justify-center rounded-sm border-l-2 border-primary bg-surface p-7">
-            <p className="font-display text-[28px] text-primary">{sel.stat}</p>
-            <p className="mt-3 text-[16px] font-light leading-relaxed text-muted-foreground">{sel.detail}</p>
-            <p className="mt-4 text-[12px] font-light italic text-muted-foreground/80">, {sel.source}</p>
           </div>
         </div>
       )}

@@ -3,9 +3,11 @@ import Image from "next/image";
 import type { Metadata } from "next";
 import { getShopCatalog } from "@/lib/catalog";
 import { ledgerStats } from "@/lib/truth-server";
-import { MATERIAL_LABELS, MATERIAL_NOTES } from "@/lib/scoring";
-import { MATERIAL_FACTS } from "@/lib/materials";
+import { MATERIAL_LABELS } from "@/lib/scoring";
+import { FIBRE_FUNCTION } from "@/lib/materials";
 import { HeroSearch } from "@/components/hero-search";
+import { LabelCheckDemo } from "@/components/label-check-demo";
+import { CountUp } from "@/components/kinetic";
 import { FibreWidget, type FibreEntry } from "@/components/fibre-widget";
 import { garmentType, type GarmentType } from "@/lib/garment";
 import { CONDITIONS, CONDITION_SLUGS, isConditionSafe } from "@/lib/conditions";
@@ -67,6 +69,23 @@ function fibreImage(products: Product[], m: MaterialId): string | null {
   return scored[0]?.p.image_url ?? null;
 }
 
+/**
+ * Best editorial photo for a category slot (hero, Women, Men). Ranks by how
+ * much of a full look the garment shows — dresses, jumpsuits, coats and
+ * jumpers photograph as head-to-toe model shots, which is what the founder
+ * asked the homepage to lead with, rather than the arbitrary first match
+ * (which was landing on a cropped back-of-a-jumper with no face). Real brand
+ * photography throughout; deterministic, ties break on id.
+ */
+function bestGarmentShot(products: Product[], pred: (p: Product) => boolean): string | null {
+  const scored = products
+    .filter((p) => p.image_url && pred(p) && !SECONDHAND.test(p.title))
+    .map((p) => ({ p, cloth: SHOWS_CLOTH[garmentType(p.title)] ?? 0 }))
+    .filter((c) => c.cloth >= 4) // full-look garments only — the ones shot on a model
+    .sort((a, b) => b.cloth - a.cloth || a.p.id.localeCompare(b.p.id));
+  return scored[0]?.p.image_url ?? null;
+}
+
 /** How a shopper names an excluded fibre, rather than our material ids. */
 const FIBRE_FAMILY: Array<[RegExp, string]> = [
   [/wool/i, "wool"],
@@ -82,26 +101,47 @@ export default async function Home() {
   const products = await getShopCatalog();
   const stats = ledgerStats();
 
-  const heroImg = firstImage(products, (p) => /dress|linen/i.test(p.title) && p.gender === "women") ?? products[0]?.image_url ?? null;
-  const womenImg = firstImage(products, (p) => p.gender === "women" && /dress|linen/i.test(p.title)) ?? firstImage(products, (p) => p.gender === "women");
-  const menImg = firstImage(products, (p) => p.gender === "men");
+  // Lead with full-look model shots (faces, a whole garment), falling back to
+  // any women's/men's photo only if nothing better exists.
+  const heroImg =
+    bestGarmentShot(products, (p) => p.gender === "women" && /dress|jumpsuit|linen/i.test(p.title)) ??
+    bestGarmentShot(products, (p) => p.gender === "women") ??
+    firstImage(products, (p) => p.gender === "women") ??
+    products[0]?.image_url ?? null;
+  const womenImg =
+    bestGarmentShot(products, (p) => p.gender === "women" && /dress|jumpsuit/i.test(p.title)) ??
+    bestGarmentShot(products, (p) => p.gender === "women") ??
+    firstImage(products, (p) => p.gender === "women");
+  const menImg =
+    bestGarmentShot(products, (p) => p.gender === "men") ??
+    firstImage(products, (p) => p.gender === "men");
 
-  const childrenImg = firstImage(products, (p) => CHILDRENS.test(p.title));
-  const homeImg = firstImage(products, (p) => HOMEWARE.test(p.title) && !CHILDRENS.test(p.title));
+  // Children & Home aren't stocked yet, so a literal match is usually empty and
+  // the panel rendered as a blank swatch (which read as broken). Fall back to a
+  // relevant natural-fibre look — soft cotton for Children, linen for Home — so
+  // the card always shows real cloth.
+  const childrenImg =
+    bestGarmentShot(products, (p) => CHILDRENS.test(p.title)) ??
+    fibreImage(products, "organic_cotton") ??
+    firstImage(products, (p) => dominant(p, "organic_cotton"));
+  const homeImg =
+    firstImage(products, (p) => HOMEWARE.test(p.title) && !CHILDRENS.test(p.title)) ??
+    fibreImage(products, "linen") ??
+    firstImage(products, (p) => dominant(p, "linen"));
 
   // a fibre with no photo that genuinely shows it is dropped rather than
   // rendered as an empty tile, we stock no silk, so silk would sit blank
-  const fibres: FibreEntry[] = FIBRES.filter(([id]) => MATERIAL_FACTS[id])
-    .map(([id, tagline, swatch]) => {
-      const f = MATERIAL_FACTS[id]!;
-      return {
-        id, tagline, swatch,
-        label: MATERIAL_LABELS[id],
-        note: MATERIAL_NOTES[id],
-        stat: f.stat, detail: f.detail, source: f.source,
-        image: fibreImage(products, id),
-      };
-    })
+  // Benefit-led, not eco-led: the homepage fibre widget speaks to how a fibre
+  // feels and wears (FIBRE_FUNCTION), not its water or carbon story.
+  const fibres: FibreEntry[] = FIBRES.filter(([id]) => (FIBRE_FUNCTION[id]?.length ?? 0) > 0)
+    .map(([id, tagline, swatch]) => ({
+      id,
+      tagline,
+      swatch,
+      label: MATERIAL_LABELS[id],
+      benefits: FIBRE_FUNCTION[id] ?? [],
+      image: fibreImage(products, id),
+    }))
     .filter((f) => f.image);
 
   const fibreCount = new Set(products.flatMap((p) => p.fabric_composition.map((f) => f.material))).size;
@@ -145,11 +185,11 @@ export default async function Home() {
           <div className="flex flex-col justify-center gap-6 px-6 py-16 sm:px-10 md:py-24">
             <span className="eyebrow">Natural fibres, chosen well</span>
             <h1 className="max-w-[15ch] font-display text-[clamp(2rem,4.6vw,2.5rem)] leading-[1.12] text-foreground sm:text-[clamp(2rem,4.6vw,2.5rem)]">
-              Clothes and bedding chosen for the skin they sit against.
+              Know what your clothes are really made of.
             </h1>
             <p className="max-w-[46ch] text-[16px] font-light leading-relaxed text-muted-foreground">
-              We&apos;ve read the composition on {products.length.toLocaleString("en-GB")} pieces from {brandCount} brands. Every percentage here is the brand&apos;s own disclosure, not our estimate. Search a fibre,
-              or paste a link from any other shop and we&apos;ll read that one too.
+              We surface the real fibre composition of clothes and bedding using each brand&apos;s own
+              disclosed percentages, so you know you&apos;re buying natural before you start searching.
             </p>
             <HeroSearch />
           </div>
@@ -161,24 +201,25 @@ export default async function Home() {
 
       {/* ── EXTENSION CTA (prominent, near top) ── */}
       <section className="bg-foreground text-background">
-        <div className="mx-auto flex max-w-[1280px] flex-col items-center justify-between gap-6 px-6 py-10 sm:px-10 md:flex-row">
+        <div className="mx-auto grid max-w-[1280px] items-center gap-10 px-6 py-12 sm:px-10 md:grid-cols-[1.05fr_.95fr]">
           <div className="text-center md:text-left">
-            <span className="text-[12px] font-semibold uppercase tracking-[0.18em] text-rose">The free tool</span>
-            <h2 className="mt-2 font-display text-[28px] text-background">Check any fabric label, on any shop.</h2>
-            <p className="mt-2 max-w-[52ch] text-[16px] font-light leading-relaxed opacity-75">
-              Reads the fibre composition on any retailer&apos;s product page. Zara, ASOS, M&amp;S, so the
-              plastic hiding in a &ldquo;linen&rdquo; blend shows up before you buy. Free, and it can only see a
-              page in the moment you click it.
+            <span className="text-[12px] font-semibold uppercase tracking-[0.18em] text-rose">The free browser tool</span>
+            <h2 className="mt-2 font-display text-[clamp(1.75rem,3vw,2rem)] leading-tight text-background">
+              Check any fabric label, as you shop.
+            </h2>
+            <p className="mt-3 max-w-[42ch] text-[16px] font-light leading-relaxed opacity-75">
+              One click on any shop and the plastic hiding in a &ldquo;linen&rdquo; blend shows up before you buy.
             </p>
+            <div className="mt-6 flex flex-wrap justify-center gap-3 md:justify-start">
+              <Link href="/extension" className="rounded-full bg-primary px-6 py-3 text-[12px] font-semibold uppercase tracking-[0.14em] text-primary-foreground transition-opacity hover:opacity-90">
+                Install the extension
+              </Link>
+              <Link href="/analyze" className="rounded-full border border-background/30 px-6 py-3 text-[12px] font-semibold uppercase tracking-[0.14em] transition-colors hover:bg-background/10">
+                Try it here
+              </Link>
+            </div>
           </div>
-          <div className="flex shrink-0 gap-3">
-            <Link href="/extension" className="rounded-full bg-primary px-6 py-3 text-[12px] font-semibold uppercase tracking-[0.14em] text-primary-foreground transition-opacity hover:opacity-90">
-              Install the extension
-            </Link>
-            <Link href="/analyze" className="rounded-full border border-background/30 px-6 py-3 text-[12px] font-semibold uppercase tracking-[0.14em] transition-colors hover:bg-background/10">
-              Try it here
-            </Link>
-          </div>
+          <LabelCheckDemo />
         </div>
       </section>
 
@@ -236,20 +277,20 @@ export default async function Home() {
               <Link
                 key={c.slug}
                 href={`/condition/${c.slug}`}
-                className="group flex flex-col justify-between border border-border bg-background p-6 transition-colors hover:border-slate"
+                className="group flex flex-col justify-between rounded-sm border border-slate/25 bg-background p-6 shadow-[0_1px_2px_rgba(58,58,85,.05)] transition-all hover:border-primary hover:shadow-[0_18px_36px_-22px_rgba(58,58,85,.5)]"
               >
                 <div>
-                  <span className="eyebrow">{c.clinicalName}</span>
-                  <h3 className="mt-2 font-display text-[20px] leading-snug text-foreground group-hover:text-primary">
+                  <span className="text-[11px] font-semibold uppercase tracking-[0.16em] text-mauve">{c.clinicalName}</span>
+                  <h3 className="mt-2 font-display text-[21px] font-medium leading-snug text-foreground group-hover:text-primary">
                     {c.name}
                   </h3>
-                  <p className="mt-2 text-[14px] font-light leading-relaxed text-muted-foreground">
-                    Excludes {c.excludes}.
+                  <p className="mt-2 text-[14px] leading-relaxed text-foreground/75">
+                    Excludes <span className="font-semibold text-grade-d">{c.excludes}</span>.
                   </p>
                 </div>
-                <p className="mt-5 font-display text-[28px] font-light tabular-nums text-foreground">
+                <p className="mt-5 font-display text-[30px] font-normal tabular-nums text-foreground">
                   {c.count.toLocaleString("en-GB")}
-                  <span className="ml-2 text-[12px] uppercase tracking-[0.1em] text-muted-foreground">
+                  <span className="ml-2 text-[12px] font-semibold uppercase tracking-[0.1em] text-slate">
                     pieces pass
                   </span>
                 </p>
@@ -291,19 +332,31 @@ export default async function Home() {
         </div>
       </section>
 
-      {/* ── STAT BAND ── */}
+      {/* ── STAT BAND ──
+          A compact infographic: each figure counts up as it scrolls in, sits
+          in the brand's rose accent, and is divided by a hairline. Aesthetic
+          first, four numbers, no clutter. */}
       <section className="border-y border-border bg-foreground text-background">
         <div className="mx-auto max-w-[1280px] px-6 section-y sm:px-10">
-          <div className="grid grid-cols-2 gap-8 md:grid-cols-4">
+          <div className="grid grid-cols-2 gap-y-10 md:grid-cols-4">
             {[
-              [products.length.toLocaleString("en-GB"), "real pieces, label-read"],
-              [String(fibreCount), "natural & plant fibres"],
-              [String(brandCount), "brands read in full"],
-              [stats ? String(stats.flagged) : ", ", "greenwash flags on record"],
-            ].map(([n, l]) => (
-              <div key={l} className="text-center" role="group" aria-label={`${n} ${l}`}>
-                <p aria-hidden className="font-display text-[clamp(2rem,4.6vw,2.5rem)] font-light tabular-nums">{n}</p>
-                <p aria-hidden className="mt-1 text-[12px] font-light uppercase tracking-[0.1em] opacity-70">{l}</p>
+              { n: products.length, label: "real pieces, label-read" },
+              { n: fibreCount, label: "natural & plant fibres" },
+              { n: brandCount, label: "brands read in full" },
+              ...(stats ? [{ n: stats.flagged, label: "greenwash flags on record" }] : []),
+            ].map((s, i) => (
+              <div
+                key={s.label}
+                className={`relative text-center md:px-6 ${i > 0 ? "md:border-l md:border-background/15" : ""}`}
+                role="group"
+                aria-label={`${s.n.toLocaleString("en-GB")} ${s.label}`}
+              >
+                <p aria-hidden className="font-display text-[clamp(2.5rem,5.5vw,3.25rem)] font-light tabular-nums text-rose">
+                  <CountUp to={s.n} />
+                </p>
+                <p aria-hidden className="mx-auto mt-2 max-w-[16ch] text-[12px] font-medium uppercase tracking-[0.13em] opacity-70">
+                  {s.label}
+                </p>
               </div>
             ))}
           </div>

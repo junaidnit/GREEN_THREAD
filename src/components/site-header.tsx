@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { SavedIndicator } from "@/components/saved";
@@ -87,6 +87,23 @@ export function SiteHeader() {
   const [q, setQ] = useState("");
   const [mobileOpen, setMobileOpen] = useState(false);
 
+  // "/" focuses search from anywhere, unless the user is already typing in a
+  // field — the same shortcut the header hints at with its ⌗ key.
+  useEffect(() => {
+    function onKey(e: KeyboardEvent) {
+      if (e.key !== "/" || e.metaKey || e.ctrlKey || e.altKey) return;
+      const el = document.activeElement;
+      const typing =
+        el instanceof HTMLElement &&
+        (el.tagName === "INPUT" || el.tagName === "TEXTAREA" || el.isContentEditable);
+      if (typing) return;
+      e.preventDefault();
+      setSearchOpen(true);
+    }
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, []);
+
   function submitSearch(e: React.FormEvent) {
     e.preventDefault();
     const term = q.trim();
@@ -103,7 +120,7 @@ export function SiteHeader() {
     <header className="sticky top-0 z-40 bg-background/95 backdrop-blur-md">
       {/* utility line */}
       <div className="bg-foreground py-2 text-center text-[12px] font-medium uppercase tracking-[0.16em] text-background">
-        Natural fibres, chosen for how they feel and wear · Check any label, free
+        Natural fibres, chosen for how they feel and wear · Check any label as you shop
       </div>
 
       <div className="border-b border-border">
@@ -140,6 +157,7 @@ export function SiteHeader() {
                 <SubLinks items={CONDITION_LINKS} base="/condition/" />
               </MegaItem>
               <MegaItem label="Magazine" href="/magazine" />
+              <MegaItem label="About" href="/about" />
             </ul>
           </nav>
 
@@ -148,12 +166,13 @@ export function SiteHeader() {
             <button
               onClick={() => setSearchOpen((v) => !v)}
               aria-label="Search"
-              className="tap-target flex h-11 items-center gap-2 rounded-full border border-border bg-surface-2 px-4 text-[14px] tracking-wide text-muted-foreground transition-colors hover:border-slate hover:text-foreground"
+              className="tap-target group flex h-11 items-center gap-2.5 rounded-full border border-border bg-surface px-3.5 text-[14px] tracking-wide text-muted-foreground shadow-[0_1px_2px_rgba(58,58,85,.06)] transition-all hover:border-slate hover:text-foreground hover:shadow-[0_4px_14px_-6px_rgba(58,58,85,.35)] sm:pl-4 sm:pr-2"
             >
-              <svg viewBox="0 0 20 20" className="size-4" fill="none" stroke="currentColor" strokeWidth="1.5">
+              <svg viewBox="0 0 20 20" className="size-4 transition-colors group-hover:text-primary" fill="none" stroke="currentColor" strokeWidth="1.6">
                 <circle cx="9" cy="9" r="6" /><path d="M14 14l4 4" strokeLinecap="round" />
               </svg>
               <span className="hidden sm:inline">Search</span>
+              <kbd className="ml-1 hidden rounded border border-border bg-surface-2 px-1.5 py-0.5 font-sans text-[11px] font-medium text-muted-foreground/70 sm:inline">/</kbd>
             </button>
             <Link
               href="/analyze"
@@ -203,7 +222,7 @@ export function SiteHeader() {
       {mobileOpen && (
         <div className="border-b border-border bg-surface lg:hidden">
           <ul className="mx-auto flex max-w-[1280px] flex-col gap-1 px-5 py-4 text-[16px] font-light">
-            {[["Women", "/search?gender=women"], ["Men", "/search?gender=men"], ["Children", "/children"], ["Materials", "/fabric/linen"], ["Conditions", "/conditions"], ["Magazine", "/magazine"], ["Fabric Check", "/analyze"], ["Install Extension", "/extension"]].map(([label, href]) => (
+            {[["Women", "/search?gender=women"], ["Men", "/search?gender=men"], ["Children", "/children"], ["Materials", "/fabric/linen"], ["Conditions", "/conditions"], ["Magazine", "/magazine"], ["About", "/about"], ["Fabric Check", "/analyze"], ["Install Extension", "/extension"]].map(([label, href]) => (
               <li key={href}>
                 <Link href={href} onClick={() => setMobileOpen(false)} className="block py-2 text-foreground">
                   {label}

@@ -78,6 +78,11 @@ const nextConfig: NextConfig = {
         protocol: "https",
         hostname: "**.shopify.com",
       },
+      {
+        // founder's family imagery on the /about page (Barnard Mohair)
+        protocol: "https",
+        hostname: "barnardmohair.com",
+      },
     ],
   },
 };

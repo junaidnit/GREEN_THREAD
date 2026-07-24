@@ -7,7 +7,7 @@ import { BRAND_LOGO } from "@/components/brand-path";
  * and the brand palette so a shared link looks like the site it came from.
  */
 export const runtime = "nodejs";
-export const alt = "The Fibre Set, natural fibres, chosen well";
+export const alt = "The Fibre Set, natural fibres, chosen for you";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -42,7 +42,7 @@ export default async function Image() {
             THE FIBRE SET
           </div>
           <div style={{ fontSize: 36, color: "#4B2144", marginTop: 20, display: "flex" }}>
-            Natural fibres, chosen well
+            Natural fibres, chosen for you
           </div>
           <div
             style={{
@@ -54,7 +54,7 @@ export default async function Image() {
               lineHeight: 1.4,
             }}
           >
-            We read the label and publish what it actually is.
+            We read the label — only the natural fibres get through.
           </div>
         </div>
       </div>

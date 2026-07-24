@@ -17,9 +17,25 @@ import {
 } from "@/lib/search";
 import { MATERIAL_LABELS } from "@/lib/scoring";
 import { FIBRE_CLASS, MATERIAL_FACTS, type FibreClass } from "@/lib/materials";
+import {
+  CONDITIONS,
+  conditionSearchTerm,
+  detectCondition,
+  isConditionSafe,
+} from "@/lib/conditions";
 import { titleCase } from "@/lib/format";
 import { ProductCard } from "./product-card";
 import { ChevronDown, Leaf, Search, SlidersHorizontal, X } from "./icons";
+
+/** How a shopper names an excluded fibre, rather than our material ids. */
+function fibreFamilyLabel(m: MaterialId): string {
+  const label = MATERIAL_LABELS[m] ?? m;
+  if (/wool/i.test(label)) return "wool";
+  if (/polyester/i.test(label)) return "polyester";
+  if (/polyamide|nylon/i.test(label)) return "nylon";
+  if (/elastane|spandex/i.test(label)) return "elastane";
+  return label.toLowerCase();
+}
 
 const FIBRE_GROUPS: Array<{ class: FibreClass; label: string; blurb: string }> = [
   { class: "natural", label: "Natural fibres", blurb: "grown, not made" },
@@ -51,7 +67,34 @@ export function SearchExperience({ products }: { products: CatalogCard[] }) {
 
   const [filters, setFilters] = useState<Filters>(() => paramsToFilters(new URLSearchParams(searchParams)));
   const [drawerOpen, setDrawerOpen] = useState(false);
-  const index = useMemo(() => buildIndex(products), [products]);
+
+  // CONDITION LOCK: a query like "shirt for dermatitis" is scoped to the
+  // condition-safe set — harmful fibres (e.g. wool for eczema) are removed from
+  // the results AND from the facets, so they can never be turned back on. The
+  // condition words are stripped from the text query so it matches the garment.
+  const conditionSlug = useMemo(() => detectCondition(filters.q), [filters.q]);
+  const conditionRule = conditionSlug ? CONDITIONS[conditionSlug] : null;
+  const scoped = useMemo(
+    () =>
+      conditionSlug ? products.filter((p) => isConditionSafe(p.fabric_composition, conditionSlug)) : products,
+    [products, conditionSlug],
+  );
+  const effFilters = useMemo(
+    () => (conditionSlug ? { ...filters, q: conditionSearchTerm(filters.q) } : filters),
+    [filters, conditionSlug],
+  );
+  // the excluded fibre families, for the locked-filter display
+  const lockedFibres = useMemo(() => {
+    if (!conditionRule) return [] as string[];
+    const out: string[] = [];
+    for (const e of conditionRule.excludes) {
+      const fam = fibreFamilyLabel(e.material);
+      if (!out.includes(fam)) out.push(fam);
+    }
+    return out;
+  }, [conditionRule]);
+
+  const index = useMemo(() => buildIndex(scoped), [scoped]);
 
   // Debounced URL sync (shareable links + back button, no history spam).
   // Skips when the URL already matches, a redundant replace can race and
@@ -74,8 +117,8 @@ export function SearchExperience({ products }: { products: CatalogCard[] }) {
     };
   }, [filters, pathname, router]);
 
-  const results = useMemo(() => applyFilters(products, filters, index), [products, filters, index]);
-  const counts = useMemo(() => facetCounts(products, filters, index), [products, filters, index]);
+  const results = useMemo(() => applyFilters(scoped, effFilters, index), [scoped, effFilters, index]);
+  const counts = useMemo(() => facetCounts(scoped, effFilters, index), [scoped, effFilters, index]);
   const brandNames = useMemo(
     () => new Map(products.map((p) => [p.brand.slug, p.brand.name])),
     [products],
@@ -126,8 +169,8 @@ export function SearchExperience({ products }: { products: CatalogCard[] }) {
 
   const [copied, setCopied] = useState(false);
   const nearMisses = useMemo(
-    () => (results.length === 0 && filters.q.trim() ? closestMatches(products, filters.q, index) : []),
-    [results.length, filters.q, products, index],
+    () => (results.length === 0 && effFilters.q.trim() ? closestMatches(scoped, effFilters.q, index) : []),
+    [results.length, effFilters.q, scoped, index],
   );
 
   const activeCount =
@@ -263,8 +306,15 @@ export function SearchExperience({ products }: { products: CatalogCard[] }) {
 
         {/* results */}
         <div>
+          {conditionRule && conditionSlug && (
+            <ConditionLockBanner
+              name={conditionRule.name}
+              slug={conditionSlug}
+              locked={lockedFibres}
+            />
+          )}
           <AnimatePresence>
-            {showBanner && (
+            {showBanner && !conditionRule && (
               <RefinementBanner
                 counts={counts}
                 onPick={set}
@@ -754,6 +804,65 @@ function RefinementBanner({
         })}
       </div>
     </motion.div>
+  );
+}
+
+/**
+ * Shown when a search resolves to a skin condition. States plainly that the
+ * harmful fibres are excluded and CANNOT be turned on — the locked filter the
+ * shopper can see but not defeat — and links to the full condition guide.
+ */
+function ConditionLockBanner({
+  name,
+  slug,
+  locked,
+}: {
+  name: string;
+  slug: string;
+  locked: string[];
+}) {
+  return (
+    <div
+      data-testid="condition-lock"
+      className="mt-4 rounded-xl2 border border-primary/25 bg-[linear-gradient(120deg,var(--accent),var(--surface))] p-4 sm:p-5"
+    >
+      <div className="flex items-start gap-3">
+        <span className="mt-0.5 grid size-8 shrink-0 place-items-center rounded-full bg-primary/12 text-primary">
+          <svg viewBox="0 0 24 24" className="size-4" fill="none" stroke="currentColor" strokeWidth="1.8">
+            <rect x="5" y="11" width="14" height="9" rx="2" />
+            <path d="M8 11V8a4 4 0 0 1 8 0v3" strokeLinecap="round" />
+          </svg>
+        </span>
+        <div className="min-w-0">
+          <p className="font-display text-sm font-bold text-foreground">
+            {name}: harmful fibres are locked out
+          </p>
+          <p className="mt-0.5 text-xs leading-relaxed text-muted-foreground">
+            You searched for a skin condition, so we&apos;ve hard-excluded the fibres that irritate it.
+            They can&apos;t be filtered back in.{" "}
+            <a href={`/condition/${slug}`} className="font-semibold text-primary underline-offset-2 hover:underline">
+              See the full rule &amp; why
+            </a>
+          </p>
+          {locked.length > 0 && (
+            <div className="mt-2.5 flex flex-wrap gap-1.5">
+              {locked.map((f) => (
+                <span
+                  key={f}
+                  className="inline-flex items-center gap-1 rounded-full border border-grade-d/30 bg-grade-d/10 px-2.5 py-1 text-[12px] font-semibold text-grade-d"
+                >
+                  <svg viewBox="0 0 24 24" className="size-3" fill="none" stroke="currentColor" strokeWidth="2">
+                    <rect x="5" y="11" width="14" height="9" rx="2" />
+                    <path d="M8 11V8a4 4 0 0 1 8 0v3" strokeLinecap="round" />
+                  </svg>
+                  excludes {f}
+                </span>
+              ))}
+            </div>
+          )}
+        </div>
+      </div>
+    </div>
   );
 }
 

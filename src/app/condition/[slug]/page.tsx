@@ -3,8 +3,18 @@ import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { getShopCatalog } from "@/lib/catalog";
 import { CONDITIONS, CONDITION_SLUGS, isConditionSafe, type ConditionSlug } from "@/lib/conditions";
-import { ProductCard } from "@/components/product-card";
+import { MATERIAL_LABELS } from "@/lib/scoring";
+import { ConditionResults } from "@/components/condition-results";
 import { AlertTriangle, BadgeCheck } from "@/components/icons";
+
+/** How a shopper names an excluded fibre, collapsed to a family. */
+function fibreFamily(label: string): string {
+  if (/wool/i.test(label)) return "wool";
+  if (/polyester/i.test(label)) return "polyester";
+  if (/polyamide|nylon/i.test(label)) return "nylon";
+  if (/elastane|spandex/i.test(label)) return "elastane";
+  return label.toLowerCase();
+}
 
 interface Props {
   params: Promise<{ slug: string }>;
@@ -36,6 +46,9 @@ export default async function ConditionPage({ params }: Props) {
     .sort((a, b) => b.sustainability.score - a.sustainability.score);
 
   const excludedLabels = [...new Set(rule.excludes.map((e) => e.material))];
+  const lockedFibres = [
+    ...new Set(rule.excludes.map((e) => fibreFamily(MATERIAL_LABELS[e.material] ?? e.material))),
+  ];
 
   return (
     <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6">
@@ -88,8 +101,8 @@ export default async function ConditionPage({ params }: Props) {
         </p>
       </div>
 
-      <div className="mb-4 mt-8 flex items-end justify-between gap-4">
-        <h2 className="font-display text-[20px] font-bold">{products.length} pieces that qualify</h2>
+      <div className="mb-6 mt-8 flex items-end justify-between gap-4">
+        <h2 className="font-display text-[20px] font-bold">Pieces that qualify</h2>
         <div className="flex flex-wrap gap-1.5">
           {CONDITION_SLUGS.filter((s) => s !== rule.slug).map((s) => (
             <Link
@@ -104,11 +117,7 @@ export default async function ConditionPage({ params }: Props) {
       </div>
 
       {products.length > 0 ? (
-        <div className="grid grid-cols-2 gap-3 sm:gap-5 md:grid-cols-4">
-          {products.slice(0, 48).map((p, i) => (
-            <ProductCard key={p.id} product={p} priority={i < 4} />
-          ))}
-        </div>
+        <ConditionResults products={products} lockedFibres={lockedFibres} conditionName={rule.name} />
       ) : (
         <p className="text-muted-foreground">No products currently meet this list, check back soon.</p>
       )}

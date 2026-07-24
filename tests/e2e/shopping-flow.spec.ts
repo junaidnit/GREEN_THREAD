@@ -305,10 +305,15 @@ test.describe("natural-fibre-first", () => {
     // promise. This used to assert that a toggle REDUCED the count; there is
     // now nothing for it to remove, which is the point.
     await page.goto("/search");
+    await expect(page.getByTestId("product-card").first()).toBeVisible();
+    // Natural pieces no longer carry a stamp (a "100% natural" badge on every
+    // garment is noise on a natural-only shop). Any mark that DOES show is the
+    // plastic-free (regenerated) exception — never a plastic one. The promise
+    // holds as an absence: nothing in the shop reads "% plastic".
     const marks = await page.getByTestId("fibre-mark").allInnerTexts();
-    expect(marks.length).toBeGreaterThan(0);
     for (const m of marks) {
-      expect(m).toMatch(/100% natural|Plastic-free/i);
+      expect(m).toMatch(/plastic-free/i);
+      expect(m).not.toMatch(/\d+%\s*plastic/i);
     }
   });
 

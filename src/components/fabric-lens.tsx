@@ -9,7 +9,7 @@ import { useRef, useState } from "react";
  */
 export function FabricLens({ imageUrl, children }: { imageUrl: string; children: React.ReactNode }) {
   const wrapRef = useRef<HTMLDivElement>(null);
-  const [lens, setLens] = useState<{ x: number; y: number; bx: number; by: number } | null>(null);
+  const [lens, setLens] = useState<{ x: number; y: number; bx: number; by: number; w: number } | null>(null);
 
   const hiRes = imageUrl.replace(/w=900/, "w=1800").replace(/h=1200/, "h=2400");
   const LENS = 190;
@@ -25,6 +25,11 @@ export function FabricLens({ imageUrl, children }: { imageUrl: string; children:
       y,
       bx: (x / rect.width) * 100,
       by: (y / rect.height) * 100,
+      // rendered width of the underlying image — the zoom is computed from
+      // THIS, not from the lens box. Sizing the background as a % of the tiny
+      // lens made the fabric render *smaller* than the main photo (the bug):
+      // 240% of a 190px lens is far less than the ~600px on-screen image.
+      w: rect.width,
     });
   }
 
@@ -48,7 +53,9 @@ export function FabricLens({ imageUrl, children }: { imageUrl: string; children:
               left: lens.x - LENS / 2,
               top: lens.y - LENS / 2,
               backgroundImage: `url(${hiRes})`,
-              backgroundSize: `${ZOOM * 100}%`,
+              // single-value px size preserves the photo's aspect ratio and
+              // scales it to ZOOM× its on-screen width — a genuine zoom-IN.
+              backgroundSize: `${lens.w * ZOOM}px`,
               backgroundPosition: `${lens.bx}% ${lens.by}%`,
             }}
           >

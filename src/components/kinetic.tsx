@@ -116,7 +116,7 @@ export function ExpandableText({ text, className }: { text: string; className?: 
         onClick={() => setOpen((o) => !o)}
         className="mt-1 text-xs font-semibold text-primary underline-offset-2 hover:underline"
       >
-        {open ? "less" : "the honest read →"}
+        {open ? "less" : "read →"}
       </button>
     </div>
   );
